@@ -5495,6 +5495,76 @@ async def tenant_scope(
     }
 
 
+# =============================================================================
+# TENANT STANDARDS — framework enrolment (Ship 104'.c/d)
+# =============================================================================
+
+class EnrollStandardsRequest(BaseModel):
+    standard_ids: list[str]
+
+
+@app.get("/api/v1/tenant/standards", tags=["tenant"])
+async def tenant_standards_list(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """List the tenant's enrolled standards + the catalog of standards
+    they CAN enrol in. UI uses this for both the Get Started framework
+    picker (empty state → show `enrollable`) and the Profile add-
+    framework surface (any state → show both).
+    """
+    from rag.tenant_standards import list_enrollable, list_enrolled
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (key_info.tenant_id,))
+        enrolled   = list_enrolled(conn,  key_info.tenant_id)
+        enrollable = list_enrollable(conn)
+        enrolled_ids = {e["standard_id"] for e in enrolled}
+        # Mark enrollable entries that are already enrolled so the UI
+        # can grey them out.
+        for s in enrollable:
+            s["already_enrolled"] = s["id"] in enrolled_ids
+    finally:
+        pool.putconn(conn)
+    return {"enrolled": enrolled, "enrollable": enrollable}
+
+
+@app.post("/api/v1/tenant/standards", tags=["tenant"])
+async def tenant_standards_enroll(
+    body:     EnrollStandardsRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Enrol the tenant in one or more standards. Seeds posture_controls
+    rows (Not assessed) for each control that has a curated
+    FulfilmentSpec in Neo4j. Idempotent — already-enrolled standards
+    return status='already_enrolled' with zero seeding.
+    """
+    from rag.tenant_standards import enroll, _new_neo4j_driver
+
+    if not body.standard_ids:
+        raise HTTPException(status_code=400, detail="standard_ids cannot be empty")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    neo  = _new_neo4j_driver()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (key_info.tenant_id,))
+        try:
+            results = enroll(conn, neo, key_info.tenant_id, body.standard_ids)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        pool.putconn(conn)
+        neo.close()
+    return {"results": results}
+
+
 @app.get("/api/v1/tenant/profile", tags=["templates"])
 async def get_tenant_profile(
     request:  Request,

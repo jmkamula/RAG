@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-02-quickstart-boot';
+window.ARION_JS_VERSION = '2026-09-02-framework-picker';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -2327,10 +2327,129 @@ function _renderDecisionTrailDetail(t) {
     </div>`;
 }
 
+// ── Ship 104'.c — Framework picker (empty-tenant gate on Get Started) ──
+function _renderFrameworkPickerFullPage(enrollable, wrap) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+
+  // Compact card at the top of Get Started that gates access until
+  // the tenant picks their starting framework.
+  let html = `
+    <div style="max-width:720px;margin:24px auto 0;padding:0 20px">
+      <div style="font-size:20px;font-weight:600;color:#3A382E;margin-bottom:6px">
+        Choose your starting framework
+      </div>
+      <div style="font-size:13px;color:#5F5E5A;margin-bottom:22px;line-height:1.55">
+        Most compliance programs start with one framework and add others once
+        the foundation is in place. Pick where you want to begin — you can
+        add more frameworks any time from
+        <a href="#profile" style="color:#534AB7">Profile → Frameworks</a>.
+      </div>
+      <form id="framework-picker-form">
+        <div style="display:grid;gap:10px">
+  `;
+
+  enrollable.forEach((s, i) => {
+    const checked = (s.recommended && !s.already_enrolled) ? 'checked' : '';
+    const disabled = s.already_enrolled ? 'disabled' : '';
+    html += `
+      <label style="display:flex;align-items:flex-start;gap:12px;padding:16px 18px;
+                     background:#fff;border:1px solid ${s.recommended ? '#B4ADEB' : '#E8E5DA'};
+                     border-radius:8px;cursor:${s.already_enrolled ? 'not-allowed' : 'pointer'};
+                     opacity:${s.already_enrolled ? '0.55' : '1'}">
+        <input type="radio" name="std" value="${esc(s.id)}" ${checked} ${disabled}
+               style="margin-top:2px;cursor:${s.already_enrolled ? 'not-allowed' : 'pointer'}">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:14px;font-weight:600;color:#3A382E">${esc(s.short_name || s.full_name)}</span>
+            ${s.recommended ? '<span style="font-size:10px;font-weight:600;padding:2px 7px;background:#EEEDFE;color:#3C3489;border-radius:10px;letter-spacing:.4px;text-transform:uppercase">Recommended</span>' : ''}
+            ${s.already_enrolled ? '<span style="font-size:10px;font-weight:600;padding:2px 7px;background:#E8F1EA;color:#1D9E75;border-radius:10px;letter-spacing:.4px;text-transform:uppercase">Enrolled</span>' : ''}
+          </div>
+          <div style="font-size:12px;color:#5F5E5A;line-height:1.5">
+            ${esc(s.description || '')}
+          </div>
+        </div>
+      </label>
+    `;
+  });
+
+  html += `
+        </div>
+
+        <div id="framework-picker-error"
+             style="display:none;font-size:12px;color:#B92A28;background:#FEECEA;
+                    border:1px solid #F3B4A9;padding:8px 10px;border-radius:6px;margin-top:14px"></div>
+
+        <button type="submit" id="framework-picker-submit"
+                style="margin-top:22px;font-size:14px;font-weight:600;padding:11px 18px;
+                       background:#534AB7;color:#fff;border:none;border-radius:8px;cursor:pointer">
+          Enrol and continue
+        </button>
+      </form>
+    </div>
+  `;
+  wrap.innerHTML = html;
+
+  document.getElementById('framework-picker-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn    = document.getElementById('framework-picker-submit');
+    const errBox = document.getElementById('framework-picker-error');
+    errBox.style.display = 'none';
+
+    const std = e.target.querySelector('input[name="std"]:checked');
+    if (!std) {
+      errBox.textContent = 'Pick a framework to continue.';
+      errBox.style.display = 'block';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Enrolling…';
+    try {
+      await api('/api/v1/tenant/standards', {
+        method: 'POST',
+        body:   JSON.stringify({standard_ids: [std.value]}),
+      });
+      // Reload Get Started so it renders with the newly enrolled scope
+      loadGetStarted();
+      // Refresh dashboard heatmap next time user visits it.
+      dashData = null;
+    } catch (err) {
+      errBox.textContent = 'Enrolment failed: ' + (err.message || err);
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Enrol and continue';
+    }
+  });
+}
+
+
 function renderGetStarted(d) {
   const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
   const attr = s => esc(s).replace(/"/g,'&quot;');
   const wrap = document.getElementById('getstarted-wrap');
+
+  // Ship 104'.c — if the tenant has zero enrolled frameworks, gate
+  // the page on the framework picker. Fetch standards; if enrolled
+  // list is empty, render only the picker and return early.
+  // Existing renders happen after enrolment (page refreshes from
+  // loadGetStarted after enroll).
+  api('/api/v1/tenant/standards').then(sd => {
+    if (!sd.enrolled || sd.enrolled.length === 0) {
+      _renderFrameworkPickerFullPage(sd.enrollable || [], wrap);
+    } else {
+      _renderGetStartedBody(d, wrap);
+    }
+  }).catch(() => {
+    // If /tenant/standards fails, fall through to legacy render so
+    // we don't dead-end the tenant.
+    _renderGetStartedBody(d, wrap);
+  });
+}
+
+// Extracted from the original renderGetStarted body so we can gate on
+// the framework picker (Ship 104'.c).
+function _renderGetStartedBody(d, wrap) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => esc(s).replace(/"/g,'&quot;');
 
   const phase = d.phase || 'profile';
   const phaseIx = {profile:0, foundation:1, operational:2, annual:3}[phase] || 0;
@@ -2715,21 +2834,109 @@ async function loadProfile() {
   const wrap = document.getElementById('profile-wrap');
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
   try {
-    const [profileResp, systemsResp, overridesResp, vocabResp, channelsResp, keysResp] = await Promise.all([
+    const [profileResp, systemsResp, overridesResp, vocabResp, channelsResp, keysResp, stdsResp] = await Promise.all([
       api('/api/v1/tenant/profile'),
       api('/api/v1/tenant/external-systems'),
       api('/api/v1/tenant/cascade-overrides').catch(() => ({items: []})),
       api('/api/v1/tenant/cascade-events/vocabulary').catch(() => ({vocabulary: {}})),
       api('/api/v1/admin/notifications/channels').catch(() => ({channels: []})),
       api('/api/v1/tenant/api-keys').catch(() => ({keys: []})),
+      api('/api/v1/tenant/standards').catch(() => ({enrolled: [], enrollable: []})),
     ]);
     renderProfile(profileResp.profile || []);
     renderExternalSystems(systemsResp.systems || []);
     renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
     renderNotificationChannels(channelsResp.channels || []);
     renderApiKeys(keysResp.keys || []);
+    // Ship 104'.d — Frameworks section rendered after all other Profile
+    // sections. Doesn't try to slot into renderProfile's grouped layout;
+    // appends its own card block to the wrap element.
+    renderFrameworksSection(stdsResp.enrolled || [], stdsResp.enrollable || []);
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your profile. Please refresh in a moment.</p></div>';
+  }
+}
+
+
+// ── Ship 104'.d — Frameworks section in Profile ─────────────────
+function renderFrameworksSection(enrolled, enrollable) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const wrap = document.getElementById('profile-wrap');
+
+  const rmvExisting = wrap.querySelector('#frameworks-section');
+  if (rmvExisting) rmvExisting.remove();
+
+  const canEnroll = enrollable.filter(s => !s.already_enrolled);
+
+  let html = `
+    <div id="frameworks-section" style="margin-top:24px;border-top:1px solid #E8E5DA;padding-top:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div>
+          <div style="font-size:15px;font-weight:600;color:#3A382E">Frameworks</div>
+          <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+            ${enrolled.length} enrolled${enrolled.length ? ' · your compliance program spans these standards' : ''}${canEnroll.length ? ' · add more below' : ''}
+          </div>
+        </div>
+      </div>
+  `;
+
+  if (enrolled.length) {
+    html += `<div style="display:grid;gap:8px">`;
+    enrolled.forEach(e => {
+      html += `
+        <div style="padding:14px 18px;background:#fff;border:1px solid #E8E5DA;border-radius:6px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:14px;font-weight:600;color:#3A382E">${esc(e.short_name || e.full_name)}</span>
+            <span style="font-size:10px;font-weight:600;padding:2px 7px;background:#E8F1EA;color:#1D9E75;border-radius:10px;letter-spacing:.4px;text-transform:uppercase">Enrolled</span>
+          </div>
+          <div style="font-size:12px;color:#5F5E5A">
+            ${esc(e.control_count)} control${e.control_count === 1 ? '' : 's'} in scope · status: ${esc(e.status || 'implementing')}
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (canEnroll.length) {
+    html += `<div style="margin-top:14px;font-size:12px;color:#5C5A4F;margin-bottom:8px">Add another framework:</div>`;
+    html += `<div style="display:grid;gap:8px">`;
+    canEnroll.forEach(s => {
+      html += `
+        <div style="padding:14px 18px;background:#fff;border:1px solid #E8E5DA;border-radius:6px;
+                     display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:600;color:#3A382E;margin-bottom:2px">${esc(s.short_name || s.full_name)}</div>
+            <div style="font-size:12px;color:#5F5E5A;line-height:1.5">${esc(s.description || '')}</div>
+          </div>
+          <button type="button" onclick="enrollFramework('${esc(s.id).replace(/'/g,'&#39;')}')"
+                  style="font-size:12px;font-weight:600;padding:8px 14px;background:#534AB7;color:#fff;
+                         border:none;border-radius:6px;cursor:pointer;white-space:nowrap">
+            Add
+          </button>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+
+  // Append rather than replace so we don't clobber existing sections.
+  wrap.insertAdjacentHTML('beforeend', html);
+}
+
+
+async function enrollFramework(standardId) {
+  try {
+    await api('/api/v1/tenant/standards', {
+      method: 'POST',
+      body:   JSON.stringify({standard_ids: [standardId]}),
+    });
+    // Refresh profile so both enrolled + enrollable lists update.
+    loadProfile();
+    // Invalidate dashboard cache so heatmap picks up the new scope.
+    dashData = null;
+  } catch (e) {
+    alert('Enrolment failed: ' + (e.message || e));
   }
 }
 
