@@ -3494,9 +3494,15 @@ async def advisory_topics_list(
                 "framework_role_counts": roll.get("framework_role_counts", {}),
             })
 
+        # Ship 104'.e — surface tenant's enrolled_standard_ids so the
+        # UI can grey out topics whose primary_framework isn't enrolled.
+        from rag.tenant_standards import enrolled_standard_ids
+        enrolled_ids = enrolled_standard_ids(conn, key_info.tenant_id)
+
         return {
-            "topics":   result,
-            "trace_id": request.state.trace_id,
+            "topics":                result,
+            "enrolled_standard_ids": enrolled_ids,
+            "trace_id":              request.state.trace_id,
         }
     finally:
         pool.putconn(conn)
@@ -5161,16 +5167,23 @@ async def get_journey_state(
         from rag.posture_loader import _build_engine_neo4j_driver
         neo4j_driver = _build_engine_neo4j_driver()
         from rag.journey.state import compute_journey_state
+        from rag.tenant_standards import enrolled_standard_ids
         try:
             state = compute_journey_state(conn, neo4j_driver, key_info.tenant_id)
         finally:
             if neo4j_driver is not None:
                 neo4j_driver.close()
+        # Ship 104'.e — enrolled standards for scoping UI (Get Started
+        # foundation-templates filter, topics grey-out, dashboard-tile
+        # visibility).
+        enrolled_ids = enrolled_standard_ids(conn, key_info.tenant_id)
     finally:
         pool.putconn(conn)
 
     from dataclasses import asdict
-    return asdict(state)
+    resp = asdict(state)
+    resp["enrolled_standard_ids"] = enrolled_ids
+    return resp
 
 
 @app.get("/api/v1/journey/next", tags=["journey"])

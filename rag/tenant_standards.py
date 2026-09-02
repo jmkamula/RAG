@@ -146,6 +146,19 @@ def list_enrolled(pg_conn, tenant_id: str) -> list[dict]:
     ]
 
 
+def enrolled_standard_ids(pg_conn, tenant_id: str) -> list[str]:
+    """Return the tenant's enrolled standard_ids (active only). Small
+    helper for Ship 104'.e scoping across topics + get-started +
+    dashboard so surfaces that fan out beyond the enrolment can grey/
+    filter accordingly."""
+    with pg_conn.cursor() as cur:
+        cur.execute("""
+            SELECT standard_id FROM tenant_standards
+             WHERE tenant_id = %s AND is_active = TRUE
+        """, (tenant_id,))
+        return [r[0] for r in cur.fetchall()]
+
+
 def enroll(
     pg_conn,
     neo_driver,

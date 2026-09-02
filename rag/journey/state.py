@@ -435,6 +435,7 @@ def compute_journey_state(
             "sequence":        seq_idx,
             "control_ref":     ls.control_ref,
             "leaf_id":         ls.leaf_id,
+            "standard_id":     ls.standard_id,
             "title":           ls.title,
             "evidence_type":   ls.evidence_type,
             "is_tabular":      is_tabular,

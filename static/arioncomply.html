@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-02-framework-picker';
+window.ARION_JS_VERSION = '2026-09-02-scoping';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -2496,12 +2496,23 @@ function _renderGetStartedBody(d, wrap) {
   }
 
   // ── Foundation anchors list ──
-  const anchors = d.foundation_anchors || [];
+  // Ship 104'.e — filter to enrolled frameworks so a tenant enrolled
+  // only in ISO 27001 doesn't see GDPR/27701-only templates in their
+  // "start here" list.
+  const enrolledSet = new Set(d.enrolled_standard_ids || []);
+  const anchorsAll  = d.foundation_anchors || [];
+  const anchors = enrolledSet.size
+    ? anchorsAll.filter(a => !a.standard_id || enrolledSet.has(a.standard_id))
+    : anchorsAll;
+  const hiddenByScope = anchorsAll.length - anchors.length;
   let anchorsHtml = '';
   if (anchors.length) {
     anchorsHtml = `<div style="margin-bottom:20px">
       <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:4px">Foundation templates (${anchors.length})</div>
-      <div style="font-size:11px;color:#5C5A4F;margin-bottom:10px">The recommended sequence — most compliance programs start here. Every download opens in a new tab.</div>
+      <div style="font-size:11px;color:#5C5A4F;margin-bottom:10px">
+        The recommended sequence — most compliance programs start here. Every download opens in a new tab.
+        ${hiddenByScope ? `<span style="color:#7C7A6E">· ${hiddenByScope} more available after enrolling in additional frameworks (<a href="#profile" style="color:#534AB7">Profile → Frameworks</a>).</span>` : ''}
+      </div>
       <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;overflow:hidden">`;
     for (const a of anchors) {
       const pct = a.completion_pct || 0;
@@ -3849,19 +3860,27 @@ async function loadTopics() {
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading topic bundles…</p></div>';
   try {
     const d = await api('/api/v1/advisory/topics');
-    renderTopicsList(d.topics || []);
+    // Ship 104'.e — pass the tenant's enrolled frameworks so
+    // topics outside their scope get greyed with an "add framework"
+    // hint. If the field is absent (older API), no scoping applied.
+    renderTopicsList(d.topics || [], new Set(d.enrolled_standard_ids || []));
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load topics.</p></div>';
   }
 }
 
-function renderTopicsList(topics) {
+function renderTopicsList(topics, enrolledSet) {
   const wrap = document.getElementById('topics-wrap');
   if (!topics.length) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-folder-question"></i><p>No topics curated for this tenant yet.</p></div>';
     return;
   }
+  enrolledSet = enrolledSet || new Set();
   const cards = topics.map(t => {
+    // Ship 104'.e — topic is "in scope" iff either the tenant is
+    // enrolled in its primary_framework OR we don't know the tenant's
+    // enrolments (enrolledSet empty). Out-of-scope topics render greyed.
+    const inScope = enrolledSet.size === 0 || enrolledSet.has(t.primary_framework);
     const v = t.verdict_counts || {};
     const fr = t.framework_role_counts || {};
     const totalAssessed = (v.Comply||0) + (v.OFI||0) + (v.NC||0) + (v['N/A']||0);
@@ -3884,8 +3903,18 @@ function renderTopicsList(topics) {
       v['N/A']    ? `<span class="topic-vp f-NA">${v['N/A']} N/A</span>` : '',
       v.unassessed ? `<span class="topic-vp f-NotAssessed">${v.unassessed} unassessed</span>` : '',
     ].join('');
+    // Ship 104'.e — out-of-scope topics render greyed with a hint.
+    const scopeStyle = inScope
+      ? ''
+      : 'opacity:0.55;background:#f6f5f0';
+    const scopeHint = inScope
+      ? ''
+      : `<div style="margin-top:8px;font-size:11px;color:#7C7A6E;font-style:italic">
+           Requires ${escapeHtml(fwLabel)} enrolment — add in
+           <a href="#profile" style="color:#534AB7;font-style:normal" onclick="event.stopPropagation()">Profile → Frameworks</a>
+         </div>`;
     return `
-      <div class="topic-card" onclick="openTopicDetail('${escapeHtml(t.slug)}')">
+      <div class="topic-card" style="${scopeStyle}" onclick="openTopicDetail('${escapeHtml(t.slug)}')">
         <div class="topic-card-head">
           <i class="ti ${icon}" aria-hidden="true"></i>
           <div class="topic-card-title">${escapeHtml(t.title)}</div>
@@ -3897,6 +3926,7 @@ function renderTopicsList(topics) {
           ${chips ? `<span class="topic-chips">${chips}</span>` : ''}
         </div>
         <div class="topic-card-verdicts">${pills || '<span class="muted">no assessments</span>'}</div>
+        ${scopeHint}
       </div>
     `;
   }).join('');
