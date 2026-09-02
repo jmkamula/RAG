@@ -34,7 +34,7 @@ import os
 import re
 import secrets
 import uuid
-from urllib.parse import quote_plus, urlparse
+from urllib.parse import unquote, urlparse
 
 import psycopg2
 
@@ -48,25 +48,30 @@ ADMIN_SCOPES = ["chat", "hitl", "documents", "posture"]
 # on tenants filters it to (app.tenant_id = tenants.id). Without a
 # set_config, the app role sees nothing. We connect as the schema
 # owner `arioncomply` which bypasses RLS on tables it owns.
+#
+# NOTE: use keyword-arg connect, not a DSN string. urlparse does NOT
+# URL-decode the password field — u.password returns 'P%40ng0%40mb3l3'
+# literally when the URL contains '%40'. Round-tripping through a DSN
+# string then double-encodes it and psycopg2 auths with the wrong
+# value. Keyword args skip URL encoding entirely.
 
-def _owner_dsn() -> str:
-    """Build a DSN that connects as the schema-owner `arioncomply`
-    role. Reuses the password from DATABASE_URL — same password on
-    most installs — unless overridden via ARION_OWNER_PW env."""
+def _owner_conn():
+    """Return a fresh psycopg2 connection as the arioncomply role."""
     app_dsn = os.getenv("DATABASE_URL", "")
     if not app_dsn:
         raise RuntimeError("DATABASE_URL not set")
     u = urlparse(app_dsn)
-    owner_pw = os.getenv("ARION_OWNER_PW") or (u.password or "")
-    host = u.hostname or "127.0.0.1"
-    port = u.port or 5432
-    db   = (u.path or "/arioncomply_compliance").lstrip("/")
-    # URL-encode owner_pw so `@` etc in the password don't break parsing.
-    return f"postgresql://arioncomply:{quote_plus(owner_pw)}@{host}:{port}/{db}"
-
-
-def _owner_conn():
-    return psycopg2.connect(_owner_dsn())
+    # unquote to reverse the URL-encoding used by install.sh's .env writer
+    # (e.g. 'P%40ng0%40mb3l3' → 'P@ng0@mb3l3').
+    parsed_pw = unquote(u.password or "")
+    owner_pw  = os.getenv("ARION_OWNER_PW") or parsed_pw
+    return psycopg2.connect(
+        host     = u.hostname or "127.0.0.1",
+        port     = u.port or 5432,
+        user     = "arioncomply",
+        password = owner_pw,
+        dbname   = (u.path or "/arioncomply_compliance").lstrip("/"),
+    )
 
 
 # ── Slug generation ─────────────────────────────────────────────────
