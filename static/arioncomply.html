@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-07-26-chat-persistence';
+window.ARION_JS_VERSION = '2026-09-02-quickstart-boot';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -8178,11 +8178,13 @@ function toastError(fallback, err) {
 // Quickstart form.
 
 async function bootQuickstartCheck() {
+  console.info('[boot] bootQuickstartCheck starting');
   // Default the server URL to the origin that served this page —
   // avoids the "I loaded the UI from customer_box but connected to
   // dev_host by accident" trap.
   const urlEl = document.getElementById('api-url');
   if (!urlEl.value) urlEl.value = window.location.origin;
+  console.info('[boot] api-url set to', urlEl.value);
 
   // Ship 104'.b — clear stale keys that were saved for a DIFFERENT
   // origin (i.e. the user had a session on the dev host earlier,
@@ -8190,38 +8192,43 @@ async function bootQuickstartCheck() {
   // by origin so each server has its own remembered key.
   const originKey = 'apiKey:' + window.location.origin;
   const legacyKey = localStorage.getItem('apiKey');
-  const storedKey = localStorage.getItem(originKey) || legacyKey;
-  // Migrate the legacy un-namespaced key: if we have one and we're
-  // on the same origin it was probably saved for, keep it. Otherwise
-  // drop it so we don't cross-contaminate origins.
-  if (legacyKey && !localStorage.getItem(originKey)) {
+  const nsKey     = localStorage.getItem(originKey);
+  console.info('[boot] localStorage state:', {legacyKey: legacyKey ? legacyKey.slice(0,8)+'…' : null,
+                                                 nsKey:     nsKey     ? nsKey.slice(0,8)+'…'     : null});
+  if (legacyKey && !nsKey) {
     // We don't KNOW what origin the legacy key was for — safest is
     // to clear it and force re-entry / Quickstart.
     localStorage.removeItem('apiKey');
+    console.info('[boot] cleared legacy un-namespaced apiKey');
   }
 
   // Case 1 — restore saved key for THIS origin
-  if (storedKey && localStorage.getItem(originKey)) {
-    document.getElementById('api-key').value = storedKey;
+  if (nsKey) {
+    console.info('[boot] case 1 — restoring origin-namespaced key');
+    document.getElementById('api-key').value = nsKey;
     connect();
     return;
   }
   // Case 2 vs 3 — ask the backend
   try {
     const r = await fetch('/api/v1/quickstart/status');
+    console.info('[boot] quickstart status HTTP', r.status);
     if (r.ok) {
       const j = await r.json();
+      console.info('[boot] quickstart status body:', j);
       if (j.bootstrap_available) {
+        console.info('[boot] case 2 — showing Quickstart overlay');
         showQuickstartOverlay();
         return;
       }
     }
   } catch (e) {
-    console.warn('quickstart status check failed', e);
+    console.warn('[boot] quickstart status check failed', e);
     // Fall through to case 3 — the tenant knows their key.
   }
   // Case 3 — fall through: user must enter their key + click Connect
   // (topbar is empty; no auto-connect with an empty key)
+  console.info('[boot] case 3 — waiting for user to enter their key + Connect');
 }
 
 function showQuickstartOverlay() {
