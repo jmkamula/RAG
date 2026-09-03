@@ -12,7 +12,7 @@
 #   bash deploy/install.sh
 #
 # Non-interactive / CI mode (all passwords via env):
-#   ARION_OWNER_PW=... ARION_APP_PW=... NEO4J_PW=... OPENAI_KEY=... \
+#   ARION_OWNER_PW=... ARION_APP_PW=... NEO4J_PASSWORD=... OPENAI_API_KEY=... \
 #     bash deploy/install.sh --yes
 #
 # What this does:
@@ -80,7 +80,7 @@ neo4j_auth_ok() {
 # lost by design here; step 8 rebuilds it from the catalog.
 neo4j_reset_password() {
     local pw="$1"
-    warn "Neo4j auth doesn't match NEO4J_PW — resetting"
+    warn "Neo4j auth doesn't match NEO4J_PASSWORD — resetting"
     warn "  · wiping /var/lib/neo4j/data/{databases,transactions,dbms}"
     warn "  · graph content will be reloaded from catalog in step 8"
     sudo systemctl stop neo4j
@@ -108,10 +108,59 @@ step "0. Sanity checks"
 [[ "$EUID" -eq 0 ]] && fail "run as a regular user with sudo, not as root"
 ok "code root: $ARION_ROOT"
 
+# ── Update-friendly secret loader (Ship 111'.a) ──────────────────
+# If .env exists (i.e. a prior install has already run), read its
+# secrets so prompt_pw skips them. Only genuinely-missing values
+# trigger interactive prompts — critical for SSH one-liner updates
+# where stdin is not a TTY.
+#
+# Ship 111'.a canonicalizes install-time + runtime variable names
+# so this loader is a straight read (not a translation table):
+#
+#   ARION_OWNER_PW  — owner Postgres role password
+#   OPENAI_API_KEY  — OpenAI API key
+#   NEO4J_PASSWORD  — Neo4j password
+#   ARION_APP_PW    — app Postgres role password (install-time only;
+#                     runtime code reads app pw from DATABASE_URL)
+#
+# ARION_APP_PW isn't stored in .env directly — it's embedded in
+# DATABASE_URL. For update-mode we parse it back out here.
+if [[ -f "$ARION_ROOT/.env" ]]; then
+    _read_env_var() {
+        # Read a KEY=value from .env safely without executing shell
+        # substitutions. Handles bare, single-, and double-quoted values.
+        local key="$1"
+        grep -E "^${key}=" "$ARION_ROOT/.env" | head -1 | \
+            sed -E "s/^${key}=//; s/^\"(.*)\"\$/\1/; s/^'(.*)'\$/\1/"
+    }
+    _url_decode() {
+        # POSIX %XX decoder for DATABASE_URL password field.
+        printf '%b' "$(printf '%s' "$1" | \
+            sed 's/+/ /g; s/%\([0-9A-Fa-f][0-9A-Fa-f]\)/\\x\1/g')"
+    }
+
+    : "${ARION_OWNER_PW:=$(_read_env_var ARION_OWNER_PW)}"
+    : "${OPENAI_API_KEY:=$(_read_env_var OPENAI_API_KEY)}"
+    : "${NEO4J_PASSWORD:=$(_read_env_var NEO4J_PASSWORD)}"
+
+    # DATABASE_URL shape: postgresql://arioncomply_app:PASSWORD@host/db
+    if [[ -z "${ARION_APP_PW:-}" ]]; then
+        _db_url=$(_read_env_var DATABASE_URL)
+        if [[ "$_db_url" =~ ^postgresql://[^:]+:([^@]+)@ ]]; then
+            ARION_APP_PW=$(_url_decode "${BASH_REMATCH[1]}")
+            export ARION_APP_PW
+        fi
+    fi
+
+    if [[ -n "${OPENAI_API_KEY:-}${NEO4J_PASSWORD:-}${ARION_APP_PW:-}${ARION_OWNER_PW:-}" ]]; then
+        ok "loaded existing secrets from .env (update mode — missing values will be prompted)"
+    fi
+fi
+
 prompt_pw ARION_OWNER_PW  "Choose a password for the arioncomply Postgres role"
 prompt_pw ARION_APP_PW    "Choose a password for the arioncomply_app Postgres role"
-prompt_pw NEO4J_PW        "Choose a password for the neo4j user"
-prompt_pw OPENAI_KEY      "OpenAI API key (leave blank if using another provider)"
+prompt_pw NEO4J_PASSWORD  "Choose a password for the neo4j user"
+prompt_pw OPENAI_API_KEY  "OpenAI API key (leave blank if using another provider)"
 
 # ── 1. System deps ───────────────────────────────────────────────────
 step "1. System packages"
@@ -134,7 +183,7 @@ if ! command -v neo4j >/dev/null 2>&1; then
     sudo apt-get install -y -qq neo4j
     # Initial password bootstrap (fresh install path)
     sudo systemctl stop neo4j || true
-    sudo neo4j-admin dbms set-initial-password "$NEO4J_PW" 2>&1 | tail -1
+    sudo neo4j-admin dbms set-initial-password "$NEO4J_PASSWORD" 2>&1 | tail -1
     sudo systemctl enable --now neo4j
     ok "neo4j installed + running"
 else
@@ -150,20 +199,20 @@ for i in {1..30}; do
     sleep 2
 done
 
-# Verify auth matches NEO4J_PW. Handles the case where Neo4j is
+# Verify auth matches NEO4J_PASSWORD. Handles the case where Neo4j is
 # already installed but with a different password (e.g. a prior
 # install attempt with a different handoff.env, or a manual reset).
 # `set-initial-password` is one-shot pre-bootstrap; if it's already
 # bit and the current password is wrong, we have to nuke the system
 # DB to redo bootstrap. Safe here because step 8 rebuilds the graph.
-if neo4j_auth_ok "$NEO4J_PW"; then
-    ok "Neo4j auth verified against NEO4J_PW"
+if neo4j_auth_ok "$NEO4J_PASSWORD"; then
+    ok "Neo4j auth verified against NEO4J_PASSWORD"
 else
-    neo4j_reset_password "$NEO4J_PW" || fail "Neo4j password reset failed"
-    if neo4j_auth_ok "$NEO4J_PW"; then
+    neo4j_reset_password "$NEO4J_PASSWORD" || fail "Neo4j password reset failed"
+    if neo4j_auth_ok "$NEO4J_PASSWORD"; then
         ok "Neo4j auth reset — verified"
     else
-        fail "Neo4j still not accepting NEO4J_PW after reset — check journalctl -u neo4j -n 50"
+        fail "Neo4j still not accepting NEO4J_PASSWORD after reset — check journalctl -u neo4j -n 50"
     fi
 fi
 
@@ -314,22 +363,33 @@ ok "pip install complete"
 # ampersand / backslash / dollar in passwords, and won't URL-encode
 # passwords that appear inside the postgresql:// connection strings.
 step "6. Environment file"
+# Ship 111'.a — the writer runs on BOTH first-install and update paths.
+# On first install: copy the template, substitute every secret.
+# On update: ensure ARION_OWNER_PW is present (it wasn't stashed in
+# pre-111 installs); every other secret we recognize was already
+# stashed correctly on first install.
 if [[ ! -f "$ARION_ROOT/.env" ]]; then
     cp "$ARION_ROOT/deploy/.env.example" "$ARION_ROOT/.env"
-    ARION_APP_PW="$ARION_APP_PW" NEO4J_PW="$NEO4J_PW" OPENAI_KEY="${OPENAI_KEY:-}" \
+    ARION_APP_PW="$ARION_APP_PW" ARION_OWNER_PW="$ARION_OWNER_PW" \
+        NEO4J_PASSWORD="$NEO4J_PASSWORD" OPENAI_API_KEY="${OPENAI_API_KEY:-}" \
         ARION_ENV_PATH="$ARION_ROOT/.env" python3 - <<'PYEOF'
 import os, re, urllib.parse
 path      = os.environ["ARION_ENV_PATH"]
 app_pw    = os.environ["ARION_APP_PW"]
-neo4j_pw  = os.environ["NEO4J_PW"]
-openai    = os.environ.get("OPENAI_KEY", "")
+owner_pw  = os.environ["ARION_OWNER_PW"]
+neo4j_pw  = os.environ["NEO4J_PASSWORD"]
+openai    = os.environ.get("OPENAI_API_KEY", "")
 enc       = urllib.parse.quote_plus  # URL-encodes @ : / etc
 
+# Replace-or-append: if the key exists in the template, substitute the
+# value; if not (older template, hand-edited .env), append the line at
+# the end. Preserves all existing keys and comments.
 subs = {
-    "DATABASE_URL":         f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_compliance",
+    "DATABASE_URL":          f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_compliance",
     "SESSIONS_DATABASE_URL": f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_sessions",
-    "PGPASSWORD":           app_pw,
-    "NEO4J_PASSWORD":       neo4j_pw,
+    "PGPASSWORD":            app_pw,
+    "ARION_OWNER_PW":        owner_pw,       # Ship 111'.a
+    "NEO4J_PASSWORD":        neo4j_pw,
 }
 if openai:
     subs["OPENAI_API_KEY"] = openai
@@ -337,14 +397,32 @@ if openai:
 with open(path) as f:
     text = f.read()
 for k, v in subs.items():
-    text = re.sub(rf"^{re.escape(k)}=.*$", f"{k}={v}", text, count=1, flags=re.M)
+    pattern = rf"^{re.escape(k)}=.*$"
+    if re.search(pattern, text, flags=re.M):
+        text = re.sub(pattern, f"{k}={v}", text, count=1, flags=re.M)
+    else:
+        if not text.endswith("\n"):
+            text += "\n"
+        text += f"{k}={v}\n"
 with open(path, "w") as f:
     f.write(text)
 PYEOF
     chmod 600 "$ARION_ROOT/.env"
     ok ".env written with secrets"
 else
-    ok ".env already exists — not overwriting (review manually if needed)"
+    # Update path — ensure ARION_OWNER_PW landed in the file. This is
+    # a one-time backfill for pre-111 installs; harmless on 111+ boxes
+    # where the fresh writer already put it there.
+    if grep -qE "^ARION_OWNER_PW=" "$ARION_ROOT/.env"; then
+        ok ".env already has ARION_OWNER_PW — no change"
+    else
+        # Append via a tempfile the invoking user can write (arionops
+        # owns .env; sudo tee would work too but keeps ownership).
+        printf '\n# Ship 111 — stashed for install.sh update mode\nARION_OWNER_PW=%s\n' \
+            "$ARION_OWNER_PW" >> "$ARION_ROOT/.env"
+        chmod 600 "$ARION_ROOT/.env"
+        ok ".env: appended ARION_OWNER_PW for future update runs"
+    fi
 fi
 
 # ── 7. Chroma data dir + systemd units ───────────────────────────────
@@ -454,14 +532,14 @@ ok "arioncomply-sweep.timer enabled (fires every 30 min)"
 # 8148 nodes / 14378 rels, zero property drift).
 #
 # All loaders read NEO4J_PASSWORD via os.getenv. Bash keeps the
-# value in $NEO4J_PW; export at the boundary.
+# value in $NEO4J_PASSWORD; export at the boundary.
 step "8. Neo4j graph load (framework role model + all curated content)"
 cd "$ARION_ROOT"
 
 NEO4J_JSON="$ARION_ROOT/db/baseline/neo4j_baseline.json"
 if [[ -f "$NEO4J_JSON" ]]; then
     log "  · loading via consolidated golden ($(du -h "$NEO4J_JSON" | cut -f1) JSON snapshot)"
-    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    NEO4J_PASSWORD="$NEO4J_PASSWORD" PYTHONPATH="$ARION_ROOT" \
         python3 db/baseline/load_neo4j_baseline.py 2>&1 | tail -8
     ok "graph loaded from golden"
 else
@@ -469,23 +547,23 @@ else
     warn "    (this path retires in Ship 103'; see db/AUTHORING.md)"
 
     log "  · loading RequirementNodes (iso + gdpr JSON)"
-    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    NEO4J_PASSWORD="$NEO4J_PASSWORD" PYTHONPATH="$ARION_ROOT" \
         python3 load_neo4j.py 2>&1 | tail -3
 
     log "  · seeding ISO 27701 RequirementNodes"
-    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    NEO4J_PASSWORD="$NEO4J_PASSWORD" PYTHONPATH="$ARION_ROOT" \
         python3 scripts/seed_27701_requirement_nodes.py 2>&1 | tail -3
 
     log "  · loading cross-framework relationship catalog"
-    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    NEO4J_PASSWORD="$NEO4J_PASSWORD" PYTHONPATH="$ARION_ROOT" \
         python3 enrichment/relationships/load_to_neo4j.py 2>&1 | tail -3
 
     log "  · loading PART_OF hierarchy + control edges"
-    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    NEO4J_PASSWORD="$NEO4J_PASSWORD" PYTHONPATH="$ARION_ROOT" \
         python3 load_graph_relationships.py 2>&1 | tail -3
 
     log "  · loading evidence layer (FulfilmentSpec + EvidenceRequirement + ChecklistItem)"
-    NEO4J_PASSWORD="$NEO4J_PW" PYTHONPATH="$ARION_ROOT" \
+    NEO4J_PASSWORD="$NEO4J_PASSWORD" PYTHONPATH="$ARION_ROOT" \
         python3 enrichment/documents/load_to_neo4j.py 2>&1 | tail -3
 
     ok "graph loaded via legacy 5-loader chain"
