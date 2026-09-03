@@ -2,13 +2,15 @@
 rag/onboarding/quickstart.py — first-tenant provisioning via UI Quickstart.
 
 Ship 104'.a (2026-09-01).
+Ship 110'.b (2026-09-03) — extends with client_facts initializer.
 
 The bootstrap flow: when the API comes up on a fresh customer box
 with zero tenants, the UI shows a Quickstart form on first visit.
 The form POSTs to `/api/v1/quickstart` which creates a minimal-
 shape tenant + admin user + API key with the standard runtime
 scopes. Customer proceeds to the Get Started sidebar to enrol in
-frameworks + configure client_facts + upload documents.
+frameworks + upload documents. Deeper client_facts questionnaire
+lives in Profile → About your organisation (Ship 110'.c).
 
 Bootstrap-only design: once any active tenant exists, the endpoint
 returns 409. This prevents anonymous callers from spawning tenants
@@ -21,8 +23,10 @@ this file borrows from):
   · tenant row (with sector / country / cloud_only)
   · one admin user
   · one API key with scopes ['chat','hitl','documents','posture']
+  · one client_facts row initialised from Quickstart inputs, with
+    fact_source markers so Ship 110'.d's applicability derivation
+    can distinguish "tenant declared this" from "we assumed this"
   · NO framework enrolments (customer picks in Get Started)
-  · NO client_facts (customer configures in Get Started)
   · NO posture_controls seed (populated when frameworks are enrolled)
 
 Neo4j is not touched by quickstart — no per-tenant Neo4j data at
@@ -30,16 +34,91 @@ this stage of the flow.
 """
 from __future__ import annotations
 import hashlib
+import json
 import os
 import re
 import secrets
 import uuid
+from datetime import datetime, timezone
 from urllib.parse import unquote, urlparse
 
 import psycopg2
 
 
 ADMIN_SCOPES = ["chat", "hitl", "documents", "posture"]
+
+
+# EU/EEA country codes for eu_data_subjects derivation at Quickstart
+# time. Tenant in an EU/EEA country → likely has EU data subjects
+# → seed as derived (tenant can override in Profile if wrong).
+_EU_EEA_COUNTRIES = frozenset({
+    # EU (27)
+    "AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI",
+    "FR", "GR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT",
+    "NL", "PL", "PT", "RO", "SE", "SI", "SK",
+    # EEA additions
+    "IS", "LI", "NO",
+})
+
+
+def _now_iso() -> str:
+    """UTC ISO-8601 timestamp for fact_source markers."""
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _initial_client_facts(
+    sector:     str | None,
+    country:    str,
+    cloud_only: bool,
+) -> tuple[dict, dict]:
+    """Return (declared_values, fact_source_markers) for the client_facts
+    row created at Quickstart.
+
+    Columns not in the returned dict keep their schema defaults (FALSE
+    for booleans, NULL for text). Their absence from fact_source signals
+    "not yet declared" — Ship 110'.d's applicability derivation treats
+    absence as `default` and does NOT fire N/A rules for those facts.
+    """
+    now = _now_iso()
+    values:  dict[str, object] = {}
+    sources: dict[str, dict]   = {}
+
+    # Country is always set (defaults to "GB" in create_first_tenant)
+    values["country"] = country
+    sources["country"] = {"source": "declared", "at": now}
+
+    # Sector: declared if the caller passed one
+    if sector:
+        values["sector"] = sector
+        sources["sector"] = {"source": "declared", "at": now}
+
+    # cloud_only checkbox is a direct question in the Quickstart form:
+    # checked   → has_physical_premises=False + uses_cloud_services=True (declared)
+    # unchecked → has_physical_premises=True (declared); uses_cloud_services
+    #             stays at default (unknown — they didn't say either way)
+    if cloud_only:
+        values["has_physical_premises"] = False
+        values["uses_cloud_services"]   = True
+        sources["has_physical_premises"] = {"source": "declared", "at": now}
+        sources["uses_cloud_services"]   = {"source": "declared", "at": now}
+    else:
+        values["has_physical_premises"] = True
+        sources["has_physical_premises"] = {"source": "declared", "at": now}
+
+    # Country-driven derivations. Tenant can override in Profile.
+    ctry = (country or "").upper()
+    if ctry in _EU_EEA_COUNTRIES:
+        values["eu_data_subjects"] = True
+        sources["eu_data_subjects"] = {
+            "source": "derived", "at": now, "from": "country",
+        }
+    if ctry == "GB":
+        values["uk_data_subjects"] = True
+        sources["uk_data_subjects"] = {
+            "source": "derived", "at": now, "from": "country",
+        }
+
+    return values, sources
 
 
 # ── DB connection ────────────────────────────────────────────────────
@@ -177,6 +256,29 @@ def create_first_tenant(
                     f"{name} — quickstart admin key",
                     ADMIN_SCOPES,
                 ))
+
+                # 4. client_facts row — Ship 110'.b initializer.
+                # Only columns we're actively declaring/deriving are
+                # in the INSERT column list; the rest keep their schema
+                # defaults (and stay absent from fact_source, which
+                # signals "default" to Ship 110'.d's derivation).
+                facts_values, facts_sources = _initial_client_facts(
+                    sector=sector, country=country, cloud_only=cloud_only,
+                )
+                cols_sql     = ", ".join(facts_values.keys())
+                placeholders = ", ".join(["%s"] * len(facts_values))
+                cur.execute(
+                    f"""
+                    INSERT INTO client_facts (
+                        tenant_id, {cols_sql}, fact_source
+                    ) VALUES (%s, {placeholders}, %s::jsonb)
+                    """,
+                    (
+                        tenant_id,
+                        *facts_values.values(),
+                        json.dumps(facts_sources),
+                    ),
+                )
 
             pg.commit()
 
