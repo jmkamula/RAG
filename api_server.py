@@ -5413,13 +5413,12 @@ _TENANT_PROFILE_KEYS: list[dict] = [
      "label": "Primary product / service",
      "description": "What your organization does or sells — used verbatim in scope statements."},
 
-    # Dates
-    {"key": "approval_date",       "group": "Dates",
-     "label": "Default approval date",
-     "description": "Default \"approved on\" date printed in downloaded policies. Override per document."},
-    {"key": "next_review_date",    "group": "Dates",
-     "label": "Default next review date",
-     "description": "Default review-by date printed in policies. Usually 12 months after approval."},
+    # Ship 108'.b — approval_date + next_review_date removed from
+    # Profile. Those are per-document decisions determined at the
+    # moment of approval, not tenant-wide defaults. Renderer emits
+    # a format-hint whisper for <<APPROVAL_DATE>> + <<NEXT_REVIEW_DATE>>
+    # so the tenant sees the expected shape without ArionComply
+    # claiming a specific approval date happened.
 ]
 _TENANT_PROFILE_KEY_SET = {entry["key"] for entry in _TENANT_PROFILE_KEYS}
 
@@ -5600,6 +5599,7 @@ async def get_tenant_profile(
     conn = pool.getconn()
     journey_status = None
     journey_status_updated_at = None
+    date_format = None
     try:
         set_session(conn, key_info.tenant_id)
         with conn.cursor() as cur:
@@ -5610,10 +5610,11 @@ async def get_tenant_profile(
             )
             stored = {r[0]: {"value": r[1], "updated_at": r[2].isoformat() if r[2] else None}
                       for r in cur.fetchall()}
-            # Ship 106'.a — fetch journey_status in the same session
-            # so the Profile page renders both from one GET.
+            # Ship 106'.a + 108'.b — fetch journey_status + date_format
+            # in the same session so the Profile page renders all
+            # tenant preferences from one GET.
             cur.execute("""
-                SELECT journey_status, journey_status_updated_at
+                SELECT journey_status, journey_status_updated_at, date_format
                   FROM client_facts
                  WHERE tenant_id = %s::uuid
                  LIMIT 1
@@ -5622,6 +5623,9 @@ async def get_tenant_profile(
             if cf:
                 journey_status = cf[0]
                 journey_status_updated_at = cf[1].isoformat() if cf[1] else None
+                date_format = cf[2]
+            else:
+                date_format = None
     finally:
         pool.putconn(conn)
 
@@ -5659,6 +5663,7 @@ async def get_tenant_profile(
         "profile":                   out_rows,
         "journey_status":            journey_status,
         "journey_status_updated_at": journey_status_updated_at,
+        "date_format":               date_format,
     }
 
 
@@ -5667,10 +5672,15 @@ async def get_tenant_profile(
 # =============================================================================
 
 _JOURNEY_STATUS_ALLOWED = {"greenfield", "building", "documented", "audited", "mature"}
+_DATE_FORMAT_ALLOWED   = {"iso", "dmy_slash", "mdy_slash", "dmy_dot", "long"}
 
 
 class JourneyStatusRequest(BaseModel):
     journey_status: str
+
+
+class DateFormatRequest(BaseModel):
+    date_format: str
 
 
 @app.put("/api/v1/tenant/journey-status", tags=["tenant"])
@@ -5723,6 +5733,51 @@ async def put_journey_status(
         pool.putconn(conn)
 
     return {"journey_status": body.journey_status}
+
+
+@app.put("/api/v1/tenant/date-format", tags=["tenant"])
+async def put_date_format(
+    body:     DateFormatRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Ship 108'.b — set the tenant's regional date-format preference.
+    Renderer applies this format to all date substitutions in
+    downloaded templates (`<<GENERATED_DATE>>` + `<<APPROVAL_DATE>>` +
+    `<<NEXT_REVIEW_DATE>>` whispers).
+
+    Values: iso / dmy_slash / mdy_slash / dmy_dot / long.
+    Auto-save (Profile UI calls this on radio change).
+    Idempotent — UPSERTs client_facts.
+    """
+    if body.date_format not in _DATE_FORMAT_ALLOWED:
+        raise HTTPException(
+            status_code = 400,
+            detail      = f"date_format must be one of {sorted(_DATE_FORMAT_ALLOWED)}",
+        )
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (key_info.tenant_id,))
+            cur.execute("SELECT 1 FROM client_facts WHERE tenant_id = %s LIMIT 1",
+                        (key_info.tenant_id,))
+            if cur.fetchone():
+                cur.execute("""
+                    UPDATE client_facts SET date_format = %s WHERE tenant_id = %s
+                """, (body.date_format, key_info.tenant_id))
+            else:
+                cur.execute("""
+                    INSERT INTO client_facts (tenant_id, date_format)
+                    VALUES (%s, %s)
+                """, (key_info.tenant_id, body.date_format))
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    return {"date_format": body.date_format}
 
 
 @app.put("/api/v1/tenant/profile", tags=["templates"])

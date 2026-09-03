@@ -266,10 +266,37 @@ def _mark_na_sections(
     return body_md, marked, kept
 
 
+def _format_date(dt: "_dt.date", fmt: Optional[str]) -> str:
+    """Ship 108'.b — format a date per the tenant's regional preference.
+
+    Recognised formats (from client_facts.date_format):
+      iso        — 2026-09-03      (default; ISO 8601, unambiguous)
+      dmy_slash  — 03/09/2026      (UK, Ireland, most of Europe, Brazil)
+      mdy_slash  — 09/03/2026      (US, English Canada)
+      dmy_dot    — 03.09.2026      (Germany, Czech, Poland)
+      long       — 3 Sep 2026      (long form, unambiguous, wordy)
+
+    None / unknown → ISO fallback so an unset preference never breaks
+    the render.
+    """
+    if fmt == "dmy_slash":
+        return dt.strftime("%d/%m/%Y")
+    if fmt == "mdy_slash":
+        return dt.strftime("%m/%d/%Y")
+    if fmt == "dmy_dot":
+        return dt.strftime("%d.%m.%Y")
+    if fmt == "long":
+        # Avoid the leading-zero `%d` — use int day + %b month name.
+        return f"{dt.day} {dt.strftime('%b %Y')}"
+    # 'iso' or None or anything else
+    return dt.isoformat()
+
+
 def _substitute_placeholders(
-    body_md:    str,
-    tenant_row: dict,
-    profile:    Optional[dict] = None,
+    body_md:     str,
+    tenant_row:  dict,
+    profile:     Optional[dict] = None,
+    date_format: Optional[str]  = None,
 ) -> tuple[str, int]:
     """Replace placeholders with tenant-specific values.
 
@@ -279,8 +306,7 @@ def _substitute_placeholders(
       2. `tenant_profile` (k/v) — open-ended set covering CEO_NAME,
          CISO_NAME, DPO_NAME, ISMS_MANAGER_NAME, ISMS_OWNER_NAME,
          HR_PARTNER_NAME, AWARENESS_LEAD_NAME, REGISTERED_ADDRESS,
-         COMPANY_NUMBER, TENANT_DOMAIN, PRODUCT_OR_SERVICE,
-         APPROVAL_DATE, NEXT_REVIEW_DATE, etc.
+         COMPANY_NUMBER, TENANT_DOMAIN, PRODUCT_OR_SERVICE, etc.
 
     Placeholder convention: `<<UPPER_SNAKE_NAME>>` ↔
     `profile_key = 'upper_snake_name'.lower()`. Unknown placeholders
@@ -288,19 +314,45 @@ def _substitute_placeholders(
     `<<NAME>>` text — tenant can fill them by hand or add a profile
     row.
 
+    Ship 108'.b changes:
+      · <<GENERATED_DATE>> now formatted per tenant's date_format
+        (client_facts.date_format, passed via `date_format` param).
+      · <<APPROVAL_DATE>> and <<NEXT_REVIEW_DATE>> emit a "whisper"
+        — the marker stays visible so the tenant knows a per-doc
+        decision is required, and today's date (or today+365d) is
+        shown as a format example.
+      · approval_date + next_review_date removed from Profile UI;
+        legacy tenant_profile rows are ignored here.
+
     Returns (new_body, n_filled).
     """
-    today = _dt.date.today().isoformat()
+    today = _dt.date.today()
+    today_str = _format_date(today, date_format)
+    review_str = _format_date(today + _dt.timedelta(days=365), date_format)
+
+    # Whisper: preserves the placeholder shape so the tenant knows a
+    # date-fill is required, with today's date (or today+365d) as a
+    # format hint. Does NOT commit to today being the actual approval.
+    approval_whisper = f"<<APPROVAL_DATE — e.g. {today_str}>>"
+    review_whisper   = f"<<NEXT_REVIEW_DATE — e.g. {review_str}>>"
+
     fills = {
-        "<<TENANT_NAME>>":    (tenant_row.get("name") or "").strip()       or "<<TENANT_NAME>>",
-        "<<TENANT_SHORT>>":   (tenant_row.get("short_code") or "").strip() or "<<TENANT_SHORT>>",
-        "<<TENANT_SECTOR>>":  (tenant_row.get("sector") or "").strip()     or "<<TENANT_SECTOR>>",
-        "<<TENANT_COUNTRY>>": (tenant_row.get("country") or "").strip()    or "<<TENANT_COUNTRY>>",
-        "<<TENANT_INDUSTRY>>":(tenant_row.get("industry") or "").strip()   or "<<TENANT_INDUSTRY>>",
-        "<<GENERATED_DATE>>": today,
+        "<<TENANT_NAME>>":      (tenant_row.get("name") or "").strip()       or "<<TENANT_NAME>>",
+        "<<TENANT_SHORT>>":     (tenant_row.get("short_code") or "").strip() or "<<TENANT_SHORT>>",
+        "<<TENANT_SECTOR>>":    (tenant_row.get("sector") or "").strip()     or "<<TENANT_SECTOR>>",
+        "<<TENANT_COUNTRY>>":   (tenant_row.get("country") or "").strip()    or "<<TENANT_COUNTRY>>",
+        "<<TENANT_INDUSTRY>>":  (tenant_row.get("industry") or "").strip()   or "<<TENANT_INDUSTRY>>",
+        "<<GENERATED_DATE>>":   today_str,
+        "<<APPROVAL_DATE>>":    approval_whisper,
+        "<<NEXT_REVIEW_DATE>>": review_whisper,
     }
     if profile:
         for k, v in profile.items():
+            # approval_date + next_review_date are removed from Profile
+            # in Ship 108'.b; any legacy tenant_profile rows here are
+            # ignored so the whisper always fires.
+            if k in ("approval_date", "next_review_date"):
+                continue
             placeholder = f"<<{k.upper()}>>"
             value = (v or "").strip()
             if value:
@@ -1187,6 +1239,16 @@ def render_template(
         )
         tenant_profile = {k: v for k, v in cur.fetchall()}
 
+        # Ship 108'.b — tenant's regional date-format preference. NULL
+        # (missing client_facts row OR unset column) falls back to ISO.
+        cur.execute(
+            "SELECT date_format FROM client_facts "
+            " WHERE tenant_id = %s::uuid LIMIT 1",
+            (tenant_id,),
+        )
+        _dfrow = cur.fetchone()
+        tenant_date_format = _dfrow[0] if _dfrow else None
+
         # N/A MUSTs from tenant_must_overrides (applies = FALSE).
         # Fetch reason so the render can show the auditor why we're
         # marking this section N/A (rather than silently dropping it).
@@ -1318,7 +1380,9 @@ def render_template(
     if prefill:
         body, n_tables_prefilled = _prefill_table_zones(body, pg_conn, tenant_id)
 
-    body, n_filled = _substitute_placeholders(body, tenant_row, profile=tenant_profile)
+    body, n_filled = _substitute_placeholders(
+        body, tenant_row, profile=tenant_profile, date_format=tenant_date_format,
+    )
 
     if include_header:
         # Two-layer header:

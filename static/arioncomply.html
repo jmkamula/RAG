@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-03-profile-polish';
+window.ARION_JS_VERSION = '2026-09-03-date-format';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -2879,6 +2879,10 @@ async function loadProfile() {
     // it's the first thing tenants see when navigating from a
     // clickable Phase 0 card. Auto-saves on radio change.
     renderJourneySection(profileResp.journey_status);
+    // Ship 108'.b — Regional preferences (date format) right after
+    // Compliance journey. Renderer applies this format to all date
+    // substitutions in downloaded templates.
+    renderRegionalSection(profileResp.date_format);
     renderExternalSystems(systemsResp.systems || []);
     renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
     renderNotificationChannels(channelsResp.channels || []);
@@ -2973,6 +2977,98 @@ async function saveJourneyStatus(status) {
     }
   } catch (e) {
     toastError('saving your compliance journey status', e);
+  }
+}
+
+
+// ── Ship 108'.b — Regional preferences (date format) ────────────────
+function renderRegionalSection(currentFormat) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const wrap = document.getElementById('profile-wrap');
+
+  const prior = wrap.querySelector('#regional-section');
+  if (prior) prior.remove();
+
+  // Live-preview today in each format so tenants see the shape they
+  // pick — clearer than any text description.
+  const now = new Date();
+  const d = String(now.getDate()).padStart(2, '0');
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const y = now.getFullYear();
+  const iso   = `${y}-${m}-${d}`;
+  const monShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][now.getMonth()];
+  const long_ = `${now.getDate()} ${monShort} ${y}`;
+
+  const options = [
+    {v: 'iso',       preview: iso,               note: 'ISO 8601 — default, unambiguous'},
+    {v: 'dmy_slash', preview: `${d}/${m}/${y}`,  note: 'UK, Ireland, most of Europe, Brazil'},
+    {v: 'mdy_slash', preview: `${m}/${d}/${y}`,  note: 'US, English Canada'},
+    {v: 'dmy_dot',   preview: `${d}.${m}.${y}`,  note: 'Germany, Czech Republic, Poland'},
+    {v: 'long',      preview: long_,             note: 'Long form, wordy but unambiguous'},
+  ];
+
+  // Effective default = 'iso' if unset.
+  const effective = currentFormat || 'iso';
+
+  let html = `
+    <div id="regional-section" style="margin-top:24px;border-top:1px solid #E8E5DA;padding-top:20px">
+      <div style="margin-bottom:12px">
+        <div style="font-size:15px;font-weight:600;color:#3A382E">Regional preferences</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+          How dates should appear in your downloaded policies and procedures.
+          Applies immediately to future template downloads.
+        </div>
+      </div>
+      <div style="display:grid;gap:8px">
+  `;
+
+  options.forEach(o => {
+    const checked = (effective === o.v) ? 'checked' : '';
+    const showRec = (o.v === 'iso' && !currentFormat);
+    html += `
+      <label style="display:flex;align-items:center;gap:14px;padding:12px 16px;
+                     background:#fff;border:1px solid ${checked ? '#B4ADEB' : '#E8E5DA'};
+                     border-radius:8px;cursor:pointer">
+        <input type="radio" name="date-format" value="${o.v}" ${checked}
+               onchange="saveDateFormat('${o.v}')"
+               style="cursor:pointer">
+        <div style="flex:1;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <div>
+            <span style="font-size:14px;font-weight:600;color:#3A382E;font-family:Consolas,'Courier New',monospace">${esc(o.preview)}</span>
+            ${showRec ? '<span style="font-size:10px;font-weight:600;padding:2px 7px;background:#EEEDFE;color:#3C3489;border-radius:10px;letter-spacing:.4px;text-transform:uppercase;margin-left:8px">Default</span>' : ''}
+          </div>
+          <div style="font-size:11px;color:#5F5E5A">${esc(o.note)}</div>
+        </div>
+      </label>
+    `;
+  });
+
+  html += `
+      </div>
+      <div id="date-format-saved"
+           style="font-size:11px;color:#1D9E75;margin-top:8px;opacity:0;transition:opacity 250ms">
+        ✓ Saved
+      </div>
+    </div>
+  `;
+
+  wrap.insertAdjacentHTML('beforeend', html);
+}
+
+
+async function saveDateFormat(fmt) {
+  const savedEl = document.getElementById('date-format-saved');
+  try {
+    await api('/api/v1/tenant/date-format', {
+      method: 'PUT',
+      body:   JSON.stringify({date_format: fmt}),
+    });
+    if (savedEl) {
+      savedEl.style.opacity = '1';
+      setTimeout(() => { if (savedEl) savedEl.style.opacity = '0'; }, 1600);
+    }
+  } catch (e) {
+    toastError('saving your date format preference', e);
   }
 }
 
