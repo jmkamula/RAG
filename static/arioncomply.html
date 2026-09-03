@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-02-scoping';
+window.ARION_JS_VERSION = '2026-09-03-journey';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -2471,9 +2471,29 @@ function _renderGetStartedBody(d, wrap) {
   strip += `</div>`;
 
   // ── Phase message card ──
-  const phaseMsg = `<div style="padding:14px 18px;background:#fff;border:1px solid #E8E5DA;border-radius:6px;margin-bottom:16px">
-    <div style="font-size:14px;font-weight:600;color:#3A382E;margin-bottom:4px">${esc(d.phase_name || '')}</div>
-    <div style="font-size:12px;color:#5C5A4F;line-height:1.5">${esc(d.phase_message || '')}</div>
+  // Ship 106'.b — clickable → routes to Profile page (single source
+  // of truth for tenant journey + client_facts + external systems).
+  // Also surfaces the Documents-page hint always so the tenant knows
+  // upload is an option regardless of phase.
+  const phaseMsg = `<div onclick="setMode('profile')"
+       style="padding:14px 18px;background:#fff;border:1px solid #E8E5DA;border-radius:6px;
+              margin-bottom:16px;cursor:pointer;transition:border-color 150ms, background 150ms"
+       onmouseover="this.style.borderColor='#B4ADEB';this.style.background='#FBFAFE'"
+       onmouseout="this.style.borderColor='#E8E5DA';this.style.background='#fff'">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:600;color:#3A382E;margin-bottom:4px">${esc(d.phase_name || '')}</div>
+        <div style="font-size:12px;color:#5C5A4F;line-height:1.5">${esc(d.phase_message || '')}</div>
+      </div>
+      <div style="color:#7C7A6E;font-size:16px">→</div>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F0EDE3;
+                font-size:11px;color:#5C5A4F;line-height:1.5">
+      Already have documents ready? Upload them anytime from
+      <a href="#docs" onclick="event.stopPropagation();setMode('docs');return false;"
+         style="color:#534AB7;font-weight:500">the Documents page</a>
+      — ArionComply extracts findings automatically.
+    </div>
   </div>`;
 
   // ── Next recommended action ──
@@ -2855,6 +2875,10 @@ async function loadProfile() {
       api('/api/v1/tenant/standards').catch(() => ({enrolled: [], enrollable: []})),
     ]);
     renderProfile(profileResp.profile || []);
+    // Ship 106'.a — Compliance journey section right after profile so
+    // it's the first thing tenants see when navigating from a
+    // clickable Phase 0 card. Auto-saves on radio change.
+    renderJourneySection(profileResp.journey_status);
     renderExternalSystems(systemsResp.systems || []);
     renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
     renderNotificationChannels(channelsResp.channels || []);
@@ -2865,6 +2889,90 @@ async function loadProfile() {
     renderFrameworksSection(stdsResp.enrolled || [], stdsResp.enrollable || []);
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your profile. Please refresh in a moment.</p></div>';
+  }
+}
+
+
+// ── Ship 106'.a — Compliance journey section in Profile ──────────
+// Auto-saves on radio change. Renders as an appended block below
+// renderProfile's placeholder rows so it's near the top of the page.
+function renderJourneySection(currentStatus) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const wrap = document.getElementById('profile-wrap');
+
+  // Remove prior render (loadProfile re-runs on any framework change)
+  const prior = wrap.querySelector('#journey-section');
+  if (prior) prior.remove();
+
+  const options = [
+    {v: 'greenfield',  label: 'Just starting',
+     desc: "We're building from scratch. No policies or documentation yet."},
+    {v: 'building',    label: 'Building',
+     desc: 'Some policies drafted, but the program isn\'t mature yet.'},
+    {v: 'documented',  label: 'Documented',
+     desc: 'Full documentation set. Not yet audited.'},
+    {v: 'audited',     label: 'Audited',
+     desc: "We've been through internal / external audit at least once."},
+    {v: 'mature',      label: 'Mature',
+     desc: 'We cite evidence from operational systems (Okta, ServiceNow, cloud config, etc.).'},
+  ];
+
+  let html = `
+    <div id="journey-section" style="margin-top:24px;border-top:1px solid #E8E5DA;padding-top:20px">
+      <div style="margin-bottom:12px">
+        <div style="font-size:15px;font-weight:600;color:#3A382E">Compliance journey</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+          Where are you in your compliance program? This helps ArionComply prioritise
+          what to surface next — templates for greenfield builds, upload prompts for
+          documented programs, cite-mode setup for mature operations.
+        </div>
+      </div>
+      <div style="display:grid;gap:8px">
+  `;
+
+  options.forEach(o => {
+    const checked = (currentStatus === o.v) ? 'checked' : '';
+    html += `
+      <label style="display:flex;align-items:flex-start;gap:12px;padding:12px 16px;
+                     background:#fff;border:1px solid ${checked ? '#B4ADEB' : '#E8E5DA'};
+                     border-radius:8px;cursor:pointer">
+        <input type="radio" name="journey" value="${o.v}" ${checked}
+               onchange="saveJourneyStatus('${o.v}')"
+               style="margin-top:2px;cursor:pointer">
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:2px">${esc(o.label)}</div>
+          <div style="font-size:12px;color:#5F5E5A;line-height:1.4">${esc(o.desc)}</div>
+        </div>
+      </label>
+    `;
+  });
+
+  html += `
+      </div>
+      <div id="journey-status-saved"
+           style="font-size:11px;color:#1D9E75;margin-top:8px;opacity:0;transition:opacity 250ms">
+        ✓ Saved
+      </div>
+    </div>
+  `;
+
+  wrap.insertAdjacentHTML('beforeend', html);
+}
+
+
+async function saveJourneyStatus(status) {
+  const savedEl = document.getElementById('journey-status-saved');
+  try {
+    await api('/api/v1/tenant/journey-status', {
+      method: 'PUT',
+      body:   JSON.stringify({journey_status: status}),
+    });
+    if (savedEl) {
+      savedEl.style.opacity = '1';
+      setTimeout(() => { if (savedEl) savedEl.style.opacity = '0'; }, 1600);
+    }
+  } catch (e) {
+    toastError('saving your compliance journey status', e);
   }
 }
 

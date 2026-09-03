@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-01T11:52:24Z from HEAD 851f84b5 by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-03T08:52:21Z from HEAD 56b96e59 by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict dLS1rfNz8nHgkKg13IHH4G8IRHl6tswi6xg3R2qy4mK0OsL1gtXDxvIXmWJLDW5
+\restrict BnQQ4Jcb5ZZiTqeAQnptLgyXguuHNuwUpLfgYvywhdft0KbJj4abKeHB1QqsXdq
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -1349,7 +1349,10 @@ CREATE TABLE public.client_facts (
     deleted_by uuid,
     deletion_reason text,
     retention_class text DEFAULT 'platform'::text NOT NULL,
-    purge_after timestamp with time zone
+    purge_after timestamp with time zone,
+    journey_status text,
+    journey_status_updated_at timestamp with time zone,
+    CONSTRAINT client_facts_journey_status_check CHECK (((journey_status IS NULL) OR (journey_status = ANY (ARRAY['greenfield'::text, 'building'::text, 'documented'::text, 'audited'::text, 'mature'::text]))))
 );
 
 
@@ -9445,5 +9448,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict dLS1rfNz8nHgkKg13IHH4G8IRHl6tswi6xg3R2qy4mK0OsL1gtXDxvIXmWJLDW5
+\unrestrict BnQQ4Jcb5ZZiTqeAQnptLgyXguuHNuwUpLfgYvywhdft0KbJj4abKeHB1QqsXdq
 

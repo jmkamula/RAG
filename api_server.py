@@ -5598,6 +5598,8 @@ async def get_tenant_profile(
     """
     pool = request.app.state.pg_pool
     conn = pool.getconn()
+    journey_status = None
+    journey_status_updated_at = None
     try:
         set_session(conn, key_info.tenant_id)
         with conn.cursor() as cur:
@@ -5608,6 +5610,18 @@ async def get_tenant_profile(
             )
             stored = {r[0]: {"value": r[1], "updated_at": r[2].isoformat() if r[2] else None}
                       for r in cur.fetchall()}
+            # Ship 106'.a — fetch journey_status in the same session
+            # so the Profile page renders both from one GET.
+            cur.execute("""
+                SELECT journey_status, journey_status_updated_at
+                  FROM client_facts
+                 WHERE tenant_id = %s::uuid
+                 LIMIT 1
+            """, (key_info.tenant_id,))
+            cf = cur.fetchone()
+            if cf:
+                journey_status = cf[0]
+                journey_status_updated_at = cf[1].isoformat() if cf[1] else None
     finally:
         pool.putconn(conn)
 
@@ -5641,9 +5655,74 @@ async def get_tenant_profile(
             "reference_count": 0,
         })
     return {
-        "tenant_id": key_info.tenant_id,
-        "profile":   out_rows,
+        "tenant_id":                 key_info.tenant_id,
+        "profile":                   out_rows,
+        "journey_status":            journey_status,
+        "journey_status_updated_at": journey_status_updated_at,
     }
+
+
+# =============================================================================
+# TENANT JOURNEY STATUS (Ship 106'.a)
+# =============================================================================
+
+_JOURNEY_STATUS_ALLOWED = {"greenfield", "building", "documented", "audited", "mature"}
+
+
+class JourneyStatusRequest(BaseModel):
+    journey_status: str
+
+
+@app.put("/api/v1/tenant/journey-status", tags=["tenant"])
+async def put_journey_status(
+    body:     JourneyStatusRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Set the tenant's compliance journey status. One of:
+    greenfield / building / documented / audited / mature.
+
+    Idempotent — safe to call on every radio change (frontend auto-
+    save). Upserts into client_facts (INSERT if no row exists yet,
+    UPDATE otherwise). RLS-scoped via app.tenant_id.
+    """
+    if body.journey_status not in _JOURNEY_STATUS_ALLOWED:
+        raise HTTPException(
+            status_code = 400,
+            detail      = f"journey_status must be one of {sorted(_JOURNEY_STATUS_ALLOWED)}",
+        )
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (key_info.tenant_id,))
+            # UPSERT client_facts. Fresh Quickstart tenants have no row;
+            # older tenants have one. `ON CONFLICT (tenant_id)` requires
+            # the constraint to exist — the table's PK is on `id`, so
+            # we check-and-branch manually.
+            cur.execute("""
+                SELECT 1 FROM client_facts WHERE tenant_id = %s LIMIT 1
+            """, (key_info.tenant_id,))
+            has_row = cur.fetchone() is not None
+            if has_row:
+                cur.execute("""
+                    UPDATE client_facts
+                       SET journey_status = %s,
+                           journey_status_updated_at = NOW()
+                     WHERE tenant_id = %s
+                """, (body.journey_status, key_info.tenant_id))
+            else:
+                cur.execute("""
+                    INSERT INTO client_facts (tenant_id, journey_status, journey_status_updated_at)
+                    VALUES (%s, %s, NOW())
+                """, (key_info.tenant_id, body.journey_status))
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    return {"journey_status": body.journey_status}
 
 
 @app.put("/api/v1/tenant/profile", tags=["templates"])
