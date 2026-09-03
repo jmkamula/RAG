@@ -1253,6 +1253,17 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
         return 0
 
     from rag.posture.assertions import set_assertion, get_latest_engine_assertion
+    from rag.tenant_lifecycle import lifecycle_stage
+
+    # Ship 107' — compute lifecycle stage once for the whole batch.
+    # Setup-stage tenants (fresh Quickstart, no client_facts, no
+    # journey_status) get zero engine proposals — they haven't
+    # declared scope, so the engine has nothing meaningful to
+    # propose against. Building-stage tenants get proposals for
+    # controls with real assessments only (see per-control gate below).
+    _stage = lifecycle_stage(pg_conn, tenant_id)
+    if _stage == "setup":
+        return 0
 
     proposable: list[tuple[str, str, str]] = []  # (cid, posture, reason)
     for cid, verdict in verdicts.items():
@@ -1365,6 +1376,18 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                     # clean posture. NC / OFI concurrence falls through to
                     # write an 'active' engine PA (above).
                     if live_finding == posture and not agrees_nc_ofi_concur:
+                        continue
+                    # Ship 107' — building-stage tenants only get proposals
+                    # for controls with a REAL assessment (Comply/OFI/NC).
+                    # `Not assessed` is the enrolment default — the engine
+                    # has nothing to disagree with when the tenant hasn't
+                    # looked. Skipping avoids 118-notification spam on
+                    # framework enrolment. Once the tenant makes an actual
+                    # assertion and the engine's opinion differs, this
+                    # gate opens and a real Stage-2 proposal fires.
+                    if _stage == "building" and (
+                        live_finding is None or live_finding in ("", "Not assessed")
+                    ):
                         continue
 
                 write_status = "active" if agrees_nc_ofi_concur else "pending"
