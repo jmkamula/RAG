@@ -4800,6 +4800,37 @@ async def admin_notifications_deliver_now(
 # Both return per-fact results (computed_value, changed, latency, error).
 # ─────────────────────────────────────────────────────────────────────────────
 
+@app.post("/api/v1/admin/derive-applicability", tags=["admin"])
+async def admin_derive_applicability(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Ship 110'.d — manual sweep of applicability derivation. Same
+    logic as the automatic triggers on fact-change + framework-enrol,
+    but on demand. Useful after a rule set change or a manual state fix.
+
+    Returns per-rule counts + total controls_cleared / controls_na_set.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        from rag.scoping.applicability import derive_applicability
+        result = derive_applicability(conn, key_info.tenant_id)
+        conn.commit()
+        return {
+            "tenant_id":             result.tenant_id,
+            "rules_evaluated":       result.rules_evaluated,
+            "rules_skipped_default": result.rules_skipped_default,
+            "rules_fired":           result.rules_fired,
+            "controls_cleared":      result.controls_cleared,
+            "controls_na_set":       result.controls_na_set,
+            "per_rule_na_counts":    result.per_rule_na_counts,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.post("/api/v1/admin/facts/recompute", tags=["admin"])
 async def admin_facts_recompute_all(
     request:  Request,
@@ -5571,6 +5602,24 @@ async def tenant_standards_enroll(
             results = enroll(conn, neo, key_info.tenant_id, body.standard_ids)
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
+
+        # Ship 110'.d — re-derive applicability now that new posture_controls
+        # rows have been seeded. Rules that fired before pick up the new
+        # framework's controls too (e.g. cloud_only rule now covers ISO
+        # 27002:2022 A.7.% AND ISO 27701:2019 A.7.% if just enrolled).
+        try:
+            from rag.scoping.applicability import derive_applicability
+            derivation = derive_applicability(conn, key_info.tenant_id)
+            conn.commit()
+            logger.info(
+                "applicability derived post-enrolment for %s: na_set=%d rules=%s",
+                key_info.tenant_id, derivation.controls_na_set, derivation.rules_fired,
+            )
+        except Exception as e:
+            logger.warning("post-enrolment applicability derivation failed for %s: %s",
+                           key_info.tenant_id, e)
+            try: conn.rollback()
+            except Exception: pass
     finally:
         pool.putconn(conn)
         neo.close()
@@ -5925,10 +5974,37 @@ async def put_tenant_facts(
                  WHERE tenant_id = %s
             """, params)
         conn.commit()
+
+        # Ship 110'.d — re-derive applicability after any fact change.
+        # Silent-fail on error (never block the tenant's Yes/No answer),
+        # but log for observability.
+        try:
+            from rag.scoping.applicability import derive_applicability
+            derivation = derive_applicability(conn, key_info.tenant_id)
+            conn.commit()
+            logger.info(
+                "applicability derived for %s: cleared=%d na_set=%d rules=%s",
+                key_info.tenant_id, derivation.controls_cleared,
+                derivation.controls_na_set, derivation.rules_fired,
+            )
+            derived_out = {
+                "controls_cleared": derivation.controls_cleared,
+                "controls_na_set":  derivation.controls_na_set,
+                "rules_fired":      derivation.rules_fired,
+            }
+        except Exception as e:
+            logger.warning("applicability derivation failed for %s: %s",
+                           key_info.tenant_id, e)
+            try: conn.rollback()
+            except Exception: pass
+            derived_out = None
     finally:
         pool.putconn(conn)
 
-    return {"updated": sorted(body.updates.keys())}
+    return {
+        "updated":      sorted(body.updates.keys()),
+        "applicability_derived": derived_out,
+    }
 
 
 @app.put("/api/v1/tenant/profile", tags=["templates"])
