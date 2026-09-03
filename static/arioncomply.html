@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-03-date-format';
+window.ARION_JS_VERSION = '2026-09-03-drop-cascade-ov';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -2865,11 +2865,14 @@ async function loadProfile() {
   const wrap = document.getElementById('profile-wrap');
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
   try {
-    const [profileResp, systemsResp, overridesResp, vocabResp, channelsResp, keysResp, stdsResp] = await Promise.all([
+    // Ship 109' — cascade overrides + cascade vocabulary fetches
+    // removed. That surface asked tenants to mute cascade paths they
+    // shouldn't need to understand. The right answer is applicability
+    // derivation from client_facts (deferred until post-PoC customer
+    // signal). Backend endpoints stay for external API compat.
+    const [profileResp, systemsResp, channelsResp, keysResp, stdsResp] = await Promise.all([
       api('/api/v1/tenant/profile'),
       api('/api/v1/tenant/external-systems'),
-      api('/api/v1/tenant/cascade-overrides').catch(() => ({items: []})),
-      api('/api/v1/tenant/cascade-events/vocabulary').catch(() => ({vocabulary: {}})),
       api('/api/v1/admin/notifications/channels').catch(() => ({channels: []})),
       api('/api/v1/tenant/api-keys').catch(() => ({keys: []})),
       api('/api/v1/tenant/standards').catch(() => ({enrolled: [], enrollable: []})),
@@ -2884,7 +2887,6 @@ async function loadProfile() {
     // substitutions in downloaded templates.
     renderRegionalSection(profileResp.date_format);
     renderExternalSystems(systemsResp.systems || []);
-    renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
     renderNotificationChannels(channelsResp.channels || []);
     renderApiKeys(keysResp.keys || []);
     // Ship 104'.d — Frameworks section rendered after all other Profile
@@ -3513,172 +3515,6 @@ async function deleteNotificationChannel(id) {
   }
 }
 
-
-// ── Cascade overrides admin (S3r) ──────────────────────────────────────
-function renderCascadeOverrides(overrides, vocab) {
-  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
-  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
-  const wrap = document.getElementById('profile-wrap');
-
-  // Event-type picker. Categories + event-type slugs are humanized for
-  // display; the underlying value stays the slug (that's what the API
-  // expects). Titles come pre-composed from the catalog.
-  let pickerOpts = '<option value="">— pick event type —</option>';
-  for (const [cat, evs] of Object.entries(vocab || {})) {
-    const catLabel = String(cat).replace(/_/g, ' ');
-    pickerOpts += `<optgroup label="${esc(catLabel)}">`;
-    for (const ev of evs) {
-      const evLabel = ev.title || String(ev.event_type).replace(/_/g, ' ');
-      pickerOpts += `<option value="${attr(ev.event_type)}">${esc(evLabel)}</option>`;
-    }
-    pickerOpts += '</optgroup>';
-  }
-
-  // Turn 'ISO27001:2022:A.6.4' or 'req:A.6.4:foo' into a tenant-friendly
-  // 'A.6.4' style ref — the machine-form breadcrumb belongs in a tooltip,
-  // not in the middle of a table cell.
-  const _prettyTarget = (t) => {
-    if (!t) return '—';
-    const s = String(t);
-    if (s.startsWith('req:')) return s.split(':')[1] || s;
-    const parts = s.split(':');
-    return parts[parts.length - 1] || s;
-  };
-
-  // Existing overrides table
-  let rows = '';
-  if (!overrides.length) {
-    rows = `<tr><td colspan="5" style="padding:12px;color:#9C9A8E;font-size:12px;text-align:center">No cascade overrides registered.</td></tr>`;
-  } else {
-    for (const o of overrides) {
-      const target = _prettyTarget(o.target_requirement_id);
-      const targetTooltip = o.target_requirement_id ? attr(o.target_requirement_id) : '';
-      const kindLabel = o.override_kind === 'mute_event' ? 'mute event' : 'mute target';
-      const evLabel = String(o.event_type || '').replace(/_/g, ' ');
-      rows += `<tr>
-        <td style="padding:6px 8px;font-size:11px"><span style="background:#F0EDE3;color:#5C5A4F;padding:1px 6px;border-radius:8px;font-size:10px">${esc(kindLabel)}</span></td>
-        <td style="padding:6px 8px;font-size:11px">${esc(evLabel)}</td>
-        <td style="padding:6px 8px;font-size:11px" title="${targetTooltip}">${esc(target)}</td>
-        <td style="padding:6px 8px;font-size:11px;color:#3A382E">${esc(o.reason || '')}</td>
-        <td style="padding:6px 8px;text-align:right">
-          <button onclick="deleteCascadeOverride('${attr(o.id)}')" title="Remove" style="font-size:10px;padding:3px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-trash"></i></button>
-        </td>
-      </tr>`;
-    }
-  }
-
-  const sectionHtml = `
-    <div style="margin-top:24px;padding:16px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px">
-      <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:4px">
-        <i class="ti ti-shield-off"></i> Cascade policy overrides
-      </div>
-      <div style="font-size:11px;color:#5C5A4F;margin-bottom:12px">
-        Mute specific cascade paths that don't fit your organisation.
-        Active overrides are consulted by the cascade engine before
-        firing implications.
-      </div>
-
-      <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #E8E5DA;border-radius:4px;overflow:hidden;margin-bottom:14px">
-        <thead style="background:#F0EDE3;font-size:10px;text-transform:uppercase;color:#5C5A4F;letter-spacing:.4px">
-          <tr>
-            <th style="padding:6px 8px;text-align:left;font-weight:600">Scope</th>
-            <th style="padding:6px 8px;text-align:left;font-weight:600">Event</th>
-            <th style="padding:6px 8px;text-align:left;font-weight:600">Target control</th>
-            <th style="padding:6px 8px;text-align:left;font-weight:600">Reason</th>
-            <th style="padding:6px 8px"></th>
-          </tr>
-        </thead>
-        <tbody id="cascade-override-rows">${rows}</tbody>
-      </table>
-
-      <div style="padding:10px;background:#fff;border:1px dashed #E8E5DA;border-radius:4px">
-        <div style="font-size:11px;font-weight:600;color:#3A382E;margin-bottom:6px">Add an override</div>
-        <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:6px;align-items:center">
-          <label style="font-size:11px;color:#5C5A4F">Scope:</label>
-          <select id="cov-kind" onchange="_covKindChanged()" style="font-size:11px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4">
-            <option value="mute_event_target">Mute this event for one specific control</option>
-            <option value="mute_event">Mute this event across every control it fires on</option>
-          </select>
-
-          <label style="font-size:11px;color:#5C5A4F">Event type:</label>
-          <select id="cov-event" style="font-size:11px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4">${pickerOpts}</select>
-
-          <label style="font-size:11px;color:#5C5A4F" id="cov-target-lbl">Target control:</label>
-          <input id="cov-target" placeholder="e.g. ISO27001:2022:A.6.4 (full machine ref — needed for exact match)" style="font-size:11px;padding:4px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:monospace;grid-column:2/4">
-
-          <label style="font-size:11px;color:#5C5A4F;align-self:start">Reason (required):</label>
-          <textarea id="cov-reason" rows="2" placeholder="Auditor-grade explanation — why this cascade does not apply to us." style="font-size:11px;padding:6px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4;resize:vertical"></textarea>
-
-          <span></span>
-          <div style="grid-column:2/4;display:flex;justify-content:flex-end">
-            <button onclick="addCascadeOverride()" class="btn-ask" style="font-size:11px;padding:5px 14px">
-              <i class="ti ti-plus"></i> Add override
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>`;
-
-  wrap.insertAdjacentHTML('beforeend', sectionHtml);
-}
-
-function _covKindChanged() {
-  const kind = document.getElementById('cov-kind').value;
-  const lbl  = document.getElementById('cov-target-lbl');
-  const inp  = document.getElementById('cov-target');
-  const needTarget = (kind === 'mute_event_target');
-  lbl.style.opacity  = needTarget ? '1' : '.4';
-  inp.disabled       = !needTarget;
-  inp.style.opacity  = needTarget ? '1' : '.4';
-  if (!needTarget) inp.value = '';
-}
-
-async function addCascadeOverride() {
-  const kind   = document.getElementById('cov-kind').value;
-  const event_t = document.getElementById('cov-event').value;
-  const target = document.getElementById('cov-target').value.trim();
-  const reason = document.getElementById('cov-reason').value.trim();
-  if (!event_t)            { alert('Pick an event type.'); return; }
-  if (!reason)             { alert('Reason is required.'); return; }
-  if (kind === 'mute_event_target' && !target) {
-    alert('Target control is required when muting for a single control.'); return;
-  }
-  const body = {
-    override_kind: kind,
-    event_type:    event_t,
-    reason:        reason,
-  };
-  if (kind === 'mute_event_target') body.target_requirement_id = target;
-  try {
-    const r = await fetch('/api/v1/tenant/cascade-overrides', {
-      method:  'PUT',
-      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
-      body:    JSON.stringify(body),
-    });
-    if (!r.ok) {
-      const t = await r.text();
-      alert(`Add failed: ${r.status} ${t.slice(0,300)}`);
-      return;
-    }
-    loadProfile();
-  } catch (e) { alert(`Error: ${e.message}`); }
-}
-
-async function deleteCascadeOverride(id) {
-  if (!confirm('Remove this cascade override?')) return;
-  try {
-    const r = await fetch(`/api/v1/tenant/cascade-overrides/${encodeURIComponent(id)}`, {
-      method:  'DELETE',
-      headers: {'X-API-Key': API_KEY},
-    });
-    if (!r.ok) {
-      const t = await r.text();
-      alert(`Remove failed: ${r.status} ${t.slice(0,200)}`);
-      return;
-    }
-    loadProfile();
-  } catch (e) { alert(`Error: ${e.message}`); }
-}
 
 function renderProfile(rows) {
   const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
