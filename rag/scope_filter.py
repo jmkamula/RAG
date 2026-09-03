@@ -117,12 +117,16 @@ def get_tenant_scope_facts(tenant_id: str, pg_conn) -> dict:
     try:
         with pg_conn.cursor() as cur:
             cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            # Ship 110'.a — client_facts is the source of truth for
+            # scoping attributes. COALESCE into tenants for legacy
+            # rows that Ship 110'.b's Quickstart initializer hasn't
+            # yet populated.
             cur.execute(
                 """
-                SELECT t.has_physical_premises,
-                       t.does_software_development,
+                SELECT COALESCE(cf.has_physical_premises, t.has_physical_premises),
+                       COALESCE(cf.develops_software,     t.does_software_development),
                        t.industry,
-                       t.employee_count,
+                       COALESCE(cf.employee_count,        t.employee_count),
                        cf.processes_personal_data,
                        cf.role_controller,
                        cf.role_processor,

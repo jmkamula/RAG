@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-03T11:17:53Z from HEAD cb2df3c1 by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-03T14:21:53Z from HEAD 8caf134d by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict p79SNLDohLkztx72jkCIoPDqkaDV8N6KmjzPd0d7ftz0h4Qrt98gsqjIeQVsHTo
+\restrict 7XSgbScGdFrc7TAnvOzvDVw4UxgkMtDHfQIHapEPc9bFAcb5iet5P2eFMNFKGdb
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -1353,6 +1353,9 @@ CREATE TABLE public.client_facts (
     journey_status text,
     journey_status_updated_at timestamp with time zone,
     date_format text,
+    country text,
+    employee_count integer,
+    fact_source jsonb DEFAULT '{}'::jsonb NOT NULL,
     CONSTRAINT client_facts_date_format_check CHECK (((date_format IS NULL) OR (date_format = ANY (ARRAY['iso'::text, 'dmy_slash'::text, 'mdy_slash'::text, 'dmy_dot'::text, 'long'::text])))),
     CONSTRAINT client_facts_journey_status_check CHECK (((journey_status IS NULL) OR (journey_status = ANY (ARRAY['greenfield'::text, 'building'::text, 'documented'::text, 'audited'::text, 'mature'::text]))))
 );
@@ -1479,6 +1482,7 @@ CREATE TABLE public.posture_controls (
     engine_approved_by uuid,
     engine_approved_at timestamp with time zone,
     applicability_status text DEFAULT 'applicable'::text NOT NULL,
+    applicability_reason text,
     CONSTRAINT posture_controls_applicability_status_check CHECK ((applicability_status = ANY (ARRAY['applicable'::text, 'na'::text]))),
     CONSTRAINT posture_controls_confidence_check CHECK ((confidence = ANY (ARRAY['high'::text, 'medium'::text, 'low'::text]))),
     CONSTRAINT posture_controls_confirmation_status_check CHECK ((confirmation_status = ANY (ARRAY['draft'::text, 'confirmed'::text, 'overridden'::text, 'document_confirmed'::text, 'engine_confirmed'::text]))),
@@ -9450,5 +9454,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict p79SNLDohLkztx72jkCIoPDqkaDV8N6KmjzPd0d7ftz0h4Qrt98gsqjIeQVsHTo
+\unrestrict 7XSgbScGdFrc7TAnvOzvDVw4UxgkMtDHfQIHapEPc9bFAcb5iet5P2eFMNFKGdb
 
