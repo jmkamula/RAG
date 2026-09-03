@@ -530,9 +530,11 @@ def main():
 
     # Resolve workbook path from tenant uploads
     import psycopg2
+    # Owner role (bypasses RLS) — needs ARION_OWNER_PW.
     conn = psycopg2.connect(
         host="127.0.0.1", dbname="arioncomply_compliance",
-        user="arioncomply", password=os.getenv("POSTGRES_PASSWORD", ""),
+        user="arioncomply",
+        password=os.getenv("ARION_OWNER_PW") or os.getenv("POSTGRES_PASSWORD", ""),
     )
     with conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (TENANT_ID,))

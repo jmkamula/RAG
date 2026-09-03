@@ -344,11 +344,15 @@ def _connect_pg():
     import psycopg2
     from dotenv import load_dotenv
     load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+    # Connects as the arioncomply owner role (bypasses RLS on tenants +
+    # posture_controls). Runtime canonical for the owner pw is
+    # ARION_OWNER_PW; keep the legacy POSTGRES_PASSWORD fallback so any
+    # ambient-env caller still works during the migration window.
     return psycopg2.connect(
-        host     = os.getenv('POSTGRES_HOST', '127.0.0.1'),
-        dbname   = os.getenv('POSTGRES_DB',   'arioncomply_compliance'),
-        user     = os.getenv('POSTGRES_USER', 'arioncomply'),
-        password = os.getenv('POSTGRES_PASSWORD', ''),
+        host     = os.getenv('PGHOST', os.getenv('POSTGRES_HOST', '127.0.0.1')),
+        dbname   = os.getenv('PGDATABASE', 'arioncomply_compliance'),
+        user     = 'arioncomply',
+        password = os.getenv('ARION_OWNER_PW') or os.getenv('POSTGRES_PASSWORD', ''),
     )
 
 

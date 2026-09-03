@@ -2302,7 +2302,7 @@ def _build_topic_bundle_answer(state: dict, tenant) -> Optional[dict]:
         host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
         dbname   = "arioncomply_compliance",
         user     = "arioncomply_app",
-        password = os.getenv("POSTGRES_PASSWORD"),
+        password = os.getenv("PGPASSWORD", ""),
     )
     try:
         with pg.cursor() as cur:
@@ -2678,7 +2678,7 @@ def make_retrieve_node(
                     host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
                     dbname   = "arioncomply_compliance",
                     user     = "arioncomply_app",
-                    password = os.getenv("POSTGRES_PASSWORD"),
+                    password = os.getenv("PGPASSWORD", ""),
                 )
                 try:
                     _ack_result = acknowledge_gap(
@@ -2741,7 +2741,7 @@ def make_retrieve_node(
                     host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
                     dbname   = "arioncomply_compliance",
                     user     = "arioncomply_app",
-                    password = os.getenv("POSTGRES_PASSWORD"),
+                    password = os.getenv("PGPASSWORD", ""),
                 )
                 try:
                     _tenant_id = str(getattr(tenant, "tenant_id", "") or "")
@@ -2826,7 +2826,7 @@ def make_retrieve_node(
                     host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
                     dbname   = "arioncomply_compliance",
                     user     = "arioncomply_app",
-                    password = os.getenv("POSTGRES_PASSWORD"),
+                    password = os.getenv("PGPASSWORD", ""),
                 )
                 try:
                     _tenant_id = str(getattr(tenant, "tenant_id", "") or "")

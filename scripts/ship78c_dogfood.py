@@ -32,7 +32,7 @@ def deactivate_findings():
     import psycopg2
     conn = psycopg2.connect(
         host="127.0.0.1", dbname="arioncomply_compliance",
-        user="arioncomply", password=os.getenv("POSTGRES_PASSWORD", ""),
+        user="arioncomply", password=os.getenv("ARION_OWNER_PW") or os.getenv("POSTGRES_PASSWORD", ""),
     )
     tid = "00000000-0000-0000-0000-000000000001"
     with conn.cursor() as cur:
@@ -103,7 +103,7 @@ def snapshot_findings():
     import psycopg2
     conn = psycopg2.connect(
         host="127.0.0.1", dbname="arioncomply_compliance",
-        user="arioncomply", password=os.getenv("POSTGRES_PASSWORD", ""),
+        user="arioncomply", password=os.getenv("ARION_OWNER_PW") or os.getenv("POSTGRES_PASSWORD", ""),
     )
     out_path = "/data/arioncomply/docs/ground_truth/ship77d_measurement/run_d_union_tuned.csv"
     tid = "00000000-0000-0000-0000-000000000001"

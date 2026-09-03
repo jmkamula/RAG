@@ -30,7 +30,7 @@ def deactivate_findings():
     import psycopg2
     conn = psycopg2.connect(
         host="127.0.0.1", dbname="arioncomply_compliance",
-        user="arioncomply", password=os.getenv("POSTGRES_PASSWORD", ""),
+        user="arioncomply", password=os.getenv("ARION_OWNER_PW") or os.getenv("POSTGRES_PASSWORD", ""),
     )
     tid = "00000000-0000-0000-0000-000000000001"
     with conn.cursor() as cur:
@@ -122,7 +122,7 @@ def snapshot_findings():
     ) TO '{OUT_CSV}' WITH (FORMAT csv, HEADER);
     """
     env = os.environ.copy()
-    env["PGPASSWORD"] = env.get("POSTGRES_PASSWORD", "")
+    env["PGPASSWORD"] = env.get("ARION_OWNER_PW") or env.get("POSTGRES_PASSWORD", "")
     subprocess.run(
         ["psql", "-h", "127.0.0.1", "-U", "arioncomply",
          "-d", "arioncomply_compliance", "-c", sql],
