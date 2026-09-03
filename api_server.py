@@ -5374,52 +5374,52 @@ async def download_template(
 # the UI human-grade copy for the known set.
 
 _TENANT_PROFILE_KEYS: list[dict] = [
-    # People
+    # People — Ship 108'.a — purpose-driven descriptions
     {"key": "ceo_name",            "group": "People",
      "label": "CEO name",
-     "description": "Chief Executive Officer who signs off on top-level policies."},
+     "description": "Person who signs top-level policies (CEO or equivalent)."},
     {"key": "ciso_name",           "group": "People",
      "label": "CISO name",
-     "description": "Chief Information Security Officer leading security operations."},
+     "description": "Day-to-day security operations lead."},
     {"key": "dpo_name",            "group": "People",
      "label": "DPO name",
-     "description": "Data Protection Officer (or equivalent privacy lead)."},
+     "description": "Privacy lead — DPO title if you have one, otherwise the equivalent role."},
     {"key": "isms_manager_name",   "group": "People",
      "label": "ISMS Manager",
-     "description": "Day-to-day ISMS operator (per Clause 5.3a)."},
+     "description": "Day-to-day ISMS operator. Named in Clause 5.3(a) roles."},
     {"key": "isms_owner_name",     "group": "People",
      "label": "ISMS Owner",
-     "description": "Top-management accountable owner of the ISMS (often CEO)."},
+     "description": "Top-management owner accountable for the ISMS. Often the CEO."},
     {"key": "hr_partner_name",     "group": "People",
      "label": "HR partner",
-     "description": "HR contact for personnel-security workflows (A.6 controls)."},
+     "description": "HR contact for personnel-security tasks (screening, joiner/leaver, awareness)."},
     {"key": "awareness_lead_name", "group": "People",
      "label": "Awareness programme lead",
-     "description": "Lead for A.6.3 information-security awareness + training."},
+     "description": "Lead for security awareness + training."},
 
     # Org metadata
     {"key": "registered_address",  "group": "Organisation",
      "label": "Registered office address",
-     "description": "Legal registered address — appears in policy headers + privacy notices."},
+     "description": "Legal registered address. Appears in policy headers + privacy notices."},
     {"key": "company_number",      "group": "Organisation",
      "label": "Company number",
-     "description": "Registered company / business number (e.g. UK Companies House)."},
+     "description": "Registered company / business number (Companies House or equivalent)."},
     {"key": "tenant_domain",       "group": "Organisation",
      "label": "Primary domain",
-     "description": "Public domain used in policy email addresses (dpo@…, ciso@…)."},
+     "description": "Your public domain. Used in policy email addresses (dpo@…, ciso@…)."},
 
     # Business context
     {"key": "product_or_service",  "group": "Business",
      "label": "Primary product / service",
-     "description": "Short description used in scope-statements and customer-facing docs."},
+     "description": "What your organization does or sells — used verbatim in scope statements."},
 
     # Dates
     {"key": "approval_date",       "group": "Dates",
      "label": "Default approval date",
-     "description": "Default 'approved on' date for newly-rendered policies (override per doc)."},
+     "description": "Default \"approved on\" date printed in downloaded policies. Override per document."},
     {"key": "next_review_date",    "group": "Dates",
      "label": "Default next review date",
-     "description": "Default 'next planned review' — typically approval_date + 365d."},
+     "description": "Default review-by date printed in policies. Usually 12 months after approval."},
 ]
 _TENANT_PROFILE_KEY_SET = {entry["key"] for entry in _TENANT_PROFILE_KEYS}
 

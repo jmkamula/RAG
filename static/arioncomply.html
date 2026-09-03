@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-03-journey';
+window.ARION_JS_VERSION = '2026-09-03-profile-polish';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -3623,28 +3623,38 @@ function renderProfile(rows) {
       <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;overflow:hidden">`;
     for (const r of g.rows) {
       const isEmpty = !((r.value || '').trim());
-      const refTag = r.reference_count > 0
-        ? `<span style="color:#5C5A4F;font-size:11px">Used in ${r.reference_count} template${r.reference_count===1?'':'s'}</span>`
-        : `<span style="color:#9C9A8E;font-size:11px;font-style:italic">No template references yet</span>`;
+      // Ship 108'.a — right-side status: [empty chip if empty] · Used in N templates.
+      // Label no longer collides with the empty state, and the placeholder-token
+      // hint moves to a `title` tooltip on the input so template-authors can find
+      // it on hover without cluttering the row for typical readers.
+      const refText = r.reference_count > 0
+        ? `Used in ${r.reference_count} template${r.reference_count === 1 ? '' : 's'}`
+        : 'No template references yet';
+      const emptyChip = isEmpty
+        ? '<span style="color:#9C2E2E;font-size:11px;background:#FEECEA;padding:1px 7px;border-radius:9px;font-weight:500">empty</span>'
+        : '';
+      const rightMeta = emptyChip
+        ? `<div style="display:flex;align-items:center;gap:8px">
+             ${emptyChip}
+             <span style="color:#9C9A8E;font-size:11px">·</span>
+             <span style="color:#5C5A4F;font-size:11px">${refText}</span>
+           </div>`
+        : `<span style="color:${r.reference_count > 0 ? '#5C5A4F' : '#9C9A8E'};font-size:11px;${r.reference_count > 0 ? '' : 'font-style:italic'}">${refText}</span>`;
+      const tokenHint = `Template token: <<${r.key.toUpperCase()}>>`;
       html += `<div class="profile-row" style="padding:10px 14px;border-bottom:1px solid #F0EDE3">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
-          <div style="font-size:12px;color:#3A382E;font-weight:600">
-            ${esc(r.label)}
-            ${isEmpty ? '<span style="color:#9C2E2E;font-size:11px;font-weight:400;margin-left:6px">empty</span>' : ''}
-          </div>
-          ${refTag}
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="font-size:12px;color:#3A382E;font-weight:600">${esc(r.label)}</div>
+          ${rightMeta}
         </div>
-        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">${esc(r.description)}</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px;line-height:1.5">${esc(r.description)}</div>
         <input type="text" class="profile-input" data-key="${attr(r.key)}"
                placeholder="(empty — placeholder will appear literally in templates)"
+               title="${attr(tokenHint)}"
                value="${attr(r.value)}"
                style="width:100%;margin-top:6px;padding:7px 10px;
                       font-size:12px;font-family:inherit;
                       background:#FAF8F2;border:1px solid ${isEmpty ? '#E8B5B5' : '#E8E5DA'};
                       border-radius:4px;color:#3A382E;box-sizing:border-box" />
-        <div style="font-size:10px;color:#9C9A8E;margin-top:3px;font-family:Consolas,monospace">
-          ↳ replaces <code>&lt;&lt;${esc(r.key.toUpperCase())}&gt;&gt;</code> in templates
-        </div>
       </div>`;
     }
     html += `</div></div>`;
