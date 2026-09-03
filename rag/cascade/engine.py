@@ -905,6 +905,32 @@ def fire_cascade(
             if blocked:
                 continue
 
+            # Ship 110'.e — applicability gate: don't fire if target
+            # control has been scoped N/A for this tenant by the
+            # applicability derivation (rag.scoping.applicability).
+            # The N/A reason on posture_controls documents WHY nothing
+            # fired for auditor-facing "why is X silent?" questions.
+            pg_cursor.execute(
+                """
+                SELECT applicability_status
+                  FROM posture_controls
+                 WHERE tenant_id   = %s::uuid
+                   AND standard_id = %s
+                   AND control_ref = %s
+                   AND is_active
+                 LIMIT 1
+                """,
+                (tenant_id, r.target_standard_id, r.target_control_ref),
+            )
+            row = pg_cursor.fetchone()
+            if row and row[0] == 'na':
+                logger.info(
+                    "cascade suppressed for tenant=%s target=%s:%s — "
+                    "applicability_status=na",
+                    tenant_id, r.target_standard_id, r.target_control_ref,
+                )
+                continue
+
             pg_cursor.execute(
                 """
                 INSERT INTO triggered_implication
