@@ -5610,20 +5610,35 @@ async def get_tenant_profile(
             )
             stored = {r[0]: {"value": r[1], "updated_at": r[2].isoformat() if r[2] else None}
                       for r in cur.fetchall()}
-            # Ship 106'.a + 108'.b — fetch journey_status + date_format
-            # in the same session so the Profile page renders all
-            # tenant preferences from one GET.
-            cur.execute("""
-                SELECT journey_status, journey_status_updated_at, date_format
+            # Ship 106'.a + 108'.b + 110'.c — fetch journey_status +
+            # date_format + all scoping facts + fact_source in one GET.
+            scoping_cols_sql = ", ".join(sorted(_SCOPING_FACTS_ALL_ALLOWED))
+            cur.execute(f"""
+                SELECT journey_status, journey_status_updated_at,
+                       date_format, fact_source,
+                       {scoping_cols_sql}
                   FROM client_facts
                  WHERE tenant_id = %s::uuid
                  LIMIT 1
             """, (key_info.tenant_id,))
             cf = cur.fetchone()
+            scoping_facts: dict = {}
             if cf:
-                journey_status = cf[0]
+                journey_status            = cf[0]
                 journey_status_updated_at = cf[1].isoformat() if cf[1] else None
-                date_format = cf[2]
+                date_format               = cf[2]
+                fact_source               = cf[3] or {}
+                scoping_col_values        = dict(zip(sorted(_SCOPING_FACTS_ALL_ALLOWED), cf[4:]))
+                for col, val in scoping_col_values.items():
+                    marker = fact_source.get(col)
+                    # source==None means default (column at schema default,
+                    # never explicitly declared or derived).
+                    scoping_facts[col] = {
+                        "value":  val,
+                        "source": (marker or {}).get("source", "default"),
+                        "from":   (marker or {}).get("from"),
+                        "at":     (marker or {}).get("at"),
+                    }
             else:
                 date_format = None
     finally:
@@ -5664,6 +5679,7 @@ async def get_tenant_profile(
         "journey_status":            journey_status,
         "journey_status_updated_at": journey_status_updated_at,
         "date_format":               date_format,
+        "scoping_facts":             scoping_facts,
     }
 
 
@@ -5673,6 +5689,31 @@ async def get_tenant_profile(
 
 _JOURNEY_STATUS_ALLOWED = {"greenfield", "building", "documented", "audited", "mature"}
 _DATE_FORMAT_ALLOWED   = {"iso", "dmy_slash", "mdy_slash", "dmy_dot", "long"}
+
+
+# Ship 110'.c — client_facts scoping columns exposed via
+# GET /api/v1/tenant/profile + writable via PUT /api/v1/tenant/facts.
+# Update this set (schema-mirroring) when a new scoping question lands.
+# Two column families: booleans (Yes/No questions) + text (sector).
+_SCOPING_FACTS_BOOL_ALLOWED = {
+    "processes_personal_data",
+    "eu_data_subjects",
+    "uk_data_subjects",
+    "role_controller",
+    "role_processor",
+    "special_category_data",
+    "automated_decision_making",
+    "has_physical_premises",
+    "develops_software",
+    "transfers_data_outside_eu",
+    "employee_count_250_plus",
+    "public_authority",
+}
+_SCOPING_FACTS_TEXT_ALLOWED = {
+    "sector",
+    "country",
+}
+_SCOPING_FACTS_ALL_ALLOWED = _SCOPING_FACTS_BOOL_ALLOWED | _SCOPING_FACTS_TEXT_ALLOWED
 
 
 class JourneyStatusRequest(BaseModel):
@@ -5778,6 +5819,116 @@ async def put_date_format(
         pool.putconn(conn)
 
     return {"date_format": body.date_format}
+
+
+class ScopingFactsUpdate(BaseModel):
+    """Body for PUT /api/v1/tenant/facts.
+    Values may be True / False / None (None = revert to default, drop
+    from fact_source). Only columns in _SCOPING_FACTS_ALL_ALLOWED are
+    accepted; unknown columns raise 400.
+    """
+    updates: dict
+
+
+@app.put("/api/v1/tenant/facts", tags=["tenant"])
+async def put_tenant_facts(
+    body:     ScopingFactsUpdate,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Ship 110'.c — update tenant scoping facts from the Profile
+    "About your organisation" section. Auto-save endpoint (frontend
+    calls this on each answer change).
+
+    Body shape:
+        {"updates": {"processes_personal_data": true,
+                     "special_category_data":   false,
+                     "sector":                  "healthcare"}}
+
+    Each column is:
+      · validated against _SCOPING_FACTS_ALL_ALLOWED
+      · type-checked (bool cols must get bool; text cols must get str)
+      · UPDATEd with the new value
+      · marked `declared` in fact_source (overrides any prior derived/default)
+
+    Idempotent — safe to call on every checkbox change. UPSERTs into
+    client_facts (creates the row if missing).
+    """
+    if not body.updates:
+        raise HTTPException(status_code=400, detail="updates payload is empty")
+
+    import json as _json
+    from datetime import datetime, timezone
+
+    # Validate + partition into bool / text
+    bool_updates: dict[str, bool] = {}
+    text_updates: dict[str, str | None] = {}
+    for col, val in body.updates.items():
+        if col not in _SCOPING_FACTS_ALL_ALLOWED:
+            raise HTTPException(
+                status_code = 400,
+                detail      = f"unknown scoping-fact column: {col}",
+            )
+        if col in _SCOPING_FACTS_BOOL_ALLOWED:
+            if not isinstance(val, bool):
+                raise HTTPException(
+                    status_code = 400,
+                    detail      = f"{col} must be a boolean (got {type(val).__name__})",
+                )
+            bool_updates[col] = val
+        else:  # text column
+            if val is not None and not isinstance(val, str):
+                raise HTTPException(
+                    status_code = 400,
+                    detail      = f"{col} must be a string or null",
+                )
+            text_updates[col] = val
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (key_info.tenant_id,))
+
+            # Ensure client_facts row exists (fresh Quickstart tenants
+            # from Ship 110'.b already have one; pre-110'.b tenants may not).
+            cur.execute("""
+                INSERT INTO client_facts (tenant_id)
+                VALUES (%s)
+                ON CONFLICT (tenant_id) DO NOTHING
+            """, (key_info.tenant_id,))
+
+            # Build UPDATE with dynamic column list + fact_source patch
+            set_pairs: list[str] = []
+            params:    list = []
+            all_updates = {**bool_updates, **text_updates}
+            for col, val in all_updates.items():
+                set_pairs.append(f"{col} = %s")
+                params.append(val)
+
+            fact_source_patch = {
+                col: {"source": "declared", "at": now_iso}
+                for col in all_updates.keys()
+            }
+            set_pairs.append("fact_source = fact_source || %s::jsonb")
+            params.append(_json.dumps(fact_source_patch))
+
+            set_pairs.append("last_updated = NOW()")
+
+            params.append(key_info.tenant_id)
+            cur.execute(f"""
+                UPDATE client_facts
+                   SET {", ".join(set_pairs)}
+                 WHERE tenant_id = %s
+            """, params)
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    return {"updated": sorted(body.updates.keys())}
 
 
 @app.put("/api/v1/tenant/profile", tags=["templates"])
