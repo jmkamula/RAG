@@ -145,6 +145,10 @@ RULES: tuple[AppRule, ...] = (
     ),
 
     # ── GDPR territorial scope: no EU AND no UK subjects ────────────
+    # Ship 113'.a — kept as (eu, uk) only. The new region columns
+    # (us, ca, apac, other) don't affect GDPR — GDPR applies when
+    # data subjects are in EU/EEA or UK, regardless of the tenant's
+    # own location or other-region subjects.
     AppRule(
         id            = "no_eu_uk_subjects",
         driving_facts = ("eu_data_subjects", "uk_data_subjects"),
@@ -158,13 +162,16 @@ RULES: tuple[AppRule, ...] = (
     ),
 
     # ── Controller-specific GDPR articles when tenant is not a
-    #    controller (and not a joint controller either) ─────────────
+    #    controller. Ship 113'.a dropped the role_joint_controller
+    #    guard — the Profile questionnaire no longer surfaces the
+    #    joint-controller question (rare + confusing for most
+    #    tenants), so the guard would block the rule from ever
+    #    firing. Semantically: role_controller=False implies not a
+    #    joint controller either (joint is a form of controller).
     AppRule(
         id            = "not_controller",
-        driving_facts = ("role_controller", "role_joint_controller"),
-        predicate     = lambda f: (
-            f["role_controller"] is False and f["role_joint_controller"] is False
-        ),
+        driving_facts = ("role_controller",),
+        predicate     = lambda f: f["role_controller"] is False,
         targets       = (
             TargetScope("GDPR:2016/679", "Art.24"),
             TargetScope("GDPR:2016/679", "Art.24.%"),

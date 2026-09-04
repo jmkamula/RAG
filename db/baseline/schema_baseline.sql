@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-03T14:21:53Z from HEAD 8caf134d by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-04T11:59:34Z from HEAD ad0492c1 by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 7XSgbScGdFrc7TAnvOzvDVw4UxgkMtDHfQIHapEPc9bFAcb5iet5P2eFMNFKGdb
+\restrict I89nKNLtM7g9rM5IsGYipNLvgxYZLhv4mTN012O1jmo8kOJCLobpZp8P3Vmb4De
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -1356,7 +1356,13 @@ CREATE TABLE public.client_facts (
     country text,
     employee_count integer,
     fact_source jsonb DEFAULT '{}'::jsonb NOT NULL,
+    us_data_subjects boolean DEFAULT false NOT NULL,
+    ca_data_subjects boolean DEFAULT false NOT NULL,
+    apac_data_subjects boolean DEFAULT false NOT NULL,
+    other_data_subjects boolean DEFAULT false NOT NULL,
+    employee_size_bucket text,
     CONSTRAINT client_facts_date_format_check CHECK (((date_format IS NULL) OR (date_format = ANY (ARRAY['iso'::text, 'dmy_slash'::text, 'mdy_slash'::text, 'dmy_dot'::text, 'long'::text])))),
+    CONSTRAINT client_facts_employee_size_bucket_check CHECK (((employee_size_bucket IS NULL) OR (employee_size_bucket = ANY (ARRAY['small'::text, 'medium'::text, 'large'::text])))),
     CONSTRAINT client_facts_journey_status_check CHECK (((journey_status IS NULL) OR (journey_status = ANY (ARRAY['greenfield'::text, 'building'::text, 'documented'::text, 'audited'::text, 'mature'::text]))))
 );
 
@@ -9454,5 +9460,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 7XSgbScGdFrc7TAnvOzvDVw4UxgkMtDHfQIHapEPc9bFAcb5iet5P2eFMNFKGdb
+\unrestrict I89nKNLtM7g9rM5IsGYipNLvgxYZLhv4mTN012O1jmo8kOJCLobpZp8P3Vmb4De
 
