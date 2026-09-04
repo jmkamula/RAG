@@ -5722,6 +5722,28 @@ async def get_tenant_profile(
             "description": "Custom placeholder (no catalog metadata).",
             "reference_count": 0,
         })
+    # Ship 113'.c — surface region + sector controlled vocabularies
+    # in the same GET so the Profile page renders without a second
+    # roundtrip. Client-side stays a pure consumer — the vocab lives
+    # in one place (rag/scoping/*).
+    from rag.scoping.regions import REGION_LABELS, REGION_COLUMN
+    from rag.scoping.sectors import SECTORS, TIER_LABELS
+    scoping_vocab = {
+        "regions": [
+            {"key": key, "column": REGION_COLUMN[key], "label": label}
+            for key, label in REGION_LABELS
+        ],
+        "sectors": [
+            {"code": code, "label": label, "tier": tier}
+            for code, label, tier in SECTORS
+        ],
+        "sector_tiers": TIER_LABELS,
+        "employee_size_buckets": [
+            {"code": "small",  "label": "1 to 50",             "detail": "small"},
+            {"code": "medium", "label": "51 to 250",           "detail": "medium"},
+            {"code": "large",  "label": "More than 250",       "detail": "large"},
+        ],
+    }
     return {
         "tenant_id":                 key_info.tenant_id,
         "profile":                   out_rows,
@@ -5729,6 +5751,7 @@ async def get_tenant_profile(
         "journey_status_updated_at": journey_status_updated_at,
         "date_format":               date_format,
         "scoping_facts":             scoping_facts,
+        "scoping_vocab":             scoping_vocab,
     }
 
 

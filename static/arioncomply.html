@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-04-country-dropdown';
+window.ARION_JS_VERSION = '2026-09-04-scoping-rewrite';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -2889,7 +2889,7 @@ async function loadProfile() {
     // Ship 110'.c — About your organisation: scoping questions that
     // drive applicability derivation. Progressive-discovery entry
     // point. Auto-save on each answer.
-    renderScopingSection(profileResp.scoping_facts || {});
+    renderScopingSection(profileResp.scoping_facts || {}, profileResp.scoping_vocab || {});
     renderExternalSystems(systemsResp.systems || []);
     renderNotificationChannels(channelsResp.channels || []);
     renderApiKeys(keysResp.keys || []);
@@ -3092,67 +3092,83 @@ async function saveDateFormat(fmt) {
 // when the value was derived at Quickstart from another fact (e.g.
 // "we assumed EU subjects because your country is CZ").
 
-const SCOPING_QUESTIONS = [
+// Ship 113'.c — de-jargonized Profile scoping questions.
+//
+// No named frameworks in question text. Every question stands alone
+// (no "these individuals" references to earlier answers). Regions are
+// a multi-select (Q2). Company size is a 3-bucket radio (Q11).
+// Sector is a controlled-vocabulary dropdown (Q12) — moved here from
+// Quickstart in Ship 113'.d.
+//
+// Question types:
+//   'boolean'          — Yes/No radio, writes one boolean column
+//   'region_multi'     — checkbox group, writes N boolean columns
+//                        (one per region key in scopingVocab.regions)
+//   'size_bucket'      — 3-option radio, writes employee_size_bucket
+//                        + auto-derives employee_count_250_plus
+//   'sector_dropdown'  — <select>, writes sector
+
+const SCOPING_QUESTIONS_V2 = [
   {
     group: 'Your data operations',
     items: [
-      {col: 'processes_personal_data',
-       q:   'Do you process personal data about identifiable individuals?',
-       hint:'Names, emails, IDs, HR records, customer data — anything that can identify a person.'},
-      {col: 'eu_data_subjects',
-       q:   'Do any of the individuals live in the EU or EEA?',
-       hint:'Customers, employees, or contacts based in an EU/EEA country.'},
-      {col: 'uk_data_subjects',
-       q:   'Do any of them live in the UK?',
-       hint:'Post-Brexit, the UK has its own UK GDPR alongside the EU GDPR.'},
-      {col: 'transfers_data_outside_eu',
-       q:   'Do you transfer personal data outside the EU/UK?',
-       hint:'US-hosted cloud services, offshore support teams, international customers, etc.'},
+      {type: 'boolean', col: 'processes_personal_data',
+       q: 'Do you collect or store information about individual people?',
+       hint: 'Any records that identify a person — customer accounts, employee files, contact lists, user records, video/CCTV, mailing lists — whether by name, ID, email, or a combination of data that could identify them.'},
+      {type: 'region_multi', key: 'regions_data_subjects',
+       q: 'In which regions do the people whose information you hold live?',
+       hint: 'Where the individuals are actually based, regardless of where your organisation operates. Check every region that applies.'},
+      {type: 'boolean', col: 'transfers_data_outside_eu',
+       q: 'Does personal information cross international borders?',
+       hint: 'The systems, staff, or vendors you use for storing or processing may sit in a different country from where the people whose data you hold actually live.'},
     ],
   },
   {
     group: 'Your role',
     items: [
-      {col: 'role_controller',
-       q:   'Are you a data controller?',
-       hint:'You decide WHY personal data is collected + HOW it will be used.'},
-      {col: 'role_processor',
-       q:   'Are you a data processor?',
-       hint:'You handle personal data on behalf of another organisation, following their instructions.'},
-      {col: 'public_authority',
-       q:   'Are you a public authority or public body?',
-       hint:'Government, agency, municipality, publicly-funded body. Not applicable to most companies.'},
+      {type: 'boolean', col: 'role_controller',
+       q: 'Do you decide what personal information gets collected and what happens to it?',
+       hint: 'You set the purposes (why the information is collected) and the means (how it will be used).'},
+      {type: 'boolean', col: 'role_processor',
+       q: 'Do you handle personal information for other organisations, following their instructions?',
+       hint: 'Someone else sets the purposes; you carry out the work on their behalf.'},
+      {type: 'boolean', col: 'public_authority',
+       q: 'Are you a government body, agency, or publicly-funded institution?',
+       hint: 'Public administration, municipality, publicly-funded body. Most private companies answer No.'},
     ],
   },
   {
-    group: 'Sensitive processing',
+    group: 'Sensitive information',
     items: [
-      {col: 'special_category_data',
-       q:   'Do you handle special category personal data?',
-       hint:'Health, biometric, genetic, sexual orientation, race, religion, political views, trade union.'},
-      {col: 'automated_decision_making',
-       q:   'Do you make automated decisions about people?',
-       hint:'Credit scoring, resume screening, algorithmic hiring, benefits eligibility, insurance rate setting.'},
+      {type: 'boolean', col: 'special_category_data',
+       q: 'Do you handle any of these categories of information?',
+       hint: 'Health or medical, biometric (fingerprints, facial scans), genetic, racial or ethnic origin, religious beliefs, political views, sexual orientation, or trade union membership.'},
+      {type: 'boolean', col: 'automated_decision_making',
+       q: 'Do computer systems make significant decisions about individuals without a human reviewing them?',
+       hint: 'Examples: automated loan approvals, resume screening algorithms, insurance rate setting, benefits eligibility, algorithmic hiring.'},
     ],
   },
   {
     group: 'Your organisation',
     items: [
-      {col: 'has_physical_premises',
-       q:   'Do you have physical premises where staff work?',
-       hint:'Any office, warehouse, retail location, or data-centre facility. Fully-remote / cloud-only teams answer No.'},
-      {col: 'develops_software',
-       q:   'Do you develop or ship software products?',
-       hint:'In-house SaaS, downloadable apps, embedded firmware, APIs sold to customers.'},
-      {col: 'employee_count_250_plus',
-       q:   'Do you have 250 or more employees?',
-       hint:'A GDPR Article 30 exemption threshold; smaller companies have fewer record-keeping obligations.'},
+      {type: 'boolean', col: 'has_physical_premises',
+       q: 'Do you have physical offices, warehouses, retail locations, or facilities where staff work in person?',
+       hint: 'Fully-remote or cloud-only teams answer No.'},
+      {type: 'boolean', col: 'develops_software',
+       q: 'Do you build or sell software products?',
+       hint: 'In-house SaaS, downloadable apps, mobile apps, APIs sold to customers, or embedded software.'},
+      {type: 'size_bucket', col: 'employee_size_bucket',
+       q: 'How many people work at your organisation?',
+       hint: 'Include full-time and part-time employees; exclude contractors and consultants.'},
+      {type: 'sector_dropdown', col: 'sector',
+       q: 'Which sector best describes what your organisation does?',
+       hint: 'Pick the closest match — this shapes how the applicability engine treats sector-specific compliance duties.'},
     ],
   },
 ];
 
 
-function renderScopingSection(scopingFacts) {
+function renderScopingSection(scopingFacts, scopingVocab) {
   const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
   const wrap = document.getElementById('profile-wrap');
 
@@ -3167,42 +3183,159 @@ function renderScopingSection(scopingFacts) {
     return `<span style="font-size:10px;color:#6E5F00;background:#FFF3B0;padding:2px 7px;border-radius:10px;margin-left:8px">Assumed at setup · change if wrong</span>`;
   };
 
-  const renderQuestion = (item) => {
-    const fact  = scopingFacts[item.col] || {value: null, source: 'default'};
-    const val   = fact.value;
+  const notAnsweredChip = () => `
+    <span style="font-size:10px;color:#5C5A4F;background:#F1EFE8;padding:2px 7px;border-radius:10px;margin-left:8px">Not answered</span>
+  `;
+
+  const answeredChip = (col) => `
+    <span id="scoping-saved-${col}"
+          style="font-size:11px;color:#1D9E75;opacity:0;transition:opacity 250ms;align-self:center">
+      ✓ Saved
+    </span>
+  `;
+
+  // ── boolean Yes/No ──────────────────────────────────────────────
+  const renderBoolean = (item) => {
+    const fact = scopingFacts[item.col] || {value: null, source: 'default'};
+    const val  = fact.value;
     const yesCk = (val === true)  ? 'checked' : '';
     const noCk  = (val === false && fact.source !== 'default') ? 'checked' : '';
     const notAnswered = (fact.source === 'default');
     return `
-      <div style="padding:14px 16px;background:#fff;border:1px solid #E8E5DA;
-                  border-radius:8px;margin-bottom:8px">
+      <div style="padding:14px 16px;background:#fff;border:1px solid #E8E5DA;border-radius:8px;margin-bottom:8px">
         <div style="font-size:14px;font-weight:600;color:#3A382E;line-height:1.4">
           ${esc(item.q)}${sourceHint(fact)}
-          ${notAnswered ? '<span style="font-size:10px;color:#5C5A4F;background:#F1EFE8;padding:2px 7px;border-radius:10px;margin-left:8px">Not answered</span>' : ''}
+          ${notAnswered ? notAnsweredChip() : ''}
         </div>
-        <div style="font-size:11px;color:#5C5A4F;margin-top:4px;line-height:1.5">
-          ${esc(item.hint)}
-        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:4px;line-height:1.5">${esc(item.hint)}</div>
         <div style="display:flex;gap:20px;margin-top:10px">
           <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px">
             <input type="radio" name="scoping-${item.col}" value="yes" ${yesCk}
-                   onchange="saveScopingFact('${item.col}', true, this)"
-                   style="cursor:pointer">
-            Yes
+                   onchange="saveScopingFact('${item.col}', true)"
+                   style="cursor:pointer">Yes
           </label>
           <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px">
             <input type="radio" name="scoping-${item.col}" value="no" ${noCk}
-                   onchange="saveScopingFact('${item.col}', false, this)"
-                   style="cursor:pointer">
-            No
+                   onchange="saveScopingFact('${item.col}', false)"
+                   style="cursor:pointer">No
           </label>
-          <span id="scoping-saved-${item.col}"
-                style="font-size:11px;color:#1D9E75;opacity:0;transition:opacity 250ms;align-self:center">
-            ✓ Saved
-          </span>
+          ${answeredChip(item.col)}
         </div>
       </div>
     `;
+  };
+
+  // ── region multi-select ────────────────────────────────────────
+  const renderRegionMulti = (item) => {
+    const regions = scopingVocab.regions || [];
+    // How many region cols have been answered (declared/derived)?
+    const answeredCount = regions.filter(r => (scopingFacts[r.column] || {}).source !== 'default').length;
+    const notAnswered = answeredCount === 0;
+    let boxes = '';
+    regions.forEach(r => {
+      const fact = scopingFacts[r.column] || {value: null, source: 'default'};
+      const checked = fact.value === true ? 'checked' : '';
+      const hint = fact.source === 'derived' && fact.from === 'country'
+        ? `<span style="font-size:10px;color:#6E5F00;margin-left:8px">(assumed from your country)</span>`
+        : '';
+      boxes += `
+        <label style="display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:13px">
+          <input type="checkbox" value="${esc(r.column)}" ${checked}
+                 onchange="saveScopingFact('${esc(r.column)}', this.checked)"
+                 style="cursor:pointer">
+          <span>${esc(r.label)}${hint}</span>
+        </label>
+      `;
+    });
+    return `
+      <div style="padding:14px 16px;background:#fff;border:1px solid #E8E5DA;border-radius:8px;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:600;color:#3A382E;line-height:1.4">
+          ${esc(item.q)}${notAnswered ? notAnsweredChip() : ''}
+        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:4px;line-height:1.5">${esc(item.hint)}</div>
+        <div style="display:flex;flex-direction:column;margin-top:8px;gap:2px">
+          ${boxes}
+        </div>
+      </div>
+    `;
+  };
+
+  // ── size bucket 3-radio ────────────────────────────────────────
+  const renderSizeBucket = (item) => {
+    const buckets = scopingVocab.employee_size_buckets || [];
+    const fact = scopingFacts[item.col] || {value: null, source: 'default'};
+    const notAnswered = fact.source === 'default';
+    let radios = '';
+    buckets.forEach(b => {
+      const checked = fact.value === b.code ? 'checked' : '';
+      radios += `
+        <label style="display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:13px">
+          <input type="radio" name="scoping-${item.col}" value="${esc(b.code)}" ${checked}
+                 onchange="saveScopingFact('${item.col}', '${esc(b.code)}')"
+                 style="cursor:pointer">
+          <span>${esc(b.label)} <span style="color:#8a8878">(${esc(b.detail)})</span></span>
+        </label>
+      `;
+    });
+    return `
+      <div style="padding:14px 16px;background:#fff;border:1px solid #E8E5DA;border-radius:8px;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:600;color:#3A382E;line-height:1.4">
+          ${esc(item.q)}${notAnswered ? notAnsweredChip() : ''}
+        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:4px;line-height:1.5">${esc(item.hint)}</div>
+        <div style="display:flex;flex-direction:column;margin-top:8px;gap:2px">
+          ${radios}
+        </div>
+      </div>
+    `;
+  };
+
+  // ── sector dropdown ────────────────────────────────────────────
+  const renderSectorDropdown = (item) => {
+    const sectors = scopingVocab.sectors || [];
+    const tierLabels = scopingVocab.sector_tiers || {};
+    const fact = scopingFacts[item.col] || {value: null, source: 'default'};
+    const current = fact.value || '';
+    const notAnswered = fact.source === 'default' || !current;
+
+    // Group sectors by tier
+    const byTier = {};
+    sectors.forEach(s => {
+      (byTier[s.tier] = byTier[s.tier] || []).push(s);
+    });
+    let opts = '<option value="">— pick a sector —</option>';
+    ['nis2_essential','nis2_important','commercial','other'].forEach(tier => {
+      if (!byTier[tier]) return;
+      opts += `<optgroup label="${esc(tierLabels[tier] || tier)}">`;
+      byTier[tier].forEach(s => {
+        const sel = (current === s.code) ? 'selected' : '';
+        opts += `<option value="${esc(s.code)}" ${sel}>${esc(s.label)}</option>`;
+      });
+      opts += `</optgroup>`;
+    });
+
+    return `
+      <div style="padding:14px 16px;background:#fff;border:1px solid #E8E5DA;border-radius:8px;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:600;color:#3A382E;line-height:1.4">
+          ${esc(item.q)}${notAnswered ? notAnsweredChip() : ''}
+        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:4px;line-height:1.5">${esc(item.hint)}</div>
+        <select onchange="saveScopingFact('${item.col}', this.value)"
+                style="margin-top:10px;font-size:14px;padding:9px 11px;border:1px solid #d9d7cd;border-radius:8px;background:#fff;width:100%;max-width:520px">
+          ${opts}
+        </select>
+      </div>
+    `;
+  };
+
+  const renderQuestion = (item) => {
+    switch (item.type) {
+      case 'boolean':          return renderBoolean(item);
+      case 'region_multi':     return renderRegionMulti(item);
+      case 'size_bucket':      return renderSizeBucket(item);
+      case 'sector_dropdown':  return renderSectorDropdown(item);
+      default:                 return '';
+    }
   };
 
   let html = `
@@ -3211,14 +3344,13 @@ function renderScopingSection(scopingFacts) {
         <div style="font-size:15px;font-weight:600;color:#3A382E">About your organisation</div>
         <div style="font-size:11px;color:#5C5A4F;margin-top:2px;line-height:1.5">
           A few questions about what your organisation does. Your answers scope
-          the compliance controls that apply to you — for example, physical-security
-          controls skip if you're cloud-only, and children's-data rules skip if you
-          don't handle any. Auto-saved as you answer.
+          the compliance work that applies to you — auto-saved as you answer.
+          Everything you fill in here can be changed later.
         </div>
       </div>
   `;
 
-  SCOPING_QUESTIONS.forEach(g => {
+  SCOPING_QUESTIONS_V2.forEach(g => {
     html += `
       <div style="font-size:11px;font-weight:700;color:#5C5A4F;text-transform:uppercase;
                   letter-spacing:.5px;margin:16px 0 8px 0">${esc(g.group)}</div>
@@ -3231,7 +3363,7 @@ function renderScopingSection(scopingFacts) {
 }
 
 
-async function saveScopingFact(col, val, radioEl) {
+async function saveScopingFact(col, val) {
   const savedEl = document.getElementById(`scoping-saved-${col}`);
   try {
     await api('/api/v1/tenant/facts', {
@@ -3242,10 +3374,10 @@ async function saveScopingFact(col, val, radioEl) {
       savedEl.style.opacity = '1';
       setTimeout(() => { if (savedEl) savedEl.style.opacity = '0'; }, 1600);
     }
-    // Clear the "Not answered" chip now that we have a declared value.
-    // Simplest — re-render the whole section (small enough).
+    // Re-render so "Not answered" chips clear + region multi-select
+    // reflects the freshly-saved value.
     const profileResp = await api('/api/v1/tenant/profile').catch(() => null);
-    if (profileResp) renderScopingSection(profileResp.scoping_facts || {});
+    if (profileResp) renderScopingSection(profileResp.scoping_facts || {}, profileResp.scoping_vocab || {});
   } catch (e) {
     toastError('saving your answer', e);
   }
