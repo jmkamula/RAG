@@ -10,6 +10,11 @@ Complements the **PoC-side view** on each customer VM
 (`/data/arioncomply/.deployment_log.jsonl`), which is machine-parseable
 and appended by `deploy/install.sh` on every run.
 
+**Full step-by-step guide**: see [`PLAYBOOK.md`](PLAYBOOK.md) — the
+canonical playbook for fresh install + per-arc updates + golden image
+audit + recovery scenarios. The rest of this README is the deployment-
+log convention (file naming + row shape + query patterns).
+
 ## Naming convention
 
 One file per deployment target: `<hostname-or-nickname>.md`.

@@ -398,9 +398,30 @@ customer's Ubuntu host from your laptop** (cloud VM or on-prem),
 read [[CLAUDE_OPERATOR.md]]
 first — it's the runbook with handoff acceptance, phases 1-4
 (connect+install / tenant+smoke / troubleshoot / handback), safety
-guardrails, and the handback template. The customer's side of prep
-(VM, NSG, `arionops` user, secret channel) is in
-`docs/customer_prep_checklist.html`. Companion documents:
+guardrails, and the handback template.
+
+For the **step-by-step deployment playbook** (fresh install AND
+per-arc update flows + golden image audit + recovery scenarios),
+read [[docs/deployments/PLAYBOOK.md]] — canonical PoC operations
+guide, Ship 115' (2026-09-04). Includes the two SSH invocation
+patterns operators use today:
+
+```bash
+# Fresh install (once per box, interactive):
+ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host>
+# Then: cd /data/arioncomply && bash deploy/install.sh
+
+# Per-arc update (every ship that touches the box):
+ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host> '
+  cd /data/arioncomply &&
+  git pull &&
+  bash scripts/ops/ship-<N>-poc-update.sh
+'
+```
+
+The customer's side of prep (VM, NSG, `arionops` user, secret
+channel) is in `docs/customer_prep_checklist.html`. Companion
+documents:
 
 - `scripts/ops/diagnose.sh` — one-command diagnostic bundle (produced on VM)
 - `scripts/ops/remote_diagnose.sh` — operator-laptop wrapper: SSH → diagnose → scp → extract
