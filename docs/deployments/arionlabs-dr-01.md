@@ -14,7 +14,9 @@
 | 2026-09-04 | operator | 09a5532e (Ship 110'.f + ops scripts) | — | RED | First update attempt — `sudo bash install.sh` blocked by "run as regular user with sudo" sanity check. Reverted approach. |
 | 2026-09-04 | operator | 09a5532e | — | RED | Second attempt — `bash install.sh` (no sudo) blocked at prompt_pw for ARION_OWNER_PW. Root cause: install.sh didn't read .env. Fix scoped as Ship 111'. |
 | 2026-09-04 | operator | b77da436 (Ship 111'.b) | schema_v110, v111, v112 | GREEN | Ship 111'.a canonical env names in place + one-time backfill of ARION_OWNER_PW into `.env`. Ship 110' fully live. `install.sh` output: `loaded existing secrets from .env (update mode — missing values will be prompted)`. |
-| 2026-09-04 | operator | 3c90f7c2 (Ship 111'.c) | (no new) | pending | client_facts backfill for the pre-Ship-110'.b Arion Networks s.r.o. tenant. |
+| 2026-09-04 | operator | b9e6a1d4 (Ship 111'.e) | (no new) | GREEN | Ship 111'.c backfill delivered — `client_facts` row inserted for `Arion Networks s.r.o.`. FIRST `.deployment_log.jsonl` line landed. Surfaced country-format bug: tenant had `country="Czechia"` (free-text display name) instead of `"CZ"` ISO code, silently skipping eu_data_subjects derivation. |
+| 2026-09-04 | operator | (Path B — direct SQL) | — | GREEN | Ad-hoc SQL fix for the country-format bug on this tenant. UPDATE `tenants.country` + `client_facts.country` to `"CZ"`, add `eu_data_subjects=TRUE` with derived marker in `fact_source`. Manual applicability sweep triggered — 14 A.7.% N/A confirmed. Ship 112' opened to fix the root cause. |
+| pending  | — | ab959765 (Ship 112'.b) | (no new) | pending | Ship 112'.a country normalization in initializer + 112'.b Quickstart form dropdown. Deploy pattern: `git pull && bash deploy/install.sh && sudo systemctl restart arioncomply-api`. Verifies with a new Quickstart tenant that country is stored as ISO code from either free-text (via 112'.a) or dropdown (via 112'.b). |
 
 ## Context
 
