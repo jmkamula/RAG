@@ -318,7 +318,10 @@ if [[ "$tracker_empty" == "0" && "$baseline_applied" == "1" ]]; then
 fi
 
 # Apply un-applied migrations in numeric order. Fail loud on error.
+# Ship 111'.d — accumulate applied-migration names into APPLIED_MIGRATIONS
+# so the deployment log at the end can record what actually landed.
 applied_count=0
+APPLIED_MIGRATIONS=()
 if compgen -G "$ARION_ROOT/db/schema_v*.sql" > /dev/null; then
     for f in $(ls "$ARION_ROOT"/db/schema_v*.sql | sort -V); do
         v=$(basename "$f" .sql)
@@ -331,6 +334,7 @@ if compgen -G "$ARION_ROOT/db/schema_v*.sql" > /dev/null; then
             sudo -u postgres psql -d arioncomply_compliance -c \
                 "INSERT INTO schema_migrations (version) VALUES ('$v')" > /dev/null
             applied_count=$((applied_count + 1))
+            APPLIED_MIGRATIONS+=("$v")
         fi
     done
     if [[ "$applied_count" -gt 0 ]]; then
@@ -587,6 +591,77 @@ if ! lsof -i :8080 -sTCP:LISTEN >/dev/null 2>&1; then
 else
     warn "port 8080 already in use — leaving existing API alone"
 fi
+
+# ── Deployment log (Ship 111'.d) ─────────────────────────────────────
+# Append one JSON line to .deployment_log.jsonl capturing what
+# actually ran this invocation. Machine-parseable for future automated
+# deploy scripts + human-readable enough via `jq`. Append-only,
+# chmod 600. Never edited by hand.
+#
+# Schema (per line):
+#   {
+#     "ts":                UTC ISO-8601,
+#     "git_sha":           short SHA of HEAD at install.sh run time,
+#     "git_branch":        branch name at run time,
+#     "git_subject":       commit subject line (helps humans skim),
+#     "migrations_applied":[...],   # empty when no new SQL fired
+#     "invoker":           $USER,
+#     "invoker_sudo":      $SUDO_USER if set,
+#     "hostname":          from `hostname -s`,
+#     "install_sh_step_9": "started" | "already_running",
+#     "outcome":           "GREEN"  # fail() exits before we reach here
+#   }
+DEPLOY_LOG="$ARION_ROOT/.deployment_log.jsonl"
+_git_sha=$(cd "$ARION_ROOT" && git rev-parse --short HEAD 2>/dev/null || echo "")
+_git_branch=$(cd "$ARION_ROOT" && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+_git_subject=$(cd "$ARION_ROOT" && git log -1 --format='%s' 2>/dev/null || echo "")
+_ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+_hostname=$(hostname -s 2>/dev/null || echo "")
+_step9_state=$(lsof -i :8080 -sTCP:LISTEN >/dev/null 2>&1 && echo "already_running" || echo "not_running")
+
+# Build migrations_applied JSON array. Empty when no new migrations
+# fired this run.
+if [[ ${#APPLIED_MIGRATIONS[@]} -eq 0 ]]; then
+    _migs="[]"
+else
+    _migs="["
+    for m in "${APPLIED_MIGRATIONS[@]}"; do
+        _migs+="\"$m\","
+    done
+    _migs="${_migs%,}]"
+fi
+
+# jq keeps quoting sane. Fall back to sed-escape if jq unavailable
+# (unusual on a customer box that has curl + postgres + python
+# already installed via step 1).
+if command -v jq >/dev/null 2>&1; then
+    _log_line=$(jq -cn \
+        --arg ts "$_ts" --arg sha "$_git_sha" --arg br "$_git_branch" \
+        --arg subj "$_git_subject" --arg inv "${USER:-unknown}" \
+        --arg su "${SUDO_USER:-}" --arg host "$_hostname" \
+        --arg s9 "$_step9_state" --argjson migs "$_migs" \
+        '{ts:$ts, git_sha:$sha, git_branch:$br, git_subject:$subj,
+          migrations_applied:$migs, invoker:$inv, invoker_sudo:$su,
+          hostname:$host, install_sh_step_9:$s9, outcome:"GREEN"}')
+else
+    # Minimal fallback — sed-escape strings.
+    _esc() { printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'; }
+    _log_line="{\"ts\":\"$_ts\",\"git_sha\":\"$_git_sha\","
+    _log_line+="\"git_branch\":\"$(_esc "$_git_branch")\","
+    _log_line+="\"git_subject\":\"$(_esc "$_git_subject")\","
+    _log_line+="\"migrations_applied\":$_migs,"
+    _log_line+="\"invoker\":\"${USER:-unknown}\","
+    _log_line+="\"invoker_sudo\":\"${SUDO_USER:-}\","
+    _log_line+="\"hostname\":\"$_hostname\","
+    _log_line+="\"install_sh_step_9\":\"$_step9_state\","
+    _log_line+="\"outcome\":\"GREEN\"}"
+fi
+
+# Append + chmod 600 (may contain hostname/user; not secrets, but
+# same chmod as .env for consistency).
+echo "$_log_line" >> "$DEPLOY_LOG"
+chmod 600 "$DEPLOY_LOG"
+ok "deployment log appended: $DEPLOY_LOG"
 
 # ── Summary ──────────────────────────────────────────────────────────
 step "Install complete"

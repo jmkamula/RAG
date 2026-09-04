@@ -3,6 +3,9 @@
 *.key
 *.pem
 
+# Ship 111'.d — PoC-side deployment log (per-customer, never committed)
+.deployment_log.jsonl
+
 # Python
 __pycache__/
 *.pyc
