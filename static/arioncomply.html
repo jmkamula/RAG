@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-03-scoping-facts';
+window.ARION_JS_VERSION = '2026-09-04-country-dropdown';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -8752,8 +8752,58 @@ function showQuickstartOverlay() {
             </label>
             <label style="display:flex;flex-direction:column;gap:5px">
               <span style="font-size:12px;font-weight:600;color:#3C3489">Country</span>
-              <input name="country" type="text" value="GB" required
-                style="font-size:14px;padding:9px 11px;border:1px solid #d9d7cd;border-radius:8px">
+              <select name="country" required
+                style="font-size:14px;padding:9px 11px;border:1px solid #d9d7cd;border-radius:8px;background:#fff">
+                <optgroup label="Europe (EU + EEA + UK)">
+                  <option value="AT">Austria</option>
+                  <option value="BE">Belgium</option>
+                  <option value="BG">Bulgaria</option>
+                  <option value="HR">Croatia</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="CZ">Czechia</option>
+                  <option value="DK">Denmark</option>
+                  <option value="EE">Estonia</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="GR">Greece</option>
+                  <option value="HU">Hungary</option>
+                  <option value="IS">Iceland</option>
+                  <option value="IE">Ireland</option>
+                  <option value="IT">Italy</option>
+                  <option value="LV">Latvia</option>
+                  <option value="LI">Liechtenstein</option>
+                  <option value="LT">Lithuania</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="MT">Malta</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="NO">Norway</option>
+                  <option value="PL">Poland</option>
+                  <option value="PT">Portugal</option>
+                  <option value="RO">Romania</option>
+                  <option value="SK">Slovakia</option>
+                  <option value="SI">Slovenia</option>
+                  <option value="ES">Spain</option>
+                  <option value="SE">Sweden</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="GB" selected>United Kingdom</option>
+                </optgroup>
+                <optgroup label="North America">
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                </optgroup>
+                <optgroup label="Asia-Pacific">
+                  <option value="AU">Australia</option>
+                  <option value="IN">India</option>
+                  <option value="JP">Japan</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="SG">Singapore</option>
+                </optgroup>
+                <optgroup label="Rest of world">
+                  <option value="BR">Brazil</option>
+                  <option value="ZA">South Africa</option>
+                </optgroup>
+              </select>
             </label>
           </div>
 
