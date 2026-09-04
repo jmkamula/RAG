@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-04-scoping-rewrite';
+window.ARION_JS_VERSION = '2026-09-04-quickstart-no-sector';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -8876,12 +8876,7 @@ function showQuickstartOverlay() {
             </label>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <label style="display:flex;flex-direction:column;gap:5px">
-              <span style="font-size:12px;font-weight:600;color:#3C3489">Sector (optional)</span>
-              <input name="sector" type="text" placeholder="e.g. finance, healthcare"
-                style="font-size:14px;padding:9px 11px;border:1px solid #d9d7cd;border-radius:8px">
-            </label>
+          <div>
             <label style="display:flex;flex-direction:column;gap:5px">
               <span style="font-size:12px;font-weight:600;color:#3C3489">Country</span>
               <select name="country" required
@@ -8974,7 +8969,10 @@ function showQuickstartOverlay() {
       name:        form.name.value.trim(),
       admin_name:  form.admin_name.value.trim() || 'Admin',
       admin_email: form.admin_email.value.trim(),
-      sector:      form.sector.value.trim() || null,
+      // Ship 113'.d — sector moved to Profile; Quickstart no longer captures it.
+      // Backend QuickstartRequest.sector stays for API compat but frontend
+      // sends null so tenants get a clean slate to pick from the dropdown.
+      sector:      null,
       country:     form.country.value.trim() || 'GB',
       cloud_only:  form.cloud_only.checked,
     };
