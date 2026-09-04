@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-04T11:59:34Z from HEAD ad0492c1 by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-04T15:19:06Z from HEAD d20e85b8 by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict I89nKNLtM7g9rM5IsGYipNLvgxYZLhv4mTN012O1jmo8kOJCLobpZp8P3Vmb4De
+\restrict 1Fyc0JUNnLuDV7qXy6ZYfiLyEJQdz8F2odL6ngkqRoQbVbfiO5ZI2WG1PrKNhAb
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -1363,7 +1363,8 @@ CREATE TABLE public.client_facts (
     employee_size_bucket text,
     CONSTRAINT client_facts_date_format_check CHECK (((date_format IS NULL) OR (date_format = ANY (ARRAY['iso'::text, 'dmy_slash'::text, 'mdy_slash'::text, 'dmy_dot'::text, 'long'::text])))),
     CONSTRAINT client_facts_employee_size_bucket_check CHECK (((employee_size_bucket IS NULL) OR (employee_size_bucket = ANY (ARRAY['small'::text, 'medium'::text, 'large'::text])))),
-    CONSTRAINT client_facts_journey_status_check CHECK (((journey_status IS NULL) OR (journey_status = ANY (ARRAY['greenfield'::text, 'building'::text, 'documented'::text, 'audited'::text, 'mature'::text]))))
+    CONSTRAINT client_facts_journey_status_check CHECK (((journey_status IS NULL) OR (journey_status = ANY (ARRAY['greenfield'::text, 'building'::text, 'documented'::text, 'audited'::text, 'mature'::text])))),
+    CONSTRAINT client_facts_sector_check CHECK (((sector IS NULL) OR (sector = ANY (ARRAY['energy'::text, 'transport'::text, 'banking'::text, 'finance_markets'::text, 'health'::text, 'water'::text, 'digital_infra'::text, 'ict_services'::text, 'public_admin'::text, 'space'::text, 'postal_courier'::text, 'waste_management'::text, 'chemicals'::text, 'food'::text, 'manufacturing'::text, 'digital_providers'::text, 'research'::text, 'retail'::text, 'professional'::text, 'nonprofit'::text, 'other'::text]))))
 );
 
 
@@ -9460,5 +9461,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict I89nKNLtM7g9rM5IsGYipNLvgxYZLhv4mTN012O1jmo8kOJCLobpZp8P3Vmb4De
+\unrestrict 1Fyc0JUNnLuDV7qXy6ZYfiLyEJQdz8F2odL6ngkqRoQbVbfiO5ZI2WG1PrKNhAb
 

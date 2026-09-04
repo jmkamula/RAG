@@ -5975,15 +5975,26 @@ async def put_tenant_facts(
                                       f"{sorted(_EMPLOYEE_SIZE_BUCKET_ALLOWED)}",
                     )
             if col == "sector" and val is not None:
-                from rag.scoping.sectors import is_valid_sector_code
-                # sector is soft-validated — legacy free-text values
-                # like "IT Consulting" from pre-Ship 113' Quickstarts
-                # are still accepted. Only reject empty strings that
-                # snuck in via UI form.
+                from rag.scoping.sectors import is_valid_sector_code, VALID_SECTOR_CODES
+                # Ship 114'.c — hard-validate against the canonical
+                # vocabulary now that schema_v114 enforces the CHECK
+                # constraint at the DB layer. Both layers reject the
+                # same set of values so the API returns a helpful
+                # 400 instead of a Postgres check_violation surfacing
+                # as 500.
                 if val == "":
                     raise HTTPException(
                         status_code = 400,
                         detail      = "sector cannot be empty string",
+                    )
+                if not is_valid_sector_code(val):
+                    raise HTTPException(
+                        status_code = 400,
+                        detail      = (
+                            f"sector must be one of the {len(VALID_SECTOR_CODES)} "
+                            f"canonical codes (see rag/scoping/sectors.py). "
+                            f"Got: {val!r}"
+                        ),
                     )
             text_updates[col] = val
 
