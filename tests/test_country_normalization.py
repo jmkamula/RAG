@@ -104,6 +104,43 @@ def test_initial_client_facts_us_no_derivations():
     assert sources["country"]["source"] == "declared"
 
 
+def test_initial_client_facts_derives_us_region_ship_113():
+    """Ship 113'.a — US country derives us_data_subjects=True."""
+    values, sources = _initial_client_facts(
+        sector=None, country="United States", cloud_only=False,
+    )
+    assert values["country"] == "US"
+    assert values.get("us_data_subjects") is True
+    assert sources["us_data_subjects"]["source"] == "derived"
+    assert sources["us_data_subjects"]["from"] == "country"
+    # Other regions NOT set
+    assert values.get("eu_data_subjects") is None
+    assert values.get("apac_data_subjects") is None
+
+
+def test_initial_client_facts_derives_apac_region_ship_113():
+    """Ship 113'.a — Australia derives apac_data_subjects=True."""
+    values, sources = _initial_client_facts(
+        sector=None, country="Australia", cloud_only=False,
+    )
+    assert values["country"] == "AU"
+    assert values.get("apac_data_subjects") is True
+    assert values.get("eu_data_subjects") is None
+
+
+def test_initial_client_facts_derives_other_region_ship_113():
+    """Ship 113'.a — Brazil (not in EU/UK/US/CA/APAC) derives
+    other_data_subjects=True.
+    """
+    values, sources = _initial_client_facts(
+        sector=None, country="Brazil", cloud_only=False,
+    )
+    assert values["country"] == "BR"
+    assert values.get("other_data_subjects") is True
+    assert values.get("eu_data_subjects") is None
+    assert values.get("us_data_subjects") is None
+
+
 if __name__ == "__main__":
     test_normalize_display_name_to_iso_code()
     test_normalize_uk_variants()
@@ -115,4 +152,7 @@ if __name__ == "__main__":
     test_initial_client_facts_derives_eu_from_display_name()
     test_initial_client_facts_derives_uk_from_display_name()
     test_initial_client_facts_us_no_derivations()
+    test_initial_client_facts_derives_us_region_ship_113()
+    test_initial_client_facts_derives_apac_region_ship_113()
+    test_initial_client_facts_derives_other_region_ship_113()
     print("OK — all country normalization tests pass")

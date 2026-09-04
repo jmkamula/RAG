@@ -212,15 +212,18 @@ def _initial_client_facts(
         sources["has_physical_premises"] = {"source": "declared", "at": now}
 
     # Country-driven derivations. Tenant can override in Profile.
-    ctry = normalized_country
-    if ctry in _EU_EEA_COUNTRIES:
-        values["eu_data_subjects"] = True
-        sources["eu_data_subjects"] = {
-            "source": "derived", "at": now, "from": "country",
-        }
-    if ctry == "GB":
-        values["uk_data_subjects"] = True
-        sources["uk_data_subjects"] = {
+    #
+    # Ship 113'.a — extended to the 6-region map. Whichever region
+    # matches the tenant's registered country gets the corresponding
+    # *_data_subjects column set to True + marked derived. The tenant
+    # can un-check it in Profile if it turns out their data subjects
+    # live elsewhere.
+    from rag.scoping.regions import region_of_country, REGION_COLUMN
+    tenant_region = region_of_country(normalized_country)
+    if tenant_region is not None:
+        col = REGION_COLUMN[tenant_region]
+        values[col] = True
+        sources[col] = {
             "source": "derived", "at": now, "from": "country",
         }
 

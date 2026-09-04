@@ -5746,8 +5746,13 @@ _DATE_FORMAT_ALLOWED   = {"iso", "dmy_slash", "mdy_slash", "dmy_dot", "long"}
 # Two column families: booleans (Yes/No questions) + text (sector).
 _SCOPING_FACTS_BOOL_ALLOWED = {
     "processes_personal_data",
+    # Ship 113'.a — 6 region buckets (was 2)
     "eu_data_subjects",
     "uk_data_subjects",
+    "us_data_subjects",
+    "ca_data_subjects",
+    "apac_data_subjects",
+    "other_data_subjects",
     "role_controller",
     "role_processor",
     "special_category_data",
@@ -5761,8 +5766,13 @@ _SCOPING_FACTS_BOOL_ALLOWED = {
 _SCOPING_FACTS_TEXT_ALLOWED = {
     "sector",
     "country",
+    "employee_size_bucket",   # Ship 113'.a — 'small'/'medium'/'large'
 }
 _SCOPING_FACTS_ALL_ALLOWED = _SCOPING_FACTS_BOOL_ALLOWED | _SCOPING_FACTS_TEXT_ALLOWED
+
+# Ship 113'.b — enum allowlists for text scoping facts. Applied at
+# PUT /api/v1/tenant/facts to reject bad values before they land.
+_EMPLOYEE_SIZE_BUCKET_ALLOWED = {"small", "medium", "large"}
 
 
 class JourneyStatusRequest(BaseModel):
@@ -5931,7 +5941,41 @@ async def put_tenant_facts(
                     status_code = 400,
                     detail      = f"{col} must be a string or null",
                 )
+            # Ship 113'.b — enum validation for text scoping facts
+            # that have a controlled vocabulary. Rejects garbage
+            # before it lands in the DB and would confuse consumers.
+            if col == "employee_size_bucket" and val is not None:
+                if val not in _EMPLOYEE_SIZE_BUCKET_ALLOWED:
+                    raise HTTPException(
+                        status_code = 400,
+                        detail      = f"employee_size_bucket must be one of "
+                                      f"{sorted(_EMPLOYEE_SIZE_BUCKET_ALLOWED)}",
+                    )
+            if col == "sector" and val is not None:
+                from rag.scoping.sectors import is_valid_sector_code
+                # sector is soft-validated — legacy free-text values
+                # like "IT Consulting" from pre-Ship 113' Quickstarts
+                # are still accepted. Only reject empty strings that
+                # snuck in via UI form.
+                if val == "":
+                    raise HTTPException(
+                        status_code = 400,
+                        detail      = "sector cannot be empty string",
+                    )
             text_updates[col] = val
+
+    # Ship 113'.b — when employee_size_bucket is being set, also
+    # derive employee_count_250_plus (bool) from it. Downstream
+    # applicability rules read the boolean; the bucket is what the
+    # Profile UI writes. Both stay in sync via this derivation.
+    if "employee_size_bucket" in text_updates:
+        bucket = text_updates["employee_size_bucket"]
+        if bucket == "large":
+            bool_updates["employee_count_250_plus"] = True
+        elif bucket in ("small", "medium"):
+            bool_updates["employee_count_250_plus"] = False
+        # bucket=None means the tenant cleared their answer — leave
+        # employee_count_250_plus alone rather than reverting it.
 
     now_iso = datetime.now(timezone.utc).isoformat()
 
