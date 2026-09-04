@@ -61,6 +61,105 @@ _EU_EEA_COUNTRIES = frozenset({
 })
 
 
+# Ship 112'.a — display-name → ISO 3166-1 alpha-2 map.
+#
+# Ship 104's Quickstart form is free-text; before Ship 112'.b's
+# dropdown lands, customers type whatever they want ("Czechia",
+# "United Kingdom", "USA", etc.). Downstream code (this file's
+# _EU_EEA_COUNTRIES membership check, applicability derivation)
+# compares against ISO codes, so free-text display names silently
+# fail the check.
+#
+# Fix: `_normalize_country()` accepts any of:
+#   · ISO 3166-1 alpha-2 code       ("CZ")
+#   · Common English display name    ("Czechia", "Czech Republic")
+#   · Common variants                ("UK", "USA")
+# and returns the ISO code. Unrecognised input is returned as-is so
+# the caller still has _something_ to write.
+#
+# Keys are stored lowercased for case-insensitive lookup. Whitespace
+# is trimmed before lookup.
+_COUNTRY_NAME_TO_CODE: dict[str, str] = {
+    # EU (27) + EEA (3)
+    "austria": "AT",
+    "belgium": "BE",
+    "bulgaria": "BG",
+    "cyprus": "CY",
+    "czechia": "CZ", "czech republic": "CZ",
+    "germany": "DE", "deutschland": "DE",
+    "denmark": "DK",
+    "estonia": "EE",
+    "spain": "ES", "españa": "ES",
+    "finland": "FI",
+    "france": "FR",
+    "greece": "GR",
+    "croatia": "HR",
+    "hungary": "HU",
+    "ireland": "IE",
+    "italy": "IT", "italia": "IT",
+    "lithuania": "LT",
+    "luxembourg": "LU",
+    "latvia": "LV",
+    "malta": "MT",
+    "netherlands": "NL", "holland": "NL", "the netherlands": "NL",
+    "poland": "PL",
+    "portugal": "PT",
+    "romania": "RO",
+    "sweden": "SE",
+    "slovenia": "SI",
+    "slovakia": "SK",
+    "iceland": "IS",
+    "liechtenstein": "LI",
+    "norway": "NO",
+    # UK + North America + other common non-EU that customers land on
+    "united kingdom": "GB", "uk": "GB", "great britain": "GB",
+    "britain": "GB", "england": "GB", "scotland": "GB", "wales": "GB",
+    "united states": "US", "united states of america": "US", "usa": "US",
+    "america": "US", "u.s.": "US", "u.s.a.": "US",
+    "canada": "CA",
+    "australia": "AU",
+    "new zealand": "NZ",
+    "switzerland": "CH", "schweiz": "CH", "suisse": "CH",
+    "japan": "JP",
+    "brazil": "BR", "brasil": "BR",
+    "india": "IN",
+    "singapore": "SG",
+    "south africa": "ZA",
+}
+
+
+def _normalize_country(raw: str | None) -> str:
+    """Return canonical ISO 3166-1 alpha-2 country code for `raw`.
+
+    Accepts:
+      · Already-canonical 2-letter codes → returned upper-cased.
+      · Known display names / common variants → mapped via
+        _COUNTRY_NAME_TO_CODE (case-insensitive, whitespace-trimmed).
+      · Unrecognised input → returned as-is (fail-open: caller still
+        stores something, downstream derivation just silently skips).
+
+    Empty input returns empty string so caller can apply its own
+    default (e.g. "GB" in create_first_tenant).
+    """
+    if not raw:
+        return ""
+    stripped = raw.strip()
+    if not stripped:
+        return ""
+    # Display name / variant lookup FIRST — catches 2-letter aliases
+    # like "UK" that aren't valid ISO codes (UK maps to GB). Doing
+    # the 2-letter shortcut first would return "UK" verbatim.
+    key = stripped.lower()
+    if key in _COUNTRY_NAME_TO_CODE:
+        return _COUNTRY_NAME_TO_CODE[key]
+    # Already a 2-letter code that wasn't in the alias map — assume
+    # it's a valid ISO code and pass through upper-cased.
+    if len(stripped) == 2 and stripped.isalpha():
+        return stripped.upper()
+    # Unknown — return as-is so the caller still writes _something_
+    return stripped
+
+
 def _now_iso() -> str:
     """UTC ISO-8601 timestamp for fact_source markers."""
     return datetime.now(timezone.utc).isoformat()
@@ -83,8 +182,15 @@ def _initial_client_facts(
     values:  dict[str, object] = {}
     sources: dict[str, dict]   = {}
 
+    # Ship 112'.a — normalize free-text country input to ISO alpha-2.
+    # Ship 104's Quickstart form is free-text; "Czechia" / "United
+    # Kingdom" / "USA" all get canonicalized here so the EU/EEA
+    # derivation below works + so posture_controls filters that
+    # compare against ISO codes downstream see a stable value.
+    normalized_country = _normalize_country(country) or "GB"
+
     # Country is always set (defaults to "GB" in create_first_tenant)
-    values["country"] = country
+    values["country"] = normalized_country
     sources["country"] = {"source": "declared", "at": now}
 
     # Sector: declared if the caller passed one
@@ -106,7 +212,7 @@ def _initial_client_facts(
         sources["has_physical_premises"] = {"source": "declared", "at": now}
 
     # Country-driven derivations. Tenant can override in Profile.
-    ctry = (country or "").upper()
+    ctry = normalized_country
     if ctry in _EU_EEA_COUNTRIES:
         values["eu_data_subjects"] = True
         sources["eu_data_subjects"] = {
@@ -219,12 +325,18 @@ def create_first_tenant(
                     raise ValueError(f"tenant with slug '{slug}' already exists")
 
                 # 1. tenant row
+                # Ship 112'.a — normalize country to ISO alpha-2 for
+                # tenants.country too (not just client_facts), so any
+                # future code that reads tenants.country directly
+                # (e.g. legacy call sites, admin UIs) sees a canonical
+                # value. See _normalize_country docstring.
                 tenant_id = str(uuid.uuid4())
+                normalized_country = _normalize_country(country) or "GB"
                 cur.execute("""
                     INSERT INTO tenants (
                         id, name, slug, sector, country, cloud_only, subscription
                     ) VALUES (%s, %s, %s, %s, %s, %s, 'free')
-                """, (tenant_id, name, slug, sector, country, cloud_only))
+                """, (tenant_id, name, slug, sector, normalized_country, cloud_only))
 
                 # Set RLS context so the users + api_keys inserts satisfy
                 # their tenant_id-scoped policies.
