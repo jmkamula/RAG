@@ -1,484 +1,1303 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ArionComply — Architecture & Innovation Brief</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>ArionComply — Product Architecture</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 :root {
-  --fg: #1a1a1a;
-  --muted: #666;
-  --accent: #1c76fc;
-  --accent-soft: #eaf2ff;
-  --border: #e2e2e2;
-  --code-bg: #f5f5f7;
-  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
-  --serif: "Charter", "Iowan Old Style", Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --fg:          #1a1a1a;
+  --muted:       #5f5e5a;
+  --dim:         #8a8878;
+  --line:        #e2e0d8;
+  --line-soft:   #efedE5;
+  --paper:       #fbfaf4;
+  --panel:       #ffffff;
+  --accent:      #534AB7;
+  --accent-soft: #EEEDFE;
+  --accent-fg:   #3C3489;
+  --amber:       #a37b00;
+  --amber-soft:  #fff3b0;
+  --green:       #1D9E75;
+  --green-soft:  #E5F5EE;
+  --red:         #B92A28;
+  --red-soft:    #FEECEA;
+  --human:       #d97706;
+  --ai:          #2563eb;
+  --mono:        "SF Mono", Menlo, Consolas, monospace;
+  --sans:        -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif:       "Charter", Georgia, "Iowan Old Style", serif;
 }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.65;
   color: var(--fg);
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 24px;
+  background: var(--paper);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 32px 120px;
 }
-h1 { font-size: 2.4em; margin: 0.2em 0 0.1em; letter-spacing: -0.02em; }
-h2 { font-size: 1.6em; margin: 1.8em 0 0.5em; padding-bottom: 0.3em;
-     border-bottom: 2px solid var(--border); letter-spacing: -0.01em; }
-h3 { font-size: 1.2em; margin: 1.4em 0 0.4em; color: var(--fg); }
-h4 { font-size: 1.02em; margin: 1em 0 0.3em; color: var(--muted);
-     text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+h1 { font-size: 2.6em; margin: 0.1em 0 0.2em; letter-spacing: -0.02em; line-height: 1.15; }
+h2 { font-size: 1.55em; margin: 2.4em 0 0.6em; padding: 0.4em 0 0.5em;
+     border-bottom: 2px solid var(--line); letter-spacing: -0.01em; }
+h3 { font-size: 1.18em; margin: 1.8em 0 0.5em; color: var(--fg); }
+h4 { font-size: 0.95em; margin: 1.4em 0 0.3em; color: var(--muted);
+     text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+p  { margin: 0.6em 0 1em; }
+ul,ol { margin: 0.4em 0 1.2em; padding-left: 1.4em; }
+li { margin: 0.35em 0; }
+code {
+  font-family: var(--mono); font-size: 0.88em;
+  background: #f4f2ea; padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--line-soft);
+}
+pre {
+  font-family: var(--mono); font-size: 0.85em;
+  background: #23262e; color: #e6e6e6;
+  padding: 14px 18px; border-radius: 6px;
+  overflow-x: auto; line-height: 1.5;
+}
+pre code { background: none; border: none; padding: 0; color: inherit; }
+a { color: var(--accent-fg); text-decoration: none; border-bottom: 1px solid var(--line); }
+a:hover { border-bottom-color: var(--accent); }
+
 .hero {
-  padding: 24px 28px;
-  background: var(--accent-soft);
-  border-radius: 8px;
-  margin: 24px 0 32px;
-  border-left: 4px solid var(--accent);
+  padding: 32px 34px;
+  background: linear-gradient(135deg, #F3F1FA 0%, #EEEDFE 100%);
+  border-radius: 10px;
+  margin: 20px 0 44px;
+  border-left: 5px solid var(--accent);
 }
-.hero p { margin: 0.4em 0; }
-.hero em { color: var(--accent); font-weight: 600; font-style: normal; }
-.hero .subtitle {
-  color: var(--muted);
-  font-size: 0.9em;
-  margin-top: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+.hero .eyebrow {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--accent-fg); margin-bottom: 8px;
 }
+.hero h1 { color: var(--fg); }
+.hero .lede {
+  font-family: var(--serif); font-size: 1.2em; line-height: 1.55;
+  color: var(--fg); margin: 12px 0 6px;
+}
+.hero .meta {
+  font-size: 12px; color: var(--muted); margin-top: 18px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
 .callout {
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 14px 18px;
-  margin: 12px 0;
-  background: #fafafa;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 18px 0;
+  background: var(--panel);
 }
-.callout strong { color: var(--accent); }
-.grid-2 {
+.callout.accent { border-left: 4px solid var(--accent); background: var(--accent-soft); }
+.callout.amber  { border-left: 4px solid var(--amber);  background: var(--amber-soft); }
+.callout.green  { border-left: 4px solid var(--green);  background: var(--green-soft); }
+.callout.red    { border-left: 4px solid var(--red);    background: var(--red-soft); }
+.callout .tag {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px;
+}
+
+.two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin: 16px 0;
+  margin: 20px 0;
 }
-.grid-3 {
+.two-col > div {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.two-col h4 { margin-top: 0; }
+
+.role-split {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-  margin: 16px 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 24px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
 }
-.card {
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 14px 16px;
+.role-split .role {
+  padding: 20px 24px;
+  background: var(--panel);
 }
-.card h4 { margin-top: 0; }
-.card p { margin: 0.3em 0; font-size: 0.94em; }
-code, .mono { font-family: var(--mono); font-size: 0.9em; }
-code {
-  background: var(--code-bg);
-  padding: 1px 5px;
-  border-radius: 3px;
-  color: #333;
+.role-split .role.human { border-top: 4px solid var(--human); }
+.role-split .role.ai    { border-top: 4px solid var(--ai); border-left: 1px solid var(--line); }
+.role-split .role h4 {
+  font-size: 1em; margin: 0 0 8px; letter-spacing: 0.02em; text-transform: none; color: var(--fg);
 }
-pre {
-  background: var(--code-bg);
-  padding: 14px 16px;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-family: var(--mono);
-  font-size: 0.85em;
-  line-height: 1.5;
-  border-left: 3px solid var(--accent);
-}
-.ascii {
-  background: var(--code-bg);
-  padding: 16px 20px;
-  border-radius: 6px;
-  font-family: var(--mono);
-  font-size: 0.85em;
-  white-space: pre;
-  overflow-x: auto;
-  border-left: 3px solid var(--accent);
-}
+.role-split .role.human h4::before { content: "🧑 "; }
+.role-split .role.ai    h4::before { content: "🤖 "; }
+.role-split ul { margin: 8px 0 0; padding-left: 20px; }
+.role-split li { font-size: 14px; margin: 5px 0; }
+
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 12px 0;
+  margin: 16px 0 20px;
   font-size: 0.94em;
 }
 th, td {
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--line);
+  padding: 9px 12px;
   text-align: left;
   vertical-align: top;
 }
-th {
-  background: var(--code-bg);
-  font-weight: 600;
-  color: var(--fg);
-}
-tr:last-child td { border-bottom: none; }
-.badge {
-  display: inline-block;
-  font-size: 0.72em;
-  padding: 2px 8px;
+th { background: var(--line-soft); font-weight: 600; }
+td code { font-size: 0.85em; }
+
+.diagram {
+  margin: 26px 0;
+  padding: 22px;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 10px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  margin: 0 4px 0 0;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  overflow-x: auto;
 }
-.badge-green { background: #e6f7ec; color: #0f7b3a; }
-.badge-amber { background: #fff5e0; color: #a25b00; }
-.badge-red   { background: #fde7ea; color: #b0303f; }
-.trace-link {
-  font-family: var(--mono);
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px dashed var(--accent);
-  padding-bottom: 1px;
+.diagram .cap {
+  font-size: 12px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-top: 14px; text-align: center;
 }
-a { color: var(--accent); }
-.muted { color: var(--muted); }
-.footer {
-  margin-top: 60px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.88em;
+.diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+nav.toc {
+  position: sticky; top: 0;
+  background: var(--paper);
+  padding: 14px 0 12px;
+  margin: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  z-index: 10;
 }
+nav.toc strong {
+  display: block; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px;
+}
+nav.toc ol { list-style: decimal; padding-left: 20px; margin: 0; columns: 2; column-gap: 30px; }
+nav.toc li { margin: 3px 0; break-inside: avoid; }
+nav.toc a { border-bottom: none; color: var(--accent-fg); }
+nav.toc a:hover { text-decoration: underline; }
+
+.principle-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+.principle-list li {
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  background: var(--panel);
+  margin-bottom: 10px;
+  border-radius: 0 6px 6px 0;
+}
+.principle-list li strong { color: var(--accent-fg); }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+.stat {
+  padding: 16px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: center;
+}
+.stat .num {
+  font-size: 1.9em; font-weight: 700; color: var(--accent-fg);
+  line-height: 1; display: block; margin-bottom: 4px;
+}
+.stat .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+footer {
+  margin-top: 60px; padding-top: 24px;
+  border-top: 2px solid var(--line);
+  font-size: 13px; color: var(--muted);
+}
+footer a { color: var(--accent-fg); }
 </style>
 </head>
 <body>
 
 <div class="hero">
-<h1>ArionComply</h1>
-<p class="subtitle">Compliance Program Ledger &middot; Architecture &amp; Innovation Brief &middot; 2026-07-26</p>
-<p><em>ArionComply is a compliance program ledger, not a generic evidence repository.</em>
-Our role: track where evidence lives, its freshness, its ownership, and its
-auditor-readable provenance &mdash; while the tenant keeps evidence sovereignty
-in the systems that already hold their data (Odoo HR, Okta IAM, ServiceNow CMDB,
-document workflows).</p>
-<p>Under the hood, it is a cross-platform Retrieval-Augmented Generation stack
-purpose-built for compliance: a role-aware graph of requirements, a
-deterministic case-file &amp; preservation-check discipline for LLM answers,
-a nine-signal consensus extractor for evidence discovery, and a dual-backend
-OpenTelemetry stack to make every decision observable.</p>
+  <div class="eyebrow">Product Architecture · 2026-09-05</div>
+  <h1>ArionComply</h1>
+  <p class="lede">
+    A compliance program ledger that tracks where evidence lives, whether it's fresh,
+    who owns it, and how each piece maps to the frameworks your organisation is held
+    accountable against. Designed and built through human&ndash;AI collaboration.
+  </p>
+  <div class="meta">Audience: engineers &middot; consultants &middot; compliance leads</div>
 </div>
 
-<h2>1. Where we are today</h2>
+<nav class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#problem">The problem we solve</a></li>
+    <li><a href="#product">What ArionComply is</a></li>
+    <li><a href="#philosophy">Design philosophy</a></li>
+    <li><a href="#layers">The system in layers</a></li>
+    <li><a href="#catalog">Frameworks catalog</a></li>
+    <li><a href="#scoping">Scoping &amp; applicability</a></li>
+    <li><a href="#chat">The conversational surface</a></li>
+    <li><a href="#cascade">Cascade engine</a></li>
+    <li><a href="#multitenant">Multi-tenant, multi-framework</a></li>
+    <li><a href="#collab">Human&ndash;AI collaboration</a></li>
+    <li><a href="#build">How we build</a></li>
+    <li><a href="#deploy">Deployment &amp; operations</a></li>
+    <li><a href="#next">What's next</a></li>
+  </ol>
+</nav>
 
-<div class="grid-3">
-<div class="card">
-<h4>Deployed</h4>
-<p><span class="badge badge-green">Live</span> Chat &middot; Dashboard &middot; Stage-1 queue &middot; Evidence Package &middot; Risk Register &middot; External REST API + Python SDK</p>
-</div>
-<div class="card">
-<h4>Frameworks curated</h4>
-<p><span class="badge badge-green">100%</span> ISO 27001:2022 &middot; ISO 27701:2019 &middot; ISO 27003/4/5 (guidance) &middot; GDPR :2016/679<br>
-<span class="muted">490 curated posture rows &middot; 4293 checklist items</span></p>
-</div>
-<div class="card">
-<h4>Observability</h4>
-<p><span class="badge badge-green">Live</span> Jaeger &middot; Arize Phoenix &middot; OTel GenAI semconv &middot; 3-tier privacy gating</p>
-</div>
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="problem">1. The problem we solve</h2>
+
+<p>
+Compliance is stuck in a paperwork paradigm. Organisations are held accountable
+against overlapping frameworks &mdash; ISO&nbsp;27001, ISO&nbsp;27701, GDPR,
+NIS&nbsp;2, SOC&nbsp;2, sector-specific rules &mdash; each demanding evidence
+that a control is in place, operating, and reviewed. In practice this evidence
+lives everywhere: spreadsheets in someone's OneDrive, an HR record in Odoo, an
+access review in Okta, a firewall log in a SIEM, a training certificate in an
+LMS, a signed policy PDF on a shared drive.
+</p>
+
+<p>
+The traditional response is a compliance platform that becomes yet another
+document repository &mdash; you upload copies, tag them, hope they stay in
+sync with the systems of record. When the auditor arrives, someone spends
+weeks reconciling what's in the platform against what's actually in production.
+Everyone loses: the auditor gets stale evidence, the tenant duplicates data,
+and every audit begins with the same question &mdash;
+<em>is what's in the platform still what's true?</em>
+</p>
+
+<div class="callout accent">
+  <div class="tag">The shift we're making</div>
+  <p style="margin:4px 0 0">
+    Regulators increasingly want to see a functioning program, not a library
+    of paper. ArionComply is built for that reality. We are the
+    <strong>ledger</strong> that describes your compliance program &mdash;
+    the map to where evidence lives, the freshness clock, the ownership record,
+    the auditor-readable provenance &mdash; while your evidence stays in the
+    systems of record that already hold it.
+  </p>
 </div>
 
-<h2>2. Architecture at a glance</h2>
+<h4>What "compliance program ledger" means in practice</h4>
+<ul>
+  <li><strong>We track</strong> where each piece of evidence lives, how fresh
+    it is, who owns it, and which control requirements it satisfies.</li>
+  <li><strong>We do not</strong> re-implement your HR system, your IAM, your
+    CMDB. Those systems remain authoritative; ArionComply cites them.</li>
+  <li><strong>We surface</strong> gaps, upcoming reviews, cascade implications,
+    cross-framework overlap &mdash; things a human reviewer would miss at scale.</li>
+  <li><strong>We support</strong> tenants who prefer to hold evidence inside
+    the product (typical for startups without system-of-record maturity) with
+    the same freshness &amp; provenance discipline.</li>
+</ul>
 
-<div class="ascii">
-      ┌──────────────────────────────────────────────────────────────┐
-      │                       Tenant Surfaces                        │
-      │  Chat &nbsp;&nbsp;&nbsp; Dashboard &nbsp;&nbsp; Documents &nbsp;&nbsp; Risks &nbsp;&nbsp; Get Started    │
-      └──────────────────┬───────────────────────┬───────────────────┘
-                         │                       │
-              FastAPI + Python SDK &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SSE stream
-                         │                       │
-      ┌──────────────────┴───────────────────────┴───────────────────┐
-      │                    Case-file discipline                     │
-      │  Case-file digest → LLM (bounded) → preservation-check       │
-      │  → deterministic repair (APPEND-ONLY footer)                 │
-      └────────────┬────────────────────────────┬────────────────────┘
-                   │                            │
-              7-signal chat consensus &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-signal extraction consensus
-              (Ship 1 arc)                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Ship 32-43 arc-family)
-                   │                            │
-      ┌────────────┴────────────────────────────┴────────────────────┐
-      │                     Role-aware graph                         │
-      │  Program (ISO 27001)  Extension (ISO 27701)                  │
-      │  Obligation (GDPR)    Guidance (ISO 27003/4/5)               │
-      │  DEMONSTRATES  IMPLEMENTS  SUPPORTS  ENABLES  GOVERNANCE     │
-      └────────────┬────────────────────────────┬────────────────────┘
-                   │                            │
-                 Neo4j                      Chroma (semantic)
-                 (structural &amp; role)         (BM25 + embeddings)
-                          │
-                          └──────── Postgres ─────────
-                                     (posture, findings, tenant state)
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="product">2. What ArionComply is</h2>
 
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Everything traced end-to-end via OpenTelemetry
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → Jaeger (waterfalls) + Arize Phoenix (LLM UI)
+<div class="stat-grid">
+  <div class="stat"><span class="num">3</span><span class="label">frameworks fully curated</span></div>
+  <div class="stat"><span class="num">220+</span><span class="label">controls with evidence spec</span></div>
+  <div class="stat"><span class="num">800+</span><span class="label">must-contain items</span></div>
+  <div class="stat"><span class="num">500+</span><span class="label">typed cross-framework edges</span></div>
+  <div class="stat"><span class="num">53</span><span class="label">cascade event types</span></div>
+  <div class="stat"><span class="num">237/238</span><span class="label">eval baseline</span></div>
 </div>
 
-<h3>2.1 Datastore choices &mdash; and why</h3>
+<h3>Two coexisting evidence modes</h3>
+
+<p>
+Not every organisation looks the same. A five-person startup keeps most of
+their compliance evidence <em>inside</em> a tool because they don't yet have
+separate systems of record. A 500-person enterprise has authoritative data
+in Odoo, Okta, Workday, ServiceNow &mdash; asking them to re-upload copies
+is both wasteful and a source of divergence risk. ArionComply supports both,
+in the same tenant, at the same time, on a per-control basis:
+</p>
+
+<div class="two-col">
+  <div>
+    <h4>Stored mode</h4>
+    <p style="margin:6px 0"><strong>Evidence authored + held in-product.</strong>
+    Templates, forms, tabular evidence rows. The tenant fills in structured
+    fields; the ledger records what was filled, when, and by whom. Typical
+    for smaller organisations and for evidence that has no natural system of
+    record (Statement of Applicability, ISMS scope, risk register).</p>
+  </div>
+  <div>
+    <h4>Cited mode</h4>
+    <p style="margin:6px 0"><strong>Evidence lives in the source system; we track the citation.</strong>
+    A URL to the record, a verification cadence, an attestation
+    (<code>verified_by</code> at a specific time), a note on whether changes
+    were detected between checks. The tenant owns the source system; we
+    ensure the citation is fresh and the trail is auditor-defensible.</p>
+  </div>
+</div>
+
+<div class="callout amber">
+  <div class="tag">Principle</div>
+  <p style="margin:4px 0 0">
+    <strong>For cited evidence, the system exposes and tracks &mdash; the
+    tenant attests.</strong> There are no silent machine attestations, no
+    URL scrapers that auto-populate a verification log. Every
+    <code>verified_by</code> is a real user at the moment of a real decision.
+    This is not laziness; it is audit-defensibility. When the auditor asks
+    "how do you know this was current on Tuesday?" the answer is a signed
+    human attestation, not a robot's guess.
+  </p>
+</div>
+
+<h3>Per-must granularity</h3>
+
+<p>
+The unit of compliance work in ArionComply is not the control (too coarse
+&mdash; an auditor can't tell you which part fails) nor the document (too
+disconnected &mdash; a policy document may satisfy fragments of ten controls).
+It is the <strong>must-contain item</strong>: a specific, verifiable
+statement a control requires. For ISO 27001 <code>A.5.15 Access control</code>,
+the musts include: "access rights are reviewed at planned intervals", "a
+formal registration and de-registration process exists", "a record of that
+review is retained", and several more. Each must has a freshness clock, an
+owner, and evidence linked to it.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="philosophy">3. Design philosophy</h2>
+
+<ul class="principle-list">
+  <li>
+    <strong>Deterministic where it matters.</strong> Every compliance-load-bearing
+    decision &mdash; is this control applicable? does this evidence satisfy
+    this must? is this cascade implication in scope? &mdash; is computed by
+    a deterministic engine, not by a language model. An LLM may draft the
+    prose that explains the decision, but never the decision itself.
+  </li>
+  <li>
+    <strong>AI where it helps.</strong> Language models are excellent at
+    reading dense policy documents to extract structured fields, at answering
+    natural-language questions with citations, at drafting starter templates.
+    They are used liberally for these tasks. Every LLM call is logged with
+    input, output, latency, and cost.
+  </li>
+  <li>
+    <strong>Provenance for every write.</strong> A boolean column on the
+    tenant's scoping profile does not just carry <code>true</code> or
+    <code>false</code> &mdash; it carries a source marker: was this declared
+    by the tenant, derived by the system from another declared fact, or still
+    at schema default? Downstream engines behave differently based on the
+    source, and the audit trail always shows who or what said what, when.
+  </li>
+  <li>
+    <strong>Fail-open for user-facing prose, fail-loud for audit-critical decisions.</strong>
+    If a display humanisation function encounters an unknown enum value, it
+    shows the raw slug rather than crashing the page. If the applicability
+    engine encounters an unknown driving fact, it does not fire the rule
+    &mdash; because silently marking a control as N/A on a wrong assumption
+    is the exact opposite of the discipline an auditor is looking for.
+  </li>
+  <li>
+    <strong>Human-in-the-loop by design.</strong> The tenant is authoritative
+    on their own state. Every engine-proposed change surfaces as a proposal
+    that requires human confirmation before it hits the live posture. AI
+    outputs are never applied silently.
+  </li>
+  <li>
+    <strong>APPEND-ONLY for LLM outputs.</strong> When the conversational
+    surface generates a compliance answer, deterministic checks may append
+    missing citations or verdict markers &mdash; but the LLM's prose is
+    never rewritten. The audit trail shows what the model said and what the
+    deterministic layer added, both preserved.
+  </li>
+</ul>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="layers">4. The system in layers</h2>
+
+<p>
+ArionComply is composed of six functional layers. Each layer has a
+well-defined input and output; each has its own storage and its own tests.
+The layers are not strict pipeline stages &mdash; they interact in both
+directions &mdash; but the mental separation matches the way we build and
+reason about the system.
+</p>
+
+<div class="diagram">
+<svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ArionComply layered architecture">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f5e5a"/>
+    </marker>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EEEDFE"/><stop offset="100%" stop-color="#F3F1FA"/>
+    </linearGradient>
+  </defs>
+  <g font-family="-apple-system, Segoe UI, sans-serif" font-size="13" fill="#1a1a1a">
+    <rect x="20" y="30" width="860" height="60" rx="8" fill="url(#g1)" stroke="#c4beed" stroke-width="1.5"/>
+    <text x="50" y="55" font-weight="700" fill="#3C3489">1. Intake</text>
+    <text x="50" y="76" font-size="12" fill="#5f5e5a">Documents &middot; workbooks &middot; templates &middot; cited external sources &middot; forms</text>
+
+    <rect x="20" y="110" width="860" height="60" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="50" y="135" font-weight="700">2. Catalog</text>
+    <text x="50" y="156" font-size="12" fill="#5f5e5a">Frameworks &middot; controls &middot; must-contain items &middot; relationships &middot; cascade events</text>
+
+    <rect x="20" y="190" width="860" height="60" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="50" y="215" font-weight="700">3. State</text>
+    <text x="50" y="236" font-size="12" fill="#5f5e5a">Posture per tenant &middot; applicability &middot; scoping facts &middot; findings &middot; tenant profile</text>
+
+    <rect x="20" y="270" width="860" height="60" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="50" y="295" font-weight="700">4. Assess</text>
+    <text x="50" y="316" font-size="12" fill="#5f5e5a">Fulfilment engine &middot; applicability derivation &middot; cascade engine &middot; critic verifiers</text>
+
+    <rect x="20" y="350" width="580" height="60" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="50" y="375" font-weight="700">5. Surface</text>
+    <text x="50" y="396" font-size="12" fill="#5f5e5a">Dashboard &middot; chat &middot; Get Started &middot; Evidence Package &middot; notifications</text>
+
+    <rect x="620" y="350" width="260" height="60" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="640" y="375" font-weight="700">6. External API</text>
+    <text x="640" y="396" font-size="12" fill="#5f5e5a">/api/external/v1 &middot; Python SDK</text>
+
+    <line x1="450" y1="90"  x2="450" y2="107" stroke="#5f5e5a" marker-end="url(#arr)"/>
+    <line x1="450" y1="170" x2="450" y2="187" stroke="#5f5e5a" marker-end="url(#arr)"/>
+    <line x1="450" y1="250" x2="450" y2="267" stroke="#5f5e5a" marker-end="url(#arr)"/>
+    <line x1="450" y1="330" x2="310" y2="347" stroke="#5f5e5a" marker-end="url(#arr)"/>
+    <line x1="450" y1="330" x2="750" y2="347" stroke="#5f5e5a" marker-end="url(#arr)"/>
+
+    <text x="30" y="450" font-size="11" fill="#8a8878">
+      Human review points at every arrow. Provenance markers travel with each write.
+    </text>
+  </g>
+</svg>
+<div class="cap">Layered composition &mdash; intake at the top, surfaces at the bottom.</div>
+</div>
+
+<h3>Layer 1 &mdash; Intake</h3>
+
+<p>
+Evidence arrives in ArionComply through several distinct paths, each with
+different provenance guarantees and human-review points.
+</p>
 
 <table>
-<thead><tr><th>Store</th><th>Role</th><th>Why this &amp; not X</th></tr></thead>
-<tbody>
-<tr><td><strong>Neo4j</strong></td>
-    <td>Requirement graph, role model, cross-framework edges
-        (<code>DEMONSTRATES</code>, <code>IMPLEMENTS</code>, <code>SUPPORTS</code>...)</td>
-    <td>Compliance is fundamentally a graph problem: an obligation like
-        <em>GDPR Art. 35 DPIA</em> is <em>demonstrated by</em> an ISO 27701
-        A.7.2.5 program leaf that itself <em>satisfies</em> ISO 27001 6.1.2.
-        Relational joins would mask the semantics.</td></tr>
-<tr><td><strong>Postgres</strong></td>
-    <td>Posture, findings, evidence, tenant state, RLS-scoped multi-tenancy</td>
-    <td>Tenant isolation via Row-Level Security is battle-tested. Every
-        auditor-load-bearing table (posture_controls, document_findings,
-        posture_status_log) is here, with append-only compliance semantics
-        where auditors need them.</td></tr>
-<tr><td><strong>ChromaDB</strong></td>
-    <td>Semantic embeddings for query &rarr; requirement retrieval;
-        per-framework collections</td>
-    <td>Purpose-built for RAG. One embedding model (<code>text-embedding-3-large</code>)
-        across all four collections after Ship 5' consolidation. Retrieved
-        via consensus signals, not raw top-K.</td></tr>
-<tr><td><strong>Jaeger + Phoenix</strong></td>
-    <td>Distributed tracing: Jaeger for infrastructure spans, Phoenix
-        for LLM-first UI</td>
-    <td>Both consume OTLP; SDK exports to both in parallel. Traces are
-        portable to any OTel-native backend (Grafana Tempo, Honeycomb,
-        Langfuse) without rewrites.</td></tr>
-</tbody>
+  <tr><th>Path</th><th>Shape</th><th>Auto-approve?</th><th>Notes</th></tr>
+  <tr>
+    <td>Templated document</td>
+    <td>Markdown / .docx / .xlsx written from an ArionComply template</td>
+    <td>Yes</td>
+    <td>Deterministic fast-path: the template markers say exactly which
+      must-item each answer satisfies. Tenant-authored, no inference uncertainty.</td>
+  </tr>
+  <tr>
+    <td>Workbook (round-trip)</td>
+    <td>.xlsx with a hidden <code>_arion_meta</code> sheet</td>
+    <td>Yes</td>
+    <td>Per-column bindings mean each row lands on a specific must-item.
+      Same auto-approve confidence as templated documents.</td>
+  </tr>
+  <tr>
+    <td>Generic document</td>
+    <td>Free-form PDF / .docx / .md the tenant uploads</td>
+    <td>No</td>
+    <td>Extraction pipeline uses layered fingerprint matching + LLM
+      extraction with strict grounding checks. Every finding lands in a
+      Stage-1 review queue before it hits posture.</td>
+  </tr>
+  <tr>
+    <td>Cited external source</td>
+    <td>URL + control-ref + verification cadence</td>
+    <td>N/A</td>
+    <td>Tenant declares the source system. Periodic verification prompts
+      a human to confirm freshness with a <code>changes_detected</code>
+      attestation.</td>
+  </tr>
 </table>
 
-<h2>3. Breakthrough innovations</h2>
+<h3>Layer 2 &mdash; Catalog</h3>
 
-<h3>3.1 <span class="badge">Ship 2'</span> Case-file discipline: bounded LLM + APPEND-ONLY preservation-check</h3>
-<p>The chat pipeline gives the LLM a compact <em>case-file digest</em>
-(~450&ndash;650 tokens: query, posture, cited refs, cross-framework
-bridges, session context) rather than the pre-Ship-2' <em>21,731-token
-average prompt</em>. After the LLM answers, a <em>preservation-check</em>
-runs deterministically: every required ref, <code>[DRAFT]</code> tag,
-verdict prefix, and cross-framework bridge line that the LLM was expected
-to include is verified. Missing elements are <em>appended</em> as a
-footer &mdash; never rewriting LLM prose. This means:</p>
+<p>
+The catalog is the immutable-per-release description of what frameworks
+require. It lives in two coordinated stores: a <strong>graph database</strong>
+holds the network of frameworks, controls, must-contain items, evidence
+requirements, and the typed edges between them; a <strong>relational
+database</strong> holds the flat lookup tables that make queries fast. The
+catalog is regenerated from source definitions and never mutated in production
+&mdash; customer boxes receive a pre-built snapshot at install time.
+</p>
+
+<p>What's in the catalog today, by numbers:</p>
 <ul>
-<li><strong>The LLM cannot silently drop compliance-load-bearing facts.</strong>
-    If it did, the deterministic repair pass restores them.</li>
-<li><strong>The LLM cannot invent controls or refs.</strong> The digest is the
-    only ground truth; the repair pass only <em>preserves</em>, never <em>adds</em>.</li>
-<li><strong>Auditor safety by construction.</strong> No stochastic decision
-    is compliance-load-bearing.</li>
+  <li>3 fully-curated frameworks (ISO 27001:2022, ISO 27701:2019, GDPR 2016/679)</li>
+  <li>220+ controls, each with an <code>EvidenceRequirement</code> describing
+    what "satisfied" means for that control</li>
+  <li>800+ must-contain items and 200+ should-contain items across those controls</li>
+  <li>500+ typed cross-framework edges (11 edge types) describing how a
+    control in one framework relates to controls in another</li>
+  <li>53 cascade event types with 260+ typed implication edges</li>
+  <li>17 topic bundles that map named business workflows (identity lifecycle,
+    incident response, records handling) to the relevant must-items across
+    frameworks</li>
 </ul>
 
-<h3>3.2 <span class="badge">Ship 32-43</span> Nine-signal extraction consensus</h3>
-<p>Evidence extraction from tenant documents runs a nine-signal consensus
-similar in spirit to the chat pipeline, with signals ordered by
-compliance-authority (highest first):</p>
-<div class="ascii">
-   Signal                        Weight    What it captures
-   ──────────────────────────    ──────    ─────────────────────────────────
-   explicit_ref                    1.00    doc verbatim cites "A.5.15" or "Art.32"
-   doc_mappings_target             0.60    curator-authored filename → leaf map
-   fingerprint_keyword             0.50    Ship 28/29 exact-token-set catalog
-   must_semantic_topk              0.30    Chroma embedding top-K
-   bm25_topk                       0.25    lexical relevance (Ship 43)
-   per_protocol_scope              0.10    per-standard Chroma retrieval
-   semantic_fit_gate               ±0.30    post-fingerprint cosine verifier
-   content_shape_penalty           −0.50    sentence looks like a field/header
-   evidence_uniqueness             −0.50    cross-candidate anti-multi-attribution
-</div>
-<p>Candidates need <em>corroboration</em> (2+ signals) to auto-accept; a
-bounded LLM arbiter (cannot invent, cannot override auto-accept)
-adjudicates the middle band. Result on Arion demo across 5 baseline docs:
-<strong>+42% recall</strong> vs pre-arc, and cross-framework GDPR
-findings surface directly (Art.35 on a DPIA doc) where the previous
-LLM discovery pipeline missed them entirely.</p>
+<h3>Layer 3 &mdash; State</h3>
 
-<h3>3.3 <span class="badge">Ship 40</span> Framework role model: obligations &amp; demonstrators</h3>
-<p>Frameworks are not siblings. ISO 27001 is a <em>program</em>; ISO 27701 is an
-<em>extension</em> of ISO 27001; GDPR is a set of <em>obligations</em>
-demonstrated by programs &amp; extensions; ISO 27003/4/5 is <em>guidance</em>.
-Edges in Neo4j encode which programs <em>DEMONSTRATE</em> which obligations.
-Posture propagates: if A.7.2.5 (ISO 27701 privacy risk assessment) is
-Comply, then Art.35 (GDPR DPIA) posture materialises via the
-<code>_apply_demonstrates_overlay</code> at posture-load time &mdash; without
-duplicating evidence.</p>
+<p>
+State is what makes a catalog installation into a live compliance program.
+Each tenant has:
+</p>
 
-<h3>3.4 <span class="badge">Ship 42</span> Two-view semantics: engine vs. auditor UI</h3>
-<p>Same table, two views. Engine reads per-MUST rows for
-<code>checklist_item_id = ANY(...)</code> recognition (needs N rows for N MUSTs).
-Auditor UI wants 1 row per unique (excerpt, control_ref). Ship 42
-resolved the tension with an <code>evidence_group_id</code> column stamped
-at write, and surface-layer queries doing
-<code>DISTINCT ON (evidence_group_id)</code>. Persistence stays
-engine-friendly; the auditor sees clean single-citation views.
-<strong>60% reduction in Stage-1 queue visual size</strong> after backfilling
-legacy rows.</p>
-
-<h3>3.5 <span class="badge">Ship 44</span> Dual-backend OTel: Jaeger + Phoenix</h3>
-<p>Every request, DB query, LLM call, LangGraph node, consensus signal,
-posture load, and preservation-check event is a span. Two backends
-consume the same OTLP export:</p>
 <ul>
-<li><strong>Jaeger</strong> for general trace waterfalls, service map, dependency graph.</li>
-<li><strong>Arize Phoenix</strong> for LLM-first UI: prompt/completion viewer,
-RAG evaluation-ready.</li>
-</ul>
-<p>Spans use the emerging <em>OpenTelemetry Semantic Conventions for GenAI</em>
-(<code>gen_ai.*</code>) so traces are portable to Grafana Tempo, Honeycomb,
-Langfuse, or any OTel-native backend. A 3-tier privacy env
-(<code>OTEL_PRIVACY_LEVEL={off, observability, debug}</code>) gates whether
-content attributes (LLM prompts, evidence excerpts, chat query text) are
-captured &mdash; safe by default.</p>
-
-<h3>3.6 <span class="badge">Ship 45</span> N+1 fix via batched EvalContext + TTL cache</h3>
-<p>Ship 44's tracing revealed that the chat's retrieve node spent 79% of
-its latency in two nested per-ref loops (<code>build_related_cards</code>
-and <code>build_templates_block</code>), each rebuilding an
-<code>EvalContext</code> (Postgres + Neo4j scan) + fresh Neo4j session +
-fresh spec resolver per call. Ship 45 batched via
-<code>build_advisory_data_for_refs</code> (shared context across all refs
-in one call) plus a 30-second TTL cache on the invariant Neo4j
-<code>_load_er_evidence_types</code> scan. Result on the deterministic
-posture-enumeration path: <strong>chat latency 11.7s → 7.3s (-37%);
-2290 → 1169 SELECTs (-49%)</strong>.</p>
-
-<h2>4. Live telemetry &mdash; sample traces</h2>
-
-<div class="callout">
-<p>Both trace UIs bind to <code>127.0.0.1</code> only. From a workstation:
-<code>ssh -L 16686:127.0.0.1:16686 -L 6006:127.0.0.1:6006 -i ~/.ssh/arioncomplySK.pem arionlabs@172.211.244.144</code></p>
-<p>Then:
-<a href="http://localhost:16686/">Jaeger UI</a> &middot;
-<a href="http://localhost:6006/">Phoenix UI</a></p>
-</div>
-
-<h3>4.1 What to look for in a chat trace</h3>
-<p class="muted">Trace shape for a typical &quot;top NC findings&quot; chat query
-(deterministic short-circuit path):</p>
-<div class="ascii">
-POST /api/v1/chat                                7.3s
-├── LangGraph                                    7.3s
-│   ├── classify                                 3.8s
-│   │   └── gen_ai.chat.consensus_gatekeeper     1.2s
-│   ├── retrieve                                 3.5s
-│   │   ├── arion.resolver.resolve               220ms
-│   │   │   ├── arion.resolver.vector_search     170ms
-│   │   │   ├── arion.resolver.graph_expand      50ms
-│   │   │   └── arion.graph_expander.get_
-│   │   │       incident_obligations             6ms
-│   │   ├── arion.answer_augment.build_
-│   │   │   short_circuit_structured            2.8s
-│   │   │   └── arion.answer_augment.
-│   │   │       build_related_cards             2.7s
-│   │   └── [templates_block enrichment]         ~500ms
-│   └── update_session                           1ms
-└── [server span response]
-</div>
-
-<h3>4.2 What to look for in an intake pipeline trace</h3>
-<p class="muted">Trace shape for a doc re-extract via consensus:</p>
-<div class="ascii">
-POST /api/v1/admin/uploads/{id}/reextract        14ms  (async task)
-└── arion.consensus.run                          31s
-    ├── arion.consensus.signal.must_semantic_topk    680ms
-    ├── arion.consensus.signal.bm25_topk           1.5s
-    ├── arion.consensus.signal.explicit_ref         8ms
-    ├── arion.consensus.signal.doc_mappings_target 10ms
-    ├── arion.consensus.signal.fingerprint_keyword 7.8s  ← dominant
-    ├── arion.consensus.signal.per_protocol_scope 665ms
-    ├── arion.consensus.signal.semantic_fit_gate  ~50ms
-    ├── arion.consensus.signal.content_shape_penalty ~50ms
-    ├── arion.consensus.signal.evidence_uniqueness   ~20ms
-    ├── arion.consensus.aggregate                  30ms
-    └── arion.consensus.arbitrate                 1.1s
-        └── gen_ai.chat.consensus_gatekeeper       1.1s
-</div>
-<p>fingerprint_keyword (Ship 28/29 catalog) is the current dominant
-cost &mdash; a Ship 47+ candidate for per-leaf profiling.</p>
-
-<h3>4.3 Phoenix &mdash; where LLM interactions are inspected</h3>
-<p>Every OpenAI SDK call auto-instruments via OpenInference and lands in
-Phoenix with the OTel GenAI semantic conventions: model, input+output
-tokens, latency, and (in debug tier) prompt+completion content. Phoenix
-groups them per LLM call so you can see:</p>
-<ul>
-<li>What the case-file digest sent to the LLM (~2k tokens)</li>
-<li>What the LLM returned (structured JSON via
-<code>response_format=&#123;&quot;type&quot;: &quot;json_object&quot;&#125;</code>)</li>
-<li>The consensus arbiter's per-candidate LLM decisions</li>
-<li>Chroma queries (auto-instrumented via httpx)</li>
+  <li><strong>Posture</strong> &mdash; the current compliance verdict for
+    every in-scope control: Not-assessed, Non-conformity, Opportunity-for-
+    improvement, or Comply.</li>
+  <li><strong>Applicability</strong> &mdash; a per-control marker of whether
+    the control is <em>applicable</em> or <em>N/A</em> for this tenant, with
+    a human-readable reason.</li>
+  <li><strong>Scoping facts</strong> &mdash; the tenant's business profile:
+    do they process personal data, in which regions, in what role
+    (controller / processor), with what sensitivity categories, at what size.
+    Each fact carries a source marker: declared, derived, or still at schema
+    default.</li>
+  <li><strong>Findings</strong> &mdash; the individual pieces of evidence
+    attached to must-items, each with an inference source (extracted, workbook,
+    templated, cited, manual) and a review state.</li>
+  <li><strong>Tenant profile</strong> &mdash; display-value placeholders that
+    get substituted into downloaded template documents (CEO name, DPO name,
+    registered address, approval dates).</li>
 </ul>
 
-<h2>5. What's next</h2>
+<h3>Layer 4 &mdash; Assess</h3>
 
-<h3>Near-term (Ship 47&ndash;52)</h3>
+<p>
+The assessment layer is where the compliance verdicts are computed. It is
+the most disciplined layer in the system: every function is deterministic,
+every input is auditable, every output is testable.
+</p>
+
 <ul>
-<li><strong>Retrieve LLM-path deeper profile</strong> &mdash;
-    <code>build_related_cards</code> is still 4.5s on the LLM chat path;
-    Ship 44/45 traces will point to specific hotspots.</li>
-<li><strong>fingerprint_keyword decomposition</strong> &mdash; the 7.8s
-    consensus catalog walk; per-leaf timing to find the specific hot
-    files.</li>
-<li><strong>Broader-doc eval on 68 more Arion docs</strong> &mdash;
-    Ship 41-43 covered 5 baseline docs; extending validates BM25 + dedup
-    at scale.</li>
-<li><strong>Persistent Jaeger &amp; Phoenix storage</strong> &mdash;
-    in-memory today; badger + Postgres for post-demo continuous
-    observability.</li>
+  <li><strong>Fulfilment engine</strong> &mdash; for each control, evaluates
+    whether the collected evidence satisfies the must-contain items and
+    produces a verdict (NC / OFI / Comply). Runs on a per-must granularity
+    so that partial satisfaction is representable and actionable.</li>
+  <li><strong>Applicability derivation</strong> &mdash; reads the tenant's
+    scoping facts and applies 11 rules to mark controls that structurally
+    do not apply (a cloud-only tenant has no physical premises controls;
+    a tenant with no EU data subjects has no GDPR obligations). Rules only
+    fire on <em>declared</em> or <em>derived</em> facts, never on unanswered
+    defaults.</li>
+  <li><strong>Cascade engine</strong> &mdash; when an event happens (a supplier
+    is reassessed, an incident is closed, a training campaign completes), the
+    cascade engine walks the graph of implications and creates follow-up
+    obligations on the downstream controls.</li>
+  <li><strong>Critic verifiers</strong> &mdash; for LLM-extracted evidence,
+    a downstream pass runs a strict grounding check: the claimed finding
+    must be verbatim-supported by the source document. Findings that fail
+    the grounding check are dropped before they reach human review.</li>
 </ul>
 
-<h3>Strategic bets</h3>
-<ul>
-<li><strong>Default-ON consensus extraction</strong> &mdash; currently
-opt-in per tenant behind <code>USE_CONSENSUS_EXTRACTION=1</code>. After
-broader-doc eval passes, flip the default and retire the legacy
-fingerprint+critic+concat paths.</li>
-<li><strong>Multi-tenant broader eval</strong> &mdash; onboard 2-3 test
-tenants to validate the role model + consensus across doc variety.</li>
-<li><strong>LLM cost tracking + budgets</strong> &mdash; OTel captures
-token counts; the dashboard needs per-tenant cost surfacing + rate
-limits.</li>
-<li><strong>External API webhook subscriptions</strong> &mdash; posture-
-change / new-finding / cascade-event events over webhook to enable
-customer automation. External REST API + Python SDK already ship.</li>
-</ul>
+<h3>Layer 5 &mdash; Surface</h3>
 
-<h2>6. Delivery velocity</h2>
+<p>
+Everything the tenant actually interacts with &mdash; the dashboard, the
+conversational chat, the Get Started sidebar, the Evidence Package export,
+notifications, the Profile page for scoping facts and preferences. Every
+surface reads from state; none writes to it without going through the
+appropriate assessment or intake path.
+</p>
 
-<table>
-<thead><tr><th>Arc family</th><th>Ships</th><th>Delivered</th></tr></thead>
-<tbody>
-<tr><td>Framework curation</td><td>Ship 1-13</td>
-    <td>4 frameworks curated to multi-leaf spec (ISO 27001 + ISO 27701 + GDPR + ISO 27000-family guidance)</td></tr>
-<tr><td>Case-file chat discipline</td><td>Ship 2'</td>
-    <td>Chat prompts 21k tokens &rarr; ~650 tokens; preservation-check + APPEND-ONLY repair; case-file is the only chat path</td></tr>
-<tr><td>Risk register</td><td>Ship 14-15</td>
-    <td>Full CRUD + dashboard + chat surfaces + notifications + DEMONSTRATES drill-in + SDK typed methods</td></tr>
-<tr><td>External API + SDK</td><td>Ship 4</td>
-    <td>14 endpoints, 8 <code>external:*</code> scopes, 59 integration tests, Python SDK, filtered OpenAPI</td></tr>
-<tr><td>Extraction consensus</td><td>Ship 32-43</td>
-    <td>9-signal consensus + LLM arbiter; +42% recall; cross-framework extraction; BM25 signal; per-doc dedup</td></tr>
-<tr><td>Observability</td><td>Ship 44-45</td>
-    <td>Dual-backend OTel (Jaeger + Phoenix); 3-tier privacy; N+1 fix -37% chat latency</td></tr>
-</tbody>
-</table>
+<h3>Layer 6 &mdash; External API</h3>
 
-<div class="footer">
-<p><strong>ArionComply</strong> &middot; Compliance program ledger for cross-platform RAG</p>
-<p>Companion pages:
-<a href="demo_walkthrough.html">demo walkthrough</a> &middot;
-<a href="poc_install_guide.html">POC install guide</a> &middot;
-<a href="tree_A5_15.html">per-control anatomy (A.5.15)</a></p>
-<p>Repository: <a href="https://github.com/jmkamula/RAG">github.com/jmkamula/RAG</a>
-&middot; Arc retrospectives in <code>docs/memory/</code></p>
+<p>
+For programmatic access, a scoped <code>/api/external/v1</code> namespace
+exposes read + write endpoints under fine-grained scopes
+(<code>external:query</code>, <code>external:posture:read</code>,
+<code>external:evidence:write</code>, etc.). A Python SDK covers all
+endpoints with typed response models and an exception hierarchy. Every
+external call is rate-limited and audit-logged.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="catalog">5. Frameworks catalog</h2>
+
+<div class="two-col">
+  <div>
+    <h4>ISO 27001:2022</h4>
+    <p style="margin:6px 0">Full curation. All 93 Annex A controls plus the
+    25 management-system clauses (4.x through 10.x). Each control has
+    must-contain items derived from ISO 27002:2022 implementation guidance.
+    Multi-leaf evidence specs distinguish policy documents, records, program
+    reviews, and operational procedures for each control.</p>
+  </div>
+  <div>
+    <h4>ISO 27701:2019</h4>
+    <p style="margin:6px 0">Full curation across all four PIMS control families
+    (A.7.2&ndash;A.7.5 for controllers, B.8.2&ndash;B.8.5 for processors).
+    Includes cross-standard bridges to the underlying ISO 27001 controls so
+    that evidence collected against 27001 also contributes to 27701 where
+    the edges say so.</p>
+  </div>
+  <div>
+    <h4>GDPR 2016/679</h4>
+    <p style="margin:6px 0">Full curation across all six operational chapters
+    (Principles, Rights, Controller/Processor duties, Transfers, DPO/codes/
+    certification, Supervisory-authority duties). DerivedSpec architecture
+    handles articles whose satisfaction depends on satisfaction of other
+    controls (e.g. Art.24 is satisfied when its 10 direct-evidence children
+    are collectively satisfied).</p>
+  </div>
+  <div>
+    <h4>Ready for more</h4>
+    <p style="margin:6px 0">The infrastructure for regional add-ons (LGPD,
+    CCPA, APPI, PIPEDA) is in place: region-scoping columns exist, sector
+    controlled-vocabulary matches NIS 2 Annexes I &amp; II, applicability
+    engine reads from a rules registry that accepts new rules without schema
+    changes. Curation of each regulation's controls is the remaining work
+    per new framework.</p>
+  </div>
 </div>
+
+<h3>How a control is represented</h3>
+
+<p>
+Consider ISO 27001 <code>A.5.15 Access control</code>. In the catalog this is:
+</p>
+
+<ol>
+  <li>A <code>RequirementNode</code> in the graph with
+    <code>node_id = ISO27001:2022:A.5.15</code>, business description,
+    cited-authority text, category tags.</li>
+  <li>An <code>EvidenceRequirement</code> that names the multi-leaf shape:
+    a policy leaf, a review-record leaf, a program-review leaf, and an
+    operational-procedure leaf.</li>
+  <li>A set of must-contain items on each leaf: for the review-record leaf,
+    items like <code>rev_sla_met</code> (was the review completed within its
+    24-hour promise), <code>rev_identity_pair</code> (are identity revocations
+    paired bi-directionally between A.5.16 and A.5.18),
+    <code>rev_residual_cleanup</code> (were downstream shares and mailboxes
+    cleaned up).</li>
+  <li>Typed edges to related controls in ISO 27002 guidance, to the ISO 27701
+    PIMS extension controls that reuse this evidence, and to GDPR articles
+    where the same evidence contributes.</li>
+  <li>Cascade edges: when an <code>identity_offboarded</code> event fires,
+    a follow-up on A.5.15 becomes expected (proof that the offboarding was
+    reflected in the access review record within the SLA).</li>
+</ol>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="scoping">6. Scoping &amp; applicability</h2>
+
+<p>
+Not every control applies to every tenant. A pure-cloud company has no
+physical premises controls; a business that never handles personal data
+has no GDPR articles; a data processor's evidence looks different from a
+data controller's. ArionComply captures scoping facts and derives
+applicability from them, so a tenant sees only the controls they are
+actually accountable against.
+</p>
+
+<div class="diagram">
+<svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Applicability derivation flow">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f5e5a"/>
+    </marker>
+  </defs>
+  <g font-family="-apple-system, Segoe UI, sans-serif" font-size="12" fill="#1a1a1a">
+    <rect x="20" y="30" width="230" height="240" rx="8" fill="#EEEDFE" stroke="#c4beed"/>
+    <text x="30" y="52" font-weight="700" fill="#3C3489">Tenant scoping facts</text>
+    <text x="30" y="76" font-size="11" fill="#5f5e5a">Answered in Profile &middot; declared + derived</text>
+    <text x="30" y="102">&bull; processes_personal_data = true</text>
+    <text x="30" y="120">&bull; eu_data_subjects = true</text>
+    <text x="30" y="138">&bull; uk_data_subjects = false</text>
+    <text x="30" y="156">&bull; role_controller = true</text>
+    <text x="30" y="174">&bull; role_processor = true</text>
+    <text x="30" y="192">&bull; has_physical_premises = false</text>
+    <text x="30" y="210">&bull; special_category_data = false</text>
+    <text x="30" y="228">&bull; &hellip;</text>
+    <text x="30" y="253" font-size="10" fill="#8a8878" font-style="italic">each fact carries a source marker</text>
+
+    <line x1="255" y1="150" x2="315" y2="150" stroke="#5f5e5a" stroke-width="2" marker-end="url(#arr2)"/>
+
+    <rect x="320" y="30" width="280" height="240" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="330" y="52" font-weight="700">Applicability rules (11)</text>
+    <text x="330" y="76" font-size="11" fill="#5f5e5a">Only fire on declared/derived facts</text>
+    <text x="330" y="102" fill="#3C3489">cloud_only_no_physical</text>
+    <text x="345" y="118" font-size="11" fill="#5f5e5a">&rarr; ISO 27001 A.7.%</text>
+    <text x="330" y="140" fill="#3C3489">no_pii_gdpr</text>
+    <text x="345" y="156" font-size="11" fill="#5f5e5a">&rarr; GDPR Art.%</text>
+    <text x="330" y="178" fill="#3C3489">not_controller</text>
+    <text x="345" y="194" font-size="11" fill="#5f5e5a">&rarr; Art.24 / Art.25 / Art.26 / A.7.%</text>
+    <text x="330" y="216" fill="#3C3489">no_special_category</text>
+    <text x="345" y="232" font-size="11" fill="#5f5e5a">&rarr; Art.9</text>
+    <text x="330" y="253" fill="#8a8878" font-size="11" font-style="italic">&hellip;7 more</text>
+
+    <line x1="605" y1="150" x2="665" y2="150" stroke="#5f5e5a" stroke-width="2" marker-end="url(#arr2)"/>
+
+    <rect x="670" y="30" width="210" height="240" rx="8" fill="#E5F5EE" stroke="#a2d9c2"/>
+    <text x="680" y="52" font-weight="700" fill="#1D9E75">posture_controls</text>
+    <text x="680" y="76" font-size="11" fill="#5f5e5a">applicability_status column</text>
+    <text x="680" y="102" font-size="12">A.5.15  <tspan fill="#5f5e5a">applicable</tspan></text>
+    <text x="680" y="120" font-size="12">A.7.1  <tspan fill="#a37b00">&rarr; na</tspan></text>
+    <text x="680" y="138" font-size="12">A.7.2  <tspan fill="#a37b00">&rarr; na</tspan></text>
+    <text x="680" y="156" font-size="12">A.7.14 <tspan fill="#a37b00">&rarr; na</tspan></text>
+    <text x="680" y="174" font-size="12">Art.9  <tspan fill="#a37b00">&rarr; na</tspan></text>
+    <text x="680" y="192" font-size="12">Art.28 <tspan fill="#5f5e5a">applicable</tspan></text>
+    <text x="680" y="210" font-size="12">&hellip;</text>
+    <text x="680" y="240" font-size="10" fill="#8a8878" font-style="italic">applicability_reason:</text>
+    <text x="680" y="255" font-size="10" fill="#8a8878" font-style="italic">"cloud-only tenant..."</text>
+  </g>
+</svg>
+<div class="cap">Applicability derivation is fact-driven and human-readable.</div>
+</div>
+
+<h3>The provenance model</h3>
+
+<p>
+Every scoping fact carries a source marker in a JSON column. The values are:
+</p>
+
+<ul>
+  <li><strong>declared</strong> &mdash; the tenant explicitly answered this
+    question in the Profile.</li>
+  <li><strong>derived</strong> &mdash; the system inferred this from another
+    fact (a tenant registered in Czechia gets <code>eu_data_subjects = true</code>
+    derived from country, until they explicitly override).</li>
+  <li><strong>overridden</strong> &mdash; the tenant explicitly disagreed
+    with a derivation and set their own answer.</li>
+  <li>(absent) &mdash; the column is still at schema default; the tenant has
+    not been asked. Applicability rules do <em>not</em> fire on defaulted
+    facts.</li>
+</ul>
+
+<div class="callout accent">
+  <div class="tag">Design rule</div>
+  <p style="margin:4px 0 0">
+    <strong>Conservative-in-doubt.</strong> A tenant sees a control until they
+    have explicitly said something that makes it inapplicable. Silence is not
+    a decision. This is the opposite of the "we already turned it off for you"
+    default that produces audit surprises when a tenant realises weeks later
+    that a control they cared about was hidden.
+  </p>
+</div>
+
+<h3>Cascade of applicability</h3>
+
+<p>
+When the applicability engine marks a control N/A, three downstream systems
+respect the marking automatically:
+</p>
+
+<ol>
+  <li>The <strong>conversational chat</strong> injects the N/A list into the
+    LLM system prompt so the model does not recommend actions on inapplicable
+    controls.</li>
+  <li>The <strong>fulfilment engine</strong> skips scoring N/A controls
+    entirely &mdash; they do not contribute to the tenant's Non-conformity
+    count.</li>
+  <li>The <strong>cascade engine</strong> refuses to fire implications on
+    N/A targets &mdash; an incident lifecycle event does not create a
+    follow-up on a physical-security control at a cloud-only tenant.</li>
+</ol>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="chat">7. The conversational surface</h2>
+
+<p>
+The chat surface is where compliance-natural-language questions become
+answers: "what are our access control gaps?", "how do we remediate our NC
+on Art.32?", "what does A.5.15 require?". Behind the innocent phrasing is
+a substantial pipeline that combines deterministic retrieval, deterministic
+ranking, LLM prose generation, and deterministic post-processing.
+</p>
+
+<div class="diagram">
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chat pipeline flow">
+  <defs>
+    <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <g font-family="-apple-system, Segoe UI, sans-serif" font-size="12" fill="#1a1a1a">
+    <rect x="20" y="30" width="200" height="90" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="30" y="52" font-weight="700">1. Retrieval-first consensus</text>
+    <text x="30" y="72" font-size="11" fill="#5f5e5a">7 deterministic signals rank</text>
+    <text x="30" y="88" font-size="11" fill="#5f5e5a">candidate refs; LLM arbitrates</text>
+    <text x="30" y="104" font-size="11" fill="#5f5e5a">only when signals disagree.</text>
+
+    <rect x="250" y="30" width="200" height="90" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="260" y="52" font-weight="700">2. Case-file digest</text>
+    <text x="260" y="72" font-size="11" fill="#5f5e5a">Compact structured evidence</text>
+    <text x="260" y="88" font-size="11" fill="#5f5e5a">packet (~450+200 tokens vs</text>
+    <text x="260" y="104" font-size="11" fill="#5f5e5a">21k in the retired path).</text>
+
+    <rect x="480" y="30" width="200" height="90" rx="8" fill="#EAF1FF" stroke="#b4c7ee"/>
+    <text x="490" y="52" font-weight="700" fill="#2563eb">3. LLM answer</text>
+    <text x="490" y="72" font-size="11" fill="#5f5e5a">Draft the compliance-natural</text>
+    <text x="490" y="88" font-size="11" fill="#5f5e5a">prose. Model never invents</text>
+    <text x="490" y="104" font-size="11" fill="#5f5e5a">citations &mdash; grounded in digest.</text>
+
+    <rect x="710" y="30" width="170" height="90" rx="8" fill="#fff" stroke="#e2e0d8"/>
+    <text x="720" y="52" font-weight="700">4. Preservation check</text>
+    <text x="720" y="72" font-size="11" fill="#5f5e5a">APPEND-ONLY: repair</text>
+    <text x="720" y="88" font-size="11" fill="#5f5e5a">dropped citations + verdicts,</text>
+    <text x="720" y="104" font-size="11" fill="#5f5e5a">never rewrite LLM prose.</text>
+
+    <line x1="222" y1="75" x2="248" y2="75" stroke="#2563eb" marker-end="url(#arr3)"/>
+    <line x1="452" y1="75" x2="478" y2="75" stroke="#2563eb" marker-end="url(#arr3)"/>
+    <line x1="682" y1="75" x2="708" y2="75" stroke="#2563eb" marker-end="url(#arr3)"/>
+
+    <rect x="20" y="160" width="860" height="220" rx="8" fill="#fbfaf4" stroke="#e2e0d8"/>
+    <text x="30" y="184" font-weight="700" fill="#3C3489">Deterministic guarantees</text>
+    <text x="30" y="210" font-size="12">&bull; Signals dominate LLM: curator-authored lexicon fires at weight 1.00,</text>
+    <text x="45" y="228" font-size="12" fill="#5f5e5a">the highest of any signal. Adding a topic mapping is more powerful than prompt-tuning.</text>
+    <text x="30" y="252" font-size="12">&bull; LLM classifier decisions can be modified but not invented.</text>
+    <text x="45" y="270" font-size="12" fill="#5f5e5a">Signal B (explicit refs) and Signal C (question type) are hard-locked against LLM override.</text>
+    <text x="30" y="294" font-size="12">&bull; Every claim in the answer must trace back to the digest.</text>
+    <text x="45" y="312" font-size="12" fill="#5f5e5a">The scan_claims pass records ref-adjacency, standard-scope, and generic-language events per turn.</text>
+    <text x="30" y="336" font-size="12">&bull; Cross-framework bridges surface deterministically.</text>
+    <text x="45" y="354" font-size="12" fill="#5f5e5a">Whenever an ISO article has related GDPR articles with tenant posture, a "Bridges to&hellip;" footer is appended.</text>
+  </g>
+</svg>
+<div class="cap">Chat pipeline &mdash; the LLM answers, deterministic layers verify.</div>
+</div>
+
+<h3>The seven signals</h3>
+
+<p>
+When a chat query arrives, seven signals evaluate in parallel and each
+contributes weighted votes to which control-refs the query is about:
+</p>
+
+<ol>
+  <li><strong>Retrieval (A)</strong> &mdash; semantic search over control texts.</li>
+  <li><strong>Explicit refs (B)</strong> &mdash; regex-match user-typed refs
+    like <code>A.5.15</code> or <code>Art.32.1.b</code>. Weight 1.00.</li>
+  <li><strong>Curated lexicon (C)</strong> &mdash; the human-authored map of
+    business phrases to control refs. <em>Highest weight (1.00)</em> &mdash;
+    when a curator says "chatgpt policy" maps to A.8.19, that mapping wins.</li>
+  <li><strong>Posture boost (D)</strong> &mdash; tenant NC/OFI relevance.</li>
+  <li><strong>Graph tightness (E)</strong> &mdash; controls in the same family cluster.</li>
+  <li><strong>Framework hint (F)</strong> &mdash; token match on "GDPR" / "ISO 27001".</li>
+  <li><strong>Session context (G)</strong> &mdash; deictic follow-ups
+    ("what about that control?" resolves against the previous turn's cited refs).</li>
+</ol>
+
+<p>
+Only if the deterministic signals fail to reach a confident verdict does
+the <strong>gatekeeper LLM arbiter</strong> get consulted. And even then,
+the LLM cannot invent &mdash; it can approve, modify, or reject candidates,
+but hard-locks prevent it from overriding a signal that fired cleanly.
+</p>
+
+<h3>The case-file digest</h3>
+
+<p>
+Once the target refs are known, the resolver assembles a <em>case-file
+digest</em>: a compact, structured evidence packet containing the tenant's
+posture on the target refs, the graph neighbourhood, the cited MUSTs, session
+context, and any scope-N/A annotations. This packet averages 650 tokens today,
+versus 21,731 tokens in the legacy path that was retired in Ship 2'.n. The
+result is dramatically lower LLM cost and higher answer quality &mdash; the
+model spends its attention budget on the relevant material, not on a wall of
+context.
+</p>
+
+<h3>The preservation check</h3>
+
+<p>
+After the LLM answers, a deterministic pass checks that every citation and
+verdict marker the digest promised is actually present in the answer prose.
+If the model dropped a required ref or a <code>[DRAFT]</code> tag (mandatory
+hedge for un-confirmed postures), the repair pass <em>appends</em> the missing
+elements as an audit footer:
+</p>
+
+<pre>Access rights are reviewed quarterly (A.5.15 [NC-DRAFT] &mdash; register incomplete).
+
+&#8627; Compliance facts: [NC-DRAFT] A.5.18 (access rights review overdue).
+&#8627; Bridges to ISO 27001 for Art.32: A.5.15 [Comply], A.5.18 [NC-DRAFT].</pre>
+
+<p>
+The LLM's prose is never rewritten. The audit trail preserves both what the
+model said and what the deterministic layer added.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="cascade">8. Cascade engine</h2>
+
+<p>
+Compliance is not a set of independent checkboxes. When a supplier is
+reassessed, several downstream obligations become newly relevant (contract
+review, risk register update, DPIA refresh if the supplier processes personal
+data). When an incident closes, obligations flow to lessons-learned,
+root-cause analysis, and evidence-of-improvement controls. The cascade
+engine models these implications explicitly.
+</p>
+
+<h3>Vocabulary</h3>
+
+<ul>
+  <li><strong>53 event types</strong> &mdash; the things that happen (supplier
+    assessed, incident triaged, training completed, access reviewed, contract
+    renewed, threshold crossed).</li>
+  <li><strong>260+ typed edges</strong> &mdash; TRIGGERS_OBLIGATION,
+    EXPECTS_FOLLOWUP_EVENT, BLOCKS_WHEN, DEMONSTRATES, IMPLEMENTS, SUPPORTS,
+    ENABLES, GOVERNANCE &mdash; each with different walk semantics.</li>
+  <li><strong>Meta-cascade patterns</strong> &mdash; aggregation thresholds
+    (fire the "high incident rate" downstream event when 5+ minor incidents
+    occur in a 30-day window), blocking conditions (skip this cascade when
+    the target's <code>applies_when</code> predicate is false), policy
+    overrides (tenant can mute specific cascade patterns).</li>
+</ul>
+
+<h3>What the tenant sees</h3>
+
+<p>
+Every fired cascade produces a <em>follow-up</em>: a dated obligation on a
+downstream control with a stated reason (which event fired, which edge was
+walked, when the follow-up is due). Follow-ups appear on the dashboard,
+generate notifications when they come near due date, and get resolved when
+the tenant attaches confirming evidence to the target control.
+</p>
+
+<h3>What the tenant does not see</h3>
+
+<p>
+Cascade fires that were <em>suppressed</em>. Every applicability-blocked
+cascade gets an info-log entry so an auditor asking "why didn't the
+training-overdue event flow to this policy?" gets a traceable answer &mdash;
+the target was marked N/A because the tenant declared they have no on-premises
+staff.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="multitenant">9. Multi-tenant, multi-framework</h2>
+
+<p>
+ArionComply is designed for tenants who work against several frameworks
+simultaneously. A typical ISMS-first customer starts with ISO 27001, adds
+GDPR as an obligation the same organisation is accountable against, then
+layers ISO 27701 as a PIMS extension. The same evidence contributes to
+multiple frameworks through typed edges rather than duplicated uploads.
+</p>
+
+<h3>Row-level security by tenant</h3>
+
+<p>
+Every posture, finding, notification, and evidence record is tenant-scoped
+at the database layer via row-level security policies. The runtime application
+role has permission to read these tables but the security policy filters
+every query to the current tenant (established via a session-scoped
+tenant-id variable that the API sets from the caller's API key). A
+programmer error that forgets to pass tenant_id doesn't leak data &mdash;
+the security policy returns zero rows.
+</p>
+
+<h3>Framework role model</h3>
+
+<p>
+The three frameworks currently in the catalog are related by an explicit
+role model: ISO 27001 is a <strong>program</strong> framework; ISO 27701
+is an <strong>extension</strong> that sits on top; GDPR is an
+<strong>obligation</strong> a tenant may be held accountable against. The
+framework role model matters for how the fulfilment engine attributes
+evidence and for how the chat presents cross-framework relationships. Adding
+NIS 2 to the catalog will make it an obligation for most tenants and a
+program for national CERTs.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="collab">10. Human&ndash;AI collaboration</h2>
+
+<p>
+This section is important because ArionComply is unusual in two ways: the
+AI component is <em>bounded</em> to specific roles by design, and the entire
+system was itself designed and built through human&ndash;AI collaboration.
+Both axes deserve explicit description.
+</p>
+
+<h3>Who does what at runtime</h3>
+
+<div class="role-split">
+  <div class="role human">
+    <h4>Human is authoritative on</h4>
+    <ul>
+      <li>Tenant posture (any change requires human confirmation)</li>
+      <li>Scoping-fact declarations (what the tenant IS)</li>
+      <li>Sector, region, role &mdash; all controlled-vocabulary picks</li>
+      <li>Template authorship and evidence content</li>
+      <li>Every Stage-1 review of extracted findings</li>
+      <li>Every Stage-2 review of engine-proposed verdicts</li>
+      <li>Every <code>verified_by</code> attestation on cited evidence</li>
+      <li>Curator lexicon and topic bundle definitions</li>
+    </ul>
+  </div>
+  <div class="role ai">
+    <h4>AI drafts, ranks, extracts</h4>
+    <ul>
+      <li>Chat prose (bounded by digest + preservation check)</li>
+      <li>Field extraction from uploaded documents (verified verbatim)</li>
+      <li>Question-type classification (bounded arbiter, can't invent)</li>
+      <li>Enrichment of catalog metadata (curator reviews)</li>
+      <li>Consensus signal ranking (deterministic + LLM tiebreak)</li>
+      <li>Never &mdash; decide applicability, mutate posture silently, invent citations, produce a compliance verdict</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout green">
+  <div class="tag">The load-bearing rule</div>
+  <p style="margin:4px 0 0">
+    <strong>No compliance-load-bearing decision is made by an LLM without a
+    deterministic gate.</strong> The engine decides applicability; the tenant
+    confirms posture; the LLM drafts the explanation. This means every AI
+    action has an auditable checkpoint &mdash; a rule that fired, a verifier
+    that passed, a human that clicked approve &mdash; before it reaches
+    production state.
+  </p>
+</div>
+
+<h3>Provenance for every LLM call</h3>
+
+<p>
+Every LLM call in the system is logged with purpose label, prompt, completion,
+latency, and cost. Every chat turn logs the case-file digest, the LLM
+response, and every deterministic repair event. Every consensus decision
+logs the seven signals' scores and the arbiter's verdict. This means operators
+can audit exactly what any model said, when, why, and what deterministic
+layer wrapped it &mdash; for any given turn, in production.
+</p>
+
+<h3>How this system itself was built</h3>
+
+<p>
+ArionComply is developed by a single human operator working with Claude
+(Anthropic's language model) as the design and implementation partner. This
+is not a marketing angle &mdash; it is a load-bearing fact about how the
+codebase looks and how it evolves. The collaboration has a specific rhythm:
+</p>
+
+<ul>
+  <li><strong>Small arcs.</strong> A "ship" is a coherent piece of work,
+    typically decomposed into a handful of sub-arcs delivered over hours to
+    days. As of this document, the catalog is at Ship 116.</li>
+  <li><strong>Every arc has a retrospective.</strong> Written to
+    <code>docs/memory/</code>, indexed in <code>MEMORY.md</code>, and
+    cross-linked from the codebase. The retrospective codifies lessons that
+    constrain future arcs.</li>
+  <li><strong>Every commit is co-authored.</strong> Commits are attributed
+    to both the human operator and Claude, per <code>Co-Authored-By</code>
+    markers in commit messages.</li>
+  <li><strong>Every deployment is logged twice.</strong> The dev-side
+    markdown log (committed to git) and the PoC-side JSONL log (appended by
+    <code>install.sh</code> on the customer box) together give a persistent,
+    machine-parseable history of what was deployed where and when.</li>
+</ul>
+
+<h3>Why this transparency matters</h3>
+
+<p>
+Compliance customers are entitled to know what parts of their compliance
+program were designed by a human, what parts by an AI, and how the two
+interact. In ArionComply, the answer is: the curated frameworks and the
+deterministic engines are human-authored; the extraction, chat, and drafting
+paths are AI-authored with human review at every load-bearing decision point.
+The entire codebase, including every AI-suggested change, went through the
+same human review that any production code goes through in any careful shop.
+This is an example of what "responsible AI in compliance" can look like:
+neither a rubber-stamp on AI outputs nor a rejection of AI's real capabilities,
+but a bounded collaboration with auditable checkpoints.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="build">11. How we build</h2>
+
+<h3>Ship arc discipline</h3>
+
+<p>
+Work is organised in "ship arcs" &mdash; cohesive units of change that ship
+as a group of commits with a shared retrospective. Sub-arcs (Ship&nbsp;110'.a,
+110'.b, ...) decompose an arc into shippable increments; a closer sub-arc
+(usually the last) writes the retrospective. The arc pattern reduces context
+switching, gives clear rollback boundaries, and produces a compact history
+future work can build on.
+</p>
+
+<h3>Retrospective discipline</h3>
+
+<p>
+Every arc closes with a retrospective in <code>docs/memory/</code>. The
+retrospective captures: what was delivered, what changed in the code base,
+what lessons were codified (numbered), what was deferred to future arcs,
+and what related arcs it depends on or supersedes. Codified lessons are
+referenced in future retrospectives &mdash; the sequence of lessons is
+itself the accumulated design memory of the project.
+</p>
+
+<h3>Testing discipline</h3>
+
+<ul>
+  <li><strong>Eval suite</strong> &mdash; 238 end-to-end evaluation cases
+    covering the chat pipeline. Runs before every deploy. The baseline is
+    237 PASS + 1 known-stable WARN; any regression below 236 blocks the ship.</li>
+  <li><strong>Unit tests</strong> for load-bearing helpers (country
+    normalisation, sector validation, applicability rule shape, ID types,
+    consensus signal weights, cross-framework edge invariants).</li>
+  <li><strong>Grep guards</strong> for regression prevention. When we
+    canonicalise a name or retire a pattern, we add a static grep guard
+    that fails the build if the retired pattern reappears in runtime code.</li>
+  <li><strong>Retrospective-as-test.</strong> Codified lessons in retros are
+    themselves informal tests &mdash; future arcs check the lesson list
+    before touching a related area.</li>
+</ul>
+
+<h3>Golden image discipline</h3>
+
+<p>
+Fresh installs of ArionComply do not replay every schema migration and
+re-embed every document from scratch. They load pre-built golden images
+(Postgres schema snapshot, curator seed data, graph export, embedding
+tarball). A pre-commit hook keeps the Postgres and graph goldens automatically
+fresh; the embedding golden is refreshed manually when embedding sources
+change (that cost is real: ~$2 OpenAI per rebuild). Fresh install completes
+in ~2 minutes instead of the 90 minutes the incremental path would require.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="deploy">12. Deployment &amp; operations</h2>
+
+<h3>Provider-agnostic</h3>
+
+<p>
+ArionComply runs on any Ubuntu 24.04 host with 8+ GB RAM and 60+ GB disk.
+Azure VM, AWS EC2, GCP Compute Engine, on-prem VMware, bare-metal Intel
+NUC &mdash; the install script does not know or care. This matters for
+customers who prefer to keep compliance workloads on-premise: no cloud
+vendor lock-in is baked into the architecture.
+</p>
+
+<h3>Two operational patterns</h3>
+
+<div class="two-col">
+  <div>
+    <h4>Fresh install (once per box)</h4>
+    <p style="margin:6px 0 0">Interactive step 1 provisions secrets and
+    writes the environment file. Step 2 runs the installer, which loads
+    golden images across all three stores, wires system services, and
+    starts the API. Two-step sequence, only the first needs a TTY.</p>
+    <pre style="margin-top:10px;font-size:11px;line-height:1.4">bash scripts/ops/init-secrets.sh
+bash deploy/install.sh</pre>
+  </div>
+  <div>
+    <h4>Per-arc update (every ship)</h4>
+    <p style="margin:6px 0 0">Every shipped arc has a dedicated
+    <code>scripts/ops/ship-N-poc-update.sh</code> committed to git. Operator
+    runs one SSH one-liner that pulls the latest code and invokes the arc's
+    script. Migrations apply idempotently; API restarts; verification queries
+    check the arc-specific delta.</p>
+    <pre style="margin-top:10px;font-size:11px;line-height:1.4">ssh &lt;host&gt; '
+  cd /data/arioncomply &&
+  git pull &&
+  bash scripts/ops/ship-N-poc-update.sh
+'</pre>
+  </div>
+</div>
+
+<h3>Deployment tracking</h3>
+
+<p>
+Two complementary logs make deployment state persistent and machine-parseable:
+</p>
+
+<ul>
+  <li><strong>Dev-side</strong> markdown timelines in
+    <code>docs/deployments/&lt;host&gt;.md</code>, committed to git. Updated
+    before ssh commands run (planned action) and after they succeed (flip
+    to GREEN). Cross-links to arc retrospectives.</li>
+  <li><strong>PoC-side</strong> JSONL log at
+    <code>/data/arioncomply/.deployment_log.jsonl</code>, appended
+    automatically by <code>install.sh</code> on every run. Machine-parseable
+    with fields for git SHA, migrations applied, invoker, and outcome.</li>
+</ul>
+
+<h3>System-managed services</h3>
+
+<ul>
+  <li><code>arioncomply-api</code> &mdash; the API server (port 8080).</li>
+  <li><code>arioncomply-chroma</code> &mdash; vector store (port 8000).</li>
+  <li><code>arioncomply-sweep.timer</code> &mdash; scheduled background work
+    (notification delivery, fact recompute, cite verification overdue,
+    freshness expiry, retention cleanup).</li>
+</ul>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="next">13. What's next</h2>
+
+<h3>Near-term</h3>
+
+<ul>
+  <li><strong>NIS 2 curation.</strong> The sector-vocabulary + region-column
+    infrastructure is in place. Curating the NIS 2 controls and
+    cross-framework bridges to ISO 27001 is the remaining work.</li>
+  <li><strong>Customer data intake at scale.</strong> The first PoC customer
+    is now provisioned and ready for real evidence. The intake pipeline is
+    proven on 40+ Arion demo documents; scaling to a working customer will
+    surface edge cases in text extraction, workbook shapes, and cited-source
+    URL patterns.</li>
+  <li><strong>Regional privacy regulations.</strong> LGPD (Brazil), CCPA
+    (US-state), APPI (Japan), PIPEDA (Canada) &mdash; each is a multi-day
+    curator arc that hangs off the existing region-scoping infrastructure
+    without schema changes to the engine layer.</li>
+</ul>
+
+<h3>Structural bets</h3>
+
+<ul>
+  <li><strong>Sector-specific overlays.</strong> Once NIS 2 is curated, the
+    same infrastructure supports HIPAA (health), PCI-DSS (payments),
+    sector-specific supervisory guidance. Each becomes an obligation that
+    composes with the tenant's ISO 27001 or ISO 27701 program.</li>
+  <li><strong>Federated evidence.</strong> The cited-mode model can extend
+    to automated read-only fetch of cited sources (with tenant-controlled
+    credentials): the tenant still attests, but the system offers to show
+    them what changed since last verification.</li>
+  <li><strong>External-API expansion.</strong> Webhook subscriptions,
+    write-side notifications and posture, key rotation, async SDK. Currently
+    read-side is complete plus <code>/query</code> and evidence write; the
+    write-side surfaces are the remaining API layer.</li>
+</ul>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<footer>
+<p>
+ArionComply is developed openly at
+<a href="https://github.com/jmkamula/RAG">github.com/jmkamula/RAG</a>.
+This document supersedes the July 2026 architecture brief; the earlier
+version is preserved for historical reference at
+<a href="history/architecture_brief_2026_07.html">history/architecture_brief_2026_07.html</a>.
+</p>
+<p>
+Related documents:
+<a href="deployments/PLAYBOOK.md">deployments/PLAYBOOK.md</a> &middot;
+<a href="demo_walkthrough.html">demo_walkthrough.html</a> &middot;
+<a href="customer_prep_checklist.html">customer_prep_checklist.html</a> &middot;
+<a href="error_catalog.html">error_catalog.html</a>
+</p>
+</footer>
 
 </body>
 </html>
