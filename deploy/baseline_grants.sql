@@ -69,3 +69,70 @@ ALTER DEFAULT PRIVILEGES FOR ROLE arioncomply IN SCHEMA public
     GRANT USAGE, SELECT ON SEQUENCES TO arioncomply_app;
 ALTER DEFAULT PRIVILEGES FOR ROLE arioncomply IN SCHEMA public
     GRANT EXECUTE ON FUNCTIONS TO arioncomply_app;
+
+-- ── Ship 120' — restore per-table audit-log grants after blanket GRANT ──
+--
+-- The `GRANT ALL ON ALL TABLES` clause above clobbers per-table
+-- REVOKE statements from individual schema_v*.sql files (which run
+-- BEFORE this file). Without this block, every REVOKE in
+-- schema_v21 / v79 / v115 / v116 gets silently overwritten and the
+-- audit-log shape drifts across every fresh install.
+--
+-- Two shapes, both re-asserted here after the blanket GRANT:
+--
+--   Compliance-load-bearing (append-only auditor evidence, no
+--   silent history rewrites, no silent history erasure):
+--     * posture_status_log         — INSERT + SELECT only  (schema_v21 + v79)
+--     * applicability_status_log   — INSERT + SELECT only  (schema_v115)
+--     * client_facts_log           — INSERT + SELECT only  (schema_v115)
+--     * audit_ledger_download_token — SELECT + INSERT + UPDATE (UPDATE for
+--       counter/revoke), never DELETE                    (schema_v116)
+--
+--   Diagnostic (retention-eligible; NOT compliance evidence):
+--     * ai_call_log                — SELECT + INSERT + DELETE  (schema_v79)
+--     * chat_casefile_log          — SELECT + INSERT + DELETE  (schema_v79)
+--     * chat_consensus_log         — SELECT + INSERT + DELETE  (schema_v79)
+--     * fact_recompute_log         — SELECT + INSERT + DELETE  (schema_v79)
+--     * intake_trace_log           — SELECT + INSERT + DELETE  (schema_v79)
+--
+-- Using to_regclass() guard so this block is safe on older customer
+-- boxes that haven't yet applied every schema_v* — silently no-ops
+-- for missing tables.
+DO $$
+DECLARE
+    t text;
+BEGIN
+    -- Compliance-load-bearing: append-only (revoke UPDATE + DELETE)
+    FOR t IN SELECT unnest(ARRAY[
+        'posture_status_log',
+        'applicability_status_log',
+        'client_facts_log'
+    ]) LOOP
+        IF to_regclass('public.' || quote_ident(t)) IS NOT NULL THEN
+            EXECUTE format(
+                'REVOKE UPDATE, DELETE ON public.%I FROM arioncomply_app', t
+            );
+        END IF;
+    END LOOP;
+
+    -- Auditor packages: SELECT + INSERT + UPDATE, revoke DELETE only
+    IF to_regclass('public.audit_ledger_download_token') IS NOT NULL THEN
+        REVOKE DELETE ON public.audit_ledger_download_token FROM arioncomply_app;
+    END IF;
+
+    -- Diagnostic logs: retention-eligible (keep DELETE) but no silent
+    -- history rewrite (revoke UPDATE)
+    FOR t IN SELECT unnest(ARRAY[
+        'ai_call_log',
+        'chat_casefile_log',
+        'chat_consensus_log',
+        'fact_recompute_log',
+        'intake_trace_log'
+    ]) LOOP
+        IF to_regclass('public.' || quote_ident(t)) IS NOT NULL THEN
+            EXECUTE format(
+                'REVOKE UPDATE ON public.%I FROM arioncomply_app', t
+            );
+        END IF;
+    END LOOP;
+END $$;
