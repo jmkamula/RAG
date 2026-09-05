@@ -4800,6 +4800,58 @@ async def admin_notifications_deliver_now(
 # Both return per-fact results (computed_value, changed, latency, error).
 # ─────────────────────────────────────────────────────────────────────────────
 
+@app.get("/api/v1/admin/posture-snapshot", tags=["admin"])
+async def admin_posture_snapshot(
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_api_key),
+    as_of:       Optional[str] = None,
+    fmt:         str = "json",
+):
+    """Ship 118'.a — reconstruct tenant posture as of a given date.
+
+    Query params:
+      · as_of=YYYY-MM-DD    — the reconstruction date (default: now).
+      · fmt=json|csv        — response format (default: json).
+
+    Returns a full posture snapshot: per-control finding + reason +
+    source + set_at + evidence + cascade follow-ups open on the date.
+    Applicability shown is current state (Ship 118'.b will add
+    historical tracking).
+
+    Sources reconstructed: posture_assertions supersession trail +
+    document_findings lifecycle timestamps + triggered_implication.
+    """
+    if fmt not in ("json", "csv"):
+        raise HTTPException(400, "fmt must be 'json' or 'csv'")
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        from rag.posture.snapshot import (
+            snapshot_posture, snapshot_to_dict, snapshot_to_csv,
+        )
+        snap = snapshot_posture(
+            conn,
+            tenant_id    = key_info.tenant_id,
+            as_of        = as_of,
+            generated_by = key_info.user_id,
+        )
+    finally:
+        pool.putconn(conn)
+
+    if fmt == "csv":
+        from fastapi.responses import Response
+        body = snapshot_to_csv(snap)
+        label = snap.as_of.replace(":", "").replace(" ", "_")
+        fname = f"posture_snapshot_{label}.csv"
+        return Response(
+            content     = body,
+            media_type  = "text/csv; charset=utf-8",
+            headers     = {"Content-Disposition": f'attachment; filename="{fname}"'},
+        )
+    return snapshot_to_dict(snap)
+
+
 @app.post("/api/v1/admin/derive-applicability", tags=["admin"])
 async def admin_derive_applicability(
     request:  Request,
