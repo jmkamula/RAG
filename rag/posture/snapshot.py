@@ -517,3 +517,341 @@ def snapshot_to_csv(snap: PostureSnapshot) -> str:
             c.evidence_count, c.cascade_open_followups,
         ])
     return buf.getvalue()
+
+
+# ── HTML rendering (Ship 118'.c) ────────────────────────────────────
+# Print-optimised self-contained HTML. No external assets. Auditor
+# opens the URL in a browser + uses "Save as PDF" from the browser
+# menu. Includes a date picker that reloads the page with new
+# ?as_of= query param.
+
+_HTML_TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Compliance snapshot — {tenant_name} — {as_of}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root {{
+  --fg:          #1a1a1a;
+  --muted:       #5f5e5a;
+  --line:        #e2e0d8;
+  --paper:       #fbfaf4;
+  --panel:       #ffffff;
+  --accent:      #534AB7;
+  --accent-soft: #EEEDFE;
+  --nc:          #B92A28;
+  --nc-soft:     #FEECEA;
+  --ofi:         #a37b00;
+  --ofi-soft:    #fff3b0;
+  --comply:      #1D9E75;
+  --comply-soft: #E5F5EE;
+  --na:          #6b7280;
+  --na-soft:     #f3f4f6;
+  --sans:        -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:        "SF Mono", Menlo, Consolas, monospace;
+}}
+* {{ box-sizing: border-box; }}
+body {{
+  font-family: var(--sans); font-size: 14px; line-height: 1.55; color: var(--fg);
+  background: var(--paper); max-width: 1100px; margin: 0 auto;
+  padding: 32px 28px 100px;
+}}
+h1 {{ font-size: 2em; margin: 0.2em 0 0.4em; letter-spacing: -0.01em; }}
+h2 {{ font-size: 1.3em; margin: 2em 0 0.5em; padding-bottom: 0.3em;
+     border-bottom: 2px solid var(--line); }}
+h3 {{ font-size: 1.05em; margin: 1.5em 0 0.4em; color: var(--accent); }}
+p  {{ margin: 0.4em 0 0.8em; }}
+code {{ font-family: var(--mono); font-size: 0.9em; background: #f2f0e8;
+       padding: 1px 5px; border-radius: 3px; }}
+a  {{ color: var(--accent); }}
+
+.header {{
+  padding: 20px 24px; background: linear-gradient(135deg, #F3F1FA, #EEEDFE);
+  border-left: 4px solid var(--accent); border-radius: 6px; margin-bottom: 24px;
+}}
+.header .eyebrow {{ font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+                   font-weight: 700; color: var(--accent); margin-bottom: 6px; }}
+.header .meta {{ font-size: 12px; color: var(--muted); margin-top: 6px; }}
+.meta-grid {{ display: grid; grid-template-columns: max-content auto;
+              gap: 6px 14px; margin: 12px 0; font-size: 13px; }}
+.meta-grid dt {{ color: var(--muted); font-weight: 600; }}
+.meta-grid dd {{ margin: 0; }}
+
+.picker-bar {{
+  padding: 14px 18px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; margin-bottom: 20px; display: flex; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+}}
+.picker-bar label {{ font-weight: 600; font-size: 13px; color: var(--muted); }}
+.picker-bar input[type=date] {{ padding: 6px 10px; border: 1px solid var(--line);
+                                 border-radius: 4px; font-family: inherit; font-size: 13px; }}
+.picker-bar button {{ padding: 6px 14px; border: 1px solid var(--accent);
+                       background: var(--accent); color: white; border-radius: 4px;
+                       cursor: pointer; font-family: inherit; font-size: 13px; }}
+.picker-bar a {{ font-size: 12px; color: var(--muted); text-decoration: underline; }}
+
+.summary-grid {{
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px; margin: 16px 0;
+}}
+.summary-card {{
+  padding: 14px 16px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; text-align: center;
+}}
+.summary-card .num {{ font-size: 1.6em; font-weight: 700; display: block; line-height: 1.1; }}
+.summary-card .label {{ font-size: 11px; color: var(--muted); text-transform: uppercase;
+                        letter-spacing: 0.05em; margin-top: 4px; }}
+.summary-card.nc     .num {{ color: var(--nc); }}
+.summary-card.ofi    .num {{ color: var(--ofi); }}
+.summary-card.comply .num {{ color: var(--comply); }}
+.summary-card.na     .num {{ color: var(--na); }}
+.summary-card.na-scope .num {{ color: var(--accent); }}
+
+.coverage-notes {{
+  background: #f6f4ec; border: 1px solid var(--line); border-radius: 6px;
+  padding: 12px 16px; margin: 16px 0; font-size: 12px;
+}}
+.coverage-notes h4 {{ margin: 0 0 8px; font-size: 11px; text-transform: uppercase;
+                       letter-spacing: 0.1em; color: var(--muted); }}
+.coverage-notes dl {{ display: grid; grid-template-columns: max-content auto;
+                       gap: 4px 12px; margin: 0; }}
+.coverage-notes dt {{ font-weight: 600; }}
+.coverage-notes dd {{ margin: 0; color: var(--muted); }}
+.coverage-notes .cov-full {{ color: var(--comply); font-weight: 600; }}
+.coverage-notes .cov-partial {{ color: var(--ofi); font-weight: 600; }}
+
+table {{ width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 12.5px; }}
+th, td {{ border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left;
+         vertical-align: top; }}
+th {{ background: #f2f0e8; font-weight: 700; font-size: 11px; text-transform: uppercase;
+     letter-spacing: 0.04em; color: var(--muted); }}
+td.ref {{ font-family: var(--mono); font-size: 11.5px; white-space: nowrap; }}
+td.reason {{ color: var(--muted); font-size: 11.5px; max-width: 480px; }}
+
+.pill {{ display: inline-block; padding: 2px 8px; border-radius: 10px;
+        font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.04em; }}
+.pill.nc      {{ background: var(--nc-soft);     color: var(--nc); }}
+.pill.ofi     {{ background: var(--ofi-soft);    color: var(--ofi); }}
+.pill.comply  {{ background: var(--comply-soft); color: var(--comply); }}
+.pill.na      {{ background: var(--na-soft);     color: var(--na); }}
+.pill.na-scope{{ background: var(--accent-soft); color: var(--accent); }}
+.pill.notass  {{ background: #f2f0e8;            color: var(--muted); }}
+
+.footer-legal {{
+  margin-top: 40px; padding: 18px 20px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 6px; font-size: 12px; color: var(--muted);
+}}
+.footer-legal strong {{ color: var(--fg); }}
+.watermark {{ position: fixed; bottom: 8px; right: 12px; font-size: 10px;
+              color: rgba(0,0,0,0.25); font-family: var(--mono); }}
+
+/* Print rules */
+@media print {{
+  body {{ background: white; padding: 0.5in; max-width: none; }}
+  .picker-bar {{ display: none; }}
+  .watermark {{ position: fixed; bottom: 0.2in; right: 0.4in; font-size: 8pt; }}
+  h2 {{ page-break-after: avoid; }}
+  table {{ page-break-inside: auto; }}
+  tr {{ page-break-inside: avoid; page-break-after: auto; }}
+  .framework-section {{ page-break-before: auto; }}
+}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Compliance snapshot</div>
+  <h1>{tenant_name}</h1>
+  <p style="margin:6px 0"><strong>As of:</strong> {as_of}</p>
+  <div class="meta">
+    Generated {generated_at} &middot; Snapshot ID: <code>{snapshot_id}</code>
+  </div>
+</div>
+
+<div class="picker-bar">
+  <form method="get" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0">
+    <label for="as_of_input">View posture as of:</label>
+    <input type="date" id="as_of_input" name="as_of" value="{as_of_input}"
+           max="{today}" min="2026-01-01">
+    <input type="hidden" name="fmt" value="html">
+    <button type="submit">Reload</button>
+    <a href="?fmt=html">Reset to today</a>
+    <span style="margin-left:auto;color:var(--muted);font-size:11px">
+      To save as PDF: use your browser's Print &rarr; Save as PDF
+    </span>
+  </form>
+</div>
+
+<div class="summary-grid">
+  <div class="summary-card"><span class="num">{total}</span><span class="label">total controls</span></div>
+  <div class="summary-card nc"><span class="num">{nc_count}</span><span class="label">non-conformity</span></div>
+  <div class="summary-card ofi"><span class="num">{ofi_count}</span><span class="label">opportunity for improvement</span></div>
+  <div class="summary-card comply"><span class="num">{comply_count}</span><span class="label">comply</span></div>
+  <div class="summary-card na-scope"><span class="num">{na_scope_count}</span><span class="label">out of scope (N/A)</span></div>
+  <div class="summary-card"><span class="num">{notass_count}</span><span class="label">not assessed</span></div>
+  <div class="summary-card"><span class="num">{evidence_total}</span><span class="label">evidence rows</span></div>
+  <div class="summary-card"><span class="num">{cascade_total}</span><span class="label">open follow-ups</span></div>
+</div>
+
+<div class="coverage-notes">
+  <h4>Coverage notes — what this snapshot can and cannot reconstruct</h4>
+  <dl>
+    {coverage_rows}
+  </dl>
+</div>
+
+{framework_sections}
+
+<div class="footer-legal">
+  <p><strong>About this document.</strong> This is a compliance snapshot generated
+  by ArionComply from tenant {tenant_name}'s ledger. It reflects the compliance
+  posture as of {as_of}, reconstructed from the tenant's assertion history +
+  evidence lifecycle timestamps.</p>
+  <p><strong>Data protection.</strong> This snapshot may contain third-party
+  personal data (data subjects named in evidence, staff who acted on findings).
+  It is intended for the audit engagement it was generated under. Retention +
+  further distribution rules follow the tenant's data-protection policy and the
+  auditor's engagement letter.</p>
+  <p><strong>Not a certification.</strong> ArionComply surfaces compliance state
+  as observed; the tenant + their auditor own the compliance decision.</p>
+</div>
+
+<div class="watermark">
+  {tenant_name} &middot; {snapshot_id}
+</div>
+
+</body>
+</html>
+"""
+
+
+def _render_pill(finding: str, applicability: str) -> str:
+    """CSS-styled pill for the finding column."""
+    if applicability == "na":
+        return '<span class="pill na-scope">N/A (out of scope)</span>'
+    css_class = {
+        "NC":            "nc",
+        "OFI":           "ofi",
+        "Comply":        "comply",
+        "N/A":           "na",
+        "Not assessed":  "notass",
+    }.get(finding, "notass")
+    label = finding
+    return f'<span class="pill {css_class}">{label}</span>'
+
+
+def _render_framework_section(std: str, rows: list[ControlSnapshot]) -> str:
+    """Render one <section> per framework with a controls table."""
+    from html import escape
+
+    def _human_std(s: str) -> str:
+        return (s.replace("ISO27001:2022",  "ISO 27001:2022")
+                 .replace("ISO27701:2019",  "ISO 27701:2019")
+                 .replace("GDPR:2016/679",  "GDPR (2016/679)"))
+
+    rows_html = []
+    for c in sorted(rows, key=lambda r: r.control_ref):
+        pill = _render_pill(c.finding, c.applicability_status)
+        reason = escape(c.finding_reason or "") if c.applicability_status != "na" else escape(c.applicability_reason or "")
+        evidence_note = ""
+        if c.evidence_count > 0:
+            evidence_note = f'<br><span style="color:var(--muted);font-size:11px">{c.evidence_count} evidence row{"s" if c.evidence_count != 1 else ""}</span>'
+        followup_note = ""
+        if c.cascade_open_followups > 0:
+            followup_note = f'<br><span style="color:var(--ofi);font-size:11px">{c.cascade_open_followups} open follow-up{"s" if c.cascade_open_followups != 1 else ""}</span>'
+        rows_html.append(f"""
+        <tr>
+          <td class="ref">{escape(c.control_ref)}</td>
+          <td>{pill}{evidence_note}{followup_note}</td>
+          <td class="reason">{reason}</td>
+        </tr>
+        """)
+    return f"""
+    <section class="framework-section">
+      <h2>{_human_std(std)}</h2>
+      <table>
+        <thead>
+          <tr><th style="width:12%">Control</th><th style="width:22%">Verdict</th><th>Reason / gap</th></tr>
+        </thead>
+        <tbody>
+          {"".join(rows_html)}
+        </tbody>
+      </table>
+    </section>
+    """
+
+
+def snapshot_to_html(snap: PostureSnapshot, snapshot_id: str | None = None) -> str:
+    """Print-optimised self-contained HTML."""
+    import uuid as _uuid
+    from collections import Counter
+    from datetime import date as _date
+    from html import escape
+
+    sid = snapshot_id or str(_uuid.uuid4())
+
+    # Summary counts
+    total    = len(snap.controls)
+    finding_c = Counter((c.finding, c.applicability_status) for c in snap.controls)
+    def _count(finding_val, na_scope=None):
+        n = 0
+        for (f, a), k in finding_c.items():
+            if a == "na" and na_scope is not True:
+                continue
+            if a != "na" and na_scope is True:
+                continue
+            if f == finding_val:
+                n += k
+        return n
+
+    nc_count      = _count("NC")
+    ofi_count     = _count("OFI")
+    comply_count  = _count("Comply")
+    notass_count  = _count("Not assessed")
+    na_scope_count = sum(1 for c in snap.controls if c.applicability_status == "na")
+    evidence_total = sum(c.evidence_count for c in snap.controls)
+    cascade_total  = sum(c.cascade_open_followups for c in snap.controls)
+
+    # Coverage rows
+    coverage_rows = []
+    for axis, meta in snap.coverage_notes.items():
+        cov = meta.get("coverage", "?")
+        cov_class = "cov-full" if cov == "full" else "cov-partial"
+        coverage_rows.append(
+            f'<dt>{escape(axis)}</dt>'
+            f'<dd><span class="{cov_class}">{escape(cov)}</span> &middot; {escape(meta.get("note",""))}</dd>'
+        )
+
+    # Framework sections
+    per_std: dict = {}
+    for c in snap.controls:
+        per_std.setdefault(c.standard_id, []).append(c)
+    section_html = "\n".join(
+        _render_framework_section(std, rows)
+        for std, rows in sorted(per_std.items())
+    )
+
+    # Input date value
+    as_of_input = snap.as_of if len(snap.as_of) >= 10 and snap.as_of != "now" else ""
+    today_str = _date.today().isoformat()
+
+    return _HTML_TEMPLATE.format(
+        tenant_name    = escape(snap.tenant_name),
+        as_of          = escape(snap.as_of),
+        as_of_input    = escape(as_of_input),
+        today          = today_str,
+        generated_at   = escape(snap.generated_at),
+        snapshot_id    = escape(sid),
+        total          = total,
+        nc_count       = nc_count,
+        ofi_count      = ofi_count,
+        comply_count   = comply_count,
+        na_scope_count = na_scope_count,
+        notass_count   = notass_count,
+        evidence_total = evidence_total,
+        cascade_total  = cascade_total,
+        coverage_rows  = "\n".join(coverage_rows),
+        framework_sections = section_html,
+    )

@@ -4821,14 +4821,14 @@ async def admin_posture_snapshot(
     Sources reconstructed: posture_assertions supersession trail +
     document_findings lifecycle timestamps + triggered_implication.
     """
-    if fmt not in ("json", "csv"):
-        raise HTTPException(400, "fmt must be 'json' or 'csv'")
+    if fmt not in ("json", "csv", "html"):
+        raise HTTPException(400, "fmt must be 'json', 'csv', or 'html'")
     pool = request.app.state.pg_pool
     conn = pool.getconn()
     try:
         set_session(conn, key_info.tenant_id, key_info.user_id)
         from rag.posture.snapshot import (
-            snapshot_posture, snapshot_to_dict, snapshot_to_csv,
+            snapshot_posture, snapshot_to_dict, snapshot_to_csv, snapshot_to_html,
         )
         snap = snapshot_posture(
             conn,
@@ -4849,6 +4849,14 @@ async def admin_posture_snapshot(
             media_type  = "text/csv; charset=utf-8",
             headers     = {"Content-Disposition": f'attachment; filename="{fname}"'},
         )
+    if fmt == "html":
+        # Ship 118'.c — print-optimised self-contained HTML. Auditor
+        # opens the URL in a browser + uses "Save as PDF". No PDF
+        # dependency needed on the server.
+        from fastapi.responses import Response
+        import uuid as _uuid
+        body = snapshot_to_html(snap, snapshot_id=str(_uuid.uuid4()))
+        return Response(content=body, media_type="text/html; charset=utf-8")
     return snapshot_to_dict(snap)
 
 
