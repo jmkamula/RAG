@@ -108,59 +108,74 @@ step "0. Sanity checks"
 [[ "$EUID" -eq 0 ]] && fail "run as a regular user with sudo, not as root"
 ok "code root: $ARION_ROOT"
 
-# ── Update-friendly secret loader (Ship 111'.a) ──────────────────
-# If .env exists (i.e. a prior install has already run), read its
-# secrets so prompt_pw skips them. Only genuinely-missing values
-# trigger interactive prompts — critical for SSH one-liner updates
-# where stdin is not a TTY.
+# ── Load secrets from .env (Ship 116' non-interactive install) ──
+# install.sh REQUIRES .env to exist. Fresh installs must run
+# scripts/ops/init-secrets.sh first — that's the one interactive
+# step. From here on install.sh is fully non-interactive, works
+# in SSH one-liners, no TTY needed.
 #
-# Ship 111'.a canonicalizes install-time + runtime variable names
-# so this loader is a straight read (not a translation table):
-#
+# Ship 111'.a canonicalized these names to match runtime code:
 #   ARION_OWNER_PW  — owner Postgres role password
 #   OPENAI_API_KEY  — OpenAI API key
 #   NEO4J_PASSWORD  — Neo4j password
 #   ARION_APP_PW    — app Postgres role password (install-time only;
-#                     runtime code reads app pw from DATABASE_URL)
+#                     runtime code reads it back from DATABASE_URL)
 #
-# ARION_APP_PW isn't stored in .env directly — it's embedded in
-# DATABASE_URL. For update-mode we parse it back out here.
-if [[ -f "$ARION_ROOT/.env" ]]; then
-    _read_env_var() {
-        # Read a KEY=value from .env safely without executing shell
-        # substitutions. Handles bare, single-, and double-quoted values.
-        local key="$1"
-        grep -E "^${key}=" "$ARION_ROOT/.env" | head -1 | \
-            sed -E "s/^${key}=//; s/^\"(.*)\"\$/\1/; s/^'(.*)'\$/\1/"
-    }
-    _url_decode() {
-        # POSIX %XX decoder for DATABASE_URL password field.
-        printf '%b' "$(printf '%s' "$1" | \
-            sed 's/+/ /g; s/%\([0-9A-Fa-f][0-9A-Fa-f]\)/\\x\1/g')"
-    }
+# ARION_APP_PW isn't stored as a bare key in .env — it's embedded
+# in DATABASE_URL. We parse it back out here.
+if [[ ! -f "$ARION_ROOT/.env" ]]; then
+    fail ".env not found at $ARION_ROOT/.env
 
-    : "${ARION_OWNER_PW:=$(_read_env_var ARION_OWNER_PW)}"
-    : "${OPENAI_API_KEY:=$(_read_env_var OPENAI_API_KEY)}"
-    : "${NEO4J_PASSWORD:=$(_read_env_var NEO4J_PASSWORD)}"
+  Ship 116' (2026-09-04) split secret provisioning from install:
+  run the one-time bootstrap first, THEN install.sh:
 
-    # DATABASE_URL shape: postgresql://arioncomply_app:PASSWORD@host/db
-    if [[ -z "${ARION_APP_PW:-}" ]]; then
-        _db_url=$(_read_env_var DATABASE_URL)
-        if [[ "$_db_url" =~ ^postgresql://[^:]+:([^@]+)@ ]]; then
-            ARION_APP_PW=$(_url_decode "${BASH_REMATCH[1]}")
-            export ARION_APP_PW
-        fi
-    fi
+      bash scripts/ops/init-secrets.sh    # generates or prompts
+      bash deploy/install.sh              # what you're trying to run
 
-    if [[ -n "${OPENAI_API_KEY:-}${NEO4J_PASSWORD:-}${ARION_APP_PW:-}${ARION_OWNER_PW:-}" ]]; then
-        ok "loaded existing secrets from .env (update mode — missing values will be prompted)"
+  See docs/deployments/PLAYBOOK.md for the full fresh-install
+  flow. To bring your own passwords use --prompt on init-secrets.sh."
+fi
+
+_read_env_var() {
+    # Read a KEY=value from .env safely without executing shell
+    # substitutions. Handles bare, single-, and double-quoted values.
+    local key="$1"
+    grep -E "^${key}=" "$ARION_ROOT/.env" | head -1 | \
+        sed -E "s/^${key}=//; s/^\"(.*)\"\$/\1/; s/^'(.*)'\$/\1/"
+}
+_url_decode() {
+    # POSIX %XX decoder for DATABASE_URL password field.
+    printf '%b' "$(printf '%s' "$1" | \
+        sed 's/+/ /g; s/%\([0-9A-Fa-f][0-9A-Fa-f]\)/\\x\1/g')"
+}
+
+: "${ARION_OWNER_PW:=$(_read_env_var ARION_OWNER_PW)}"
+: "${OPENAI_API_KEY:=$(_read_env_var OPENAI_API_KEY)}"
+: "${NEO4J_PASSWORD:=$(_read_env_var NEO4J_PASSWORD)}"
+
+# DATABASE_URL shape: postgresql://arioncomply_app:PASSWORD@host/db
+if [[ -z "${ARION_APP_PW:-}" ]]; then
+    _db_url=$(_read_env_var DATABASE_URL)
+    if [[ "$_db_url" =~ ^postgresql://[^:]+:([^@]+)@ ]]; then
+        ARION_APP_PW=$(_url_decode "${BASH_REMATCH[1]}")
+        export ARION_APP_PW
     fi
 fi
 
-prompt_pw ARION_OWNER_PW  "Choose a password for the arioncomply Postgres role"
-prompt_pw ARION_APP_PW    "Choose a password for the arioncomply_app Postgres role"
-prompt_pw NEO4J_PASSWORD  "Choose a password for the neo4j user"
-prompt_pw OPENAI_API_KEY  "OpenAI API key (leave blank if using another provider)"
+# Fail loud if any required secret is missing. Only OpenAI is
+# optional (Chat pipeline needs it but Postgres/Neo4j don't).
+_missing=""
+[[ -n "${ARION_OWNER_PW:-}" ]] || _missing+=" ARION_OWNER_PW"
+[[ -n "${ARION_APP_PW:-}"   ]] || _missing+=" ARION_APP_PW (usually parsed from DATABASE_URL)"
+[[ -n "${NEO4J_PASSWORD:-}" ]] || _missing+=" NEO4J_PASSWORD"
+if [[ -n "$_missing" ]]; then
+    fail ".env is present but missing required secrets:$_missing
+
+  Fix by rerunning init-secrets.sh (destroys the current .env)
+  OR by editing .env directly and adding the missing keys."
+fi
+
+ok "loaded secrets from .env"
 
 # ── 1. System deps ───────────────────────────────────────────────────
 step "1. System packages"
@@ -362,71 +377,29 @@ step "5. Python dependencies"
 pip install --break-system-packages -q -r "$ARION_ROOT/deploy/requirements.txt"
 ok "pip install complete"
 
-# ── 6. .env from template ────────────────────────────────────────────
-# Secret substitution done in Python — sed would interpret pipe /
-# ampersand / backslash / dollar in passwords, and won't URL-encode
-# passwords that appear inside the postgresql:// connection strings.
-step "6. Environment file"
-# Ship 111'.a — the writer runs on BOTH first-install and update paths.
-# On first install: copy the template, substitute every secret.
-# On update: ensure ARION_OWNER_PW is present (it wasn't stashed in
-# pre-111 installs); every other secret we recognize was already
-# stashed correctly on first install.
+# ── 6. .env is guaranteed present + readable (Ship 116') ─────────
+# Ship 116' (2026-09-04) moved fresh-install .env creation to
+# scripts/ops/init-secrets.sh. Step 0 above already loaded values
+# from .env and fail-fasted if any required secret was missing.
+# This step is now update-mode only: backfills ARION_OWNER_PW into
+# pre-Ship-111 boxes whose .env was written before ARION_OWNER_PW
+# became a canonical key.
+step "6. Environment file (update-mode backfill)"
 if [[ ! -f "$ARION_ROOT/.env" ]]; then
-    cp "$ARION_ROOT/deploy/.env.example" "$ARION_ROOT/.env"
-    ARION_APP_PW="$ARION_APP_PW" ARION_OWNER_PW="$ARION_OWNER_PW" \
-        NEO4J_PASSWORD="$NEO4J_PASSWORD" OPENAI_API_KEY="${OPENAI_API_KEY:-}" \
-        ARION_ENV_PATH="$ARION_ROOT/.env" python3 - <<'PYEOF'
-import os, re, urllib.parse
-path      = os.environ["ARION_ENV_PATH"]
-app_pw    = os.environ["ARION_APP_PW"]
-owner_pw  = os.environ["ARION_OWNER_PW"]
-neo4j_pw  = os.environ["NEO4J_PASSWORD"]
-openai    = os.environ.get("OPENAI_API_KEY", "")
-enc       = urllib.parse.quote_plus  # URL-encodes @ : / etc
-
-# Replace-or-append: if the key exists in the template, substitute the
-# value; if not (older template, hand-edited .env), append the line at
-# the end. Preserves all existing keys and comments.
-subs = {
-    "DATABASE_URL":          f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_compliance",
-    "SESSIONS_DATABASE_URL": f"postgresql://arioncomply_app:{enc(app_pw)}@127.0.0.1/arioncomply_sessions",
-    "PGPASSWORD":            app_pw,
-    "ARION_OWNER_PW":        owner_pw,       # Ship 111'.a
-    "NEO4J_PASSWORD":        neo4j_pw,
-}
-if openai:
-    subs["OPENAI_API_KEY"] = openai
-
-with open(path) as f:
-    text = f.read()
-for k, v in subs.items():
-    pattern = rf"^{re.escape(k)}=.*$"
-    if re.search(pattern, text, flags=re.M):
-        text = re.sub(pattern, f"{k}={v}", text, count=1, flags=re.M)
-    else:
-        if not text.endswith("\n"):
-            text += "\n"
-        text += f"{k}={v}\n"
-with open(path, "w") as f:
-    f.write(text)
-PYEOF
-    chmod 600 "$ARION_ROOT/.env"
-    ok ".env written with secrets"
+    # Belt-and-braces: step 0 should have caught this.
+    fail ".env vanished between step 0 and step 6 — something is very wrong"
+fi
+# Update path — ensure ARION_OWNER_PW landed in the file. This is
+# a one-time backfill for pre-Ship-111 installs; harmless on
+# Ship-111+ boxes where init-secrets.sh already put it there.
+if grep -qE "^ARION_OWNER_PW=" "$ARION_ROOT/.env"; then
+    ok ".env already has ARION_OWNER_PW — no change"
 else
-    # Update path — ensure ARION_OWNER_PW landed in the file. This is
-    # a one-time backfill for pre-111 installs; harmless on 111+ boxes
-    # where the fresh writer already put it there.
-    if grep -qE "^ARION_OWNER_PW=" "$ARION_ROOT/.env"; then
-        ok ".env already has ARION_OWNER_PW — no change"
-    else
-        # Append via a tempfile the invoking user can write (arionops
-        # owns .env; sudo tee would work too but keeps ownership).
-        printf '\n# Ship 111 — stashed for install.sh update mode\nARION_OWNER_PW=%s\n' \
-            "$ARION_OWNER_PW" >> "$ARION_ROOT/.env"
-        chmod 600 "$ARION_ROOT/.env"
-        ok ".env: appended ARION_OWNER_PW for future update runs"
-    fi
+    # arionops owns .env; direct append (no sudo needed).
+    printf '\n# Ship 116 backfill — stashed for future install.sh runs\nARION_OWNER_PW=%s\n' \
+        "$ARION_OWNER_PW" >> "$ARION_ROOT/.env"
+    chmod 600 "$ARION_ROOT/.env"
+    ok ".env: appended ARION_OWNER_PW for future update runs"
 fi
 
 # ── 7. Chroma data dir + systemd units ───────────────────────────────
