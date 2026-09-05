@@ -55,44 +55,89 @@ ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host> '
 
 If the tar is <1 MB, it's still an LFS pointer. Rerun `git lfs pull`. Real size is ~147 MB.
 
-### 2. Run install.sh (interactive)
+### 2. Provision secrets with `init-secrets.sh` (one-time, interactive)
 
-`install.sh` prompts for 4 secrets on a fresh install (Ship 111'.a — reads them from `.env` on update mode; fresh install has no `.env` yet):
+Ship 116' (2026-09-04) split secret provisioning from install
+mechanics. `init-secrets.sh` is the ONLY interactive step in the
+lifecycle — once it's run, everything else works in SSH one-liners.
 
-- `ARION_OWNER_PW` — Postgres owner role password
-- `ARION_APP_PW` — Postgres app role password (RLS-scoped runtime pool)
-- `NEO4J_PASSWORD` — Neo4j password
-- `OPENAI_API_KEY` — OpenAI key (or leave blank if using another provider)
-
-Run interactively (not in an SSH one-liner — needs TTY for password input):
+Run interactively (needs TTY for OpenAI key prompt at minimum):
 
 ```bash
 ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host>
 # Once inside the shell:
 cd /data/arioncomply
-bash deploy/install.sh
+bash scripts/ops/init-secrets.sh
 ```
 
-Store the four passwords in your password manager or `handback.md` (see [[CLAUDE_OPERATOR.md]] §5). Ship 111'.a stashes them in `/data/arioncomply/.env` so update mode reads them automatically.
+**Default behavior** (auto-generate mode):
+- Generates 3 strong 32-char random passwords via `openssl rand`:
+  `ARION_OWNER_PW`, `ARION_APP_PW`, `NEO4J_PASSWORD`.
+- Prompts once for `OPENAI_API_KEY` (can be left blank if you'll
+  wire another LLM provider).
+- **Prints all 3 generated passwords to stdout** — capture them
+  into your password manager / `handback.md` right then. This is
+  the only time they're shown.
+- Writes `/data/arioncomply/.env` (chmod 600) with all 6 canonical
+  keys.
+
+**Alternate: bring your own passwords** — pass `--prompt` to be
+prompted for each password (typed, hidden):
+
+```bash
+bash scripts/ops/init-secrets.sh --prompt
+```
+
+**Alternate: fully headless** — pass `--openai-key=<k>` to avoid
+the OpenAI prompt, then `init-secrets.sh` runs with zero interaction:
+
+```bash
+bash scripts/ops/init-secrets.sh --openai-key=sk-...
+# Works even inside a one-liner:
+ssh ... 'bash scripts/ops/init-secrets.sh --openai-key=sk-...'
+```
+
+**Refuses to overwrite** an existing `.env` — by design, this
+script is a one-time bootstrap. Rotating a secret post-install is
+a different flow (edit `.env` directly, restart `arioncomply-api`).
+
+### 3. Run install.sh (non-interactive)
+
+`install.sh` from Ship 116' hard-requires `.env` and never prompts.
+Works in an SSH one-liner from your Mac:
+
+```bash
+ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host> '
+  cd /data/arioncomply &&
+  bash deploy/install.sh
+'
+```
+
+Or inside the interactive session from step 2:
+
+```bash
+cd /data/arioncomply
+bash deploy/install.sh
+```
 
 **What install.sh does** (9 phases):
 
 | # | Phase | Notes |
 |---|---|---|
-| 0 | Sanity checks | Refuses EUID=0; reads `.env` if present (update mode auto-skips prompts) |
+| 0 | Sanity checks | Refuses EUID=0. HARD-REQUIRES `.env` (Ship 116') — fails loud pointing to `init-secrets.sh` if missing. Validates every required secret is present. |
 | 1 | System packages | Installs postgresql-16, python3, curl, lsof, git via apt |
 | 2 | Neo4j 5 | Install + set initial password + verify auth |
 | 3 | Postgres roles + databases + extensions | 2 databases (`arioncomply_compliance`, `arioncomply_sessions`) + 2 roles (`arioncomply` owner, `arioncomply_app` RLS-scoped) |
 | 4 | Schema baseline + curator seed | Loads `schema_baseline.sql` (pg_dump snapshot up to Ship 114') + `seed_curator_data.sql` (curator tables like `templates`, `topic_leaves`) + `schema_sessions_baseline.sql`. Bootstraps `schema_migrations` tracker + applies any un-applied `schema_v*.sql` |
 | 5 | Python dependencies | `pip install -r deploy/requirements.txt` |
-| 6 | `.env` from template | Writes secrets from prompts (or update-mode re-appends any missing) |
+| 6 | `.env` update-mode backfill | Since Ship 116', `.env` is guaranteed present by step 0. Step 6 now only handles pre-Ship-111 boxes that need `ARION_OWNER_PW` appended. No-op on modern installs. |
 | 7 | Chroma dir + systemd units | Extracts `chroma_prebuilt.tar.gz` (147 MB compressed / 263 MB raw, all 9 collections) + installs systemd units for `arioncomply-{api,chroma,sweep}` |
 | 8 | Neo4j graph load | Loads `neo4j_baseline.json` via `load_neo4j_baseline.py` (8148 nodes / 14378 relationships) |
 | 9 | Start the API | `systemctl start arioncomply-api` + wait 60s for `/docs` to respond |
 
 Also writes one line to `/data/arioncomply/.deployment_log.jsonl` (Ship 111'.d).
 
-### 3. Post-install verification
+### 4. Post-install verification
 
 ```bash
 ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host> '
@@ -109,7 +154,7 @@ ssh -i ~/.ssh/arion_operator_ed25519 arionops@<host> '
 
 Everything should be `active (running)`. First line in `.deployment_log.jsonl` should show `outcome: GREEN`.
 
-### 4. Grant browser access (SSH tunnel)
+### 5. Grant browser access (SSH tunnel)
 
 From your Mac:
 
@@ -120,7 +165,7 @@ ssh -i ~/.ssh/arion_operator_ed25519 -L 8080:127.0.0.1:8080 arionops@<host>
 
 You'll see the **Quickstart overlay** (Ship 104') — first tenant provisioning happens in the browser, no CLI needed.
 
-### 5. Register the deployment
+### 6. Register the deployment
 
 Create a new `docs/deployments/<host>.md` markdown following [[README.md]] convention:
 
