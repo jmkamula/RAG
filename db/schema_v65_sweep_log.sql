@@ -53,6 +53,6 @@ CREATE INDEX IF NOT EXISTS idx_sweep_log_errors
 COMMENT ON TABLE sweep_log IS
 'Sweep scheduler audit trail — one row per (tick, work_type). Fed by rag.scheduler.tick. Not tenant-scoped: tick runs across all tenants in one call.';
 
-GRANT SELECT, INSERT, UPDATE ON sweep_log TO arioncomply_app;
+GRANT SELECT, INSERT, UPDATE ON sweep_log TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: ops health tracker, not compliance evidence. Writer updates row status as sweep progresses.
 
 COMMIT;

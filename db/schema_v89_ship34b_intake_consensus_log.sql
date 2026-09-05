@@ -76,7 +76,7 @@ CREATE POLICY intake_consensus_log_tenant_isolation ON intake_consensus_log
     USING (tenant_id::text = current_setting('app.tenant_id', TRUE));
 
 -- Diagnostic table grants (matches Ship 4'.b addendum pattern)
-GRANT SELECT, INSERT, DELETE ON intake_consensus_log TO arioncomply_app;
+GRANT SELECT, INSERT, DELETE ON intake_consensus_log TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: diagnostic log per Ship 121 classification; DELETE is intentional for retention sweep.
 
 COMMENT ON TABLE intake_consensus_log IS
 'Diagnostic log for Ship 33 extraction consensus module. One row per doc processed. Retention-eligible; arioncomply_app has INSERT/SELECT/DELETE.';

@@ -49,16 +49,16 @@ BEGIN;
 -- ── 1. Grant DELETE + revoke UPDATE on ai_call_log ──────────────────
 -- (UPDATE on an LLM-call log entry is a footgun; DELETE for
 -- retention is the honest need.)
-GRANT DELETE ON ai_call_log TO arioncomply_app;
+GRANT DELETE ON ai_call_log TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: Ship 4'.b diagnostic reclassification (retention-eligible).
 REVOKE UPDATE ON ai_call_log FROM arioncomply_app;
 
 -- ── 2. Grant DELETE on the 4 other diagnostic logs ──────────────────
 -- Also enable RLS + a permissive `app_*_all` policy so cross-tenant
 -- retention sweeps can iterate the way schema_v70 established.
-GRANT DELETE ON chat_casefile_log  TO arioncomply_app;
-GRANT DELETE ON chat_consensus_log TO arioncomply_app;
-GRANT DELETE ON fact_recompute_log TO arioncomply_app;
-GRANT DELETE ON intake_trace_log   TO arioncomply_app;
+GRANT DELETE ON chat_casefile_log  TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: Ship 4'.b diagnostic reclassification (retention-eligible).
+GRANT DELETE ON chat_consensus_log TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: Ship 4'.b diagnostic reclassification (retention-eligible).
+GRANT DELETE ON fact_recompute_log TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: Ship 4'.b diagnostic reclassification (retention-eligible).
+GRANT DELETE ON intake_trace_log   TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: Ship 4'.b diagnostic reclassification (retention-eligible).
 
 -- Add permissive policies (idempotent — DROP + CREATE).
 DO $$

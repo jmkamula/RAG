@@ -100,6 +100,6 @@ CREATE POLICY tenant_isolation_ai_call_log ON ai_call_log
     USING (tenant_id IS NULL
            OR tenant_id = NULLIF(current_setting('app.tenant_id', true), '')::uuid);
 
-GRANT SELECT, INSERT, UPDATE ON ai_call_log TO arioncomply_app;
+GRANT SELECT, INSERT, UPDATE ON ai_call_log TO arioncomply_app;  -- APPEND-ONLY-EXEMPT: superseded by schema_v79 (REVOKE UPDATE + GRANT DELETE — Ship 4'.b diagnostic reclassification)
 
 COMMIT;

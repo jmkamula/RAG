@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Ship 63' — CI grep guards against patterns we've root-caused.
+# Ship 63' + Ship 122'.a — CI grep guards against patterns we've root-caused.
 #
-# Two tight guards where the pattern has a canonical location and
-# any new occurrence is a genuine regression. Broader disciplines
-# (hardcoded model strings, uncoordinated document_findings reads,
-# direct openai imports) are documented in the codebase memory but
-# not enforced here — the false-positive rate on those grep
-# patterns is too high to be actionable in CI.
+# Tight guards where the pattern has a canonical location and any new
+# occurrence is a genuine regression. Broader disciplines (hardcoded
+# model strings, uncoordinated document_findings reads, direct openai
+# imports) are documented in the codebase memory but not enforced here —
+# the false-positive rate on those grep patterns is too high to be
+# actionable in CI.
 #
 #   1. Naive `if ref in answer:` in the forbidden_refs / expected_refs
 #      assertion loops in tests/eval_suite.py. Ship 60'.k root-caused
@@ -27,6 +27,17 @@
 #      per [[feedback-na-dominance-via-applicability-column]]. Five
 #      pre-Ship-66' sites are allowlisted; the guard fails on any
 #      NEW addition.
+#
+#   4. Blanket `GRANT ... (DELETE|ALL) ON ALL TABLES ... TO
+#      arioncomply_app` outside deploy/baseline_grants.sql. Ship 120'
+#      diagnosed that this shape silently clobbers per-table REVOKEs
+#      in schema_v* files. Only baseline_grants.sql is exempt (and
+#      it restores intended shape in its post-blanket DO block).
+#
+#   5. schema_v* file granting UPDATE/DELETE/ALL on a `_log` or
+#      `_audit` table to arioncomply_app. Tables with these suffixes
+#      are compliance-load-bearing by convention. Escape hatch:
+#      `-- APPEND-ONLY-EXEMPT` on the same line as the GRANT.
 #
 # Usage:
 #   scripts/ci/check_forbidden_patterns.sh
@@ -129,6 +140,42 @@ report \
     ':!snapshots/**' \
     ':!db/workbook_importer.py' \
     ':!rag/llm_answer.py'
+
+# 4 — Ship 120' — blanket GRANT ... ON ALL TABLES ... TO arioncomply_app.
+#     The one legitimate site is deploy/baseline_grants.sql, which
+#     restores intended per-table shape in its own DO block.
+report \
+    "Blanket GRANT ... (DELETE|ALL) ... ON ALL TABLES ... TO arioncomply_app outside baseline_grants.sql" \
+    "Ship 120' — this shape silently clobbers per-table REVOKEs. Enumerate per table + register in tests/test_audit_table_grants.py." \
+    'GRANT[^;]*(\bDELETE\b|\bALL PRIVILEGES\b|\bALL\b)[^;]*ON ALL TABLES[^;]*TO[^;]*arioncomply_app' \
+    -- '*.sql' 'deploy/' 'scripts/' \
+    ':!deploy/baseline_grants.sql' \
+    ':!scripts/ci/**'
+
+# 5 — Ship 121' — schema_v* file granting UPDATE/DELETE on _log/_audit.
+#     Tables named *_log or *_audit are compliance-load-bearing by
+#     convention. Escape hatch: put `-- APPEND-ONLY-EXEMPT` on the
+#     same line as the GRANT for legitimate exceptions.
+#     `git grep` returns whole matching lines so we can filter the
+#     exempt marker inline via a follow-on grep -v.
+schema_over_grants=$(
+    git grep -nE 'GRANT[^;]*(\bUPDATE\b|\bDELETE\b|\bALL\b)[^;]*ON[[:space:]]+[a-zA-Z_.]*(_log|_audit)[[:space:]]+TO[[:space:]]+arioncomply_app' \
+        -- 'db/schema_v*.sql' 2>/dev/null | \
+    grep -v 'APPEND-ONLY-EXEMPT' || true
+)
+if [[ -n "$schema_over_grants" ]]; then
+    FAILED=1
+    echo ""
+    echo "FAIL — schema_v* GRANT UPDATE/DELETE on _log/_audit table to arioncomply_app"
+    echo "       Ship 121' — audit-shape tables should be INSERT+SELECT only, or"
+    echo "       explicitly annotated -- APPEND-ONLY-EXEMPT on the GRANT line."
+    if [[ $VERBOSE -eq 1 ]]; then
+        echo "$schema_over_grants" | sed 's/^/         /'
+    else
+        count=$(echo "$schema_over_grants" | wc -l | tr -d ' ')
+        echo "       $count hit(s); re-run with --verbose to list."
+    fi
+fi
 
 if [[ $FAILED -eq 0 ]]; then
     echo "OK — no forbidden patterns."

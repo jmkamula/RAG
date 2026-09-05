@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-05T22:18:55Z from HEAD 755468bd by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-05T22:53:34Z from HEAD 35fa1b84 by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict M8bWfIsCm62teqthonSOaKL2SaH1OdsspU1YVbT0DABwXNjbT3mZGqiN44vXrtl
+\restrict rXO0y7nj7PAK3egh6l5cViedKg81heNcNVQdbnNPW94655T9Ib4QgE20TE95xOF
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -9662,5 +9662,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict M8bWfIsCm62teqthonSOaKL2SaH1OdsspU1YVbT0DABwXNjbT3mZGqiN44vXrtl
+\unrestrict rXO0y7nj7PAK3egh6l5cViedKg81heNcNVQdbnNPW94655T9Ib4QgE20TE95xOF
 
