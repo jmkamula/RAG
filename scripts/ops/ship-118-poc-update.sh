@@ -73,7 +73,10 @@ sudo -u postgres psql -d arioncomply_compliance -c \
 # needs an ARION_DEV_API_KEY that may not be stashed on every box).
 echo
 echo "=== 6. Trigger derive-applicability sweep (populates log) ==="
-if [[ -x scripts/dev/trigger_applicability_sweep.py ]]; then
+# Ship 118'.d fix: check -f (exists), not -x (executable). Python
+# files pulled via git don't get the executable bit — they're
+# invoked as `python3 script.py` not `./script.py`.
+if [[ -f scripts/dev/trigger_applicability_sweep.py ]]; then
     set -a; source .env; set +a
     PYTHONPATH=. python3 scripts/dev/trigger_applicability_sweep.py \
     || echo "  (sweep utility failed — non-critical, next fact PUT will populate the log)"
@@ -90,26 +93,39 @@ sudo -u postgres psql -d arioncomply_compliance -c \
      UNION ALL
      SELECT 'client_facts_log', COUNT(*) FROM client_facts_log;"
 
-# ── 8. Snapshot smoke test ───────────────────────────────────────
+# ── 8. Snapshot smoke test (direct-DB, no API key needed) ────────
+# Ship 118'.d — use the direct-DB path here too, matching the step 6
+# pattern. Calls snapshot_posture() from a small inline Python block,
+# same code as the HTTP endpoint. No ARION_DEV_API_KEY required.
 echo
-echo "=== 8. Snapshot smoke test (JSON, current) ==="
-if [[ -n "$API_KEY" ]]; then
-    curl -sf "http://127.0.0.1:8080/api/v1/admin/posture-snapshot" \
-        -H "X-API-Key: $API_KEY" \
-    | python3 -c "
-import sys, json
-d = json.load(sys.stdin)
+echo "=== 8. Snapshot smoke test (current, all active tenants) ==="
+set -a; source .env; set +a
+PYTHONPATH=. python3 <<'PYEOF' || echo "  (snapshot smoke test failed — non-critical)"
+import os, sys
+from urllib.parse import unquote, urlparse
 from collections import Counter
-by_f = Counter(c['finding'] for c in d['controls'])
-print(f\"  as_of: {d['as_of']}  controls: {d['control_count']}\")
-print(f\"  findings: {dict(by_f)}\")
-cov = d['coverage_notes']
-print(f\"  applicability coverage: {cov['applicability_status']['coverage']}\")
-print(f\"  scoping       coverage: {cov['scoping_facts']['coverage']}\")
-"
-else
-    echo "  (skipped — no admin key available; spot-check via UI)"
-fi
+import psycopg2
+from rag.posture.snapshot import snapshot_posture
+
+u = urlparse(os.environ["DATABASE_URL"])
+conn = psycopg2.connect(
+    host=u.hostname, port=u.port or 5432, user="arioncomply",
+    password=os.getenv("ARION_OWNER_PW") or unquote(u.password or ""),
+    dbname=(u.path or "/arioncomply_compliance").lstrip("/"),
+)
+with conn.cursor() as cur:
+    cur.execute("SELECT id::text, name FROM tenants WHERE is_active ORDER BY created_at")
+    tenants = cur.fetchall()
+
+for tid, name in tenants:
+    snap = snapshot_posture(conn, tid)
+    by_f = Counter(c.finding for c in snap.controls)
+    cov_app  = snap.coverage_notes["applicability_status"]["coverage"]
+    cov_scop = snap.coverage_notes["scoping_facts"]["coverage"]
+    print(f"  {name!r}: {snap.control_count} controls  findings={dict(by_f)}")
+    print(f"    coverage: applicability={cov_app}  scoping={cov_scop}")
+conn.close()
+PYEOF
 
 # ── 9. Deployment log tail ───────────────────────────────────────
 echo
