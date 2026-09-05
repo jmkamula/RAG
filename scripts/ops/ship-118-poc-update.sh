@@ -73,11 +73,10 @@ sudo -u postgres psql -d arioncomply_compliance -c \
 # needs an ARION_DEV_API_KEY that may not be stashed on every box).
 echo
 echo "=== 6. Trigger derive-applicability sweep (populates log) ==="
-# Ship 118'.d fix: check -f (exists), not -x (executable). Python
-# files pulled via git don't get the executable bit — they're
-# invoked as `python3 script.py` not `./script.py`.
+# Ship 118'.d — Python utilities load .env themselves via python-
+# dotenv (safe parser — handles values with special chars that bash
+# `source .env` chokes on). No bash-side env setup needed.
 if [[ -f scripts/dev/trigger_applicability_sweep.py ]]; then
-    set -a; source .env; set +a
     PYTHONPATH=. python3 scripts/dev/trigger_applicability_sweep.py \
     || echo "  (sweep utility failed — non-critical, next fact PUT will populate the log)"
 else
@@ -94,38 +93,17 @@ sudo -u postgres psql -d arioncomply_compliance -c \
      SELECT 'client_facts_log', COUNT(*) FROM client_facts_log;"
 
 # ── 8. Snapshot smoke test (direct-DB, no API key needed) ────────
-# Ship 118'.d — use the direct-DB path here too, matching the step 6
-# pattern. Calls snapshot_posture() from a small inline Python block,
-# same code as the HTTP endpoint. No ARION_DEV_API_KEY required.
+# Ship 118'.d — mirrors the step 6 pattern: Python utility loads
+# .env itself via python-dotenv. Same shape, same reason: no bash-
+# side env setup that could choke on unquoted-special-char values.
 echo
 echo "=== 8. Snapshot smoke test (current, all active tenants) ==="
-set -a; source .env; set +a
-PYTHONPATH=. python3 <<'PYEOF' || echo "  (snapshot smoke test failed — non-critical)"
-import os, sys
-from urllib.parse import unquote, urlparse
-from collections import Counter
-import psycopg2
-from rag.posture.snapshot import snapshot_posture
-
-u = urlparse(os.environ["DATABASE_URL"])
-conn = psycopg2.connect(
-    host=u.hostname, port=u.port or 5432, user="arioncomply",
-    password=os.getenv("ARION_OWNER_PW") or unquote(u.password or ""),
-    dbname=(u.path or "/arioncomply_compliance").lstrip("/"),
-)
-with conn.cursor() as cur:
-    cur.execute("SELECT id::text, name FROM tenants WHERE is_active ORDER BY created_at")
-    tenants = cur.fetchall()
-
-for tid, name in tenants:
-    snap = snapshot_posture(conn, tid)
-    by_f = Counter(c.finding for c in snap.controls)
-    cov_app  = snap.coverage_notes["applicability_status"]["coverage"]
-    cov_scop = snap.coverage_notes["scoping_facts"]["coverage"]
-    print(f"  {name!r}: {snap.control_count} controls  findings={dict(by_f)}")
-    print(f"    coverage: applicability={cov_app}  scoping={cov_scop}")
-conn.close()
-PYEOF
+if [[ -f scripts/dev/print_snapshot_summary.py ]]; then
+    PYTHONPATH=. python3 scripts/dev/print_snapshot_summary.py \
+    || echo "  (snapshot smoke test failed — non-critical)"
+else
+    echo "  (scripts/dev/print_snapshot_summary.py not present — skipping)"
+fi
 
 # ── 9. Deployment log tail ───────────────────────────────────────
 echo
