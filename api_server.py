@@ -4860,6 +4860,345 @@ async def admin_posture_snapshot(
     return snapshot_to_dict(snap)
 
 
+# ═════════════════════════════════════════════════════════════════
+# Ship 119'.c — Audit-ledger download tokens (one-time URL delivery)
+# ═════════════════════════════════════════════════════════════════
+#
+# Tenant admin generates a token via POST /admin/audit-ledger/tokens
+# (authenticated). The token embeds all ledger-generation parameters
+# so what the auditor sees on fetch is what the admin committed to
+# at token time, even if underlying state drifts.
+#
+# Auditor fetches the ledger via GET /audit-ledger/download/{token}
+# (unauthenticated — token IS the auth). No API key needed. Signed
+# by opaque token possession. Every fetch increments times_used +
+# appends an access-log entry; expires_at + max_uses limit reach.
+#
+# Design:
+#   · DB-backed opaque tokens (not JWT). Revocable, auditable,
+#     no signing-key management.
+#   · Ledger params frozen at token creation; regenerated on each
+#     fetch with those params.
+#   · Default single-use (max_uses=1), 7-day expiry.
+# See schema_v116_audit_ledger_download_tokens.sql for the table.
+
+
+class AuditLedgerTokenRequest(BaseModel):
+    """POST body for token creation. Every ledger-generation
+    parameter the tenant wants captured is included here."""
+    as_of:                     Optional[str] = None
+    auditor_firm:              Optional[str] = None
+    engagement_date:           Optional[str] = None
+    engagement_reference:      Optional[str] = None
+    redaction_level:           str  = 'default'
+    include_verbatim_excerpts: bool = False
+    pseudonymise_users:        bool = True
+    retention_days:            int  = 2555   # 7 years
+    max_uses:                  int  = 1
+    expires_in_days:           int  = 7
+    label:                     Optional[str] = None
+
+
+@app.post("/api/v1/admin/audit-ledger/tokens", tags=["admin"])
+async def admin_audit_ledger_create_token(
+    body:     AuditLedgerTokenRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Ship 119'.c — mint a one-time-download URL for the auditor.
+
+    Returns:
+        {
+          "token": "opaque-string",
+          "url":   "https://<host>/api/v1/audit-ledger/download/<token>",
+          "expires_at": "2026-09-12T...",
+          "max_uses": 1,
+          "label": ...
+        }
+
+    The URL is what the tenant admin sends to their auditor. The
+    auditor opens it in their browser, gets the ledger HTML, uses
+    Save-as-PDF. No key exchange. No account setup.
+    """
+    if body.redaction_level not in ('off', 'default', 'strict'):
+        raise HTTPException(400, "redaction_level must be one of: off, default, strict")
+    if body.max_uses < 1 or body.max_uses > 100:
+        raise HTTPException(400, "max_uses must be between 1 and 100")
+    if body.expires_in_days < 1 or body.expires_in_days > 90:
+        raise HTTPException(400, "expires_in_days must be between 1 and 90")
+
+    import secrets as _secrets
+    from datetime import datetime, timedelta, timezone
+
+    token       = _secrets.token_urlsafe(32)     # ~43 chars, cryptographically random
+    expires_at  = datetime.now(timezone.utc) + timedelta(days=body.expires_in_days)
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO audit_ledger_download_token (
+                    token, tenant_id, created_by, expires_at,
+                    max_uses, as_of, auditor_firm, engagement_date,
+                    engagement_reference, redaction_level,
+                    include_verbatim_excerpts, pseudonymise_users,
+                    retention_days, label
+                ) VALUES (
+                    %s, %s::uuid, %s::uuid, %s,
+                    %s, %s, %s, %s,
+                    %s, %s,
+                    %s, %s,
+                    %s, %s
+                )
+            """, (
+                token, key_info.tenant_id, key_info.user_id, expires_at,
+                body.max_uses, body.as_of, body.auditor_firm, body.engagement_date,
+                body.engagement_reference, body.redaction_level,
+                body.include_verbatim_excerpts, body.pseudonymise_users,
+                body.retention_days, body.label,
+            ))
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    # Build the fetch URL from the incoming request's base URL.
+    base_url = str(request.base_url).rstrip('/')
+    fetch_url = f"{base_url}/api/v1/audit-ledger/download/{token}"
+
+    return {
+        "token":      token,
+        "url":        fetch_url,
+        "expires_at": expires_at.isoformat(),
+        "max_uses":   body.max_uses,
+        "label":      body.label,
+    }
+
+
+@app.get("/api/v1/admin/audit-ledger/tokens", tags=["admin"])
+async def admin_audit_ledger_list_tokens(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    include_revoked: bool = False,
+    include_expired: bool = False,
+):
+    """List download tokens for the calling tenant. Never returns the
+    token itself — only metadata + status. This means an admin who
+    misplaces a token cannot recover it; they issue a new one +
+    revoke the old.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            where_clauses = ["tenant_id = %s::uuid"]
+            params: list = [key_info.tenant_id]
+            if not include_revoked:
+                where_clauses.append("revoked_at IS NULL")
+            if not include_expired:
+                where_clauses.append("expires_at > NOW()")
+            where_sql = " AND ".join(where_clauses)
+            cur.execute(f"""
+                SELECT LEFT(token, 8) || '…' AS token_prefix,
+                       created_at, created_by::text, expires_at,
+                       max_uses, times_used, revoked_at,
+                       as_of, auditor_firm, engagement_date,
+                       engagement_reference, redaction_level,
+                       include_verbatim_excerpts, pseudonymise_users,
+                       label, jsonb_array_length(access_log) AS access_count
+                  FROM audit_ledger_download_token
+                 WHERE {where_sql}
+                 ORDER BY created_at DESC
+                 LIMIT 100
+            """, params)
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+
+    return {
+        "tokens": [
+            {
+                "token_prefix":     r[0],
+                "created_at":       r[1].isoformat(),
+                "created_by":       r[2],
+                "expires_at":       r[3].isoformat(),
+                "max_uses":         r[4],
+                "times_used":       r[5],
+                "revoked_at":       r[6].isoformat() if r[6] else None,
+                "as_of":            r[7],
+                "auditor_firm":     r[8],
+                "engagement_date":  r[9],
+                "engagement_reference": r[10],
+                "redaction_level":  r[11],
+                "include_verbatim_excerpts": r[12],
+                "pseudonymise_users": r[13],
+                "label":            r[14],
+                "access_count":     r[15],
+            }
+            for r in rows
+        ],
+    }
+
+
+@app.post("/api/v1/admin/audit-ledger/tokens/{token_prefix}/revoke", tags=["admin"])
+async def admin_audit_ledger_revoke_token(
+    token_prefix: str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Revoke a token by its short prefix (from the list endpoint).
+    Prefix must match exactly one active token or the request errors.
+    """
+    if len(token_prefix) < 6 or len(token_prefix) > 43:
+        raise HTTPException(400, "token_prefix must be 6-43 characters")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                UPDATE audit_ledger_download_token
+                   SET revoked_at = NOW(), revoked_by = %s::uuid
+                 WHERE tenant_id = %s::uuid
+                   AND token LIKE %s
+                   AND revoked_at IS NULL
+                 RETURNING LEFT(token, 8) || '…' AS prefix
+            """, (key_info.user_id, key_info.tenant_id, token_prefix + '%'))
+            hits = cur.fetchall()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    if len(hits) == 0:
+        raise HTTPException(404, "no active token found with that prefix")
+    if len(hits) > 1:
+        raise HTTPException(409, f"prefix matched {len(hits)} tokens — pass more characters")
+    return {"revoked": hits[0][0]}
+
+
+@app.get("/api/v1/audit-ledger/download/{token}", tags=["audit"])
+async def audit_ledger_download(
+    token:   str,
+    request: Request,
+):
+    """Ship 119'.c — public unauthenticated download endpoint. No
+    API key required. Token IS the auth. Every fetch:
+      · validates token (exists + not expired + not revoked +
+        times_used < max_uses)
+      · increments times_used
+      · appends an access-log entry (ts + IP + user-agent + new
+        ledger_id) to the token row
+      · regenerates the ledger with the parameters frozen at
+        token creation
+      · returns HTML
+
+    A failed fetch (expired / revoked / used-up) still records the
+    attempt in the access_log for forensic traceability.
+    """
+    if not token or len(token) < 20:
+        raise HTTPException(404, "audit ledger not found")
+
+    import json as _json
+    from datetime import datetime, timezone
+    from fastapi.responses import Response, HTMLResponse
+
+    now = datetime.now(timezone.utc)
+    client_ip  = request.client.host if request.client else "unknown"
+    user_agent = request.headers.get("user-agent", "unknown")[:200]
+
+    # Owner connection — we need to read + update the token row
+    # from an unauthenticated context. Use the app pool but set
+    # a synthetic tenant_id from the token lookup.
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            # 1. Look up the token (no RLS context yet — token IS the
+            # authorization; we set the tenant scope from the row).
+            cur.execute("""
+                SELECT tenant_id::text, expires_at, max_uses, times_used, revoked_at,
+                       as_of, auditor_firm, engagement_date, engagement_reference,
+                       redaction_level, include_verbatim_excerpts, pseudonymise_users,
+                       retention_days, created_by::text, access_log
+                  FROM audit_ledger_download_token
+                 WHERE token = %s
+                 LIMIT 1
+            """, (token,))
+            row = cur.fetchone()
+
+            if not row:
+                # Don't leak "does this token exist?" — same 404 either way.
+                raise HTTPException(404, "audit ledger not found")
+
+            (tenant_id, expires_at, max_uses, times_used, revoked_at,
+             ts_as_of, ts_firm, ts_date, ts_ref,
+             ts_redact, ts_verbatim, ts_pseudo,
+             ts_retention, ts_created_by, ts_access_log) = row
+
+            # 2. Validate token state — record attempt even on failure.
+            failure_reason = None
+            if revoked_at is not None:
+                failure_reason = "revoked"
+            elif expires_at < now:
+                failure_reason = "expired"
+            elif times_used >= max_uses:
+                failure_reason = "max_uses_reached"
+
+            # Always log the attempt (success or failure)
+            attempt_entry = {
+                "ts":         now.isoformat(),
+                "ip":         client_ip,
+                "ua":         user_agent,
+                "outcome":    failure_reason or "success",
+            }
+            if failure_reason:
+                cur.execute("""
+                    UPDATE audit_ledger_download_token
+                       SET access_log = access_log || %s::jsonb
+                     WHERE token = %s
+                """, (_json.dumps([attempt_entry]), token))
+                conn.commit()
+                raise HTTPException(410, f"audit ledger no longer available ({failure_reason})")
+
+            # 3. Set RLS context for downstream reads.
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+
+            # 4. Increment times_used + append access entry.
+            cur.execute("""
+                UPDATE audit_ledger_download_token
+                   SET times_used = times_used + 1,
+                       access_log = access_log || %s::jsonb
+                 WHERE token = %s
+            """, (_json.dumps([attempt_entry]), token))
+
+            # 5. Regenerate ledger with frozen params.
+            from rag.posture.audit_ledger import build_audit_ledger, LedgerOptions
+            opts = LedgerOptions(
+                as_of                     = ts_as_of,
+                auditor_firm              = ts_firm,
+                engagement_date           = ts_date,
+                engagement_reference      = ts_ref,
+                redaction_level           = ts_redact,
+                include_verbatim_excerpts = ts_verbatim,
+                pseudonymise_users        = ts_pseudo,
+                retention_days            = ts_retention,
+            )
+            _meta, html = build_audit_ledger(
+                conn,
+                tenant_id    = tenant_id,
+                options      = opts,
+                generated_by = ts_created_by,
+            )
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    return Response(content=html, media_type="text/html; charset=utf-8")
+
+
 @app.get("/api/v1/admin/audit-ledger", tags=["admin"])
 async def admin_audit_ledger(
     request:               Request,

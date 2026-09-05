@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-05T17:33:48Z from HEAD 778d7dcc by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-05T20:19:34Z from HEAD 78b568f0 by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict lSplCprEum7lTbjTYDUQtpby5sE74BuR3c8MaEM49lZJFQVdJdjA57DnuKaBSDd
+\restrict tUB3aUaJdOvNAvR8CZvzr8KhUZoud8EcE2XkWyTR7QS9D2Wv1Q3yF9VrnNc1e3M
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -870,6 +870,36 @@ CREATE TABLE public.assets (
     CONSTRAINT assets_cia_c_check CHECK (((cia_c = ANY (ARRAY['High'::text, 'Medium'::text, 'Low'::text])) OR (cia_c IS NULL))),
     CONSTRAINT assets_cia_i_check CHECK (((cia_i = ANY (ARRAY['High'::text, 'Medium'::text, 'Low'::text])) OR (cia_i IS NULL))),
     CONSTRAINT assets_value_classification_check CHECK (((value_classification = ANY (ARRAY['High'::text, 'Medium'::text, 'Low'::text])) OR (value_classification IS NULL)))
+);
+
+
+--
+-- Name: audit_ledger_download_token; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.audit_ledger_download_token (
+    token text NOT NULL,
+    tenant_id uuid NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_by uuid,
+    expires_at timestamp with time zone NOT NULL,
+    max_uses integer DEFAULT 1 NOT NULL,
+    times_used integer DEFAULT 0 NOT NULL,
+    revoked_at timestamp with time zone,
+    revoked_by uuid,
+    as_of text,
+    auditor_firm text,
+    engagement_date text,
+    engagement_reference text,
+    redaction_level text DEFAULT 'default'::text NOT NULL,
+    include_verbatim_excerpts boolean DEFAULT false NOT NULL,
+    pseudonymise_users boolean DEFAULT true NOT NULL,
+    retention_days integer DEFAULT 2555 NOT NULL,
+    access_log jsonb DEFAULT '[]'::jsonb NOT NULL,
+    label text,
+    CONSTRAINT audit_ledger_download_token_max_uses_check CHECK ((max_uses > 0)),
+    CONSTRAINT audit_ledger_download_token_redaction_level_check CHECK ((redaction_level = ANY (ARRAY['off'::text, 'default'::text, 'strict'::text]))),
+    CONSTRAINT audit_ledger_download_token_times_used_check CHECK ((times_used >= 0))
 );
 
 
@@ -4518,6 +4548,14 @@ ALTER TABLE ONLY public.assets
 
 
 --
+-- Name: audit_ledger_download_token audit_ledger_download_token_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.audit_ledger_download_token
+    ADD CONSTRAINT audit_ledger_download_token_pkey PRIMARY KEY (token);
+
+
+--
 -- Name: audit_log audit_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5534,6 +5572,20 @@ CREATE INDEX idx_assets_pii ON public.assets USING btree (tenant_id, contains_pi
 --
 
 CREATE INDEX idx_assets_tenant ON public.assets USING btree (tenant_id);
+
+
+--
+-- Name: idx_audit_token_expires; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_audit_token_expires ON public.audit_ledger_download_token USING btree (expires_at) WHERE (revoked_at IS NULL);
+
+
+--
+-- Name: idx_audit_token_tenant_active; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_audit_token_tenant_active ON public.audit_ledger_download_token USING btree (tenant_id, created_at DESC) WHERE (revoked_at IS NULL);
 
 
 --
@@ -7571,6 +7623,14 @@ ALTER TABLE ONLY public.assets
 
 
 --
+-- Name: audit_ledger_download_token audit_ledger_download_token_tenant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.audit_ledger_download_token
+    ADD CONSTRAINT audit_ledger_download_token_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id);
+
+
+--
 -- Name: cascade_suppression_log cascade_suppression_log_source_verification_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8681,6 +8741,13 @@ CREATE POLICY app_all_applicability_status_log ON public.applicability_status_lo
 
 
 --
+-- Name: audit_ledger_download_token app_all_audit_token; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY app_all_audit_token ON public.audit_ledger_download_token TO arioncomply_app USING (true) WITH CHECK (true);
+
+
+--
 -- Name: client_documents app_all_client_docs; Type: POLICY; Schema: public; Owner: -
 --
 
@@ -8872,6 +8939,12 @@ ALTER TABLE public.applicable_standards ENABLE ROW LEVEL SECURITY;
 --
 
 ALTER TABLE public.assets ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: audit_ledger_download_token; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.audit_ledger_download_token ENABLE ROW LEVEL SECURITY;
 
 --
 -- Name: audit_log; Type: ROW SECURITY; Schema: public; Owner: -
@@ -9589,5 +9662,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict lSplCprEum7lTbjTYDUQtpby5sE74BuR3c8MaEM49lZJFQVdJdjA57DnuKaBSDd
+\unrestrict tUB3aUaJdOvNAvR8CZvzr8KhUZoud8EcE2XkWyTR7QS9D2Wv1Q3yF9VrnNc1e3M
 
