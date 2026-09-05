@@ -4860,6 +4860,69 @@ async def admin_posture_snapshot(
     return snapshot_to_dict(snap)
 
 
+@app.get("/api/v1/admin/audit-ledger", tags=["admin"])
+async def admin_audit_ledger(
+    request:               Request,
+    key_info:              APIKeyInfo = Depends(require_api_key),
+    as_of:                 Optional[str] = None,
+    auditor_firm:          Optional[str] = None,
+    engagement_date:       Optional[str] = None,
+    engagement_reference:  Optional[str] = None,
+    redaction_level:       str = 'default',
+    include_verbatim_excerpts: bool = False,
+    pseudonymise_users:    bool = True,
+):
+    """Ship 119'.b — aggregate auditor ledger for the calling tenant.
+
+    Combines Ship 118' point-in-time snapshot with per-control
+    evidence excerpts (Ship 119'.a PII-redacted, opt-in per
+    generation) into one self-contained HTML document. Auditor
+    opens the returned HTML in a browser + uses Save-as-PDF.
+
+    Query params:
+      · as_of                    — YYYY-MM-DD, default = now
+      · auditor_firm             — cover-page annotation
+      · engagement_date          — cover-page annotation
+      · engagement_reference     — engagement letter reference
+      · redaction_level          — off | default | strict
+      · include_verbatim_excerpts — true|false (default false — coverage
+                                     counts + reasons only)
+      · pseudonymise_users       — true|false (default true — reviewer
+                                     identifiers become user-<hash>)
+
+    Response: text/html. No attachment header — auditor renders in
+    browser + uses Save-as-PDF for the durable artifact.
+    """
+    if redaction_level not in ('off', 'default', 'strict'):
+        raise HTTPException(400, "redaction_level must be one of: off, default, strict")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        from rag.posture.audit_ledger import build_audit_ledger, LedgerOptions
+        opts = LedgerOptions(
+            as_of                     = as_of,
+            auditor_firm              = auditor_firm,
+            engagement_date           = engagement_date,
+            engagement_reference      = engagement_reference,
+            redaction_level           = redaction_level,
+            include_verbatim_excerpts = include_verbatim_excerpts,
+            pseudonymise_users        = pseudonymise_users,
+        )
+        _meta, html = build_audit_ledger(
+            conn,
+            tenant_id    = key_info.tenant_id,
+            options      = opts,
+            generated_by = key_info.user_id,
+        )
+    finally:
+        pool.putconn(conn)
+
+    from fastapi.responses import Response
+    return Response(content=html, media_type="text/html; charset=utf-8")
+
+
 @app.post("/api/v1/admin/derive-applicability", tags=["admin"])
 async def admin_derive_applicability(
     request:  Request,
