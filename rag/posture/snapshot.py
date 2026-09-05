@@ -46,11 +46,12 @@ from typing import Optional
 
 
 # ── Coverage constants ──────────────────────────────────────────────
-# When Ship 118'.b lands (applicability_status_log + client_facts_log),
-# update this constant. Snapshots asking for as_of >= this date will
-# have full applicability/scoping history; before, current-only.
-APPLICABILITY_TRACKING_BEGAN: Optional[date] = None  # set on 118'.b ship
-SCOPING_TRACKING_BEGAN:       Optional[date] = None  # set on 118'.b ship
+# Ship 118'.b landed applicability_status_log + client_facts_log on
+# 2026-09-05. Snapshots asking for as_of >= this date have full
+# history for applicability + scoping; before, we fall back to
+# current-only (with a coverage_note explaining).
+APPLICABILITY_TRACKING_BEGAN: Optional[date] = date(2026, 9, 5)
+SCOPING_TRACKING_BEGAN:       Optional[date] = date(2026, 9, 5)
 
 
 @dataclass
@@ -246,25 +247,86 @@ def _fetch_cascade_open_snapshot(cur, tenant_id: str, as_of_sql: Optional[str]) 
     return {(std, ref): n for std, ref, n in cur.fetchall()}
 
 
-def _fetch_applicability_current(cur, tenant_id: str) -> dict:
-    """Current applicability_status + reason from posture_controls.
+def _fetch_applicability_snapshot(
+    cur, tenant_id: str, as_of_sql: Optional[str], as_of_label: str
+) -> tuple[dict, str]:
+    """Return ({(std, ref): (status, reason)}, coverage_kind).
 
-    Ship 118'.a limitation: current-only (see APPLICABILITY_TRACKING_BEGAN).
-    Ship 118'.b will add historical tracking.
+    coverage_kind ∈ {'full', 'current-only'} — full when the caller
+    asked for a date >= APPLICABILITY_TRACKING_BEGAN AND we have log
+    coverage for that window, current-only otherwise.
+
+    Ship 118'.b — reads applicability_status_log for historical
+    reconstruction when the date is in the recording window. Prior to
+    the tracking start date, we can only report the current state.
     """
+    # Case 1: current
+    if as_of_sql is None:
+        cur.execute(
+            """
+            SELECT standard_id, control_ref, applicability_status, applicability_reason
+              FROM posture_controls
+             WHERE tenant_id = %s::uuid
+               AND is_active = TRUE
+            """,
+            (tenant_id,),
+        )
+        return (
+            {(std, ref): (status, reason) for std, ref, status, reason in cur.fetchall()},
+            "full",
+        )
+
+    # Case 2: historical — check coverage window first
+    tracking_start = APPLICABILITY_TRACKING_BEGAN
+    asked_date = date.fromisoformat(as_of_label[:10]) if len(as_of_label) >= 10 else None
+    if tracking_start is None or asked_date is None or asked_date < tracking_start:
+        # Fall back to current-only
+        cur.execute(
+            """
+            SELECT standard_id, control_ref, applicability_status, applicability_reason
+              FROM posture_controls
+             WHERE tenant_id = %s::uuid
+               AND is_active = TRUE
+            """,
+            (tenant_id,),
+        )
+        return (
+            {(std, ref): (status, reason) for std, ref, status, reason in cur.fetchall()},
+            "current-only",
+        )
+
+    # Case 3: historical + in coverage window — reconstruct from log.
+    # For each (standard, control), find the most recent log entry
+    # with changed_at <= as_of. If none, the control has never had a
+    # log entry (meaning it's been at its schema default 'applicable'
+    # since tracking began — safe to report as 'applicable').
     cur.execute(
         """
-        SELECT standard_id, control_ref, applicability_status, applicability_reason
-          FROM posture_controls
-         WHERE tenant_id = %s::uuid
-           AND is_active = TRUE
+        WITH tenant_controls AS (
+            SELECT DISTINCT standard_id, control_ref
+              FROM posture_controls
+             WHERE tenant_id = %s::uuid AND is_active = TRUE
+        ),
+        latest_log AS (
+            SELECT DISTINCT ON (standard_id, control_ref)
+                   standard_id, control_ref, status_after, reason_after
+              FROM applicability_status_log
+             WHERE tenant_id = %s::uuid
+               AND changed_at <= %s::timestamptz
+             ORDER BY standard_id, control_ref, changed_at DESC
+        )
+        SELECT tc.standard_id, tc.control_ref,
+               COALESCE(ll.status_after, 'applicable') AS status,
+               ll.reason_after AS reason
+          FROM tenant_controls tc
+          LEFT JOIN latest_log ll USING (standard_id, control_ref)
         """,
-        (tenant_id,),
+        (tenant_id, tenant_id, as_of_sql),
     )
-    return {
-        (std, ref): (status, reason)
-        for std, ref, status, reason in cur.fetchall()
-    }
+    return (
+        {(std, ref): (status, reason) for std, ref, status, reason in cur.fetchall()},
+        "full",
+    )
 
 
 def _fetch_tenant_meta(cur, tenant_id: str) -> tuple[str, str | None]:
@@ -304,7 +366,9 @@ def snapshot_posture(
         assertions   = _fetch_findings_snapshot(cur, tenant_id, as_of_sql)
         evidence     = _fetch_evidence_snapshot(cur, tenant_id, as_of_sql)
         cascade_open = _fetch_cascade_open_snapshot(cur, tenant_id, as_of_sql)
-        applicability = _fetch_applicability_current(cur, tenant_id)
+        applicability, applicability_coverage = _fetch_applicability_snapshot(
+            cur, tenant_id, as_of_sql, as_of_label,
+        )
 
         # posture_controls rows the tenant is enrolled against, so we can
         # emit "Not assessed" for controls that never had an assertion.
@@ -327,10 +391,16 @@ def snapshot_posture(
         if APPLICABILITY_TRACKING_BEGAN
         else "(Ship 118prime.b, not yet shipped)"
     )
-    applicability_note = (
-        "Applicability shown is current state; "
-        "historical tracking begins " + _track_start
-    )
+    if applicability_coverage == "full":
+        applicability_note = (
+            "Applicability reconstructed from applicability_status_log "
+            "— reflects state at requested date."
+        )
+    else:
+        applicability_note = (
+            "Applicability shown is current state; "
+            "historical tracking begins " + _track_start
+        )
     for std, ref, node_id in all_controls:
         key = (std, ref)
 
@@ -376,14 +446,23 @@ def snapshot_posture(
             "note":     "fired_at + resolved_at reconstruct open follow-ups.",
         },
         "applicability_status": {
-            "coverage": "current-only",
-            "source":   "posture_controls (mutable)",
-            "note":     "Historical tracking added in Ship 118'.b.",
+            "coverage": applicability_coverage,
+            "source":   ("applicability_status_log (Ship 118'.b)"
+                         if applicability_coverage == "full"
+                         else "posture_controls (current-only fallback)"),
+            "note":     ("Full reconstruction from log."
+                         if applicability_coverage == "full"
+                         else f"Requested date is before tracking start "
+                              f"({_track_start}); showing current state."),
         },
         "scoping_facts": {
-            "coverage": "current-only",
-            "source":   "client_facts + fact_source jsonb",
-            "note":     "Historical tracking added in Ship 118'.b.",
+            "coverage": ("full" if (
+                as_of_sql is not None
+                and SCOPING_TRACKING_BEGAN is not None
+                and date.fromisoformat(as_of_label[:10]) >= SCOPING_TRACKING_BEGAN
+            ) else "current-only"),
+            "source":   "client_facts_log (Ship 118'.b)",
+            "note":     "Point-in-time scoping-fact reconstruction: query client_facts_log directly.",
         },
     }
 

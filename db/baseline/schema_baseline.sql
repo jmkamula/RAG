@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-04T15:19:06Z from HEAD d20e85b8 by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-05T17:33:48Z from HEAD 778d7dcc by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 1Fyc0JUNnLuDV7qXy6ZYfiLyEJQdz8F2odL6ngkqRoQbVbfiO5ZI2WG1PrKNhAb
+\restrict lSplCprEum7lTbjTYDUQtpby5sE74BuR3c8MaEM49lZJFQVdJdjA57DnuKaBSDd
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -793,6 +793,29 @@ COMMENT ON COLUMN public.api_rate_limit_bucket.window_start IS 'Start of the cur
 
 
 --
+-- Name: applicability_status_log; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.applicability_status_log (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tenant_id uuid NOT NULL,
+    standard_id text NOT NULL,
+    control_ref text NOT NULL,
+    status_before text,
+    status_after text NOT NULL,
+    reason_before text,
+    reason_after text,
+    rule_id text,
+    change_source text DEFAULT 'derive_applicability'::text NOT NULL,
+    changed_at timestamp with time zone DEFAULT now() NOT NULL,
+    changed_by uuid,
+    CONSTRAINT applicability_status_log_change_source_check CHECK ((change_source = ANY (ARRAY['derive_applicability'::text, 'framework_enrol'::text, 'manual'::text, 'backfill'::text]))),
+    CONSTRAINT applicability_status_log_status_after_check CHECK ((status_after = ANY (ARRAY['applicable'::text, 'na'::text]))),
+    CONSTRAINT applicability_status_log_status_before_check CHECK (((status_before IS NULL) OR (status_before = ANY (ARRAY['applicable'::text, 'na'::text]))))
+);
+
+
+--
 -- Name: applicable_standards; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1365,6 +1388,25 @@ CREATE TABLE public.client_facts (
     CONSTRAINT client_facts_employee_size_bucket_check CHECK (((employee_size_bucket IS NULL) OR (employee_size_bucket = ANY (ARRAY['small'::text, 'medium'::text, 'large'::text])))),
     CONSTRAINT client_facts_journey_status_check CHECK (((journey_status IS NULL) OR (journey_status = ANY (ARRAY['greenfield'::text, 'building'::text, 'documented'::text, 'audited'::text, 'mature'::text])))),
     CONSTRAINT client_facts_sector_check CHECK (((sector IS NULL) OR (sector = ANY (ARRAY['energy'::text, 'transport'::text, 'banking'::text, 'finance_markets'::text, 'health'::text, 'water'::text, 'digital_infra'::text, 'ict_services'::text, 'public_admin'::text, 'space'::text, 'postal_courier'::text, 'waste_management'::text, 'chemicals'::text, 'food'::text, 'manufacturing'::text, 'digital_providers'::text, 'research'::text, 'retail'::text, 'professional'::text, 'nonprofit'::text, 'other'::text]))))
+);
+
+
+--
+-- Name: client_facts_log; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.client_facts_log (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    tenant_id uuid NOT NULL,
+    column_name text NOT NULL,
+    value_before text,
+    value_after text,
+    source_before text,
+    source_after text,
+    change_source text NOT NULL,
+    changed_at timestamp with time zone DEFAULT now() NOT NULL,
+    changed_by uuid,
+    CONSTRAINT client_facts_log_change_source_check CHECK ((change_source = ANY (ARRAY['user_put'::text, 'quickstart_init'::text, 'backfill_script'::text, 'admin'::text, 'derivation'::text])))
 );
 
 
@@ -4436,6 +4478,14 @@ ALTER TABLE ONLY public.api_rate_limit_bucket
 
 
 --
+-- Name: applicability_status_log applicability_status_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.applicability_status_log
+    ADD CONSTRAINT applicability_status_log_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: applicable_standards applicable_standards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4561,6 +4611,14 @@ ALTER TABLE ONLY public.client_documents
 
 ALTER TABLE ONLY public.client_fact_change_log
     ADD CONSTRAINT client_fact_change_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: client_facts_log client_facts_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.client_facts_log
+    ADD CONSTRAINT client_facts_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -5444,6 +5502,20 @@ CREATE INDEX idx_api_keys_tenant ON public.api_keys USING btree (tenant_id) WHER
 
 
 --
+-- Name: idx_applicability_log_lookup; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_applicability_log_lookup ON public.applicability_status_log USING btree (tenant_id, standard_id, control_ref, changed_at DESC);
+
+
+--
+-- Name: idx_applicability_log_tenant_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_applicability_log_tenant_time ON public.applicability_status_log USING btree (tenant_id, changed_at DESC);
+
+
+--
 -- Name: idx_assets_active; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5588,6 +5660,20 @@ CREATE INDEX idx_client_fact_change_log_fact ON public.client_fact_change_log US
 --
 
 CREATE INDEX idx_client_fact_change_log_tenant_fired ON public.client_fact_change_log USING btree (tenant_id, fired_at DESC);
+
+
+--
+-- Name: idx_client_facts_log_column; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_client_facts_log_column ON public.client_facts_log USING btree (tenant_id, column_name, changed_at DESC);
+
+
+--
+-- Name: idx_client_facts_log_tenant_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_client_facts_log_tenant_time ON public.client_facts_log USING btree (tenant_id, changed_at DESC);
 
 
 --
@@ -7437,6 +7523,14 @@ ALTER TABLE ONLY public.api_rate_limit_bucket
 
 
 --
+-- Name: applicability_status_log applicability_status_log_tenant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.applicability_status_log
+    ADD CONSTRAINT applicability_status_log_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id);
+
+
+--
 -- Name: applicable_standards applicable_standards_deleted_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7578,6 +7672,14 @@ ALTER TABLE ONLY public.client_fact_change_log
 
 ALTER TABLE ONLY public.client_facts
     ADD CONSTRAINT client_facts_deleted_by_fkey FOREIGN KEY (deleted_by) REFERENCES public.users(id);
+
+
+--
+-- Name: client_facts_log client_facts_log_tenant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.client_facts_log
+    ADD CONSTRAINT client_facts_log_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id);
 
 
 --
@@ -8572,10 +8674,24 @@ CREATE POLICY app_all_api_keys ON public.api_keys TO arioncomply_app USING (true
 
 
 --
+-- Name: applicability_status_log app_all_applicability_status_log; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY app_all_applicability_status_log ON public.applicability_status_log TO arioncomply_app USING (true) WITH CHECK (true);
+
+
+--
 -- Name: client_documents app_all_client_docs; Type: POLICY; Schema: public; Owner: -
 --
 
 CREATE POLICY app_all_client_docs ON public.client_documents TO arioncomply_app USING (true) WITH CHECK (true);
+
+
+--
+-- Name: client_facts_log app_all_client_facts_log; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY app_all_client_facts_log ON public.client_facts_log TO arioncomply_app USING (true) WITH CHECK (true);
 
 
 --
@@ -8740,6 +8856,12 @@ CREATE POLICY app_triggered_implication_all ON public.triggered_implication TO a
 
 
 --
+-- Name: applicability_status_log; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.applicability_status_log ENABLE ROW LEVEL SECURITY;
+
+--
 -- Name: applicable_standards; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
@@ -8819,6 +8941,12 @@ ALTER TABLE public.client_fact_change_log ENABLE ROW LEVEL SECURITY;
 --
 
 ALTER TABLE public.client_facts ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: client_facts_log; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.client_facts_log ENABLE ROW LEVEL SECURITY;
 
 --
 -- Name: confirmation_log; Type: ROW SECURITY; Schema: public; Owner: -
@@ -9461,5 +9589,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 1Fyc0JUNnLuDV7qXy6ZYfiLyEJQdz8F2odL6ngkqRoQbVbfiO5ZI2WG1PrKNhAb
+\unrestrict lSplCprEum7lTbjTYDUQtpby5sE74BuR3c8MaEM49lZJFQVdJdjA57DnuKaBSDd
 

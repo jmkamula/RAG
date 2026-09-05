@@ -327,9 +327,30 @@ def _clear_derived_na(pg_conn, tenant_id: str) -> int:
     (our only writer). Manual overrides — when we add them — will use
     a separate applicability_source column so this UPDATE doesn't
     clobber them.
+
+    Ship 118'.b — logs every cleared row to applicability_status_log
+    so point-in-time posture reconstruction can distinguish "was N/A
+    on that date" from "is N/A today".
     """
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+        # Step 1: capture prior state of rows we're about to clear.
+        # (Two-step because Postgres RETURNING gives NEW values after
+        # UPDATE, so a RETURNING would give NULL for the reason we
+        # want to log as reason_before.)
+        cur.execute("""
+            SELECT standard_id, control_ref, applicability_reason
+              FROM posture_controls
+             WHERE tenant_id = %s::uuid
+               AND applicability_status = 'na'
+               AND applicability_reason IS NOT NULL
+        """, (tenant_id,))
+        cleared_rows = cur.fetchall()
+
+        if not cleared_rows:
+            return 0
+
+        # Step 2: clear.
         cur.execute("""
             UPDATE posture_controls
                SET applicability_status = 'applicable',
@@ -338,19 +359,65 @@ def _clear_derived_na(pg_conn, tenant_id: str) -> int:
                AND applicability_status = 'na'
                AND applicability_reason IS NOT NULL
         """, (tenant_id,))
-        return cur.rowcount
+        n_cleared = cur.rowcount
+
+        # Step 3: log each cleared row.
+        for std, ref, prior_reason in cleared_rows:
+            cur.execute("""
+                INSERT INTO applicability_status_log (
+                    tenant_id, standard_id, control_ref,
+                    status_before, status_after,
+                    reason_before, reason_after,
+                    rule_id, change_source
+                ) VALUES (%s, %s, %s, 'na', 'applicable', %s, NULL, %s, 'derive_applicability')
+            """, (tenant_id, std, ref, prior_reason, _rule_id_from_reason(prior_reason)))
+
+        return n_cleared
+
+
+def _rule_id_from_reason(reason: str | None) -> str | None:
+    """Extract rule_id from an applicability_reason of the shape
+    "[rule_id] Human-readable reason." — Ship 110'.d convention.
+    Returns None when reason is unrecognised.
+    """
+    if not reason:
+        return None
+    if reason.startswith("[") and "]" in reason:
+        return reason[1:reason.index("]")]
+    return None
 
 
 def _apply_rule(pg_conn, tenant_id: str, rule: AppRule) -> int:
     """Apply one rule — mark matching (standard_id, control_ref) rows
     N/A with reason. Returns number of rows updated (across all target
     scopes for this rule).
+
+    Ship 118'.b — logs every changed row to applicability_status_log.
+    A row is considered changed when EITHER the status flips OR the
+    reason text differs (a re-derivation with the same rule against
+    an already-N/A control produces no log entry — same status, same
+    reason).
     """
     reason_text = f"[{rule.id}] {rule.reason}"
     total = 0
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         for target in rule.targets:
+            # Step 1: capture prior state of rows we'll change.
+            cur.execute("""
+                SELECT standard_id, control_ref,
+                       applicability_status, applicability_reason
+                  FROM posture_controls
+                 WHERE tenant_id  = %s::uuid
+                   AND standard_id = %s
+                   AND control_ref LIKE %s
+                   AND is_active
+                   AND (applicability_status != 'na'
+                        OR applicability_reason IS DISTINCT FROM %s)
+            """, (tenant_id, target.standard_id, target.ref_pattern, reason_text))
+            changing_rows = cur.fetchall()
+
+            # Step 2: apply update.
             cur.execute("""
                 UPDATE posture_controls
                    SET applicability_status = 'na',
@@ -359,10 +426,19 @@ def _apply_rule(pg_conn, tenant_id: str, rule: AppRule) -> int:
                    AND standard_id = %s
                    AND control_ref LIKE %s
                    AND is_active
-                   -- Never override a manually-set applicability outcome.
-                   -- (Placeholder for future applicability_source column.)
             """, (reason_text, tenant_id, target.standard_id, target.ref_pattern))
             total += cur.rowcount
+
+            # Step 3: log each changed row.
+            for std, ref, prev_status, prev_reason in changing_rows:
+                cur.execute("""
+                    INSERT INTO applicability_status_log (
+                        tenant_id, standard_id, control_ref,
+                        status_before, status_after,
+                        reason_before, reason_after,
+                        rule_id, change_source
+                    ) VALUES (%s, %s, %s, %s, 'na', %s, %s, %s, 'derive_applicability')
+                """, (tenant_id, std, ref, prev_status, prev_reason, reason_text, rule.id))
     return total
 
 

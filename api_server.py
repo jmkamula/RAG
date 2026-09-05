@@ -6080,10 +6080,33 @@ async def put_tenant_facts(
                 ON CONFLICT (tenant_id) DO NOTHING
             """, (key_info.tenant_id,))
 
+            all_updates = {**bool_updates, **text_updates}
+
+            # Ship 118'.b — capture prior state per column for the
+            # audit log. One SELECT with dynamic column list so we
+            # can compare old vs new + report source_before/after.
+            _cols_sql  = ", ".join(all_updates.keys())
+            cur.execute(f"""
+                SELECT {_cols_sql}, fact_source
+                  FROM client_facts
+                 WHERE tenant_id = %s
+                 LIMIT 1
+            """, (key_info.tenant_id,))
+            prior_row = cur.fetchone()
+            prior_values: dict = {}
+            prior_source_map: dict = {}
+            if prior_row:
+                col_names = list(all_updates.keys())
+                for i, name in enumerate(col_names):
+                    prior_values[name] = prior_row[i]
+                prior_fact_source = prior_row[len(col_names)] or {}
+                for name in col_names:
+                    marker = (prior_fact_source or {}).get(name)
+                    prior_source_map[name] = (marker or {}).get("source")
+
             # Build UPDATE with dynamic column list + fact_source patch
             set_pairs: list[str] = []
             params:    list = []
-            all_updates = {**bool_updates, **text_updates}
             for col, val in all_updates.items():
                 set_pairs.append(f"{col} = %s")
                 params.append(val)
@@ -6103,6 +6126,30 @@ async def put_tenant_facts(
                    SET {", ".join(set_pairs)}
                  WHERE tenant_id = %s
             """, params)
+
+            # Ship 118'.b — append one row per changed column to
+            # client_facts_log. A column is "changed" if either the
+            # value OR the source marker moved. Idempotent PUTs
+            # (same value + same declared source) produce no log entry.
+            for col, new_val in all_updates.items():
+                prev_val    = prior_values.get(col)
+                prev_source = prior_source_map.get(col)
+                if prev_val == new_val and prev_source == "declared":
+                    continue
+                cur.execute("""
+                    INSERT INTO client_facts_log (
+                        tenant_id, column_name,
+                        value_before, value_after,
+                        source_before, source_after,
+                        change_source, changed_by
+                    ) VALUES (%s, %s, %s, %s, %s, 'declared', 'user_put', %s)
+                """, (
+                    key_info.tenant_id, col,
+                    None if prev_val is None else str(prev_val),
+                    None if new_val  is None else str(new_val),
+                    prev_source,
+                    key_info.user_id if hasattr(key_info, 'user_id') else None,
+                ))
         conn.commit()
 
         # Ship 110'.d — re-derive applicability after any fact change.

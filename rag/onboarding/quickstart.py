@@ -395,6 +395,24 @@ def create_first_tenant(
                     ),
                 )
 
+                # Ship 118'.b — log every declared/derived initial fact
+                # so point-in-time posture reconstruction can answer
+                # "what did the tenant say at signup?".
+                for col, val in facts_values.items():
+                    src = (facts_sources.get(col) or {}).get("source", "declared")
+                    cur.execute("""
+                        INSERT INTO client_facts_log (
+                            tenant_id, column_name,
+                            value_before, value_after,
+                            source_before, source_after,
+                            change_source
+                        ) VALUES (%s, %s, NULL, %s, NULL, %s, 'quickstart_init')
+                    """, (
+                        tenant_id, col,
+                        None if val is None else str(val),
+                        src,
+                    ))
+
             pg.commit()
 
             return {
