@@ -370,6 +370,78 @@ Interactive prompts return (no `.env` to read from). Store new passwords.
 
 ---
 
+## Direct-DB verification pattern (Ship 118'.d)
+
+Per-arc scripts sometimes need to call admin endpoints during
+verification (e.g. `/api/v1/admin/derive-applicability` after Ship
+118'.b to populate the audit log). Those endpoints require an
+`ARION_DEV_API_KEY` header. That key isn't always in `.env` — the
+canonical scheme (Ship 111'.a) only guarantees `ARION_OWNER_PW`.
+
+**Preferred pattern**: write a small Python utility under
+`scripts/dev/` that connects as the arioncomply owner role (using
+`ARION_OWNER_PW`, always present) and calls the same underlying
+function the HTTP endpoint calls. The ship script invokes the utility
+directly — no key needed, no HTTP layer needed.
+
+Example (Ship 118'.d — `scripts/dev/trigger_applicability_sweep.py`):
+
+```python
+def _owner_conn():
+    u = urlparse(os.getenv("DATABASE_URL"))
+    return psycopg2.connect(
+        host=u.hostname, port=u.port or 5432,
+        user="arioncomply",
+        password=os.getenv("ARION_OWNER_PW") or unquote(u.password or ""),
+        dbname=(u.path or "/arioncomply_compliance").lstrip("/"),
+    )
+
+conn = _owner_conn()
+for tenant_id in _all_active_tenants(conn):
+    r = derive_applicability(conn, tenant_id)   # same code as HTTP endpoint
+    conn.commit()
+```
+
+Ship script then calls it:
+
+```bash
+if [[ -x scripts/dev/trigger_applicability_sweep.py ]]; then
+    set -a; source .env; set +a
+    PYTHONPATH=. python3 scripts/dev/trigger_applicability_sweep.py
+fi
+```
+
+**Why not add ARION_DEV_API_KEY to `.env`?** — that's a proper design
+change tracked as an open item below (needs a scoped ops-API-key
+type + init-secrets.sh integration). The direct-DB pattern is the
+right unblocking approach in the meantime.
+
+## Open design gap: ops-scoped API key
+
+Ship 118'.d surfaced this: ship scripts benefit from a scoped ops
+key for post-deploy verification (spot-check endpoints, trigger
+recomputes, etc.). Today's API keys are tenant-scoped + created via
+the Quickstart flow — no "system operator" key exists.
+
+Options for a future arc to consider:
+
+- **A** — extend `init-secrets.sh` with `--emit-admin-key` flag that
+  generates + stashes a scoped admin key (scopes: `admin:status`,
+  `admin:posture`, `admin:facts`) tied to a well-known "ops" user
+  identity. Would require:
+  - A schema for tenant-less API keys OR a fixed "ops" tenant
+  - Scope-level RLS rules that let ops keys read across tenants for
+    admin endpoints only
+- **B** — leave the direct-DB pattern (Ship 118'.d) as the canonical
+  approach and never issue a system-operator key. Every ops action
+  either uses `ARION_OWNER_PW` for admin operations or borrows a
+  tenant's admin key for tenant-scoped operations.
+
+Direct-DB has security appeal (no long-lived cross-tenant HTTP key
+sitting in `.env`) but limits ops actions to what has a Python
+utility. Ops key would be more flexible but adds a durable elevated
+credential to the box.
+
 ## Convention: per-arc deploy scripts (`scripts/ops/ship-N-poc-update.sh`)
 
 Every ship that touches the customer box gets its own script. Established by Ship 113'.d, hardened by Ship 114'.d. Design principles:

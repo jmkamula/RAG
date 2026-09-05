@@ -63,27 +63,23 @@ sudo -u postgres psql -d arioncomply_compliance -c \
       ORDER BY table_name;"
 
 # ── 6. Trigger derive-applicability so the log gets its first rows ──
-# Without doing this, applicability_status_log would be empty and the
-# snapshot's HTML would report "no history" for controls that flipped
-# yesterday. Idempotent — re-firing a rule with same result no-ops.
+# Without doing this, applicability_status_log would be empty until
+# the next fact PUT + snapshot would report "no history" for controls
+# that flipped previously. Idempotent — re-firing a rule with same
+# result no-ops (Ship 118'.b Lesson 215).
+#
+# Ship 118'.d: prefer the direct-DB utility (uses ARION_OWNER_PW,
+# always present since Ship 111'.a) over the HTTP endpoint (which
+# needs an ARION_DEV_API_KEY that may not be stashed on every box).
 echo
 echo "=== 6. Trigger derive-applicability sweep (populates log) ==="
-# Use an api key if one exists in .env; otherwise skip and note.
-API_KEY=""
-if [[ -f .env ]]; then
-    API_KEY=$(grep -E '^ARION_DEV_API_KEY=' .env 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' || true)
-fi
-if [[ -n "$API_KEY" ]]; then
-    curl -sf -X POST http://127.0.0.1:8080/api/v1/admin/derive-applicability \
-        -H "X-API-Key: $API_KEY" \
-    | python3 -c "
-import sys, json
-d = json.load(sys.stdin)
-print(f\"  rules_fired: {d['rules_fired']}\")
-print(f\"  controls_cleared: {d['controls_cleared']}, controls_na_set: {d['controls_na_set']}\")
-" || echo "  (derive call failed — non-critical, next fact PUT will populate the log)"
+if [[ -x scripts/dev/trigger_applicability_sweep.py ]]; then
+    set -a; source .env; set +a
+    PYTHONPATH=. python3 scripts/dev/trigger_applicability_sweep.py \
+    || echo "  (sweep utility failed — non-critical, next fact PUT will populate the log)"
 else
-    echo "  (skipped — no ARION_DEV_API_KEY in .env; log populates on next fact PUT)"
+    echo "  (scripts/dev/trigger_applicability_sweep.py not present — skipping;"
+    echo "   log will populate on next fact PUT)"
 fi
 
 # ── 7. Row counts in the new tables ──────────────────────────────
