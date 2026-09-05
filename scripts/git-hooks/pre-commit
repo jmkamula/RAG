@@ -104,4 +104,70 @@ if [[ -n "$chroma_matched" ]]; then
     echo "  Run manually before release:  bash scripts/build_chroma_baseline.sh"
 fi
 
+# ── Ship 121'.c — blanket-grant guard ─────────────────────────────
+#
+# Ship 120' found that `deploy/baseline_grants.sql` had a blanket
+# `GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA
+# public TO arioncomply_app` that silently clobbered every per-table
+# REVOKE from schema_v21 / v79 / v115 / v116. The fix was one
+# post-blanket DO block in baseline_grants.sql. This guard prevents
+# a NEW blanket grant from re-opening the same drift — a fresh
+# install script, ops helper, or migration that grants ALL PRIVILEGES
+# on ALL TABLES to arioncomply_app would silently regress the fix.
+#
+# The one legitimate blanket grant (in `deploy/baseline_grants.sql`)
+# is exempted by name.
+blanket_grant_matches=$(git diff --cached --name-only --diff-filter=ACMR -- \
+    '*.sql' 'deploy/' 'scripts/' 2>/dev/null | while read -r f; do
+    [[ -z "$f" || ! -f "$f" ]] && continue
+    # Only flag the specific dangerous shape: DELETE (or ALL) on ALL TABLES to arioncomply_app.
+    # Whitelist the one intended site.
+    if [[ "$f" == "deploy/baseline_grants.sql" ]]; then continue; fi
+    if grep -nE 'GRANT[^;]*(\bDELETE\b|\bALL PRIVILEGES\b|\bALL\b)[^;]*ON ALL TABLES[^;]*TO[^;]*arioncomply_app' "$f" > /dev/null 2>&1; then
+        grep -nE 'GRANT[^;]*(\bDELETE\b|\bALL PRIVILEGES\b|\bALL\b)[^;]*ON ALL TABLES[^;]*TO[^;]*arioncomply_app' "$f" | sed "s|^|  $f:|"
+    fi
+done)
+if [[ -n "$blanket_grant_matches" ]]; then
+    echo "[pre-commit] ✗ blanket GRANT ... ON ALL TABLES ... TO arioncomply_app detected"
+    echo "$blanket_grant_matches"
+    echo
+    echo "  This shape silently clobbers the per-table REVOKEs in the compliance"
+    echo "  audit-log discipline (Ship 120'). Enumerate per table instead, or add"
+    echo "  a post-blanket REVOKE block that restores intended shape."
+    echo "  Bypass with SKIP_GOLDEN_REBUILD=1 or --no-verify only if the shape is"
+    echo "  intentional AND baseline_grants.sql restores the affected audit tables."
+    exit 1
+fi
+
+# ── Ship 121'.d — schema_v* over-grant guard ──────────────────────
+#
+# Mirror of 121'.c: catches a migration file that CREATES a new
+# audit-shape table and grants too much (UPDATE or DELETE) on it in
+# the same file. Uses a heuristic — tables whose name ends in `_log`
+# or `_audit` — because they're the ones compliance-load-bearing by
+# convention.
+#
+# Escape hatch: put `-- APPEND-ONLY-EXEMPT` on the same line as the
+# GRANT if the table is deliberately not append-only.
+schema_over_grants=$(git diff --cached --name-only --diff-filter=ACMR -- \
+    'db/schema_v*.sql' 2>/dev/null | while read -r f; do
+    [[ -z "$f" || ! -f "$f" ]] && continue
+    grep -nE 'GRANT[^;]*(\bUPDATE\b|\bDELETE\b|\bALL\b)[^;]*ON[[:space:]]+[a-zA-Z_.]*(_log|_audit)[[:space:]]+TO[[:space:]]+arioncomply_app' "$f" 2>/dev/null | \
+        grep -v 'APPEND-ONLY-EXEMPT' | \
+        sed "s|^|  $f:|"
+done)
+if [[ -n "$schema_over_grants" ]]; then
+    echo "[pre-commit] ✗ audit-shape table granted UPDATE/DELETE to arioncomply_app"
+    echo "$schema_over_grants"
+    echo
+    echo "  Tables named *_log or *_audit are compliance-load-bearing by convention."
+    echo "  Options:"
+    echo "    · Change the GRANT to (SELECT, INSERT) only + register the table in"
+    echo "      tests/test_audit_table_grants.py APPEND_ONLY_AUDIT_TABLES + add a"
+    echo "      matching REVOKE line to deploy/baseline_grants.sql."
+    echo "    · If the table is legitimately not append-only, add"
+    echo "      '-- APPEND-ONLY-EXEMPT' comment on the same line as the GRANT."
+    exit 1
+fi
+
 exit 0

@@ -82,11 +82,17 @@ ALTER DEFAULT PRIVILEGES FOR ROLE arioncomply IN SCHEMA public
 --
 --   Compliance-load-bearing (append-only auditor evidence, no
 --   silent history rewrites, no silent history erasure):
---     * posture_status_log         — INSERT + SELECT only  (schema_v21 + v79)
---     * applicability_status_log   — INSERT + SELECT only  (schema_v115)
---     * client_facts_log           — INSERT + SELECT only  (schema_v115)
---     * audit_ledger_download_token — SELECT + INSERT + UPDATE (UPDATE for
---       counter/revoke), never DELETE                    (schema_v116)
+--     * posture_status_log                — INSERT + SELECT only  (schema_v21 + v79)
+--     * applicability_status_log          — INSERT + SELECT only  (schema_v115)
+--     * client_facts_log                  — INSERT + SELECT only  (schema_v115)
+--     * audit_log                         — INSERT + SELECT only  (Ship 121')
+--     * confirmation_log                  — INSERT + SELECT only  (Ship 121')
+--     * deletion_log                      — INSERT + SELECT only  (Ship 121'; erasure provenance)
+--     * cascade_suppression_log           — INSERT + SELECT only  (Ship 121')
+--     * client_fact_change_log            — INSERT + SELECT only  (Ship 121'; cascade-driven fact mutations)
+--     * external_evidence_verification_log — INSERT + SELECT only (Ship 121')
+--     * audit_ledger_download_token       — SELECT + INSERT + UPDATE (UPDATE for
+--                                           counter/revoke), never DELETE (schema_v116)
 --
 --   Diagnostic (retention-eligible; NOT compliance evidence):
 --     * ai_call_log                — SELECT + INSERT + DELETE  (schema_v79)
@@ -94,6 +100,8 @@ ALTER DEFAULT PRIVILEGES FOR ROLE arioncomply IN SCHEMA public
 --     * chat_consensus_log         — SELECT + INSERT + DELETE  (schema_v79)
 --     * fact_recompute_log         — SELECT + INSERT + DELETE  (schema_v79)
 --     * intake_trace_log           — SELECT + INSERT + DELETE  (schema_v79)
+--     * intake_consensus_log       — SELECT + INSERT + DELETE  (Ship 121')
+--     * request_trace_log          — SELECT + INSERT + DELETE  (Ship 121')
 --
 -- Using to_regclass() guard so this block is safe on older customer
 -- boxes that haven't yet applied every schema_v* — silently no-ops
@@ -106,7 +114,13 @@ BEGIN
     FOR t IN SELECT unnest(ARRAY[
         'posture_status_log',
         'applicability_status_log',
-        'client_facts_log'
+        'client_facts_log',
+        'audit_log',
+        'confirmation_log',
+        'deletion_log',
+        'cascade_suppression_log',
+        'client_fact_change_log',
+        'external_evidence_verification_log'
     ]) LOOP
         IF to_regclass('public.' || quote_ident(t)) IS NOT NULL THEN
             EXECUTE format(
@@ -127,7 +141,9 @@ BEGIN
         'chat_casefile_log',
         'chat_consensus_log',
         'fact_recompute_log',
-        'intake_trace_log'
+        'intake_trace_log',
+        'intake_consensus_log',
+        'request_trace_log'
     ]) LOOP
         IF to_regclass('public.' || quote_ident(t)) IS NOT NULL THEN
             EXECUTE format(

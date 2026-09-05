@@ -40,9 +40,17 @@ import psycopg2
 # test catches the mismatch.
 
 APPEND_ONLY_AUDIT_TABLES = {
+    # Ship 4'.b / v21 / v79 / v115 originals
     'posture_status_log':       {'SELECT', 'INSERT'},
     'applicability_status_log': {'SELECT', 'INSERT'},
     'client_facts_log':         {'SELECT', 'INSERT'},
+    # Ship 121' additions — classified from schema inspection + comments
+    'audit_log':                          {'SELECT', 'INSERT'},  # system-wide who/what/old/new
+    'confirmation_log':                   {'SELECT', 'INSERT'},  # tenant posture-change confirmations
+    'deletion_log':                       {'SELECT', 'INSERT'},  # deletion provenance / erasure record
+    'cascade_suppression_log':            {'SELECT', 'INSERT'},  # per COMMENT: "for auditor explanation"
+    'client_fact_change_log':             {'SELECT', 'INSERT'},  # per COMMENT: "Append-only audit"
+    'external_evidence_verification_log': {'SELECT', 'INSERT'},  # per COMMENT: "Append-only audit history"
 }
 
 # Auditor-package tokens are append-only-with-status: INSERT + SELECT
@@ -58,6 +66,9 @@ DIAGNOSTIC_LOG_TABLES = {
     'chat_consensus_log': {'SELECT', 'INSERT', 'DELETE'},
     'fact_recompute_log': {'SELECT', 'INSERT', 'DELETE'},
     'intake_trace_log':   {'SELECT', 'INSERT', 'DELETE'},
+    # Ship 121' additions
+    'intake_consensus_log': {'SELECT', 'INSERT', 'DELETE'},  # per COMMENT: "Diagnostic log for Ship 33"
+    'request_trace_log':    {'SELECT', 'INSERT', 'DELETE'},  # chat routing observability
 }
 
 ALL_EXPECTED = {
@@ -189,11 +200,22 @@ def test_no_new_audit_table_slipped_in_unclassified():
     classified = set(ALL_EXPECTED.keys())
     # Known non-audit tables that end in _log by coincidence.
     known_non_audit = {
-        'sweep_log',           # ops health, no compliance role
+        'sweep_log',                  # ops health, no compliance role
         'notification_delivery_log',  # if it exists — retention-eligible
         'stage1_review_chat_log',     # historic; may not exist
+        # Ship 121' — audit_log is compliance-load-bearing (classified above),
+        # but its partitions are named `audit_log_YYYY_MM` and inherit grants.
+        # Filter them so the soft-warn doesn't complain per partition.
     }
-    unclassified = all_log_shapes - classified - known_non_audit
+    # Filter partitioned children (e.g. `audit_log_2026_09`) from the
+    # unclassified set — the parent table's grants cascade to partitions.
+    unclassified = {
+        n for n in all_log_shapes
+        if n not in classified
+        and n not in known_non_audit
+        and not any(n.startswith(p + '_') and n[len(p) + 1:].replace('_', '').isdigit()
+                    for p in classified)
+    }
     if unclassified:
         # Not a hard fail — surfaces in the run output for review.
         print(
