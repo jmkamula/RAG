@@ -252,6 +252,7 @@ footer a { color: var(--accent-fg); }
     <li><a href="#scoping">Scoping &amp; applicability</a></li>
     <li><a href="#chat">The conversational surface</a></li>
     <li><a href="#cascade">Cascade engine</a></li>
+    <li><a href="#audit">Audit trail &amp; auditor deliverables</a></li>
     <li><a href="#multitenant">Multi-tenant, multi-framework</a></li>
     <li><a href="#collab">Human&ndash;AI collaboration</a></li>
     <li><a href="#build">How we build</a></li>
@@ -317,6 +318,7 @@ and every audit begins with the same question &mdash;
   <div class="stat"><span class="num">800+</span><span class="label">must-contain items</span></div>
   <div class="stat"><span class="num">500+</span><span class="label">typed cross-framework edges</span></div>
   <div class="stat"><span class="num">53</span><span class="label">cascade event types</span></div>
+  <div class="stat"><span class="num">17</span><span class="label">grant-locked audit tables</span></div>
   <div class="stat"><span class="num">237/238</span><span class="label">eval baseline</span></div>
 </div>
 
@@ -423,6 +425,17 @@ owner, and evidence linked to it.
     missing citations or verdict markers &mdash; but the LLM's prose is
     never rewritten. The audit trail shows what the model said and what the
     deterministic layer added, both preserved.
+  </li>
+  <li>
+    <strong>Reconstructable from storage, not from memory.</strong> Every
+    compliance-load-bearing decision is stored with enough time-fidelity
+    that a future query can reconstruct the state as of any past date.
+    Point-in-time posture is a property of the storage layer, not a
+    reporting feature bolted on later. The corollary: audit-log tables have
+    UPDATE and DELETE explicitly revoked from the application role &mdash;
+    enforced at the Postgres grant layer and locked in place by static
+    regression tests. No historic query can land on data the application
+    was allowed to silently mutate.
   </li>
 </ul>
 
@@ -985,7 +998,230 @@ staff.
 </p>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
-<h2 id="multitenant">9. Multi-tenant, multi-framework</h2>
+<h2 id="audit">9. Audit trail &amp; auditor deliverables</h2>
+
+<p>
+The most compelling artefact ArionComply produces is the one it hands to
+an external auditor. Everything upstream &mdash; the intake pipeline, the
+posture engine, the cascade implications, the human-review gates &mdash;
+exists so that <em>this</em> deliverable is defensible. Three interlocking
+capabilities make it so.
+</p>
+
+<h3>Integrity-verified audit trail</h3>
+
+<p>
+Log tables split into two disciplined shapes, enforced at the Postgres grant
+layer:
+</p>
+
+<div class="two-col">
+  <div>
+    <h4>Compliance-load-bearing (9 tables)</h4>
+    <p style="margin:6px 0"><strong>INSERT + SELECT only.</strong> The
+    application role cannot silently rewrite or erase these rows. Any
+    correction goes through an explicit superuser flow with its own
+    provenance capture.</p>
+    <ul style="font-size:13px;margin:8px 0 0;padding-left:22px">
+      <li><code>posture_status_log</code> &mdash; every posture change</li>
+      <li><code>applicability_status_log</code> &mdash; every applicability rule fire</li>
+      <li><code>client_facts_log</code> &mdash; user-driven fact changes</li>
+      <li><code>client_fact_change_log</code> &mdash; cascade-driven fact changes</li>
+      <li><code>audit_log</code> &mdash; system-wide who/what/old/new/ip</li>
+      <li><code>confirmation_log</code> &mdash; tenant posture confirmations</li>
+      <li><code>deletion_log</code> &mdash; deletion provenance</li>
+      <li><code>cascade_suppression_log</code> &mdash; paths considered but skipped</li>
+      <li><code>external_evidence_verification_log</code> &mdash; cite verifications</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Diagnostic (7 tables)</h4>
+    <p style="margin:6px 0"><strong>INSERT + SELECT + DELETE, never UPDATE.</strong>
+    These carry engineering telemetry, not compliance evidence. Retention
+    sweeps may age them out; nobody may silently rewrite an entry.</p>
+    <ul style="font-size:13px;margin:8px 0 0;padding-left:22px">
+      <li><code>ai_call_log</code> &mdash; LLM cost/latency/prompt debug</li>
+      <li><code>chat_casefile_log</code> &mdash; digest observability</li>
+      <li><code>chat_consensus_log</code> &mdash; consensus tuning</li>
+      <li><code>fact_recompute_log</code> &mdash; sweep observability</li>
+      <li><code>intake_trace_log</code> &mdash; intake pipeline QA</li>
+      <li><code>intake_consensus_log</code> &mdash; extraction consensus tuning</li>
+      <li><code>request_trace_log</code> &mdash; chat routing metadata</li>
+    </ul>
+  </div>
+</div>
+
+<p>
+A seventeenth table (<code>audit_ledger_download_token</code>) sits in a
+third narrow shape: <strong>INSERT + SELECT + UPDATE, never DELETE</strong>.
+UPDATE is needed for the times-used counter and revoke fields; DELETE is
+disallowed because token access logs are themselves auditor-defensibility
+evidence for how many times a specific auditor engagement fetched the
+ledger. Auditor access history must not disappear.
+</p>
+
+<p>
+The intended grant shape for all 17 tables is locked by
+<code>tests/test_audit_table_grants.py</code>. A pre-commit and CI-runnable
+guard (<code>scripts/ci/check_forbidden_patterns.sh</code>) prevents future
+migrations from silently regressing the discipline: any new blanket
+<code>GRANT ... ON ALL TABLES ... TO arioncomply_app</code>, or any
+<code>schema_v*</code> file granting UPDATE/DELETE on a <code>*_log</code>
+or <code>*_audit</code> table, fails the commit unless it is deliberately
+annotated with an <code>-- APPEND-ONLY-EXEMPT</code> marker explaining why.
+</p>
+
+<h3>Point-in-time posture reconstruction</h3>
+
+<p>
+Any historic moment becomes a queryable state. The snapshot module takes an
+<code>as_of</code> date and reconstructs the tenant's posture as it stood on
+that date, from three already-time-tracked sources:
+</p>
+
+<ul>
+  <li><code>posture_assertions</code> supersession trail &mdash; every finding
+    change, with reason and source captured at write time.</li>
+  <li><code>document_findings</code> lifecycle timestamps &mdash; evidence,
+    with an <code>expires_at</code> guard so stale documents don't appear
+    on historical snapshots as if they were current.</li>
+  <li><code>triggered_implication</code> &mdash; cascade follow-ups that
+    were open on that date.</li>
+</ul>
+
+<p>
+The response includes a <code>coverage_notes</code> block reporting per-axis
+reconstruction fidelity. When a query lands before the corresponding audit
+table began tracking, the snapshot honestly reports
+"applicability: current-only &mdash; historical tracking begins 2026-09-05"
+rather than misrepresenting historical state as full-reconstruction.
+</p>
+
+<p>
+Three response formats: JSON (for programmatic access), CSV (auditor
+spreadsheets), and print-optimised HTML with browser Save-as-PDF workflow
+&mdash; no server-side PDF dependency, better accessibility, URL-shareable.
+Endpoint: <code>GET /api/v1/admin/posture-snapshot?as_of=YYYY-MM-DD&amp;fmt=json|csv|html</code>.
+</p>
+
+<div class="callout amber">
+  <div class="tag">Design principle</div>
+  <p style="margin:4px 0 0">
+    Point-in-time is a <strong>property of the storage layer</strong>, not
+    a feature bolted onto reporting. The raw material was always
+    time-tracked (posture supersession trail, document lifecycle timestamps,
+    cascade implications with fired-at/resolved-at). The gap was the query
+    layer that composed them. When storage decisions are made with
+    time-fidelity in mind up front, the reporting layer can be added later
+    without data migrations.
+  </p>
+</div>
+
+<h3>Auditor's Ledger</h3>
+
+<p>
+The whole-program deliverable. When an external auditor arrives at a
+B2B customer, the tenant admin generates an <em>Auditor's Ledger</em>
+&mdash; a self-contained document that combines the point-in-time snapshot
+with cover-page provenance, per-framework tables, and a data-protection
+footer &mdash; and hands the auditor a one-time-download URL.
+</p>
+
+<p>The ledger includes:</p>
+
+<ul>
+  <li><strong>Cover page</strong> &mdash; tenant name, as-of date, generation
+    timestamp, unique <code>ledger_id</code>, auditor firm + engagement
+    reference, PII redaction level, verbatim-excerpts opt-in status.</li>
+  <li><strong>Summary grid</strong> &mdash; 8 cards showing total controls,
+    NC / OFI / Comply / N/A distribution, evidence-row count, open
+    follow-ups.</li>
+  <li><strong>Coverage notes</strong> &mdash; per-axis reconstruction
+    fidelity (as in the snapshot).</li>
+  <li><strong>Per-framework tables</strong> &mdash; one section per enrolled
+    framework, control ref + verdict pill + reason, sorted by ref.</li>
+  <li><strong>Data-protection footer + watermark</strong> &mdash; retention
+    statement, "not a certification" disclaimer, watermark with
+    <code>ledger_id</code> on every page.</li>
+</ul>
+
+<h4>Privacy discipline &mdash; data minimisation by default</h4>
+
+<p>
+The default posture is <em>redact by default, disclose by explicit choice
+per generation</em>. Every ledger generation captures its own choices; those
+choices are frozen at token creation and displayed on the cover page.
+</p>
+
+<ul>
+  <li><strong>PII redaction always on.</strong> Email, US and international
+    phone, SSN, credit card, IBAN, IPv4 addresses, Czech RČ, UK NINO, French
+    NIR are all scrubbed at the <em>default</em> level. IPv6 is scrubbed at
+    the <em>strict</em> level. Names are <em>deliberately not redacted</em>
+    &mdash; compliance depends on named accountability.</li>
+  <li><strong>User pseudonymisation always on.</strong> Reviewer and attester
+    identifiers become <code>user-XXXXXX</code> with a per-tenant salt that
+    the auditor cannot reverse (SHA-256 over
+    <code>arion-ledger-salt-v1:{tenant_id}</code>, first 32 chars).</li>
+  <li><strong>Verbatim source excerpts opt-in.</strong> When
+    <code>include_verbatim_excerpts</code> is off (default), the ledger
+    reports coverage counts and gap reasons; source-document text is not
+    included. When on, per-control excerpts appear inline &mdash; but the
+    ledger cover page states so explicitly.</li>
+</ul>
+
+<h4>One-time-download URL delivery</h4>
+
+<p>
+The auditor never gets an API key. The tenant admin generates a token via
+Profile &rarr; Auditor packages, and the resulting URL is what gets shared.
+The URL:
+</p>
+
+<ul>
+  <li>Has <strong>frozen generation parameters</strong> at token creation.
+    If the auditor fetches multiple times (up to <code>max_uses</code>),
+    the ledger regenerates with identical parameters. What the tenant
+    agreed to disclose is a stable row, not a moving target.</li>
+  <li>Has a <strong>required expiry</strong> (default 7 days). No
+    indefinite-lifetime tokens.</li>
+  <li>Is <strong>revocable</strong> at any time from the same Profile view.
+    Revocation is instant.</li>
+  <li>Has <strong>every access attempt logged</strong>, not just successful
+    downloads. Expired-token attempts, revoked-token attempts, and
+    max-uses-reached attempts all land in the access log &mdash; a URL leak
+    or retention violation becomes visible to the tenant.</li>
+</ul>
+
+<div class="callout amber">
+  <div class="tag">Design principle</div>
+  <p style="margin:4px 0 0">
+    The token row <strong>IS the acknowledgement</strong>. It carries
+    created_by, created_at, all generation parameters, label, auditor firm,
+    and engagement reference &mdash; every field a "did the tenant knowingly
+    release this?" question would need to answer. No separate
+    acknowledgement table; no log-of-a-log indirection. The UI's job is
+    to force the acknowledgement to be <em>explicit and gated</em>: a
+    prominent panel with a checkbox that must be ticked before the
+    generate button enables.
+  </p>
+</div>
+
+<h3>How the three layers compose</h3>
+
+<p>
+The integrity chain is end-to-end: the audit-log tables cannot be silently
+mutated, so <em>every past state is faithful to what happened</em>. The
+point-in-time snapshot reads that faithful trail and reconstructs
+<em>the</em> historical state, not an approximation. The Auditor's Ledger
+wraps that reconstruction with cover-page provenance and redaction, and
+delivers it through a revocable, logged, frozen-at-creation URL. Ask
+"what did you know on 14 March?" and the answer is a document the auditor
+can verify was not tampered with in transit or in generation.
+</p>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<h2 id="multitenant">10. Multi-tenant, multi-framework</h2>
 
 <p>
 ArionComply is designed for tenants who work against several frameworks
@@ -1021,7 +1257,7 @@ program for national CERTs.
 </p>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
-<h2 id="collab">10. Human&ndash;AI collaboration</h2>
+<h2 id="collab">11. Human&ndash;AI collaboration</h2>
 
 <p>
 This section is important because ArionComply is unusual in two ways: the
@@ -1124,7 +1360,7 @@ but a bounded collaboration with auditable checkpoints.
 </p>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
-<h2 id="build">11. How we build</h2>
+<h2 id="build">12. How we build</h2>
 
 <h3>Ship arc discipline</h3>
 
@@ -1178,7 +1414,7 @@ in ~2 minutes instead of the 90 minutes the incremental path would require.
 </p>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
-<h2 id="deploy">12. Deployment &amp; operations</h2>
+<h2 id="deploy">13. Deployment &amp; operations</h2>
 
 <h3>Provider-agnostic</h3>
 
@@ -1245,7 +1481,7 @@ Two complementary logs make deployment state persistent and machine-parseable:
 </ul>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
-<h2 id="next">13. What's next</h2>
+<h2 id="next">14. What's next</h2>
 
 <h3>Near-term</h3>
 
@@ -1279,6 +1515,16 @@ Two complementary logs make deployment state persistent and machine-parseable:
     write-side notifications and posture, key rotation, async SDK. Currently
     read-side is complete plus <code>/query</code> and evidence write; the
     write-side surfaces are the remaining API layer.</li>
+  <li><strong>Superuser erasure-with-provenance flow.</strong> The
+    <code>deletion_log</code> infrastructure and
+    <code>rag/deletion_service.py</code> already exist &mdash; soft-delete,
+    restore, anonymise, and <code>handle_erasure_request()</code> methods
+    are implemented. What's missing is the workflow layer: a
+    superuser-scoped API endpoint, a Profile UI to trigger it with reason
+    capture, and (for higher-stakes deployments) a two-person approval
+    rule. The first real GDPR Art.17 request or customer offboarding will
+    trigger this arc &mdash; and because the plumbing is ready, the arc
+    is "wire up + test" rather than "design from scratch".</li>
 </ul>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
