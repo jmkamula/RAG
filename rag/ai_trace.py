@@ -160,9 +160,25 @@ def _sha256(text: str) -> str:
 
 
 def _preview(text: Optional[str]) -> Optional[str]:
+    """Truncated, PII-redacted preview of prompt/response text.
+
+    Ship 126'.b: applies the same PII scrubber the Auditor's Ledger uses
+    (Ship 119'.a) BEFORE truncation, so a diagnostic row that lands with
+    a 500-char preview never contains raw email/phone/SSN/IBAN/etc.
+    Truncation runs after redaction so long PII values that would push
+    past the cap don't get half-scrubbed.
+
+    Redaction is level='default' — email, phone, SSN, credit card, IBAN,
+    IPv4, national IDs (CZ/UK/FR). Deliberately NOT redacting names
+    because reviewer identity is compliance-load-bearing on the
+    auditor-facing surfaces; the diagnostic log inherits that policy.
+    """
     if not text:
         return None
-    return text[:_PREVIEW_CAP]
+    # Import inline to avoid a circular dep at module import
+    # (pii_redactor is a pure module with no back-references).
+    from rag.posture.pii_redactor import redact_pii
+    return redact_pii(text)[:_PREVIEW_CAP]
 
 
 def log_llm_call(

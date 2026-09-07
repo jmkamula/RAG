@@ -92,9 +92,17 @@ def log_casefile(
         if system_prompt_tokens is not None and user_digest_tokens is not None:
             total_tokens = system_prompt_tokens + user_digest_tokens
 
+        # Ship 126'.b: redact PII from both stored fields — the user's
+        # raw query AND the LLM's answer text — before persisting.
+        # Same scrubber the Auditor's Ledger uses (Ship 119'.a). Answer
+        # text can carry echoed PII from the query context or from
+        # tenant profile fields the LLM interpolated; scrub both.
+        from rag.posture.pii_redactor import redact_pii
+        query = redact_pii(query) if query else query
+
         # Ship 6'.d: passive claim scan. NEVER blocks or rewrites —
         # only records what normative claims the LLM made.
-        answer_body = (answer_text or "")[:_ANSWER_TEXT_CAP]
+        answer_body = redact_pii((answer_text or "")[:_ANSWER_TEXT_CAP])
         claim_events = claims_to_json(scan_claims(answer_body, case_file))
         claim_events_count = len(claim_events)
 

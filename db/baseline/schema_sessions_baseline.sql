@@ -1,12 +1,12 @@
 -- ArionComply — Postgres schema baseline (arioncomply_sessions)
--- Generated: 2026-09-05T22:53:34Z from HEAD 35fa1b84 by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-07T17:14:22Z from HEAD abf501a0 by scripts/build_pg_baseline.sh
 -- LangGraph checkpointer schema. Zero session data.
 
 --
 -- PostgreSQL database dump
 --
 
-\restrict lnalaWSr1oDbw4GyXA6asBOhgbaI0R4xkfpnbOF8CJ1DmoYBagnPzVK3uqKCugG
+\restrict 2zIEnPmWR56e0Iig8ETJj26M2g4pCteSzOxO2JbuPyHoumvl6NRG5hR41tcu78N
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -344,5 +344,5 @@ ALTER TABLE ONLY public.conversation_history
 -- PostgreSQL database dump complete
 --
 
-\unrestrict lnalaWSr1oDbw4GyXA6asBOhgbaI0R4xkfpnbOF8CJ1DmoYBagnPzVK3uqKCugG
+\unrestrict 2zIEnPmWR56e0Iig8ETJj26M2g4pCteSzOxO2JbuPyHoumvl6NRG5hR41tcu78N
 

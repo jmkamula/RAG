@@ -97,6 +97,14 @@ def log_consensus(
         signals_json = [_signal_to_json(s) for s in (result.signals or [])]
         clarification_json = _clarification_to_json(result.clarification)
 
+        # Ship 126'.b: redact PII (email/phone/SSN/CC/IBAN/IPv4/national-IDs)
+        # from the raw user query before persisting. Same scrubber the
+        # Auditor's Ledger uses (Ship 119'.a). Diagnostic value is retained
+        # (question shape, ref choice, verdict) — the sensitive substrings
+        # become `<email-redacted>` / `<phone-redacted>` / etc.
+        from rag.posture.pii_redactor import redact_pii
+        query_redacted = redact_pii(query) if query else query
+
         with pg_conn.cursor() as cur:
             cur.execute(
                 """
@@ -118,7 +126,7 @@ def log_consensus(
                 RETURNING id
                 """,
                 (
-                    tenant_id, request_id, session_id, query,
+                    tenant_id, request_id, session_id, query_redacted,
                     result.verdict,
                     list(result.refs) if result.refs else None,
                     result.top_ref_confidence,
