@@ -16,14 +16,15 @@ Manages:
 
 Usage:
     from rag.orchestrator import RAGOrchestrator, OrchestratorConfig
+    import os
 
     config = OrchestratorConfig(
-        neo4j_uri      = "bolt://127.0.0.1:7687",
-        neo4j_user     = "neo4j",
-        neo4j_password = "arionneo4j@2026",
-        chroma_host    = "localhost",
-        chroma_port    = 8000,
-        openai_api_key = "sk-proj-...",
+        neo4j_uri      = os.environ["NEO4J_URI"],
+        neo4j_user     = os.environ["NEO4J_USER"],
+        neo4j_password = os.environ["NEO4J_PASSWORD"],
+        chroma_host    = os.environ.get("CHROMA_HOST", "127.0.0.1"),
+        chroma_port    = int(os.environ.get("CHROMA_PORT", 8000)),
+        openai_api_key = os.environ["OPENAI_API_KEY"],
     )
 
     orchestrator = RAGOrchestrator(tenant_profile, config)

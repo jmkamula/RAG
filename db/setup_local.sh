@@ -62,21 +62,34 @@ else
 fi
 
 # ── Create app user ───────────────────────────────────────────────────────────
+# Ship 126'.e — generate a strong random password per install instead
+# of hardcoding. The password is written to .env below (line ~120) so
+# the app can connect; we also print it once so a developer running
+# this manually can grab it for external tools.
 echo "${DIM}Creating app user...${RESET}"
-psql arioncomply_compliance << 'PSQL' > /dev/null 2>&1
-DO $$
+# Generate strong random password (24 URL-safe chars)
+if command -v openssl >/dev/null 2>&1; then
+    APP_PW="$(openssl rand -base64 24 | tr -d '/+=' | head -c 24)"
+else
+    # Fallback: /dev/urandom + tr
+    APP_PW="$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 24)"
+fi
+psql arioncomply_compliance <<PSQL > /dev/null 2>&1
+DO \$\$
 BEGIN
     IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'arioncomply_app') THEN
-        CREATE ROLE arioncomply_app WITH LOGIN PASSWORD 'arionlocal2026';
+        CREATE ROLE arioncomply_app WITH LOGIN PASSWORD '${APP_PW}';
+    ELSE
+        ALTER ROLE arioncomply_app WITH LOGIN PASSWORD '${APP_PW}';
     END IF;
-END $$;
+END \$\$;
 GRANT CONNECT ON DATABASE arioncomply_compliance TO arioncomply_app;
 GRANT USAGE ON SCHEMA public TO arioncomply_app;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO arioncomply_app;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO arioncomply_app;
 ALTER ROLE arioncomply_app BYPASSRLS;
 PSQL
-echo "  ${GREEN}✓ App user ready${RESET}"
+echo "  ${GREEN}✓ App user ready${RESET}  (password generated + written to .env below)"
 
 # ── Seed test tenant ──────────────────────────────────────────────────────────
 echo "${DIM}Seeding Arion Networks test data...${RESET}"
@@ -108,8 +121,10 @@ echo "  ${GREEN}✓ Test data seeded${RESET}"
 
 # ── Update .env ───────────────────────────────────────────────────────────────
 echo "${DIM}Updating .env...${RESET}"
-COMP_URL="postgresql://arioncomply_app:arionlocal2026@localhost/arioncomply_compliance"
-SESS_URL="postgresql://arioncomply_app:arionlocal2026@localhost/arioncomply_sessions"
+# Ship 126'.e — use the generated password (APP_PW) from the app-user
+# creation step above, not a hardcoded value.
+COMP_URL="postgresql://arioncomply_app:${APP_PW}@localhost/arioncomply_compliance"
+SESS_URL="postgresql://arioncomply_app:${APP_PW}@localhost/arioncomply_sessions"
 
 # Find the .env file (script runs from $INGESTION)
 ENV_FILE=".env"

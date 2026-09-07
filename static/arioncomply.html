@@ -964,7 +964,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 // Bump on JS behaviour changes so you can verify fresh code from console:
 //   window.ARION_JS_VERSION should print the latest stamp.
-window.ARION_JS_VERSION = '2026-09-06-audit-view-entries';
+window.ARION_JS_VERSION = '2026-09-07-chat-restore-sanitize';
 console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
@@ -1191,13 +1191,56 @@ function _persistChatDom() {
     } catch (_e) { /* quota exceeded, private mode, etc — silent */ }
   }, 500);
 }
+// Ship 126'.d — sanitize on restore before injecting into the live
+// DOM. Defence-in-depth: today every code path building chat messages
+// escapes user/backend content via escapeHtml() before it lands in
+// innerHTML, so the persisted HTML is already safe. But localStorage
+// can be tampered with (browser extension, XSS on another same-site
+// page, physical access) — and a naïve `el.innerHTML = stored`
+// executes any onclick / javascript: / <script> the attacker adds.
+//
+// Strategy: parse into an inert DOMParser doc (which does NOT execute
+// scripts or fire event handlers), strip <script> tags + `on*`
+// attributes + `javascript:` URLs, then move sanitized nodes into the
+// live tree. Interactivity on OLD messages (setMode/openDetail
+// onclick handlers) is intentionally sacrificed — the tradeoff is
+// worth it for the security invariant. New messages remain fully
+// interactive; users can click through via the current-turn UI.
+function _sanitizeRestoredHtml(html) {
+  const parsed = new DOMParser().parseFromString(html, 'text/html');
+  parsed.querySelectorAll('script').forEach(n => n.remove());
+  parsed.querySelectorAll('*').forEach(node => {
+    // Copy the list because removeAttribute mutates the live NamedNodeMap
+    const attrs = Array.from(node.attributes);
+    attrs.forEach(attr => {
+      const name = attr.name.toLowerCase();
+      // Strip all inline event handlers
+      if (name.startsWith('on')) {
+        node.removeAttribute(attr.name);
+        return;
+      }
+      // Strip javascript: (or data: for src) URL schemes
+      if ((name === 'href' || name === 'src' || name === 'action') &&
+          /^\s*javascript:/i.test(attr.value)) {
+        node.removeAttribute(attr.name);
+      }
+    });
+  });
+  return parsed.body;
+}
+
 function _restoreChatDom() {
   try {
     const html = localStorage.getItem(_CHAT_HTML_KEY);
     if (!html) return;
     const el = document.getElementById('chat-messages');
     if (!el) return;
-    el.innerHTML = html;
+    // Clear then import sanitized nodes
+    el.textContent = '';
+    const safeBody = _sanitizeRestoredHtml(html);
+    while (safeBody.firstChild) {
+      el.appendChild(safeBody.firstChild);
+    }
     const emp = document.getElementById('chat-empty');
     if (emp) emp.style.display = 'none';
     const raw = localStorage.getItem(_CHAT_HISTORY_KEY);
