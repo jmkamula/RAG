@@ -20,6 +20,7 @@ Patterns covered:
 
 Exit 0 if all PASS or all explained; 1 on any unexpected failure shape.
 """
+import os
 from __future__ import annotations
 
 import argparse
@@ -30,7 +31,7 @@ import uuid
 
 import requests
 
-DEFAULT_API_KEY  = "arion_dev_key_2026"
+DEFAULT_API_KEY = os.environ.get("ARION_DEV_API_KEY", "")
 DEFAULT_BASE_URL = "http://localhost:8080"
 
 # Phrases that signal the conversational-context routing is BROKEN.

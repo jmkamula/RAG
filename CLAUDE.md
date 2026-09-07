@@ -382,14 +382,18 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 
 ## Test Streaming
 ```bash
+# Requires ARION_DEV_API_KEY in .env — see deploy/.env.example.
+# Ship 126'.a rotated the prior hardcoded dev key (was documented
+# in this file; public repo exposure). Fetch the current value from
+# `.env` on the box you're testing against; never commit the key.
 curl -s -N "http://localhost:8080/api/v1/chat/stream?question=what+are+our+NC+findings&session_id=test_1" \
-  -H "X-API-Key: arion_dev_key_2026"
+  -H "X-API-Key: $(grep '^ARION_DEV_API_KEY=' /data/arioncomply/.env | cut -d= -f2)"
 ```
 
 ## Test Sync Chat
 ```bash
 curl -s -X POST http://localhost:8080/api/v1/chat \
-  -H "X-API-Key: arion_dev_key_2026" \
+  -H "X-API-Key: $(grep '^ARION_DEV_API_KEY=' /data/arioncomply/.env | cut -d= -f2)" \
   -H "Content-Type: application/json" \
   -d '{"question": "what are our NC findings?"}' \
   | python3 -m json.tool

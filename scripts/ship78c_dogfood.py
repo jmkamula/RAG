@@ -13,10 +13,11 @@ Expected: findings count matches or exceeds Ship 77'.f union
 prediction (46 TP strict, 21.8% lenient F1). Tuned LLM should
 accept more of the aggregator's borderline candidates.
 """
+import os
 from urllib.request import Request, urlopen
 import json, time, os, sys
 
-API_KEY = "arion_dev_key_2026"
+API_KEY = os.environ.get("ARION_DEV_API_KEY", "")
 BASE = "http://localhost:8080"
 DOCS = {
     "dpia":     "5f59f505-45a2-4e7d-ba76-c4c6f4b2e08a",

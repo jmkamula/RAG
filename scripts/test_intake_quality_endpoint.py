@@ -34,7 +34,7 @@ import requests
 
 # Default tenant: Arion. Override with --tenant-id for other tenants.
 DEFAULT_TENANT_ID = "00000000-0000-0000-0000-000000000001"
-DEFAULT_API_KEY   = "arion_dev_key_2026"
+DEFAULT_API_KEY = os.environ.get("ARION_DEV_API_KEY", "")
 DEFAULT_BASE_URL  = "http://localhost:8080"
 DEFAULT_DB_URL    = "postgresql://arioncomply:arioncomply2026@127.0.0.1/arioncomply_compliance"
 

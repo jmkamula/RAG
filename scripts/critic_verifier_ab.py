@@ -33,7 +33,7 @@ import uuid
 import psycopg2
 
 TENANT_ID    = "00000000-0000-0000-0000-000000000001"
-API_KEY      = "arion_dev_key_2026"
+API_KEY = os.environ.get("ARION_DEV_API_KEY", "")
 API_URL      = "http://localhost:8080"
 DB_PARAMS    = dict(host="127.0.0.1", dbname="arioncomply_compliance", user="arioncomply")
 

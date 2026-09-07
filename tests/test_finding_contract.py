@@ -43,7 +43,7 @@ from rag.intake.finding_contract import (
 )
 
 
-API_KEY  = os.getenv("ARION_API_KEY", "arion_dev_key_2026")
+API_KEY  = os.environ.get("ARION_DEV_API_KEY", "")
 API_BASE = "http://localhost:8080"
 
 

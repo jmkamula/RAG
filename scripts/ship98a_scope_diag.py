@@ -15,8 +15,9 @@ choose between (A) enumerated per-intent gates in _plan_for or
 (B) an explicit question_shape enum.
 
 Run against local API. API must be up on port 8080 with
-`arion_dev_key_2026` key.
+a key from the `ARION_DEV_API_KEY` env var.
 """
+import os
 from __future__ import annotations
 
 import argparse
@@ -29,7 +30,7 @@ from urllib.error import URLError
 
 
 API_URL = "http://localhost:8080/api/v1/chat"
-API_KEY = "arion_dev_key_2026"
+API_KEY = os.environ.get("ARION_DEV_API_KEY", "")
 
 
 # Test matrix. Each row: (label, expected_intent_hint, query).
