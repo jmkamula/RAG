@@ -92,15 +92,22 @@ report_findings() {
 #
 # Ship 125' backlog (opened 2026-09-07 alongside Ship 124):
 #   PYSEC-2026-3037,3036,3040 — python-multipart 0.0.27 → 0.0.31  ✓ CLOSED Ship 125'.a
-#   PYSEC-2026-3635           — langgraph-checkpoint-postgres 3.0.5 → 3.1.1
-#   PYSEC-2026-311            — chromadb 1.5.9 → needs major-bump review
+#   PYSEC-2026-3635           — langgraph-checkpoint-postgres 3.0.5 → 3.1.2  ✓ CLOSED Ship 125'.b
+#   PYSEC-2026-311            — chromadb 1.5.9 → not-applicable-to-us (Ship 125'.c analysis)
 #   CVE-2026-45830,45831,45833 — chromadb 1.5.9 (same, 3 more CVEs)
 PIP_AUDIT_IGNORES=(
-    --ignore-vuln PYSEC-2026-3635   # langgraph-checkpoint-postgres — Ship 125'.b
-    --ignore-vuln PYSEC-2026-311    # chromadb — Ship 125'.c
-    --ignore-vuln CVE-2026-45830    # chromadb — Ship 125'.c
-    --ignore-vuln CVE-2026-45831    # chromadb — Ship 125'.c
-    --ignore-vuln CVE-2026-45833    # chromadb — Ship 125'.c
+    # ChromaDB CVEs — Ship 125'.c analysis: none apply to our deployment.
+    # We run Chroma as a local systemd service bound to 127.0.0.1 (not
+    # network-exposed), single-database + single-collection-per-purpose
+    # model (no tenancy features), never use trust_remote_code=true,
+    # never use SimpleRBACAuthorizationProvider. All 4 CVEs require
+    # attack surfaces we don't expose. Re-review when Chroma ships a fix
+    # OR when deployment model changes (multi-tenant Chroma / network
+    # exposure). See docs/memory/ship-125-prime-c-chromadb-analysis-2026-09-07.md
+    --ignore-vuln PYSEC-2026-311    # chromadb — pre-auth code injection via /api/v2/... trust_remote_code
+    --ignore-vuln CVE-2026-45830    # chromadb — cross-tenant read/write (we don't use tenancy)
+    --ignore-vuln CVE-2026-45831    # chromadb — SimpleRBACAuthorizationProvider bypass (unused)
+    --ignore-vuln CVE-2026-45833    # chromadb — authed code injection via trust_remote_code
 )
 
 echo "→ pip-audit (Python deps CVE scan)"

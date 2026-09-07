@@ -20,7 +20,7 @@ openai==2.48.0
 
 # --- Graph orchestration + session persistence ---
 langgraph==1.1.10
-langgraph-checkpoint-postgres==3.0.5
+langgraph-checkpoint-postgres==3.1.2
 
 # --- Vector store + graph DB ---
 chromadb==1.5.9
