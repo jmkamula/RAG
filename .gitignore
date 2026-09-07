@@ -38,3 +38,6 @@ archive/
 .claude/scheduled_tasks.lock
 private/
 .phoenix/
+
+# Tenant-uploaded documents (namespaced under uploads/<tenant_uuid>/)
+uploads/
