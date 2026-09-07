@@ -134,8 +134,10 @@ BEGIN
         REVOKE DELETE ON public.audit_ledger_download_token FROM arioncomply_app;
     END IF;
 
-    -- Diagnostic logs: retention-eligible (keep DELETE) but no silent
-    -- history rewrite (revoke UPDATE)
+    -- Diagnostic logs: retention runs through the Ship 127'.a
+    -- sweep_delete_diagnostic_log_rows() SECURITY DEFINER function
+    -- (owned by arioncomply owner); app role has no raw DELETE + no
+    -- UPDATE. Grants after this block: SELECT + INSERT only.
     FOR t IN SELECT unnest(ARRAY[
         'ai_call_log',
         'chat_casefile_log',
@@ -147,8 +149,32 @@ BEGIN
     ]) LOOP
         IF to_regclass('public.' || quote_ident(t)) IS NOT NULL THEN
             EXECUTE format(
-                'REVOKE UPDATE ON public.%I FROM arioncomply_app', t
+                'REVOKE UPDATE, DELETE ON public.%I FROM arioncomply_app', t
             );
         END IF;
     END LOOP;
+END $$;
+
+-- ── Ship 127'.a — grant EXECUTE on the retention sweep function ───
+-- The function is created by schema_v118_diagnostic_log_delete_restriction.sql
+-- (with GRANT EXECUTE to arioncomply_app in the same file). Re-assert
+-- here for defence-in-depth against baseline-grants-clobber patterns
+-- (the same class of bug Ship 120' fixed for tables also applies to
+-- function grants — a future ALTER FUNCTION could reset the ACL).
+--
+-- Guarded so this file remains applyable on pre-Ship-127' boxes that
+-- haven't loaded the function yet.
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM pg_proc p
+          JOIN pg_namespace n ON n.oid = p.pronamespace
+         WHERE n.nspname = 'public'
+           AND p.proname = 'sweep_delete_diagnostic_log_rows'
+    ) THEN
+        REVOKE ALL ON FUNCTION public.sweep_delete_diagnostic_log_rows(text, integer, uuid)
+            FROM PUBLIC;
+        GRANT EXECUTE ON FUNCTION public.sweep_delete_diagnostic_log_rows(text, integer, uuid)
+            TO arioncomply_app;
+    END IF;
 END $$;

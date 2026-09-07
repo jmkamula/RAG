@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-07T17:14:22Z from HEAD abf501a0 by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-07T18:44:43Z from HEAD 1874f1dc by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict UVw7YY32gfhR7aaF1wWD85vhiMJeovCuauD4Q1Ay2TqRUmNH0wh04aeUGZyQmrI
+\restrict dHR8wBeJCFPujJhC0ZVGqef2lgoW6feAv4NsNQc20qWYQbiH6AgP80MXFD9CMEJ
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -693,6 +693,94 @@ BEGIN
            || LPAD(v_seq::TEXT, v_pad, '0');
 END;
 $$;
+
+
+--
+-- Name: sweep_delete_diagnostic_log_rows(text, integer, uuid); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.sweep_delete_diagnostic_log_rows(p_table_name text, p_retention_days integer, p_tenant_id uuid DEFAULT NULL::uuid) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER
+    SET search_path TO 'public', 'pg_temp'
+    AS $$
+DECLARE
+    allowed_tables constant text[] := ARRAY[
+        'ai_call_log',
+        'chat_casefile_log',
+        'chat_consensus_log',
+        'fact_recompute_log',
+        'intake_trace_log',
+        'intake_consensus_log',
+        'request_trace_log'
+    ];
+    ts_column      text;
+    where_tenant   text := '';
+    sql_text       text;
+    deleted_count  integer;
+BEGIN
+    -- Validate table_name against allowlist (prevents SQL injection
+    -- via table_name arg + prevents accidental cross-class deletes)
+    IF NOT (p_table_name = ANY(allowed_tables)) THEN
+        RAISE EXCEPTION 'sweep_delete_diagnostic_log_rows: table_name % is not in allowlist (%)',
+            p_table_name, allowed_tables;
+    END IF;
+
+    -- Validate retention_days (must be positive integer)
+    IF p_retention_days IS NULL OR p_retention_days < 1 THEN
+        RAISE EXCEPTION 'sweep_delete_diagnostic_log_rows: p_retention_days must be >= 1, got %',
+            p_retention_days;
+    END IF;
+
+    -- Column name for the created-at timestamp varies across tables.
+    -- Most use `created_at`; a couple use different names historically.
+    -- Look up the actual column at call time so schema drift on one
+    -- table doesn't silently no-op the sweep.
+    SELECT column_name INTO ts_column
+      FROM information_schema.columns
+     WHERE table_schema = 'public'
+       AND table_name = p_table_name
+       AND column_name IN ('created_at', 'called_at', 'started_at', 'timestamp', 'ts')
+     ORDER BY CASE column_name
+                WHEN 'created_at' THEN 1
+                WHEN 'called_at'  THEN 2
+                WHEN 'started_at' THEN 3
+                WHEN 'timestamp'  THEN 4
+                WHEN 'ts'         THEN 5
+              END
+     LIMIT 1;
+
+    IF ts_column IS NULL THEN
+        RAISE EXCEPTION 'sweep_delete_diagnostic_log_rows: no timestamp column found on %',
+            p_table_name;
+    END IF;
+
+    -- Optional tenant filter
+    IF p_tenant_id IS NOT NULL THEN
+        where_tenant := format(' AND tenant_id = %L::uuid', p_tenant_id);
+    END IF;
+
+    -- Build + execute the DELETE. quote_ident on table + column names.
+    -- retention_days interpolated as %s (integer, safe).
+    sql_text := format(
+        'DELETE FROM public.%I WHERE %I < NOW() - INTERVAL ''%s days''%s',
+        p_table_name,
+        ts_column,
+        p_retention_days,
+        where_tenant
+    );
+
+    EXECUTE sql_text;
+    GET DIAGNOSTICS deleted_count = ROW_COUNT;
+    RETURN deleted_count;
+END;
+$$;
+
+
+--
+-- Name: FUNCTION sweep_delete_diagnostic_log_rows(p_table_name text, p_retention_days integer, p_tenant_id uuid); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.sweep_delete_diagnostic_log_rows(p_table_name text, p_retention_days integer, p_tenant_id uuid) IS 'Ship 127''.a — SECURITY DEFINER retention sweep entry point for the 7 diagnostic-log tables. Table_name is validated against a hardcoded allowlist; retention_days must be positive; optional tenant_id filter. Returns row count deleted. App role has EXECUTE only; raw DELETE on the underlying tables is REVOKED. Future retention sweep should call this function via the arioncomply_app connection.';
 
 
 SET default_tablespace = '';
@@ -9662,5 +9750,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict UVw7YY32gfhR7aaF1wWD85vhiMJeovCuauD4Q1Ay2TqRUmNH0wh04aeUGZyQmrI
+\unrestrict dHR8wBeJCFPujJhC0ZVGqef2lgoW6feAv4NsNQc20qWYQbiH6AgP80MXFD9CMEJ
 

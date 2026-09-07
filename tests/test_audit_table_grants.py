@@ -59,16 +59,19 @@ COUNTER_AUDIT_TABLES = {
     'audit_ledger_download_token': {'SELECT', 'INSERT', 'UPDATE'},
 }
 
-# Diagnostic logs get retention (DELETE ok), but never UPDATE.
+# Ship 127'.a — DELETE removed from all 7 diagnostic tables. App role
+# now goes through sweep_delete_diagnostic_log_rows() SECURITY DEFINER
+# function (owned by arioncomply); raw DELETE is REVOKED. UPDATE
+# remains REVOKED (Ship 4'.b addendum discipline).
 DIAGNOSTIC_LOG_TABLES = {
-    'ai_call_log':        {'SELECT', 'INSERT', 'DELETE'},
-    'chat_casefile_log':  {'SELECT', 'INSERT', 'DELETE'},
-    'chat_consensus_log': {'SELECT', 'INSERT', 'DELETE'},
-    'fact_recompute_log': {'SELECT', 'INSERT', 'DELETE'},
-    'intake_trace_log':   {'SELECT', 'INSERT', 'DELETE'},
+    'ai_call_log':        {'SELECT', 'INSERT'},
+    'chat_casefile_log':  {'SELECT', 'INSERT'},
+    'chat_consensus_log': {'SELECT', 'INSERT'},
+    'fact_recompute_log': {'SELECT', 'INSERT'},
+    'intake_trace_log':   {'SELECT', 'INSERT'},
     # Ship 121' additions
-    'intake_consensus_log': {'SELECT', 'INSERT', 'DELETE'},  # per COMMENT: "Diagnostic log for Ship 33"
-    'request_trace_log':    {'SELECT', 'INSERT', 'DELETE'},  # chat routing observability
+    'intake_consensus_log': {'SELECT', 'INSERT'},  # per COMMENT: "Diagnostic log for Ship 33"
+    'request_trace_log':    {'SELECT', 'INSERT'},  # chat routing observability
 }
 
 ALL_EXPECTED = {
@@ -154,9 +157,10 @@ def test_counter_audit_tables_shape():
 
 
 def test_diagnostic_logs_have_no_update():
-    """Diagnostic logs get DELETE for retention, but never UPDATE —
-    LLM-call / intake / consensus / casefile entries reflect what
-    actually happened, not what someone later wishes had happened."""
+    """Diagnostic logs are INSERT + SELECT only for the app role.
+    UPDATE has been REVOKED since Ship 4'.b (no silent history rewrite);
+    DELETE has been REVOKED since Ship 127'.a (retention now goes through
+    the sweep_delete_diagnostic_log_rows SECURITY DEFINER function)."""
     actual = _fetch_grants()
     for table, expected in DIAGNOSTIC_LOG_TABLES.items():
         assert table in actual, f"{table} missing from grants"

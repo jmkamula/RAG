@@ -97,13 +97,19 @@ def main():
             print("✗ OPENAI_API_KEY not set.")
             print("  Set it with: export OPENAI_API_KEY=sk-...")
             sys.exit(1)
-        print(f"✓ OPENAI_API_KEY set ({api_key[:8]}...)")
+        # Ship 127'.c — presence check only. Never log key characters
+        # (even a prefix). Aggregated logs (Jaeger, syslog, systemd
+        # journal) may propagate the string; 8 chars is not enough to
+        # reconstruct a key but leaks patterns that suggest which
+        # provider + key generation the operator is using.
+        print("✓ OPENAI_API_KEY set")
     elif provider == "anthropic":
         api_key = os.getenv("ANTHROPIC_API_KEY", "")
         if not api_key:
             print("✗ ANTHROPIC_API_KEY not set.")
             sys.exit(1)
-        print(f"✓ ANTHROPIC_API_KEY set ({api_key[:8]}...)")
+        # Ship 127'.c — presence-only; see rationale above.
+        print("✓ ANTHROPIC_API_KEY set")
 
     # Check input files
     for label, path in [("ISO nodes", args.iso), ("GDPR nodes", args.gdpr)]:
