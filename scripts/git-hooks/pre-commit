@@ -130,4 +130,38 @@ if [[ -x "$REPO/scripts/ci/check_forbidden_patterns.sh" ]]; then
     fi
 fi
 
+# ── Ship 124'.d — delegate security scanners to CI script ─────────
+#
+# Same delegation pattern as check_forbidden_patterns.sh above (Ship
+# 122'.a). scripts/ci/security_scan.sh runs pip-audit + bandit +
+# detect-secrets against the whole tracked tree.
+#
+# The scanner is skipped (exit 78) if pip-audit / bandit /
+# detect-secrets are not installed — this keeps the hook non-blocking
+# for fresh clones that haven't installed dev tools yet. Install with:
+#   pip install --break-system-packages pip-audit bandit detect-secrets
+#
+# Runtime: ~30-60s on the current tree. If that becomes annoying,
+# add a --staged-only mode to security_scan.sh.
+if [[ -x "$REPO/scripts/ci/security_scan.sh" ]]; then
+    # --fast skips detect-secrets (3-min tree scan). Pre-commit runs
+    # pip-audit + bandit only (~30s combined). Full scan runs in CI
+    # via .github/workflows/security-scan.yml on every push + PR.
+    "$REPO/scripts/ci/security_scan.sh" --fast > /tmp/security-scan.log 2>&1
+    scan_exit=$?
+    if [[ "$scan_exit" -eq 78 ]]; then
+        echo "[pre-commit] i security scanners not installed; skipping (see /tmp/security-scan.log)"
+    elif [[ "$scan_exit" -ne 0 ]]; then
+        echo "[pre-commit] ✗ security_scan.sh FAILED"
+        cat /tmp/security-scan.log
+        echo ""
+        echo "  scanners: pip-audit (CVEs) + bandit (Python static analysis)"
+        echo "  detect-secrets deferred to CI (--fast mode here)."
+        echo "  Review findings in /tmp/security-scan.log. Bypass with --no-verify only if"
+        echo "  hits are false positives; better: add rationale to .bandit skips or"
+        echo "  add --ignore-vuln <ID> to security_scan.sh with a comment."
+        exit 1
+    fi
+fi
+
 exit 0

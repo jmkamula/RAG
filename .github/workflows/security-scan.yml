@@ -1,0 +1,53 @@
+# Ship 124'.b — automated security scanners on every push + PR.
+#
+# Runs the same scripts/ci/security_scan.sh a developer runs locally
+# (Ship 124'.a). Secret-free by design: pip-audit reads
+# deploy/requirements.txt without network to PyPI (--disable-pip),
+# bandit does pure static analysis, detect-secrets scans the tree.
+# No OpenAI, no Postgres, no live tenant data — nothing to leak.
+#
+# Runs on every push to main + every PR. A red X on a commit is
+# informational; no branch protection or merge gate is set up here
+# because our current dev model is solo developer + operator with
+# direct-push. Branch protection can be enabled later if we grow.
+#
+# For the fuller test suite (test_audit_table_grants.py needs
+# Postgres, eval_suite.py needs OpenAI + a running API), see the
+# Ship 124'.a plan and Ship 122' retrospective — that's deferred
+# until we make an arc-sized decision on merge-review flow.
+
+name: security-scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: pip-audit + bandit + detect-secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history so detect-secrets can scan across it.
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install scanners
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install pip-audit bandit detect-secrets
+
+      - name: Run security_scan.sh
+        run: |
+          bash scripts/ci/security_scan.sh --verbose

@@ -1,0 +1,17 @@
+# Ship 124'.a — developer-only dependencies.
+#
+# These are NOT installed by deploy/install.sh on customer PoCs.
+# They are the scanners + tools that run in scripts/ci/security_scan.sh
+# and the pre-commit hook (scripts/git-hooks/pre-commit). Same set is
+# installed by .github/workflows/security-scan.yml on every CI run.
+#
+# One-time install on a dev clone:
+#   pip install --break-system-packages -r deploy/requirements-dev.txt
+#
+# Pinned versions match what we're testing against on the dev host as
+# of 2026-09-07 (Ship 124'). Bump alongside deploy/requirements.txt
+# in a coordinated way.
+
+pip-audit==2.10.1        # Known-CVE scan against Python deps
+bandit==1.9.4            # Python static analysis (hardcoded creds, weak crypto, SQL)
+detect-secrets==1.5.0    # Yelp's Python-native secret scanner (gitleaks alternative)
