@@ -56,29 +56,53 @@ for i in 1 2 3 4 5 6 7 8; do
 done
 
 # ── 5. Sync chat smoke test (exercises new PostgresSaver checkpointer) ──
+# Diagnostic-rich: prints the top-level keys + first answer/clarification
+# field found. If the LLM call fails on the PoC (missing OpenAI key,
+# quota exhausted, etc.) the response has neither `answer` nor
+# `clarification` — surface the raw shape so it's fixable.
 echo
 echo "=== 5. Sync chat smoke test ==="
 resp=$(curl -s -X POST http://127.0.0.1:8080/api/v1/chat \
     -H "X-API-Key: arion_dev_key_2026" \
     -H "Content-Type: application/json" \
     -d '{"question":"what is A.5.15 about?"}' 2>&1)
-if echo "$resp" | python3 -c "import sys,json; d=json.load(sys.stdin); print('  OK — chat answered:', d.get('answer','?')[:100])" 2>/dev/null; then
-    :
-else
-    echo "  WARN — chat smoke test did not return JSON: ${resp:0:200}"
-fi
+echo "$resp" | python3 -c "
+import sys, json
+try:
+    d = json.loads(sys.stdin.read())
+except Exception as e:
+    print(f'  FAIL — non-JSON response: {e}')
+    sys.exit(0)
+print(f'  Response keys: {sorted(d.keys())}')
+if isinstance(d.get('answer'), str) and d['answer']:
+    print(f'  OK — answer: {d[\"answer\"][:100]}')
+elif d.get('clarification'):
+    print(f'  OK — clarification: {str(d[\"clarification\"])[:100]}')
+else:
+    print(f'  WARN — no answer/clarification in response. Full body (200 chars):')
+    print(f'    {json.dumps(d)[:200]}')
+"
 
 # ── 6. pip-audit — confirm 4 CVEs cleared, 4 remaining (all chromadb) ──
+# pip-audit is dev-only (in deploy/requirements-dev.txt, not
+# deploy/requirements.txt). PoCs don't install it. Skip cleanly if
+# missing; the CI job on GitHub Actions runs the full audit on every
+# push, so CVE state is verified there.
 echo
 echo "=== 6. pip-audit — confirm expected CVE state ==="
-audit_out=$(pip-audit -r deploy/requirements.txt --no-deps 2>&1 || true)
-if echo "$audit_out" | grep -q "Found 4 known vulnerabilities in 1 package"; then
-    echo "  OK — 4 CVEs remain, all chromadb (expected — Ship 125'.c not-applicable analysis)"
-elif echo "$audit_out" | grep -qE "^No known vulnerabilities found"; then
-    echo "  OK — no CVEs (unexpected but great — chromadb may have shipped a fix!)"
+if ! command -v pip-audit > /dev/null 2>&1; then
+    echo "  SKIP — pip-audit not installed on PoC (dev-only dep per Ship 124'.a)."
+    echo "  CVE state is verified on every push via .github/workflows/security-scan.yml."
 else
-    echo "  WARN — unexpected pip-audit state:"
-    echo "$audit_out" | tail -15 | sed 's/^/    /'
+    audit_out=$(pip-audit -r deploy/requirements.txt --no-deps 2>&1 || true)
+    if echo "$audit_out" | grep -q "Found 4 known vulnerabilities in 1 package"; then
+        echo "  OK — 4 CVEs remain, all chromadb (expected — Ship 125'.c not-applicable analysis)"
+    elif echo "$audit_out" | grep -qE "^No known vulnerabilities found"; then
+        echo "  OK — no CVEs (unexpected but great — chromadb may have shipped a fix!)"
+    else
+        echo "  WARN — unexpected pip-audit state:"
+        echo "$audit_out" | tail -15 | sed 's/^/    /'
+    fi
 fi
 
 # ── 7. Deployment log tail ────────────────────────────────────────
