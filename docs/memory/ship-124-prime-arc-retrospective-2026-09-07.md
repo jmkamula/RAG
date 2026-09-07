@@ -136,7 +136,26 @@ The initial pip-audit invocation was `pip-audit -r ... --disable-pip 2>&1 || tru
 
 **Rule of thumb**: any scanner wrapper with `|| true` OR without an assertion that the scanner exited cleanly is suspect. Better shape: capture the exit code separately (`code=$?`), branch on it, and treat the "unexpected exit" case as its own error class instead of falling through to "assume clean."
 
-### Lesson 244 — Predictions ≠ scan results; run the tool
+### Lesson 244 — Predictions ≠ scan results; run the tool (also: "clean" without a baseline is a lie)
+
+The supply-chain Explore agent predicted "pip-audit LIKELY CLEAN — all pinned, recent versions." The actual run found 8 CVEs. Predictions based on "these packages look recent" don't substitute for running the scanner.
+
+Two twists on the same lesson:
+
+**Twist 1**: my initial local scan reported `OK — no unbaselined secrets in tracked tree` because the `.secrets.baseline` file didn't exist yet — so the "unbaselined" qualifier vacuously matched all 22 hits (my script logic branched on `if [[ -n $ds_hits ]]` where hits were non-empty, but reported "no unbaselined" as the OK message). Local clean; CI ran fresh, found 22, exited 1. **The initial local "OK" was misleading because there was nothing to compare against.**
+
+**Twist 2**: fix required `detect-secrets scan > .secrets.baseline` + commit the baseline. Future scans succeed if new hits match the baselined ones (same file:line + secret_type); genuinely new hits still fail. The baseline itself doesn't contain the secret VALUES — only file:line + detector name + a truncated hash — so it's safe to commit.
+
+The 22 hits split into three intent classes:
+- **Real issues** (2): `rag/orchestrator.py:23,26` docstring examples with `neo4j_password = "arionneo4j@2026"` + `openai_api_key = "sk-proj-..."` (Ship 122 MEDIUM gap #5 — trains developers to hardcode); `db/setup_local.sh:70` real default password `'arionlocal2026'` for local dev setup (should be generated at setup time, not committed).
+- **Placeholder patterns**: SDK README example `api_key="arion_ext_..."`; dogfood scripts with example UUIDs; SPA labels containing "api_key_expiring" as a display string.
+- **False keyword matches**: `install.sh:156` comment `# DATABASE_URL shape: postgresql://arioncomply_app:PASSWORD@host/db`; SQL role creation with plaintext password (dev-only fixture).
+
+Real cleanup is Ship 126' scope. Baseline suppression is Ship 124'.f post-CI-failure fix.
+
+This is one specific instance of [[feedback-verify-before-assert-live-state]] — the CI environment IS the live state; local greens without baseline aren't equivalent.
+
+### Lesson 245 — GitHub Actions works fine as a "runner only" without gating
 
 The supply-chain Explore agent predicted "pip-audit LIKELY CLEAN — all pinned, recent versions." The actual run found 8 CVEs. Predictions based on "these packages look recent" don't substitute for running the scanner. When a Ship's purpose is "surface findings," the deliverable is the scan output, not the pre-scan prediction. This is a specific instance of [[feedback-verify-before-assert-live-state]].
 
