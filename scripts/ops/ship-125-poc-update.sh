@@ -55,33 +55,30 @@ for i in 1 2 3 4 5 6 7 8; do
     fi
 done
 
-# ── 5. Sync chat smoke test (exercises new PostgresSaver checkpointer) ──
-# Diagnostic-rich: prints the top-level keys + first answer/clarification
-# field found. If the LLM call fails on the PoC (missing OpenAI key,
-# quota exhausted, etc.) the response has neither `answer` nor
-# `clarification` — surface the raw shape so it's fixable.
+# ── 5. Chat endpoint registration smoke test ─────────────────────
+# Verifies the auth chain + endpoint registration WITHOUT needing a
+# valid API key. A registered auth-gated endpoint returns 401/403
+# on a keyless (or bad-key) request; a broken endpoint returns 404
+# or 500. This proves the FastAPI route is loaded + the require_api_key
+# dependency is wired.
+#
+# Why not an authenticated call: the deploy script doesn't know which
+# API key the operator uses. Real chat verification is a UI check:
+# SSH tunnel + open http://localhost:8080/ + type a question. Or run
+# the eval suite (which needs the dev-VM key + OpenAI). Neither belongs
+# in a per-arc deploy verifier.
 echo
-echo "=== 5. Sync chat smoke test ==="
-resp=$(curl -s -X POST http://127.0.0.1:8080/api/v1/chat \
-    -H "X-API-Key: arion_dev_key_2026" \
+echo "=== 5. Chat endpoint registration smoke test ==="
+code=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:8080/api/v1/chat \
     -H "Content-Type: application/json" \
-    -d '{"question":"what is A.5.15 about?"}' 2>&1)
-echo "$resp" | python3 -c "
-import sys, json
-try:
-    d = json.loads(sys.stdin.read())
-except Exception as e:
-    print(f'  FAIL — non-JSON response: {e}')
-    sys.exit(0)
-print(f'  Response keys: {sorted(d.keys())}')
-if isinstance(d.get('answer'), str) and d['answer']:
-    print(f'  OK — answer: {d[\"answer\"][:100]}')
-elif d.get('clarification'):
-    print(f'  OK — clarification: {str(d[\"clarification\"])[:100]}')
-else:
-    print(f'  WARN — no answer/clarification in response. Full body (200 chars):')
-    print(f'    {json.dumps(d)[:200]}')
-"
+    -d '{"question":"ping"}')
+if [[ "$code" =~ ^(401|403)$ ]]; then
+    echo "  OK — /api/v1/chat returns $code without api key (endpoint registered, auth chain live)"
+else
+    echo "  WARN — expected 401/403 without api key, got $code"
+    echo "         (200 = auth bypass regression; 404 = route missing; 500 = pipeline error)"
+fi
+echo "  For real chat verification: SSH tunnel + open http://localhost:8080/ + type a question in the UI."
 
 # ── 6. pip-audit — confirm 4 CVEs cleared, 4 remaining (all chromadb) ──
 # pip-audit is dev-only (in deploy/requirements-dev.txt, not
