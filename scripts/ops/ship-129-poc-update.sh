@@ -43,14 +43,25 @@ set -euo pipefail
 ARION_ROOT="${ARION_ROOT:-/data/arioncomply}"
 cd "$ARION_ROOT"
 
-# Load .env so PGPASSWORD / DATABASE_URL / etc. are available to the
-# sweep + regression tests run below. install.sh's environment doesn't
-# propagate to a fresh bash invocation via SSH.
+# Extract the specific env vars our sub-commands need (bash-safe;
+# `source .env` chokes on some .env values with special chars).
+# python-dotenv (used by Python callers) parses the file more
+# tolerantly; here we grep out the specific keys we need.
+extract_env() {
+    local key="$1"
+    grep -E "^${key}=" .env 2>/dev/null | head -1 | cut -d= -f2- || true
+}
+
 if [[ -f .env ]]; then
-    set -a
-    # shellcheck disable=SC1091
-    source .env
-    set +a
+    export PGPASSWORD="$(extract_env POSTGRES_PASSWORD)"
+    export DATABASE_URL="$(extract_env DATABASE_URL)"
+    export PGHOST="$(extract_env PGHOST)"
+    export PGDATABASE="$(extract_env PGDATABASE)"
+    export PGUSER="$(extract_env PGUSER)"
+    # Defaults if not set in .env
+    export PGHOST="${PGHOST:-127.0.0.1}"
+    export PGDATABASE="${PGDATABASE:-arioncomply_compliance}"
+    export PGUSER="${PGUSER:-arioncomply_app}"
 fi
 
 if [[ ! -f deploy/install.sh ]]; then
