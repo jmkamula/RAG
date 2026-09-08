@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 #
-# scripts/dev/verify_workbook_intake.sh — v3
+# scripts/dev/verify_workbook_intake.sh — v4
 #
-# Post-Ship-128' verification. Log analysis on 2026-09-08 showed
-# workbook_discovery wrote 207 findings + arbiter wrote 449 = 656
-# total, but document_uploads.findings_count reported 0. Confirm the
-# real count by counting document_findings rows for the upload's
-# client_document_id.
+# Correct column names for document_findings: document_id (not
+# client_document_id), checklist_item_id (not must_id).
 
 set -u
 
@@ -22,9 +19,9 @@ SELECT LEFT(filename, 55) AS filename,
  ORDER BY uploaded_at DESC LIMIT 3;
 
 \echo ''
-\echo '=== 2. ACTUAL findings landed (via client_document_id join on SHA) ==='
+\echo '=== 2. ACTUAL findings landed (document_findings.document_id joined via SHA) ==='
 WITH latest AS (
-  SELECT id AS upload_id, sha256, tenant_id
+  SELECT sha256, tenant_id
     FROM document_uploads
    WHERE filename ILIKE '%workbook%'
    ORDER BY uploaded_at DESC LIMIT 1
@@ -36,15 +33,17 @@ cd_match AS (
      AND cd.checksum_sha256 = latest.sha256
 )
 SELECT COUNT(*) AS total_findings,
-       COUNT(*) FILTER (WHERE inference_source = 'workbook') AS from_workbook_discovery,
-       COUNT(*) FILTER (WHERE inference_source = 'workbook_arbiter') AS from_llm_arbiter,
-       COUNT(*) FILTER (WHERE inference_source NOT IN ('workbook', 'workbook_arbiter')) AS other_source,
-       COUNT(DISTINCT control_ref) AS distinct_controls_covered
+       COUNT(DISTINCT control_ref) AS distinct_controls,
+       COUNT(DISTINCT checklist_item_id) FILTER (WHERE checklist_item_id IS NOT NULL) AS distinct_musts,
+       status,
+       confidence
   FROM document_findings
- WHERE client_document_id IN (SELECT cd_id FROM cd_match);
+ WHERE document_id IN (SELECT cd_id FROM cd_match)
+ GROUP BY status, confidence
+ ORDER BY total_findings DESC;
 
 \echo ''
-\echo '=== 3. Sample findings (first 10) ==='
+\echo '=== 3. Sample findings (first 15) ==='
 WITH latest AS (
   SELECT sha256, tenant_id FROM document_uploads
    WHERE filename ILIKE '%workbook%'
@@ -55,15 +54,27 @@ cd_match AS (
    WHERE cd.tenant_id = latest.tenant_id AND cd.checksum_sha256 = latest.sha256
 )
 SELECT LEFT(control_ref, 15) AS control_ref,
-       LEFT(must_id, 40) AS must,
-       inference_source,
-       finding
+       LEFT(checklist_item_id, 40) AS must,
+       status,
+       confidence,
+       LEFT(excerpt, 40) AS excerpt
   FROM document_findings
- WHERE client_document_id IN (SELECT cd_id FROM cd_match)
- ORDER BY control_ref, must_id LIMIT 10;
+ WHERE document_id IN (SELECT cd_id FROM cd_match)
+ ORDER BY control_ref, checklist_item_id LIMIT 15;
 
 \echo ''
-\echo '=== 4. Stage 4.6 + 4.7 log summary from api log tail ==='
-\echo '(Log excerpt for correlation — the actual data is in Section 2)'
-\! grep -E "Stage 4\.6|Stage 4\.7|workbook_arbiter|Complete:.*workbook" /tmp/arioncomply-api.log | tail -20
+\echo '=== 4. Discrepancy: what UI shows vs what actually landed ==='
+WITH latest AS (
+  SELECT id AS upload_id, sha256, tenant_id, findings_count AS ui_shows
+    FROM document_uploads
+   WHERE filename ILIKE '%workbook%'
+   ORDER BY uploaded_at DESC LIMIT 1
+),
+cd_match AS (
+  SELECT cd.id AS cd_id FROM client_documents cd, latest
+   WHERE cd.tenant_id = latest.tenant_id AND cd.checksum_sha256 = latest.sha256
+)
+SELECT (SELECT ui_shows FROM latest) AS ui_shows_findings_count,
+       (SELECT COUNT(*) FROM document_findings
+         WHERE document_id IN (SELECT cd_id FROM cd_match)) AS actual_rows_in_document_findings;
 SQL
