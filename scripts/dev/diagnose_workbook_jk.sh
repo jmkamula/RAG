@@ -112,17 +112,56 @@ for name in wb.sheetnames:
 wb.close()
 
 # ── Discovery ──
+# discover_workbook returns list[SheetProposal], each with:
+#   sheet, mapping_id, confidence, header_row, headers[], row_count,
+#   passes=list[PassProposal], warnings, anchor_decisions
+# PassProposal has: pass_name, target_control, matched_columns={must_id: col_header},
+#   satisfied/partial/missing (MUST ids), freshness_column, cite_bindings
 from rag.intake.workbook_discovery import discover_workbook
 try:
     proposals = discover_workbook(rows_per_sheet)
-    print(f"\ndiscover_workbook returned {len(proposals)} proposals")
-    for i, p in enumerate(proposals[:5]):
-        # PassProposal fields: mapping_id, sheet_name, header_row, column_hits, rows_covered
-        mapping_id = getattr(p, "mapping_id", "?")
-        sheet_name = getattr(p, "sheet_name", "?")
-        rows_covered = getattr(p, "rows_covered", "?")
-        col_hits = getattr(p, "column_hits", [])
-        print(f"  [{i}] mapping={mapping_id} sheet={sheet_name!r} rows_covered={rows_covered} col_hits={len(col_hits)}")
+    print(f"\ndiscover_workbook returned {len(proposals)} SheetProposal(s)")
+    empty_sheets = 0
+    for i, sp in enumerate(proposals):
+        total_matched = sum(len(p.matched_columns) for p in sp.passes)
+        total_satisfied = sum(len(p.satisfied) for p in sp.passes)
+        if total_matched == 0 and total_satisfied == 0:
+            empty_sheets += 1
+            continue
+        # Only print non-empty proposals
+        print(f"\n[{i}] sheet={sp.sheet!r} mapping={sp.mapping_id}")
+        print(f"     confidence={sp.confidence:.2f} row_count={sp.row_count} passes={len(sp.passes)}")
+        for j, p in enumerate(sp.passes[:3]):
+            print(f"     pass[{j}] name={p.pass_name}")
+            print(f"       matched_columns ({len(p.matched_columns)}): {dict(list(p.matched_columns.items())[:5])}")
+            print(f"       satisfied ({len(p.satisfied)}): {p.satisfied[:5]}")
+            print(f"       partial ({len(p.partial)}): {p.partial[:5]}")
+            print(f"       warnings: {p.warnings[:3]}")
+    print(f"\nSummary: {len(proposals)} proposals total, {empty_sheets} with 0 matched_columns + 0 satisfied")
+
+    # Now run persist_proposals in a rollback-only session to see what it would write
+    print(f"\n=== persist_proposals dry-run (rollback after) ===")
+    from rag.intake.workbook_persistence import persist_proposals
+    from uuid import UUID
+    conn2 = psycopg2.connect(
+        host="127.0.0.1", dbname="arioncomply_compliance",
+        user="arioncomply", password=os.environ.get("ARION_OWNER_PW", ""),
+    )
+    try:
+        pass_count, findings_count = persist_proposals(
+            conn2,
+            UUID(str(tenant_id)),
+            str(xlsm),
+            UUID(str(upload_id)),
+            proposals,
+        )
+        print(f"  persist_proposals would write: {pass_count} passes, {findings_count} findings")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+    finally:
+        conn2.rollback()
+        conn2.close()
 except Exception as e:
     import traceback
     traceback.print_exc()
