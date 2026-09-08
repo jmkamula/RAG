@@ -52,6 +52,13 @@ extract_env() {
     grep -E "^${key}=" .env 2>/dev/null | head -1 | cut -d= -f2- || true
 }
 
+# POSIX %XX decoder — mirrors install.sh::_url_decode. Passwords in
+# DATABASE_URL are URL-encoded; PGPASSWORD needs the decoded form.
+_url_decode() {
+    printf '%b' "$(printf '%s' "$1" | \
+        sed 's/+/ /g; s/%\([0-9A-Fa-f][0-9A-Fa-f]\)/\\x\1/g')"
+}
+
 if [[ -f .env ]]; then
     # .env has DATABASE_URL (postgresql://user:pass@host:port/db) — parse
     # it into PG* env vars that rag/scheduler/tick.py::_connect reads.
@@ -60,7 +67,7 @@ if [[ -f .env ]]; then
     _db_url="$(extract_env DATABASE_URL)"
     if [[ "$_db_url" =~ postgresql://([^:]+):([^@]+)@([^:/]+)(:[0-9]+)?/(.+) ]]; then
         export PGUSER="${BASH_REMATCH[1]}"
-        export PGPASSWORD="${BASH_REMATCH[2]}"
+        export PGPASSWORD="$(_url_decode "${BASH_REMATCH[2]}")"
         export PGHOST="${BASH_REMATCH[3]}"
         export PGDATABASE="${BASH_REMATCH[5]}"
     fi
