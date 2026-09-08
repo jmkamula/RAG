@@ -854,6 +854,12 @@ class DocumentPipeline:
             _wbd_proposals = 0
             _wbd_findings  = 0
             _wbd_error: Optional[str] = None
+            # Ship 128'.c — init at outer scope so downstream counter
+            # aggregation (tracer.write("write", ...) + update_upload_status)
+            # can reference it without risking UnboundLocalError when
+            # Stage 4.7 doesn't run.
+            _arb_written  = 0
+            _arb_proposed = 0
             _is_workbook = file_name.lower().endswith((".xlsx", ".xlsm"))
             _wbd_doc_id  = summary.get("doc_id")
             # When extract returns 0 findings (new Part-A behaviour: xlsx/xlsm
@@ -955,6 +961,11 @@ class DocumentPipeline:
                             # cell-substring-verified via Ship 6'.b pattern.
                             # See [[ship-94-prime-a-arbiter-cutover]].
                             _arb_mode = (os.getenv("USE_WORKBOOK_LLM_ARBITER") or "1").lower()
+                            # Ship 128'.c — outer-scope init at line ~858 keeps
+                            # _arb_written/_arb_proposed defined even if this
+                            # block doesn't reach here. Local reset here is
+                            # deliberate: if a prior iteration set them, ensure
+                            # this Stage 4.7 pass starts from 0.
                             _arb_written = 0
                             _arb_proposed = 0
                             if _arb_mode in ("1", "shadow"):
@@ -1024,13 +1035,55 @@ class DocumentPipeline:
 
             s4_ms = int((time.time() - t4) * 1000)
 
+            # Ship 128'.c — findings_written aggregates across all 3 write
+            # paths so v_intake_runs (which reads write.findings_written) +
+            # the /api/v1/documents/{id}/status endpoint + the UI counter
+            # all reflect total findings landed, not just the LLM-extract
+            # path (which is 0 by design for workbooks).
+            _extract_written = summary.get("written", 0)
+            _total_written   = _extract_written + _wbd_findings + _arb_written
             tracer.write(
                 "write", s4_ms,
-                findings_written = summary.get("written", 0),
+                findings_written = _total_written,
                 posture_created  = summary.get("posture_created", 0),
                 posture_updated  = summary.get("posture_updated", 0),
                 posture_skipped  = summary.get("posture_skipped", 0),
             )
+
+            # Ship 128'.c — also fix document_uploads.findings_count.
+            # update_upload_status was called at Stage 4 close with
+            # len(findings) (= _extract_written). Re-call with the full
+            # aggregate so admin queries + dashboards + api /status all
+            # reflect reality. Best-effort; error swallowed like the
+            # original call. Skip when nothing new landed to avoid a
+            # no-op update round-trip.
+            if _wbd_findings > 0 or _arb_written > 0:
+                try:
+                    _refresh_conn = psycopg2.connect(self.db_url)
+                    try:
+                        _refresh_conn.autocommit = False
+                        with _refresh_conn.cursor() as _cur:
+                            _cur.execute("SET app.tenant_id = %s", (tenant_id,))
+                        from rag.intake.posture_writer import update_upload_status
+                        update_upload_status(
+                            upload_id      = upload_id,
+                            status         = "completed",
+                            findings_count = _total_written,
+                            conn           = _refresh_conn,
+                        )
+                        _refresh_conn.commit()
+                    finally:
+                        _refresh_conn.close()
+                    logger.info(
+                        f"Stage 4.6/4.7: refreshed document_uploads.findings_count "
+                        f"→ {_total_written} (extract={_extract_written} "
+                        f"discovery={_wbd_findings} arbiter={_arb_written})"
+                    )
+                except Exception as _refresh_err:
+                    logger.warning(
+                        f"Stage 4.6/4.7 findings_count refresh failed: "
+                        f"{type(_refresh_err).__name__}: {_refresh_err}"
+                    )
 
             # ── Stage 4.8: cite auto-verify — Ship 92'.a ────────────────────
             # If this upload's filename matches the basename of any
@@ -1166,9 +1219,13 @@ class DocumentPipeline:
             # ── Complete trace row ────────────────────────────────────────────
             tracer.write("complete", 0)
 
+            # Ship 128'.c — aggregate count across paths (matches the
+            # v_intake_runs value + document_uploads.findings_count).
+            _log_total = len(findings) + _wbd_findings + _arb_written
             logger.info(
                 f"Complete: {file_name} | "
-                f"{len(findings)} findings | "
+                f"{_log_total} findings "
+                f"(extract={len(findings)} discovery={_wbd_findings} arbiter={_arb_written}) | "
                 f"{summary['posture_updated']} updated | "
                 f"{summary['posture_created']} created | "
                 f"{summary.get('posture_skipped', 0)} skipped | "
@@ -1182,7 +1239,8 @@ class DocumentPipeline:
                 doc_type        = doc.doc_type,
                 standard_ids    = doc.standard_ids,
                 extraction_path = doc.extraction_path.value,
-                findings_count  = len(findings),
+                # Ship 128'.c — aggregate count (see write-stage tracer above)
+                findings_count  = _log_total,
                 controls_assessed = list({f.control_ref for f in findings}),
                 controls_updated  = summary.get("controls_assessed", []),
                 status      = "extracted",
