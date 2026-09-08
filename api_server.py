@@ -1173,6 +1173,40 @@ async def upload_document(
                 series_id,
                 version_no,
             ))
+
+            # Ship 128'.a — companion client_documents row at upload time.
+            # Fixes the workbook-0-findings silent-skip bug: workbook_discovery
+            # in doc_pipeline looks up client_documents by sha256 to get the
+            # client_document_id it needs for persist_proposals. If no row
+            # exists, the block silently skips. Historically posture_writer
+            # inserted client_documents when the LLM-extract path wrote
+            # findings, but workbooks skip LLM extract by design, so no
+            # write path fires + no client_documents row lands. The retired
+            # web-fill lane may have been the sole upload-time inserter.
+            #
+            # Match posture_writer's shape (filename + status='uploaded' +
+            # is_active + is_metadata_only=FALSE + retention_class='compliance')
+            # + add sha256 so workbook_discovery's checksum lookup succeeds.
+            # ON CONFLICT DO NOTHING handles the race where two concurrent
+            # uploads of the same file might insert; only the first wins.
+            cd_id = str(uuid.uuid4())
+            cur.execute("""
+                INSERT INTO client_documents (
+                    id, tenant_id, filename, storage_path,
+                    checksum_sha256, file_size_bytes,
+                    document_status, is_active, is_metadata_only,
+                    retention_class
+                ) VALUES (%s, %s::uuid, %s, %s, %s, %s,
+                          'uploaded', TRUE, FALSE, 'compliance')
+                ON CONFLICT DO NOTHING
+            """, (
+                cd_id,
+                key_info.tenant_id,
+                file.filename,
+                str(file_path),
+                file_sha256,
+                byte_size,
+            ))
         conn.commit()
     except Exception as e:
         conn.rollback()
