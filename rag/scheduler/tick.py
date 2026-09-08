@@ -1173,6 +1173,7 @@ def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) ->
 
 
 from rag.risk.notify import sweep_risk_register_notify  # Ship 14'.f
+from rag.notifications.enrolment_nudge import sweep_enrolment_nudge  # Ship 129'.d
 
 
 # ── posture_refresh sweep (Ship 58'.u) ──────────────────────────────────────
@@ -1411,6 +1412,7 @@ _WORK_TYPES = {
     "cite_verification_overdue":   sweep_cite_verification_overdue,
     "api_key_expiring":            sweep_api_key_expiring,
     "risk_register_notify":        sweep_risk_register_notify,   # Ship 14'.f
+    "enrolment_nudge":             sweep_enrolment_nudge,         # Ship 129'.d
     "posture_refresh":             sweep_posture_refresh,         # Ship 58'.u
     "notification_delivery":       sweep_notification_delivery,
     "notification_retention":      sweep_notification_retention,

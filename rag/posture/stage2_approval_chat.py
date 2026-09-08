@@ -158,6 +158,14 @@ def list_pending_proposals(pg_conn, tenant_id: str) -> list[dict]:
                 ON pa.tenant_id   = pc.tenant_id
                AND pa.control_ref = pc.control_ref
                AND pa.standard_id = pc.standard_id
+              -- Ship 129'.b — subscription filter. Uses tenant_evaluation_
+              -- scope (direct + inferred) so proposals on GDPR reachable
+              -- via ISO 27701 maps_to still surface. See Stage-1 counterpart
+              -- in stage1_review_chat.list_queue and
+              -- [[feedback-discovery-vs-surfacing-separation]].
+              JOIN tenant_evaluation_scope tes
+                ON tes.tenant_id   = pc.tenant_id
+               AND tes.standard_id = pc.standard_id
              WHERE pa.tenant_id              = %s
                AND pa.source                 = 'engine'
                AND pa.status                 = 'pending'
@@ -204,6 +212,13 @@ def get_proposal_for_control(
                    pa.gap_description,
                    pa.metadata
               FROM posture_controls pc
+              -- Ship 129'.b — subscription filter (see list_pending_proposals).
+              -- Deep-link to an out-of-scope control returns None → API
+              -- surfaces the same 404 as "no posture entry for this control."
+              -- Uses tenant_evaluation_scope (direct + inferred).
+              JOIN tenant_evaluation_scope tes
+                ON tes.tenant_id   = pc.tenant_id
+               AND tes.standard_id = pc.standard_id
               LEFT JOIN LATERAL (
                   SELECT finding, set_at, gap_description, metadata
                     FROM posture_assertions
@@ -219,6 +234,19 @@ def get_proposal_for_control(
              WHERE pc.tenant_id   = %s
                AND pc.control_ref = %s
                AND pc.is_active   = TRUE
+             -- Namespace-collision tiebreak: when the same ref exists in
+             -- multiple enrolled/inferred standards (e.g. Art.24 in both
+             -- GDPR:2016/679 and ISO27701:2019 B.8-mirror), prefer the
+             -- row that carries the most information. Rank order:
+             --   1. Has engine-proposal history (approved/proposed/rejected)
+             --   2. Has an assessed finding (NC/OFI/Comply, not
+             --      'Not assessed' placeholder)
+             --   3. Standard-id alphabetical as final tiebreak
+             -- Ship 129'.b's JOIN changed the implicit ordering; this
+             -- ORDER BY restores deterministic informative selection.
+             ORDER BY (pc.engine_proposal_status <> 'none') DESC,
+                      (pc.finding <> 'Not assessed')       DESC,
+                      pc.standard_id
              LIMIT 1
             """,
             (tenant_id, control_ref),
@@ -588,10 +616,18 @@ def render_stage2_answer(
     if intent.action == "list_one":
         ctrl = intent.control_ref
         if not proposal:
+            # Post-Ship 129'.b: get_proposal_for_control filters by
+            # tenant_standards enrolment, so a None result may mean the
+            # standard isn't enrolled (in addition to the prior reasons).
+            # Kept language deliberately non-specific because the caller
+            # doesn't have the standard_id to determine WHICH reason
+            # applies — the tenant should check Profile → Frameworks or
+            # curator status.
             return (
-                f"No engine proposal on file for {ctrl}. Either the control "
-                f"has no curated multi-leaf FulfilmentSpec, or the engine "
-                f"hasn't run yet for this tenant."
+                f"No engine proposal on file for {ctrl}. This can happen "
+                f"when the control's framework is not enrolled for your "
+                f"tenant, when the control has no curated multi-leaf "
+                f"FulfilmentSpec, or when the engine hasn't run yet."
             )
         status = proposal["status"]
         if status == "none":

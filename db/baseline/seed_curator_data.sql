@@ -1,5 +1,5 @@
 -- ArionComply — curator seed data
--- Generated: 2026-09-07T18:44:43Z from HEAD 1874f1dc by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-08T15:22:51Z from HEAD 57a26615 by scripts/build_pg_baseline.sh
 -- Apply AFTER schema_baseline.sql + baseline_grants.sql.
 -- Contains catalog data only — zero tenant rows.
 --

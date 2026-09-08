@@ -269,6 +269,12 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
                            ORDER BY df.extracted_at
                        ) AS rn
                   FROM document_findings df
+                  -- Ship 129'.a — subscription filter (see list_queue).
+                  -- Uses tenant_evaluation_scope so inferred standards
+                  -- (e.g. GDPR reachable via ISO 27701 maps_to) surface.
+                  JOIN tenant_evaluation_scope tes
+                    ON tes.tenant_id   = df.tenant_id
+                   AND tes.standard_id = df.standard_id
                   LEFT JOIN client_documents cd ON cd.id = df.document_id
                   LEFT JOIN workbook_intake_proposal wip
                             ON wip.id = df.workbook_proposal_id
@@ -376,16 +382,31 @@ def list_queue(pg_conn, tenant_id: str) -> list[dict]:
     """
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+        # Ship 129'.a — subscription filter. Findings for standards the
+        # tenant hasn't enrolled do not surface into the worklist. The
+        # universal-discovery data still lives in document_findings so
+        # instant-flip on enrolment works.
+        #
+        # Join target is `tenant_evaluation_scope` (not tenant_standards
+        # directly) so the filter matches the SAME predicate the runtime
+        # uses for scope resolution. tenant_evaluation_scope includes
+        # both direct enrolments AND inferred ones (e.g. GDPR reachable
+        # via an ISO 27701 `maps_to`). Using tenant_standards directly
+        # is stricter than the runtime and would hide legitimately-in-
+        # scope content. See [[feedback-discovery-vs-surfacing-separation]].
         cur.execute(
             """
-            SELECT control_ref, standard_id,
-                   count(DISTINCT COALESCE(evidence_group_id, id::text)) AS n
-              FROM document_findings
-             WHERE tenant_id     = %s
-               AND review_status = 'pending'
-               AND is_active     = TRUE
-             GROUP BY control_ref, standard_id
-             ORDER BY n DESC, control_ref
+            SELECT df.control_ref, df.standard_id,
+                   count(DISTINCT COALESCE(df.evidence_group_id, df.id::text)) AS n
+              FROM document_findings df
+              JOIN tenant_evaluation_scope tes
+                ON tes.tenant_id   = df.tenant_id
+               AND tes.standard_id = df.standard_id
+             WHERE df.tenant_id     = %s
+               AND df.review_status = 'pending'
+               AND df.is_active     = TRUE
+             GROUP BY df.control_ref, df.standard_id
+             ORDER BY n DESC, df.control_ref
             """,
             (tenant_id,),
         )

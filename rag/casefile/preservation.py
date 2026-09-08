@@ -115,9 +115,17 @@ def _build_bridge_footer(cf: CaseFile) -> tuple[Optional[str], list[str]]:
 
     # Only include xfw nodes whose linked primaries relate to the
     # cited articles (same family match as llm_answer.py).
+    # Ship 129'.c — subscription filter. Every ref that appears in the
+    # rendered footer must be enrolled — both the bridge node's own ref
+    # (xfw_ref) and each primary_ref it links to. Prevents the
+    # preservation footer from reintroducing a non-enrolled ref that
+    # framework_scope_guard already stripped from LLM prose. See
+    # [[feedback-discovery-vs-surfacing-separation]].
     posture = cf.posture_by_ref()
     relevant: list[tuple[str, str, bool]] = []  # (xfw_ref, verdict|placeholder, draft)
     for xfw_ref, primary_refs in bridges.items():
+        if not cf.is_ref_enrolled(xfw_ref):
+            continue
         # xfw_ref itself is the linked article's "other end" here — the
         # bridge dict is keyed by the xfw node's ref (e.g. Art.32)
         # and lists primary refs (e.g. A.5.15). But the article we're
@@ -148,6 +156,9 @@ def _build_bridge_footer(cf: CaseFile) -> tuple[Optional[str], list[str]]:
         # linked primary. To keep the footer readable and close to
         # existing shape, we emit primary-ref entries.
         for pref in sorted(primary_refs):
+            # Ship 129'.c — same enrolment gate on linked refs.
+            if not cf.is_ref_enrolled(pref):
+                continue
             rec = posture.get(pref) or {}
             finding = rec.get("finding")
             if finding in ("NC", "OFI", "Comply"):

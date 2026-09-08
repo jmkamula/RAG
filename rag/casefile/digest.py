@@ -224,7 +224,18 @@ def _render_xfw_bridges(cf: CaseFile) -> str:
     for xfw_ref, primary_refs in sorted(bridges.items()):
         if not cf.in_scope(xfw_ref):
             continue
-        in_scope_primaries = [p for p in primary_refs if cf.in_scope(p)]
+        # Ship 129'.c — subscription filter. Every ref that appears in
+        # the output line must belong to an enrolled framework. Applies
+        # to both the node ref (xfw_ref) and each linked ref. Skips the
+        # entire line rather than partially rendering to avoid dangling
+        # "A.5.15 ← [empty]" shapes.
+        # See [[feedback-discovery-vs-surfacing-separation]].
+        if not cf.is_ref_enrolled(xfw_ref):
+            continue
+        in_scope_primaries = [
+            p for p in primary_refs
+            if cf.in_scope(p) and cf.is_ref_enrolled(p)
+        ]
         if not in_scope_primaries:
             continue
         parts: list[str] = []

@@ -389,6 +389,39 @@ class CaseFile:
             return False
         return rec.get("finding") in _ASSESSED_FINDINGS
 
+    def is_ref_enrolled(self, ref: str) -> bool:
+        """True iff the ref belongs to a standard the tenant has enrolled.
+
+        Ship 129'.c — subscription filter for chat xfw surfaces. Uses
+        the tenant's `scope_standards` (populated from tenant_standards
+        upstream) as the enrolled set. Ref → standard lookup goes
+        through posture_by_ref first, falls back to graph_nodes.
+
+        Fail-open contract: returns True when either (a) the ref's
+        standard can't be resolved, or (b) scope_standards is empty
+        (unknown scope). This matches the Ship 66'.a "widen rather than
+        assume ISO" fallback so a missing tenant profile never silently
+        censors legitimate content.
+
+        See [[feedback-discovery-vs-surfacing-separation]].
+        """
+        scope = set(self.scope_standards)
+        if not scope:
+            return True
+        rec = self.posture_for(ref)
+        std: Optional[str] = None
+        if rec:
+            std = rec.get("standard_id")
+        if not std:
+            for n in self.all_nodes():
+                if n.ref == ref:
+                    std = getattr(n, "standard_id", None)
+                    if std:
+                        break
+        if not std:
+            return True
+        return std in scope
+
     def in_scope(self, ref: str) -> bool:
         """True iff the ref is in-scope for this tenant.
 

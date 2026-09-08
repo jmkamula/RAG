@@ -4640,7 +4640,9 @@ EVAL_CASES = [
             "+ national_law_derogation_register + applicable_activities_"
             "scope + program_review. Stage-2 list_one surface; '0/4' is "
             "the multi-leaf signature. Verifies wide-audit close-out "
-            "actually reaches the chat surface."
+            "actually reaches the chat surface. Ship 129'.b filter uses "
+            "tenant_evaluation_scope (direct + inferred), so demo tenant's "
+            "ISO 27701 enrolment infers GDPR — Art.85 surfaces as before."
         ),
     ),
 

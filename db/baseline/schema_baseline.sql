@@ -1,5 +1,5 @@
 -- ArionComply — Postgres schema baseline (arioncomply_compliance)
--- Generated: 2026-09-07T18:44:43Z from HEAD 1874f1dc by scripts/build_pg_baseline.sh
+-- Generated: 2026-09-08T15:22:51Z from HEAD 57a26615 by scripts/build_pg_baseline.sh
 -- Includes: all public-schema DDL (tables / views / functions /
 --          indexes / constraints / policies). Excludes: OWNER +
 --          GRANT (applied post-hoc by baseline_grants.sql) and
@@ -11,7 +11,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict dHR8wBeJCFPujJhC0ZVGqef2lgoW6feAv4NsNQc20qWYQbiH6AgP80MXFD9CMEJ
+\restrict W6SGdaDPH4wd1ApC3dGltjJrBWsktwuJS29Sqr1MkOYiWEq33wCq10WCMPSzukf
 
 -- Dumped from database version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
@@ -3424,7 +3424,7 @@ CREATE TABLE public.sweep_log (
     error_type text,
     error_detail text,
     CONSTRAINT sweep_log_status_check CHECK ((status = ANY (ARRAY['running'::text, 'completed'::text, 'failed'::text]))),
-    CONSTRAINT sweep_log_work_type_check CHECK ((work_type = ANY (ARRAY['fact_recompute'::text, 'overdue_followups'::text, 'freshness_expiry'::text, 'notification_delivery'::text, 'engine_kick'::text, 'cite_verification_overdue'::text, 'api_key_expiring'::text, 'notification_retention'::text, 'risk_register_notify'::text, 'posture_refresh'::text, 'cite_attestation_retention'::text, 'other'::text])))
+    CONSTRAINT sweep_log_work_type_check CHECK ((work_type = ANY (ARRAY['fact_recompute'::text, 'overdue_followups'::text, 'freshness_expiry'::text, 'notification_delivery'::text, 'engine_kick'::text, 'cite_verification_overdue'::text, 'api_key_expiring'::text, 'notification_retention'::text, 'risk_register_notify'::text, 'posture_refresh'::text, 'cite_attestation_retention'::text, 'enrolment_nudge'::text, 'other'::text])))
 );
 
 
@@ -3751,7 +3751,7 @@ CREATE TABLE public.tenant_notification (
     fired_at timestamp with time zone DEFAULT now() NOT NULL,
     read_at timestamp with time zone,
     dismissed_at timestamp with time zone,
-    CONSTRAINT tenant_notification_kind_check CHECK ((kind = ANY (ARRAY['implication_overdue'::text, 'followup_overdue'::text, 'threshold_crossed'::text, 'cascade_blocked'::text, 'auto_resolved'::text, 'freshness_expiry'::text, 'nc_surfaced'::text, 'upload_processed'::text, 'stage2_proposal_ready'::text, 'upload_failed'::text, 'cite_verification_overdue'::text, 'posture_flip_to_comply'::text, 'api_key_expiring'::text, 'risk_added'::text, 'risk_treatment_overdue'::text, 'residual_above_threshold'::text, 'risk_review_due'::text]))),
+    CONSTRAINT tenant_notification_kind_check CHECK ((kind = ANY (ARRAY['implication_overdue'::text, 'followup_overdue'::text, 'threshold_crossed'::text, 'cascade_blocked'::text, 'auto_resolved'::text, 'freshness_expiry'::text, 'nc_surfaced'::text, 'upload_processed'::text, 'stage2_proposal_ready'::text, 'upload_failed'::text, 'cite_verification_overdue'::text, 'posture_flip_to_comply'::text, 'api_key_expiring'::text, 'risk_added'::text, 'risk_treatment_overdue'::text, 'residual_above_threshold'::text, 'risk_review_due'::text, 'unenrolled_framework_applicable'::text]))),
     CONSTRAINT tenant_notification_severity_chk CHECK ((severity = ANY (ARRAY['critical'::text, 'high'::text, 'medium'::text, 'low'::text, 'info'::text])))
 );
 
@@ -9750,5 +9750,5 @@ ALTER TABLE public.workbook_intake_proposal ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict dHR8wBeJCFPujJhC0ZVGqef2lgoW6feAv4NsNQc20qWYQbiH6AgP80MXFD9CMEJ
+\unrestrict W6SGdaDPH4wd1ApC3dGltjJrBWsktwuJS29Sqr1MkOYiWEq33wCq10WCMPSzukf
 
