@@ -53,15 +53,22 @@ extract_env() {
 }
 
 if [[ -f .env ]]; then
-    export PGPASSWORD="$(extract_env POSTGRES_PASSWORD)"
-    export DATABASE_URL="$(extract_env DATABASE_URL)"
-    export PGHOST="$(extract_env PGHOST)"
-    export PGDATABASE="$(extract_env PGDATABASE)"
-    export PGUSER="$(extract_env PGUSER)"
-    # Defaults if not set in .env
+    # .env has DATABASE_URL (postgresql://user:pass@host:port/db) — parse
+    # it into PG* env vars that rag/scheduler/tick.py::_connect reads.
+    # tick.py uses os.getenv("PGPASSWORD","") not python-dotenv, so this
+    # export must happen at the shell level before the Python call.
+    _db_url="$(extract_env DATABASE_URL)"
+    if [[ "$_db_url" =~ postgresql://([^:]+):([^@]+)@([^:/]+)(:[0-9]+)?/(.+) ]]; then
+        export PGUSER="${BASH_REMATCH[1]}"
+        export PGPASSWORD="${BASH_REMATCH[2]}"
+        export PGHOST="${BASH_REMATCH[3]}"
+        export PGDATABASE="${BASH_REMATCH[5]}"
+    fi
+    # Defaults
     export PGHOST="${PGHOST:-127.0.0.1}"
     export PGDATABASE="${PGDATABASE:-arioncomply_compliance}"
     export PGUSER="${PGUSER:-arioncomply_app}"
+    export DATABASE_URL="${_db_url:-}"
 fi
 
 if [[ ! -f deploy/install.sh ]]; then
