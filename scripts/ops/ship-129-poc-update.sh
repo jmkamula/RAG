@@ -106,8 +106,16 @@ sudo -u postgres psql -d arioncomply_compliance -c \
 
 echo
 echo "=== 5. Dry-run the enrolment_nudge sweep to confirm wiring ==="
-PYTHONPATH="$ARION_ROOT" python3 -m rag.scheduler.tick \
-    --work enrolment_nudge --dry-run --json 2>&1 | tail -5
+# rag/scheduler/tick.py reads env vars directly (systemd EnvironmentFile
+# populates them under the timer). Called by hand we need python-dotenv
+# to load .env first, then invoke the CLI-equivalent entry point.
+PYTHONPATH="$ARION_ROOT" python3 -c "
+from dotenv import load_dotenv
+load_dotenv('$ARION_ROOT/.env')
+from rag.scheduler.tick import run_tick
+import json
+print(json.dumps(run_tick(['enrolment_nudge'], dry_run=True)))
+" 2>&1 | tail -5
 
 # ── 6. Regression tests (Stage-1 filter + xfw enrolment + nudge) ─
 echo
@@ -145,11 +153,11 @@ sudo -u postgres psql -d arioncomply_compliance -c \
 # ── 8. Show which frameworks the sweep would nudge (live) ───────
 echo
 echo "=== 8. Enrolment-nudge candidates (live, dry-run) ==="
-PYTHONPATH="$ARION_ROOT" python3 -m rag.scheduler.tick \
-    --work enrolment_nudge --dry-run --json 2>&1 | \
-    python3 -c "
-import sys, json
-data = json.loads(sys.stdin.read().splitlines()[-1])
+PYTHONPATH="$ARION_ROOT" python3 -c "
+from dotenv import load_dotenv
+load_dotenv('$ARION_ROOT/.env')
+from rag.scheduler.tick import run_tick
+data = run_tick(['enrolment_nudge'], dry_run=True)
 for r in data.get('results', []):
     for tid, stats in (r.get('per_tenant') or {}).items():
         print(f'  tenant {tid[:8]}: {stats}')
