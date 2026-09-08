@@ -44,6 +44,15 @@ import psycopg2
 import os
 from pathlib import Path
 
+# Ship 118'.d pattern — load .env via python-dotenv (the operator's
+# arionops shell doesn't have ARION_OWNER_PW unless the .env is
+# sourced, and bash `source .env` chokes on values with unsafe chars).
+try:
+    from dotenv import load_dotenv
+    load_dotenv('/data/arioncomply/.env')
+except ImportError:
+    pass
+
 # Look up the jk upload id + storage path from Postgres
 conn = psycopg2.connect(
     host="127.0.0.1", dbname="arioncomply_compliance",
