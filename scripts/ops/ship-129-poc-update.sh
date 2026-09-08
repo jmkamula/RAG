@@ -43,6 +43,16 @@ set -euo pipefail
 ARION_ROOT="${ARION_ROOT:-/data/arioncomply}"
 cd "$ARION_ROOT"
 
+# Load .env so PGPASSWORD / DATABASE_URL / etc. are available to the
+# sweep + regression tests run below. install.sh's environment doesn't
+# propagate to a fresh bash invocation via SSH.
+if [[ -f .env ]]; then
+    set -a
+    # shellcheck disable=SC1091
+    source .env
+    set +a
+fi
+
 if [[ ! -f deploy/install.sh ]]; then
     echo "ERROR: deploy/install.sh missing" >&2
     exit 78
