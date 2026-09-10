@@ -43,40 +43,10 @@ set -euo pipefail
 ARION_ROOT="${ARION_ROOT:-/data/arioncomply}"
 cd "$ARION_ROOT"
 
-# Extract the specific env vars our sub-commands need (bash-safe;
-# `source .env` chokes on some .env values with special chars).
-# python-dotenv (used by Python callers) parses the file more
-# tolerantly; here we grep out the specific keys we need.
-extract_env() {
-    local key="$1"
-    grep -E "^${key}=" .env 2>/dev/null | head -1 | cut -d= -f2- || true
-}
-
-# POSIX %XX decoder — mirrors install.sh::_url_decode. Passwords in
-# DATABASE_URL are URL-encoded; PGPASSWORD needs the decoded form.
-_url_decode() {
-    printf '%b' "$(printf '%s' "$1" | \
-        sed 's/+/ /g; s/%\([0-9A-Fa-f][0-9A-Fa-f]\)/\\x\1/g')"
-}
-
-if [[ -f .env ]]; then
-    # .env has DATABASE_URL (postgresql://user:pass@host:port/db) — parse
-    # it into PG* env vars that rag/scheduler/tick.py::_connect reads.
-    # tick.py uses os.getenv("PGPASSWORD","") not python-dotenv, so this
-    # export must happen at the shell level before the Python call.
-    _db_url="$(extract_env DATABASE_URL)"
-    if [[ "$_db_url" =~ postgresql://([^:]+):([^@]+)@([^:/]+)(:[0-9]+)?/(.+) ]]; then
-        export PGUSER="${BASH_REMATCH[1]}"
-        export PGPASSWORD="$(_url_decode "${BASH_REMATCH[2]}")"
-        export PGHOST="${BASH_REMATCH[3]}"
-        export PGDATABASE="${BASH_REMATCH[5]}"
-    fi
-    # Defaults
-    export PGHOST="${PGHOST:-127.0.0.1}"
-    export PGDATABASE="${PGDATABASE:-arioncomply_compliance}"
-    export PGUSER="${PGUSER:-arioncomply_app}"
-    export DATABASE_URL="${_db_url:-}"
-fi
+# Ship 130'.a — env plumbing removed. rag/scheduler/tick.py + the
+# regression test files call `load_dotenv(.env)` at import time, so
+# bare-shell invocation just works. If a future step needs env vars
+# beyond what the callee loads, add a targeted export here.
 
 if [[ ! -f deploy/install.sh ]]; then
     echo "ERROR: deploy/install.sh missing" >&2
@@ -120,16 +90,8 @@ sudo -u postgres psql -d arioncomply_compliance -c \
 
 echo
 echo "=== 5. Dry-run the enrolment_nudge sweep to confirm wiring ==="
-# rag/scheduler/tick.py reads env vars directly (systemd EnvironmentFile
-# populates them under the timer). Called by hand we need python-dotenv
-# to load .env first, then invoke the CLI-equivalent entry point.
-PYTHONPATH="$ARION_ROOT" python3 -c "
-from dotenv import load_dotenv
-load_dotenv('$ARION_ROOT/.env')
-from rag.scheduler.tick import run_tick
-import json
-print(json.dumps(run_tick(['enrolment_nudge'], dry_run=True)))
-" 2>&1 | tail -5
+PYTHONPATH="$ARION_ROOT" python3 -m rag.scheduler.tick \
+    --work enrolment_nudge --dry-run --json 2>&1 | tail -5
 
 # ── 6. Regression tests (Stage-1 filter + xfw enrolment + nudge) ─
 echo
@@ -167,11 +129,11 @@ sudo -u postgres psql -d arioncomply_compliance -c \
 # ── 8. Show which frameworks the sweep would nudge (live) ───────
 echo
 echo "=== 8. Enrolment-nudge candidates (live, dry-run) ==="
-PYTHONPATH="$ARION_ROOT" python3 -c "
-from dotenv import load_dotenv
-load_dotenv('$ARION_ROOT/.env')
-from rag.scheduler.tick import run_tick
-data = run_tick(['enrolment_nudge'], dry_run=True)
+PYTHONPATH="$ARION_ROOT" python3 -m rag.scheduler.tick \
+    --work enrolment_nudge --dry-run --json 2>&1 | \
+    python3 -c "
+import sys, json
+data = json.loads(sys.stdin.read().splitlines()[-1])
 for r in data.get('results', []):
     for tid, stats in (r.get('per_tenant') or {}).items():
         print(f'  tenant {tid[:8]}: {stats}')

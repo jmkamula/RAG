@@ -66,7 +66,22 @@ import os
 import sys
 import time
 import uuid
+from pathlib import Path
 from typing import Optional
+
+# Ship 130'.a — load .env at import time so bare-shell invocation
+# (`python3 -m rag.scheduler.tick ...`) works the same way systemd's
+# EnvironmentFile= directive works under the timer. Matches the
+# pattern used by tests / rag/chat.py / etc. Without this, sweeps
+# invoked from anywhere but systemd silently fail auth (see the
+# Ship 129'.e ops-script iteration for the diagnostic history).
+try:
+    from dotenv import load_dotenv
+    _ENV_PATH = Path(__file__).resolve().parent.parent.parent / ".env"
+    if _ENV_PATH.exists():
+        load_dotenv(_ENV_PATH)
+except ImportError:
+    pass
 
 logger = logging.getLogger(__name__)
 
@@ -75,6 +90,13 @@ logger = logging.getLogger(__name__)
 
 def _connect():
     import psycopg2
+    # Prefer DATABASE_URL when set — psycopg2 handles URL decoding of
+    # %XX-escaped password chars (Ship 116's init-secrets.sh generates
+    # 32-char random passwords that regularly contain +/= chars). Falls
+    # back to PG* vars for legacy environments.
+    db_url = os.getenv("DATABASE_URL", "").strip()
+    if db_url:
+        return psycopg2.connect(db_url)
     return psycopg2.connect(
         host    = os.getenv("PGHOST", "127.0.0.1"),
         dbname  = os.getenv("PGDATABASE", "arioncomply_compliance"),
